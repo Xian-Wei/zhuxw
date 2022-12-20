@@ -1,6 +1,6 @@
 import Head from "next/head";
 import React from "react";
-import Navbar from "./Navbar";
+import Navbar from "../Navbar";
 
 export const siteTitle = "Xian-Wei Zhu";
 
@@ -8,7 +8,7 @@ export default function Layout({ children }: any) {
   return (
     <>
       <Head>
-        <title>Xian-Wei Zhu</title>
+        <title>{siteTitle}</title>
         <meta
           name="description"
           content="Hi I'm Xian-Wei, wannabe web3 builder at @XianWeiCorp. Don't expect anything from this website."
