@@ -1,8 +1,8 @@
 ---
+id: 1
 title: "Hello World!"
-metaTitle: "My contribution to the world wide web"
-metaDesc: "Who I am and what to expect from this blog"
-socialImage: images/tako.png
+description: "Who I am and what to expect from this blog"
+image: images/tako.png
 date: "2022-12-22"
 tags:
   - life
