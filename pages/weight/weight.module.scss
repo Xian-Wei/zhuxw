@@ -1,0 +1,65 @@
+@import "../../styles/constant.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - $navbarHeight);
+}
+
+.topContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0.15;
+  width: 100%;
+  background-color: bisque;
+}
+
+.centerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0.7;
+  width: 100%;
+}
+
+.centerLeftContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0.05;
+  background-color: gray;
+  height: 100%;
+}
+
+.centerMiddleContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0.9;
+  height: 100%;
+  width: 100%;
+}
+
+.centerRightContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0.05;
+  height: 100%;
+  background-color: red;
+}
+
+.bottomContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0.15;
+  width: 100%;
+  background-color: beige;
+}
+
+.chart {
+}

@@ -16,6 +16,9 @@ export default function Navbar() {
         <Link href="/blog" className={styles.link}>
           Blog
         </Link>
+        <Link href="/weight" className={styles.link}>
+          Weight
+        </Link>
       </div>
       <div className={styles.rightContainer}>
         <Link href="/" className={styles.buttonLink}>
