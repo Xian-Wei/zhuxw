@@ -1,0 +1,6 @@
+@import "../../styles/constant.scss";
+
+.children {
+  min-height: calc(100vh - $footerHeight);
+  padding-top: $navbarHeight;
+}

@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import { Chart } from "../../components/Chart";
+import Chart from "../../components/Chart";
 import styles from "./weight.module.scss";
 import weightData from "../../json/weight.json";
 

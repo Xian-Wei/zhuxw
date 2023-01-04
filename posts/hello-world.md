@@ -2,7 +2,7 @@
 id: 1
 title: "Hello World!"
 description: "Who I am and what to expect from this blog"
-image: images/tako.png
+image: images/giraffe.png
 date: "2022-12-22"
 tags:
   - life
@@ -11,7 +11,7 @@ tags:
 
 **Hello and welcome to my very first blog post !**
 
-I am Xian-Wei Zhu, a wantrepreneur gremlin who's passionate about technology in general (especially money-making technologies such as cryptocurrencies).
+I am Xian-Wei Zhu, a wantrepreneur regard who's passionate about technology in general (especially money-making technologies such as cryptocurrencies).
 
 **I like money.**
 

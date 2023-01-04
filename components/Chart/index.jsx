@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 
-export const Chart = (props) => {
+export default function Chart(props) {
   const { data } = props;
 
   const backgroundColor = "white";
@@ -47,4 +47,4 @@ export const Chart = (props) => {
   return (
     <div ref={chartContainerRef} style={{ height: "100%", width: "100%" }} />
   );
-};
+}

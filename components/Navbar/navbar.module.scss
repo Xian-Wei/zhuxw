@@ -2,16 +2,17 @@
 
 .nav {
   display: flex;
-  position: sticky;
+  position: fixed;
   justify-content: space-around;
   align-items: center;
   height: $navbarHeight;
   width: 100%;
   padding-inline: 20px;
   padding-block: 20px;
-  backdrop-filter: blur(10px);
+  background-color: rgba(128, 128, 128, 0.6);
+  backdrop-filter: blur(50px);
   border-bottom: 1px solid rgba(128, 128, 128, 0.2);
-  column-gap: 2.875rem;
+  z-index: 1000;
 }
 
 .leftContainer {
@@ -23,7 +24,7 @@
 
 .middleContainer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   flex: 0.7;
   gap: 70px;
