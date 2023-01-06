@@ -2,7 +2,7 @@ import { FaTwitter, FaGithub, FaReddit } from "react-icons/fa";
 
 import styles from "./footer.module.scss";
 
-export default function Footer() {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.iconContainer}>
@@ -19,4 +19,6 @@ export default function Footer() {
       <div className={styles.copyright}>&copy; 2023 Xian-Wei Zhu</div>
     </footer>
   );
-}
+};
+
+export default Footer;

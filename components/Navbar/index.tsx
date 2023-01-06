@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "./navbar.module.scss";
 
-export default function Navbar() {
+const Navbar = () => {
   return (
     <nav className={styles.nav}>
       <div className={styles.leftContainer}>
@@ -27,4 +27,6 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

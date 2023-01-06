@@ -3,7 +3,7 @@ import Footer from "../Footer";
 import Navbar from "../Navbar";
 import styles from "./layout.module.scss";
 
-export default function Layout({ children }: any) {
+const Layout = ({ children }: any) => {
   return (
     <>
       <Navbar />
@@ -11,4 +11,6 @@ export default function Layout({ children }: any) {
       <Footer />
     </>
   );
-}
+};
+
+export default Layout;
