@@ -1,2 +1,20 @@
 $navbarHeight: 60px;
 $footerHeight: 100px;
+$sm: 640px;
+$md: 868px;
+$lg: 1000px;
+$xl: 1380px;
+$xxl: 1536px;
+$navbarColor: rgba(0, 150, 250, 0.4);
+$navbarBorderColor: rgba(0, 150, 250, 0.6);
+$backgroundColor: linear-gradient(
+  to bottom right,
+  rgb(240, 240, 255),
+  rgb(200, 230, 255)
+);
+$primaryColor: rgb(0, 150, 250);
+$primaryColorHalf: rgba(0, 150, 250, 0.5);
+$primaryColorFaint: rgba(0, 150, 250, 0.1);
+$neutralColor: rgb(150, 150, 150);
+$neutralColorHalf: rgba(150, 150, 150, 0.5);
+$neutralColorFaint: rgba(150, 150, 150, 1);

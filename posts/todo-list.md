@@ -9,13 +9,20 @@ tags:
   - shitpost
 ---
 
-**To-Do List**
+**_App_**
 
-- Blog post date
-- Navbar for mobile
-- Add dark mode
-- Navbar same color as background (light/dark) but with lower alpha and blur
-- Make own card for blog posts in blog tab and put it as a separate component
+- Dark mode
+- Low opacity background image to blend with the background
+- Responsive navbar + transparent with blur
 - ~~Footer~~
 - ~~Rework layouts (Have a main layout with header and footer and children layouts)~~
-- ~~BlogLayout rework~~
+
+**Blog**
+
+- ~~Make own card for blog posts in blog tab and put it as a separate component~~
+- 4 highlighted posts on top, horizontal scrollbar when mobile
+- Full post list + tag filters and search bar
+- Resize highlighted posts on client resize
+- Make separate tag component with onClick for filter
+- Add more info in Card and Post components (date, description...)
+- Add hover animation to Card

@@ -1,0 +1,42 @@
+@import "../../styles/constant.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $primaryColor;
+  width: 400px;
+  margin: 20px;
+}
+
+.imageContainer {
+  display: flex;
+}
+
+.image {
+  display: flex;
+  height: 200px;
+  width: 400px;
+  object-fit: cover;
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.title {
+  display: flex;
+}
+
+.description {
+  display: flex;
+}
+
+.tags {
+  display: flex;
+}
+
+.tag {
+  display: flex;
+}

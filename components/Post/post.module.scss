@@ -1,0 +1,28 @@
+@import "../../styles/constant.scss";
+
+.post {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+  border-top: 1px solid $neutralColorHalf;
+  transition: all 0.1s ease;
+}
+
+.post:hover {
+  padding-left: 50px;
+  border: 1px solid $primaryColor;
+  border-bottom: none;
+  background-color: $primaryColorFaint;
+}
+
+.post:hover + .post {
+  border-top: 1px solid $primaryColor;
+}
+
+.post:last-child {
+  border-bottom: 1px solid $neutralColorHalf;
+}
+
+.post:last-child:hover {
+  border-bottom: 1px solid $primaryColor;
+}

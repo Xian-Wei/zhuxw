@@ -9,9 +9,9 @@
   width: 100%;
   padding-inline: 20px;
   padding-block: 20px;
-  background-color: rgba(128, 128, 128, 0.6);
+  background-color: $navbarColor;
   backdrop-filter: blur(50px);
-  border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+  border-bottom: 1px solid $navbarBorderColor;
   z-index: 1000;
 }
 
