@@ -6,7 +6,7 @@ image: images/blunderbuss-texture.png
 date: "2023-01-04"
 tags:
   - work
-  - shitpost
+  - project
 ---
 
 **_App_**
@@ -26,3 +26,7 @@ tags:
 - Make separate tag component with onClick for filter
 - Add more info in Card and Post components (date, description...)
 - Add hover animation to Card
+
+**Weight**
+
+- Convert Chart component into TypeScript

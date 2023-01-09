@@ -26,7 +26,11 @@ const Card = ({ slug, image, title, tags }: CardProps) => {
           <div className={styles.title}> Card</div>
           <div className={styles.tags}>
             {tags?.map((tag) => {
-              return <div className={styles.tag}>{tag}</div>;
+              return (
+                <div className={styles.tag} key={tag}>
+                  {tag}
+                </div>
+              );
             })}
           </div>
         </div>

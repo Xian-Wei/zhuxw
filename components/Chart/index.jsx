@@ -42,7 +42,7 @@ const Chart = (props) => {
         chart.remove();
       };
     })();
-  }, []);
+  }, [data]);
 
   return (
     <div ref={chartContainerRef} style={{ height: "100%", width: "100%" }} />

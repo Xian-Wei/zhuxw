@@ -49,7 +49,7 @@ export default function Blog({ posts }: BlogPostProps) {
   useEffect(() => {
     setSortedPosts(posts);
     setAllTags(posts);
-  }, []);
+  }, [posts]);
 
   return (
     <Layout>
@@ -72,6 +72,7 @@ export default function Blog({ posts }: BlogPostProps) {
       <div className={styles.highlighted}>
         {posts?.slice(0, 4).map((post) => (
           <Card
+            key={post.frontmatter.id}
             slug={post.slug}
             image={post.frontmatter.image}
             title={post.frontmatter.title}
@@ -85,7 +86,11 @@ export default function Blog({ posts }: BlogPostProps) {
             <div className={styles.postTitle}>Recent posts</div>
             <div className={styles.posts}>
               {sortedPosts?.map((post) => (
-                <Post slug={post.slug} frontmatter={post.frontmatter} />
+                <Post
+                  key={post.frontmatter.id}
+                  slug={post.slug}
+                  frontmatter={post.frontmatter}
+                />
               ))}
             </div>
           </div>
@@ -104,7 +109,9 @@ export default function Blog({ posts }: BlogPostProps) {
               <div className={styles.filterTitle}>Tags</div>
               <div className={styles.tags}>
                 {tags?.map((tag) => (
-                  <div className={styles.tag}>{tag}</div>
+                  <div className={styles.tag} key={tag as string}>
+                    {tag}
+                  </div>
                 ))}
               </div>
             </div>
