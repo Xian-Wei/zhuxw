@@ -1,20 +1,35 @@
+// Variables
 $navbarHeight: 60px;
 $footerHeight: 100px;
+
+// Screen size
 $sm: 640px;
 $md: 868px;
 $lg: 1000px;
 $xl: 1380px;
 $xxl: 1536px;
+
+// Navbar
 $navbarColor: rgba(0, 150, 250, 0.4);
 $navbarBorderColor: rgba(0, 150, 250, 0.6);
+
+// Background
 $backgroundColor: linear-gradient(
   to bottom right,
   rgb(240, 240, 255),
   rgb(200, 230, 255)
 );
+
+// Colors
 $primaryColor: rgb(0, 150, 250);
-$primaryColorHalf: rgba(0, 150, 250, 0.5);
-$primaryColorFaint: rgba(0, 150, 250, 0.1);
 $neutralColor: rgb(150, 150, 150);
-$neutralColorHalf: rgba(150, 150, 150, 0.5);
-$neutralColorFaint: rgba(150, 150, 150, 1);
+$disabledColor: rgb(128, 128, 128);
+
+// Colors on hover
+$primaryColorHover: rgb(0, 130, 230);
+$neutralColorHover: rgb(130, 130, 130);
+$disabledColorHover: rgb(100, 100, 100);
+
+// Post
+$postBackground: rgba(0, 150, 250, 0.1);
+$postBorder: rgba(150, 150, 150, 0.5);

@@ -6,6 +6,6 @@ export default interface BlogPost {
     description: string;
     image: string;
     date: string;
-    tags: [];
+    tags: string[];
   };
 }

@@ -8,6 +8,8 @@ import Card from "../../components/Card";
 import Layout from "../../components/Layout";
 import Post from "../../components/Post";
 import BlogPost from "../../models/BlogPost";
+import PostTag from "../../components/PostTag";
+import TagState from "../../models/TagState";
 
 interface BlogPostProps {
   posts: BlogPost[];
@@ -16,40 +18,94 @@ interface BlogPostProps {
 export const siteTitle = "Xian-Wei's blog";
 
 export default function Blog({ posts }: BlogPostProps) {
-  const [sortedPosts, setSortedPosts] = useState<BlogPost[]>();
-  const [tags, setTags] = useState<String[]>();
+  const [searchedPosts, setSearchedPosts] = useState<BlogPost[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
+  const [tagStates, setTagStates] = useState<TagState[]>([]);
+  const [firstFilter, setFirstFilter] = useState<boolean>(true);
 
-  const onSearch = (e: any) => {
-    if (e.target.value != "") {
-      let newSortedPosts: BlogPost[] | undefined = posts?.filter((post) =>
-        post.frontmatter.title
-          .toLowerCase()
-          .includes(e.target.value.toLowerCase())
+  // Text search
+  const onSearch = (search: string) => {
+    let newSearchedPosts: BlogPost[] = [];
+
+    if (search != "") {
+      newSearchedPosts = posts?.filter((post) =>
+        post.frontmatter.title.toLowerCase().includes(search.toLowerCase())
       );
-      setSortedPosts(newSortedPosts);
     } else {
-      setSortedPosts(posts);
+      newSearchedPosts = posts;
     }
+
+    setSearchedPosts(newSearchedPosts);
   };
 
+  // Filters searched posts according to enabled tags
+  const onFilter = () => {
+    let newFilteredPosts: BlogPost[] = [];
+
+    for (let i = 0; i < searchedPosts?.length; i++) {
+      loop2: for (
+        let j = 0;
+        j < searchedPosts[i].frontmatter.tags.length;
+        j++
+      ) {
+        for (let k = 0; k < tagStates.length; k++) {
+          if (
+            searchedPosts[i].frontmatter.tags[j] === tagStates[k].name &&
+            tagStates[k].enabled
+          ) {
+            newFilteredPosts.push(searchedPosts[i]);
+            break loop2;
+          }
+        }
+      }
+    }
+
+    setFilteredPosts(newFilteredPosts);
+  };
+
+  // Tag toggle function
+  // By default all tags are enabled
+  // The first time a tag is clicked on, all other tags will be disabled
+  const toggleTag = (name: string) => {
+    let newTagStates: TagState[] = [...tagStates];
+    let index = tagStates.findIndex((tag) => tag.name === name);
+
+    if (firstFilter) {
+      newTagStates.forEach((tagState) => (tagState.enabled = false));
+      setFirstFilter(false);
+    }
+
+    newTagStates[index].enabled = !newTagStates[index].enabled;
+
+    setTagStates(newTagStates);
+  };
+
+  // Gets tags from all posts
   const setAllTags = (posts: BlogPost[]) => {
-    let tempTags: String[] = [];
+    let tempTagStates: TagState[] = [];
 
     posts.forEach((post) => {
-      post.frontmatter.tags.forEach((tag) => {
-        if (!tempTags.includes(tag)) {
-          tempTags.push(tag);
+      post.frontmatter.tags.forEach((tagName) => {
+        if (!tempTagStates.some((tagState) => tagState.name === tagName)) {
+          tempTagStates.push({ name: tagName, enabled: true });
         }
       });
     });
 
-    setTags(tempTags);
+    setTagStates(tempTagStates);
   };
 
+  // Initializes everything on load
   useEffect(() => {
-    setSortedPosts(posts);
+    setSearchedPosts(posts);
+    setFilteredPosts(posts);
     setAllTags(posts);
   }, [posts]);
+
+  // Filters every time there's an input or a tag toggle
+  useEffect(() => {
+    onFilter();
+  }, [searchedPosts, tagStates]);
 
   return (
     <Layout>
@@ -85,7 +141,7 @@ export default function Blog({ posts }: BlogPostProps) {
           <div className={styles.postContainer}>
             <div className={styles.postTitle}>Recent posts</div>
             <div className={styles.posts}>
-              {sortedPosts?.map((post) => (
+              {filteredPosts?.map((post) => (
                 <Post
                   key={post.frontmatter.id}
                   slug={post.slug}
@@ -101,18 +157,21 @@ export default function Blog({ posts }: BlogPostProps) {
                 type="text"
                 className={styles.searchInput}
                 onChange={(e) => {
-                  onSearch(e);
+                  onSearch(e.target.value);
                 }}
               />
             </div>
             <div className={styles.filterSubContainer}>
               <div className={styles.filterTitle}>Tags</div>
               <div className={styles.tags}>
-                {tags?.map((tag) => (
-                  <div className={styles.tag} key={tag as string}>
-                    {tag}
-                  </div>
-                ))}
+                {tagStates.length > 0 &&
+                  tagStates?.map((tagState) => (
+                    <PostTag
+                      tagState={tagState}
+                      toggle={() => toggleTag(tagState.name)}
+                      key={tagState.name}
+                    />
+                  ))}
               </div>
             </div>
           </div>

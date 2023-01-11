@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   padding: 40px;
-  border-top: 1px solid $neutralColorHalf;
+  border-top: 1px solid $postBorder;
   transition: all 0.1s ease;
 }
 
@@ -12,7 +12,7 @@
   padding-left: 50px;
   border: 1px solid $primaryColor;
   border-bottom: none;
-  background-color: $primaryColorFaint;
+  background-color: $postBackground;
 }
 
 .post:hover + .post {
@@ -20,7 +20,7 @@
 }
 
 .post:last-child {
-  border-bottom: 1px solid $neutralColorHalf;
+  border-bottom: 1px solid $postBorder;
 }
 
 .post:last-child:hover {

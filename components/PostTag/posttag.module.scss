@@ -1,0 +1,37 @@
+@import "../../styles/constant.scss";
+
+.tagEnabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 5px;
+  padding-inline: 10px;
+  margin-block: 10px;
+  margin-inline: 5px;
+  border-radius: 7px;
+  color: white;
+  background: $primaryColor;
+  transition: all 0.1s;
+}
+
+.tagEnabled:hover {
+  background: $primaryColorHover;
+}
+
+.tagDisabled {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: 5px;
+  padding-inline: 10px;
+  margin-block: 10px;
+  margin-inline: 5px;
+  border-radius: 7px;
+  color: white;
+  background: $disabledColor;
+  transition: all 0.1s;
+}
+
+.tagDisabled:hover {
+  background: $disabledColorHover;
+}
