@@ -27,16 +27,20 @@
 
 .title {
   display: flex;
-}
-
-.description {
-  display: flex;
+  font-size: 23px;
 }
 
 .tags {
   display: flex;
+  margin-top: 10px;
 }
 
 .tag {
   display: flex;
+  padding-block: 5px;
+  padding-inline: 10px;
+  margin-right: 5px;
+  border-radius: 7px;
+  color: white;
+  background: $primaryColor;
 }

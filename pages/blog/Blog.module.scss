@@ -17,7 +17,7 @@
   display: flex;
   flex-direction: row;
   min-height: 300px;
-  padding-inline: 250px;
+  padding-inline: 200px;
 
   @media screen and (max-width: $xl) {
     padding-inline: 50px;
@@ -25,6 +25,7 @@
 
   @media screen and (max-width: $md) {
     flex-direction: column-reverse;
+    padding-inline: 20px;
   }
 }
 
@@ -45,15 +46,25 @@
   flex: 0.7;
   flex-direction: column;
   margin-right: 50px;
+
+  @media screen and (max-width: $md) {
+    margin-right: 0px;
+  }
 }
 
 .filters {
   display: flex;
   flex-direction: column;
   flex: 0.3;
+  padding-left: 10px;
+  border-left: 1px solid $neutralColor;
 
   @media screen and (max-width: $lg) {
     margin-bottom: 40px;
+  }
+
+  @media screen and (max-width: $md) {
+    border-left: none;
   }
 }
 
@@ -69,7 +80,7 @@
 }
 
 .filterTitle {
-  padding-block: 10px;
+  padding-bottom: 10px;
   font-size: 24px;
 }
 

@@ -11,7 +11,7 @@ tags:
 
 **Hello and welcome to my very first blog post !**
 
-I am Xian-Wei Zhu, a wantrepreneur regard who's passionate about technology in general (especially money-making technologies such as cryptocurrencies).
+I am Xian-Wei Zhu, a wantrepreneur WSB regard who's passionate about tech in general (especially money-making technologies such as cryptocurrencies).
 
 **I like money.**
 
