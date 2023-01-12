@@ -23,7 +23,9 @@ const Post = ({ slug, frontmatter }: BlogPost) => {
         <div className={styles.bottomInfo}>
           <div className={styles.tags}>
             {frontmatter.tags.map((tag) => (
-              <div className={styles.tag}>{tag}</div>
+              <div className={styles.tag} key={tag}>
+                {tag}
+              </div>
             ))}
           </div>
           <div className={styles.date}>{frontmatter.date}</div>

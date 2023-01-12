@@ -38,31 +38,6 @@ export default function Blog({ posts }: BlogPostProps) {
     setSearchedPosts(newSearchedPosts);
   };
 
-  // Filters searched posts according to enabled tags
-  const onFilter = () => {
-    let newFilteredPosts: BlogPost[] = [];
-
-    for (let i = 0; i < searchedPosts?.length; i++) {
-      loop2: for (
-        let j = 0;
-        j < searchedPosts[i].frontmatter.tags.length;
-        j++
-      ) {
-        for (let k = 0; k < tagStates.length; k++) {
-          if (
-            searchedPosts[i].frontmatter.tags[j] === tagStates[k].name &&
-            tagStates[k].enabled
-          ) {
-            newFilteredPosts.push(searchedPosts[i]);
-            break loop2;
-          }
-        }
-      }
-    }
-
-    setFilteredPosts(newFilteredPosts);
-  };
-
   // Tag toggle function
   // By default all tags are enabled
   // The first time a tag is clicked on, all other tags will be disabled
@@ -104,6 +79,29 @@ export default function Blog({ posts }: BlogPostProps) {
 
   // Filters every time there's an input or a tag toggle
   useEffect(() => {
+    const onFilter = () => {
+      let newFilteredPosts: BlogPost[] = [];
+
+      for (let i = 0; i < searchedPosts?.length; i++) {
+        loop2: for (
+          let j = 0;
+          j < searchedPosts[i].frontmatter.tags.length;
+          j++
+        ) {
+          for (let k = 0; k < tagStates.length; k++) {
+            if (
+              searchedPosts[i].frontmatter.tags[j] === tagStates[k].name &&
+              tagStates[k].enabled
+            ) {
+              newFilteredPosts.push(searchedPosts[i]);
+              break loop2;
+            }
+          }
+        }
+      }
+
+      setFilteredPosts(newFilteredPosts);
+    };
     onFilter();
   }, [searchedPosts, tagStates]);
 
