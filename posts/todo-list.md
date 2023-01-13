@@ -22,10 +22,12 @@ tags:
 - ~~Make own card for blog posts in blog tab and put it as a separate component~~
 - ~~4 highlighted posts on top, horizontal scrollbar when mobile~~
 - ~~Full post list + tag filters and search bar~~
-- Remove highlighted posts for mobile
+- ~~Remove highlighted posts for mobile~~
 - ~~Make separate tag component with onClick for filter~~
 - ~~Add more info in Card and Post components (date, description...)~~
 - Add hover animation to Card
+- Show detailed vertical cards on mobile
+- Pagination
 
 **Chart**
 

@@ -8,7 +8,7 @@ export default function Chart() {
     <Layout>
       <div className={styles.container}>
         <div className={styles.topContainer}>
-          Xian-Wei's weight in a daily candlestick chart
+          My weight in a daily candlestick chart
         </div>
         <div className={styles.centerContainer}>
           <div className={styles.centerLeftContainer}>

@@ -139,13 +139,16 @@ export default function Blog({ posts }: BlogPostProps) {
           <div className={styles.postContainer}>
             <div className={styles.postTitle}>Recent posts</div>
             <div className={styles.posts}>
-              {filteredPosts?.map((post) => (
-                <Post
-                  key={post.frontmatter.id}
-                  slug={post.slug}
-                  frontmatter={post.frontmatter}
-                />
-              ))}
+              {filteredPosts
+                ?.slice()
+                .reverse()
+                .map((post) => (
+                  <Post
+                    key={post.frontmatter.id}
+                    slug={post.slug}
+                    frontmatter={post.frontmatter}
+                  />
+                ))}
             </div>
           </div>
           <div className={styles.filters}>

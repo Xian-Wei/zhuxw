@@ -5,10 +5,7 @@ const LWChart = (props: any) => {
   const { data } = props;
 
   const backgroundColor = "#FFFFFF00";
-  const lineColor = "#2962FF";
   const textColor = "black";
-  const areaTopColor = "#2962FF";
-  const areaBottomColor = "rgba(41, 98, 255, 0.28)";
 
   useEffect(() => {
     (async () => {
@@ -40,7 +37,7 @@ const LWChart = (props: any) => {
         chart.remove();
       };
     })();
-  }, []);
+  }, [data]);
 
   return (
     <div

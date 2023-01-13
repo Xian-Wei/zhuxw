@@ -11,8 +11,8 @@ interface CardProps {
 
 const Card = ({ slug, image, title, tags }: CardProps) => {
   return (
-    <Link href={`/post/${slug}`}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <Link href={`/post/${slug}`}>
         <div className={styles.imageContainer}>
           <Image
             width={400}
@@ -34,8 +34,8 @@ const Card = ({ slug, image, title, tags }: CardProps) => {
             })}
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
