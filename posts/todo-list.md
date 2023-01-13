@@ -22,11 +22,17 @@ tags:
 - ~~Make own card for blog posts in blog tab and put it as a separate component~~
 - ~~4 highlighted posts on top, horizontal scrollbar when mobile~~
 - ~~Full post list + tag filters and search bar~~
-- Resize highlighted posts on client resize
+- Remove highlighted posts for mobile
 - ~~Make separate tag component with onClick for filter~~
 - ~~Add more info in Card and Post components (date, description...)~~
 - Add hover animation to Card
 
-**Weight**
+**Chart**
 
-- Convert Chart component into TypeScript
+- ~~Convert Chart component into TypeScript~~
+- Make 2 buttons to long/short my weight
+- Order book to see how many longs and shorts there are for the week
+
+**NFT**
+
+- Unique NFT airdrop on login

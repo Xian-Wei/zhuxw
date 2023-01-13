@@ -16,8 +16,8 @@ const Navbar = () => {
         <Link href="/blog" className={styles.link}>
           Blog
         </Link>
-        <Link href="/weight" className={styles.link}>
-          Weight
+        <Link href="/chart" className={styles.link}>
+          Chart
         </Link>
       </div>
       <div className={styles.rightContainer}>
