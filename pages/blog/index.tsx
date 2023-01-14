@@ -124,15 +124,18 @@ export default function Blog({ posts }: BlogPostProps) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div className={styles.highlighted}>
-        {posts?.slice(0, 4).map((post) => (
-          <Card
-            key={post.frontmatter.id}
-            slug={post.slug}
-            image={post.frontmatter.image}
-            title={post.frontmatter.title}
-            tags={post.frontmatter.tags}
-          />
-        ))}
+        {posts
+          ?.slice(0, 4)
+          .reverse()
+          .map((post) => (
+            <Card
+              key={post.frontmatter.id}
+              slug={post.slug}
+              image={post.frontmatter.image}
+              title={post.frontmatter.title}
+              tags={post.frontmatter.tags}
+            />
+          ))}
       </div>
       <div className={styles.container}>
         <div className={styles.subcontainer}>

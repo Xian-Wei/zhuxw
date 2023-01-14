@@ -3,7 +3,8 @@
 .highlighted {
   display: flex;
   justify-content: center;
-  margin-block: 40px;
+  padding-block: 20px;
+  margin-block: 20px;
   overflow-x: auto;
 
   @media screen and (max-width: $xxl) {
@@ -15,7 +16,6 @@
   display: flex;
   flex-direction: column;
   padding-top: 30px;
-  border-top: 1px solid $neutralColor;
 }
 
 .subcontainer {

@@ -6,10 +6,20 @@
   border: 1px solid $primaryColor;
   width: 350px;
   margin: 20px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+}
+
+.container:hover .image {
+  transform: scale(1.1);
+}
+
+.container:hover .infoContainer {
+  background-color: #e0f0ff;
 }
 
 .imageContainer {
   display: flex;
+  overflow: hidden;
 }
 
 .image {
@@ -17,12 +27,15 @@
   height: 200px;
   width: 350px;
   object-fit: cover;
+  transition: transform 0.2s;
 }
 
 .infoContainer {
   display: flex;
   flex-direction: column;
   padding: 20px;
+  background-color: #cee6ff;
+  transition: background-color 0.2s;
 }
 
 .title {

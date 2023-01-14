@@ -2,7 +2,7 @@
 id: 2
 title: "To-Do list"
 description: "This is a To-Do list in case I'm lost in what I was planning on doing before"
-image: images/blunderbuss-texture.png
+image: images/blunderbuss.png
 date: "2023-01-04"
 tags:
   - work
@@ -25,7 +25,7 @@ tags:
 - ~~Remove highlighted posts for mobile~~
 - ~~Make separate tag component with onClick for filter~~
 - ~~Add more info in Card and Post components (date, description...)~~
-- Add hover animation to Card
+- ~~Add hover animation to Card~~
 - Show detailed vertical cards on mobile
 - Pagination
 
