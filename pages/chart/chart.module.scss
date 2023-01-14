@@ -5,36 +5,124 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: calc(100vh - $navbarHeight);
+  height: calc(110vh - $navbarHeight);
 }
 
+// Top
 .topContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.15;
+  flex: 0.1;
+  min-height: 50px;
   width: 100%;
   background-color: bisque;
 }
 
+.infoContainer {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  gap: 8px;
+}
+
+.pair {
+  display: flex;
+  align-items: center;
+  height: 80%;
+  padding-inline: 30px;
+  border-right: 1px solid $neutralColor;
+  font-size: 23px;
+
+  @media screen and (max-width: $sm) {
+    font-size: 16px;
+    padding-inline: 8px;
+  }
+}
+
+.price {
+  display: flex;
+  padding-inline: 28px;
+  font-size: 22px;
+
+  @media screen and (max-width: $sm) {
+    font-size: 16px;
+    padding-inline: 4px;
+  }
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-inline: 1.2vw;
+}
+
+.priceLabel {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+
+  @media screen and (max-width: $sm) {
+    font-size: 9px;
+  }
+}
+
+.priceChange {
+  display: flex;
+  font-size: 18px;
+
+  @media screen and (max-width: $sm) {
+    font-size: 10px;
+  }
+}
+
+.priceHigh {
+  display: flex;
+  font-size: 20px;
+
+  @media screen and (max-width: $sm) {
+    font-size: 10px;
+  }
+}
+
+.priceLow {
+  display: flex;
+  font-size: 20px;
+
+  @media screen and (max-width: $sm) {
+    font-size: 10px;
+  }
+}
+
+// Center
 .centerContainer {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   flex: 0.7;
   width: 100%;
+
+  @media screen and (max-width: $md) {
+    flex-direction: column;
+  }
 }
 
 .centerLeftContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.8;
   height: 100%;
+  min-width: 50%;
   width: 100%;
 
-  @media screen and (max-width: $xxl) {
-    flex: 1;
+  @media screen and (max-width: $md) {
+    flex: 0.8;
   }
 }
 
@@ -42,24 +130,105 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.2;
   height: 100%;
-  min-width: 300px;
-  background-color: red;
+  min-width: 250px;
+  background-color: rgba(81, 255, 0, 0.993);
 
-  @media screen and (max-width: $xxl) {
-    display: none;
+  @media screen and (max-width: $md) {
+    flex: 0.2;
+    min-height: 100px;
+    width: 100%;
   }
 }
 
+// Bottom
 .bottomContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 0.2;
+  min-height: 100px;
+  width: 100%;
+  background-color: rgb(83, 83, 83);
+}
+
+.bettingContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0.45;
+  gap: 7px;
+}
+
+.longButton {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.15;
+  height: 40px;
   width: 100%;
-  background-color: beige;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  color: white;
+  background-color: #1eff29;
+  transition: background-color 0.1s;
 }
 
-.chart {
+.longButton:hover {
+  background-color: #00ec0c;
+}
+
+.longButton:active {
+  background-color: #5eff00;
+}
+
+.shortButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  color: white;
+  background-color: #ff3434;
+  transition: background-color 0.1s;
+}
+
+.shortButton:hover {
+  background-color: #eb0e0e;
+}
+
+.shortButton:active {
+  background-color: #ff0000;
+}
+
+.valueInputContainer {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  padding-block: 3px;
+}
+
+.valueInput {
+  display: flex;
+  width: 100%;
+  padding-block: 0.8vh;
+  padding-right: 50px;
+  text-align: right;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: rgb(121, 121, 121);
+  outline: none;
+}
+
+.valueCurrency {
+  display: flex;
+  margin-left: -42px;
+  font-weight: 500;
+  color: white;
 }
