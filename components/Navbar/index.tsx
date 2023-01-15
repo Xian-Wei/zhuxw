@@ -5,7 +5,7 @@ import styles from "./navbar.module.scss";
 import useIsMobile from "../../hooks/useIsMobile";
 
 const Navbar = () => {
-  const [navbarToggle, setNavbarToggle] = useState<boolean>(true);
+  const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -64,16 +64,18 @@ const Navbar = () => {
           />
         )}
       </div>
-      <div className={navbarToggle ? styles.mobileLinks : styles.hidden}>
-        <Link href="/" className={styles.mobileLink}>
-          Home
-        </Link>
-        <Link href="/blog" className={styles.mobileLink}>
-          Blog
-        </Link>
-        <Link href="/chart" className={styles.mobileLink}>
-          Chart
-        </Link>
+      <div className={navbarToggle ? styles.fadeIn : styles.fadeOut}>
+        <div className={styles.mobileLinks}>
+          <Link href="/" className={styles.mobileLink}>
+            Home
+          </Link>
+          <Link href="/blog" className={styles.mobileLink}>
+            Blog
+          </Link>
+          <Link href="/chart" className={styles.mobileLink}>
+            Chart
+          </Link>
+        </div>
       </div>
     </nav>
   );

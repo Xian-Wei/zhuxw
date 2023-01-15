@@ -17,7 +17,7 @@ tags:
 - ~~Footer~~
 - ~~Rework layouts (Have a main layout with header and footer and children layouts)~~
 - Navbar transition on link clicks (Both in browser and mobile)
-- Navbar transition on hamburger click + window resize
+- ~~Navbar transition on hamburger click + window resize~~
 
 **Blog**
 
