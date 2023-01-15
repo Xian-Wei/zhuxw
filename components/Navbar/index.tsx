@@ -22,25 +22,13 @@ const Navbar = () => {
         </Link>
       </div>
       <div className={styles.middleContainer}>
-        <Link
-          href="/"
-          className={styles.link}
-          onClick={() => setNavbarToggle(false)}
-        >
+        <Link href="/" className={styles.link}>
           Home
         </Link>
-        <Link
-          href="/blog"
-          className={styles.link}
-          onClick={() => setNavbarToggle(false)}
-        >
+        <Link href="/blog" className={styles.link}>
           Blog
         </Link>
-        <Link
-          href="/chart"
-          className={styles.link}
-          onClick={() => setNavbarToggle(false)}
-        >
+        <Link href="/chart" className={styles.link}>
           Chart
         </Link>
       </div>
@@ -66,13 +54,25 @@ const Navbar = () => {
       </div>
       <div className={navbarToggle ? styles.fadeIn : styles.fadeOut}>
         <div className={styles.mobileLinks}>
-          <Link href="/" className={styles.mobileLink}>
+          <Link
+            href="/"
+            className={styles.mobileLink}
+            onClick={() => setNavbarToggle(false)}
+          >
             Home
           </Link>
-          <Link href="/blog" className={styles.mobileLink}>
+          <Link
+            href="/blog"
+            className={styles.mobileLink}
+            onClick={() => setNavbarToggle(false)}
+          >
             Blog
           </Link>
-          <Link href="/chart" className={styles.mobileLink}>
+          <Link
+            href="/chart"
+            className={styles.mobileLink}
+            onClick={() => setNavbarToggle(false)}
+          >
             Chart
           </Link>
         </div>
