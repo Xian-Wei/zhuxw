@@ -10,8 +10,14 @@ $xl: 1380px;
 $xxl: 1536px;
 
 // Navbar
-$navbarColor: rgba(0, 150, 250, 0.4);
-$navbarBorderColor: rgba(0, 150, 250, 0.6);
+$navbarBackground: rgba(0, 150, 250, 0.4);
+$navbarBorder: rgba(0, 150, 250, 0.6);
+$collapsedBackground: linear-gradient(
+  to bottom,
+  rgba(0, 0, 0, 1),
+  rgba(0, 0, 0, 0.7)
+);
+$collapsedHoverBackground: rgba(50, 50, 50, 0.2);
 
 // Background
 $backgroundColor: linear-gradient(
@@ -33,3 +39,12 @@ $disabledColorHover: rgb(100, 100, 100);
 // Post
 $postBackground: rgba(0, 150, 250, 0.1);
 $postBorder: rgba(150, 150, 150, 0.5);
+
+/* Export */
+:export {
+  sm: $sm;
+  md: $md;
+  lg: $lg;
+  xl: $xl;
+  xxl: $xxl;
+}

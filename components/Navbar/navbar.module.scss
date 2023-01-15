@@ -1,4 +1,4 @@
-@import "../../styles/constant.scss";
+@import "../../styles/constants.module.scss";
 
 .nav {
   display: flex;
@@ -7,42 +7,119 @@
   align-items: center;
   height: $navbarHeight;
   width: 100%;
-  padding-inline: 20px;
-  padding-block: 20px;
-  background-color: $navbarColor;
+  background-color: $navbarBackground;
   backdrop-filter: blur(50px);
-  border-bottom: 1px solid $navbarBorderColor;
+  border-bottom: 1px solid $navbarBorder;
   z-index: 1000;
+
+  @media screen and (max-width: $md) {
+    justify-content: space-between;
+  }
 }
 
 .leftContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.1;
+  flex: 0.15;
+  height: 100%;
+  width: 100%;
+
+  @media screen and (max-width: $md) {
+    justify-content: flex-start;
+    flex: 0.3;
+    margin-left: 20px;
+  }
 }
 
 .middleContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.7;
+  flex: 0.6;
   gap: 70px;
+
+  @media screen and (max-width: $md) {
+    display: none;
+  }
 }
 
 .rightContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.1;
+  flex: 0.15;
+  height: 100%;
+  width: 100%;
+
+  @media screen and (max-width: $md) {
+    justify-content: flex-end;
+    flex: 0.7;
+    margin-right: 20px;
+  }
+}
+
+.homeLink {
+  display: flex;
+  margin-inline: 20px;
 }
 
 .link {
   display: flex;
   text-decoration: none;
+  transition: 0.1s color;
 }
 
 .buttonLink {
   display: flex;
+  padding-block: 10px;
+  padding-inline: 20px;
+  border-radius: 10px;
+  color: white;
   text-decoration: none;
+  background-color: $primaryColor;
+}
+
+.toggle {
+  display: none;
+  font-size: 20px;
+
+  @media screen and (max-width: $md) {
+    display: flex;
+    margin-inline: 20px;
+  }
+}
+
+.mobileLinks {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  right: 0;
+  top: $navbarHeight;
+  height: calc(100vh - $navbarHeight);
+  width: 100vw;
+  padding: 20px;
+  background: $collapsedBackground, url("../../public/images/spiral.jpg");
+}
+
+.mobileLink {
+  display: flex;
+  padding: 20px;
+  padding-inline: 40px;
+  color: $neutralColor;
+  border-radius: 5px;
+  transition: 0.1s color;
+}
+
+.mobileLink:hover {
+  color: white;
+  background-color: $collapsedHoverBackground;
+}
+
+.hidden {
+  display: none;
 }
