@@ -17,7 +17,11 @@ const Navbar = () => {
   return (
     <nav className={styles.nav}>
       <div className={styles.leftContainer}>
-        <Link href="/" className={styles.homeLink}>
+        <Link
+          href="/"
+          className={styles.homeLink}
+          onClick={() => setNavbarToggle(false)}
+        >
           zhuxw
         </Link>
       </div>

@@ -2,14 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./card.module.scss";
 
-interface CardProps {
+interface BlogCardProps {
   slug: string;
   image: string;
   title: string;
   tags: string[];
 }
 
-const Card = ({ slug, image, title, tags }: CardProps) => {
+const BlogCard = ({ slug, image, title, tags }: BlogCardProps) => {
   return (
     <div className={styles.container}>
       <Link href={`/post/${slug}`}>
@@ -39,4 +39,4 @@ const Card = ({ slug, image, title, tags }: CardProps) => {
   );
 };
 
-export default Card;
+export default BlogCard;

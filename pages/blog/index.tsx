@@ -4,28 +4,28 @@ import matter from "gray-matter";
 import Head from "next/head";
 import styles from "./Blog.module.scss";
 
-import Card from "../../components/Card";
+import Post from "../../models/Post";
 import Layout from "../../components/Layout";
-import Post from "../../components/Post";
-import BlogPost from "../../models/BlogPost";
-import PostTag from "../../components/PostTag";
-import TagState from "../../models/TagState";
+import BlogCard from "../../components/BlogCard";
+import BlogPost from "../../components/BlogPost";
+import BlogPostTag from "../../components/BlogPostTag";
+import BlogPostTagState from "../../models/BlogPostTagState";
 
-interface BlogPostProps {
-  posts: BlogPost[];
+interface PostProps {
+  posts: Post[];
 }
 
 export const siteTitle = "Xian-Wei's blog";
 
-export default function Blog({ posts }: BlogPostProps) {
-  const [searchedPosts, setSearchedPosts] = useState<BlogPost[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
-  const [tagStates, setTagStates] = useState<TagState[]>([]);
+export default function Blog({ posts }: PostProps) {
+  const [searchedPosts, setSearchedPosts] = useState<Post[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
+  const [tagStates, setTagStates] = useState<BlogPostTagState[]>([]);
   const [firstFilter, setFirstFilter] = useState<boolean>(true);
 
   // Text search
   const onSearch = (search: string) => {
-    let newSearchedPosts: BlogPost[] = [];
+    let newSearchedPosts: Post[] = [];
 
     if (search != "") {
       newSearchedPosts = posts?.filter((post) =>
@@ -42,7 +42,7 @@ export default function Blog({ posts }: BlogPostProps) {
   // By default all tags are enabled
   // The first time a tag is clicked on, all other tags will be disabled
   const toggleTag = (name: string) => {
-    let newTagStates: TagState[] = [...tagStates];
+    let newTagStates: BlogPostTagState[] = [...tagStates];
     let index = tagStates.findIndex((tag) => tag.name === name);
 
     if (firstFilter) {
@@ -56,8 +56,8 @@ export default function Blog({ posts }: BlogPostProps) {
   };
 
   // Gets tags from all posts
-  const setAllTags = (posts: BlogPost[]) => {
-    let tempTagStates: TagState[] = [];
+  const setAllTags = (posts: Post[]) => {
+    let tempTagStates: BlogPostTagState[] = [];
 
     posts.forEach((post) => {
       post.frontmatter.tags.forEach((tagName) => {
@@ -80,7 +80,7 @@ export default function Blog({ posts }: BlogPostProps) {
   // Filters every time there's an input or a tag toggle
   useEffect(() => {
     const onFilter = () => {
-      let newFilteredPosts: BlogPost[] = [];
+      let newFilteredPosts: Post[] = [];
 
       for (let i = 0; i < searchedPosts?.length; i++) {
         loop2: for (
@@ -128,7 +128,7 @@ export default function Blog({ posts }: BlogPostProps) {
           ?.slice(0, 4)
           .reverse()
           .map((post) => (
-            <Card
+            <BlogCard
               key={post.frontmatter.id}
               slug={post.slug}
               image={post.frontmatter.image}
@@ -146,7 +146,7 @@ export default function Blog({ posts }: BlogPostProps) {
                 ?.slice()
                 .reverse()
                 .map((post) => (
-                  <Post
+                  <BlogPost
                     key={post.frontmatter.id}
                     slug={post.slug}
                     frontmatter={post.frontmatter}
@@ -170,7 +170,7 @@ export default function Blog({ posts }: BlogPostProps) {
               <div className={styles.tags}>
                 {tagStates.length > 0 &&
                   tagStates?.map((tagState) => (
-                    <PostTag
+                    <BlogPostTag
                       tagState={tagState}
                       toggle={() => toggleTag(tagState.name)}
                       key={tagState.name}
@@ -187,7 +187,7 @@ export default function Blog({ posts }: BlogPostProps) {
 
 export async function getStaticProps() {
   const files = fs.readdirSync("posts");
-  const posts: BlogPost[] = files.map((fileName) => {
+  const posts: Post[] = files.map((fileName) => {
     const slug = fileName.replace(".md", "");
     const readFile = fs.readFileSync(`posts/${fileName}`, "utf-8");
     const { data: frontmatter }: any = matter(readFile);

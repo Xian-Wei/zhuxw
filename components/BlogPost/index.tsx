@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import BlogPost from "../../models/BlogPost";
+import Post from "../../models/Post";
 import styles from "./post.module.scss";
 
-const Post = ({ slug, frontmatter }: BlogPost) => {
+const BlogPost = ({ slug, frontmatter }: Post) => {
   return (
     <Link href={`/post/${slug}`} className={styles.post}>
       <div className={styles.imageContainer}>
@@ -35,4 +35,4 @@ const Post = ({ slug, frontmatter }: BlogPost) => {
   );
 };
 
-export default Post;
+export default BlogPost;

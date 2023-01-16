@@ -1,4 +1,4 @@
-export default interface BlogPost {
+export default interface Post {
   slug: string;
   frontmatter: {
     id: number;

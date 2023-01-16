@@ -1,12 +1,12 @@
-import TagState from "../../models/TagState";
+import BlogPostTagState from "../../models/BlogPostTagState";
 import styles from "./posttag.module.scss";
 
-interface PostTagProps {
-  tagState: TagState;
+interface BlogPostTagProps {
+  tagState: BlogPostTagState;
   toggle: () => void;
 }
 
-const PostTag = ({ tagState, toggle }: PostTagProps) => {
+const BlogPostTag = ({ tagState, toggle }: BlogPostTagProps) => {
   return (
     <div
       className={tagState.enabled ? styles.tagEnabled : styles.tagDisabled}
@@ -17,4 +17,4 @@ const PostTag = ({ tagState, toggle }: PostTagProps) => {
   );
 };
 
-export default PostTag;
+export default BlogPostTag;
