@@ -70,16 +70,6 @@
   transition: 0.1s color;
 }
 
-.buttonLink {
-  display: flex;
-  padding-block: 8px;
-  padding-inline: 20px;
-  border-radius: 10px;
-  color: white;
-  text-decoration: none;
-  background-color: $primaryColor;
-}
-
 .toggle {
   display: none;
   font-size: 20px;

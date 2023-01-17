@@ -38,6 +38,12 @@ tags:
 - Order book to see how many longs and shorts there are for the week
 - UI Rework
 
+**Web3**
+
+- Add typing to window.ethereum
+- Display connected wallet according to MetaMask
+- Display network according to MetaMask
+
 **NFT**
 
 - Unique NFT airdrop on login

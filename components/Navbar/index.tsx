@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import styles from "./navbar.module.scss";
 import useIsMobile from "../../hooks/useIsMobile";
+import Web3Wallet from "../Web3Wallet";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
@@ -37,13 +38,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className={styles.rightContainer}>
-        <Link
-          href="/"
-          className={styles.buttonLink}
-          onClick={() => setNavbarToggle(false)}
-        >
-          Start app
-        </Link>
+        <Web3Wallet />
         {navbarToggle ? (
           <FaTimes
             className={styles.toggle}

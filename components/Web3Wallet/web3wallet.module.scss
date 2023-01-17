@@ -1,0 +1,16 @@
+@import "../../styles/constants.module.scss";
+
+.button {
+  display: flex;
+  padding-block: 8px;
+  padding-inline: 20px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  background-color: $primaryColor;
+  transition: 0.1s background-color;
+}
+
+.button:hover {
+  background-color: $primaryColorHover;
+}
