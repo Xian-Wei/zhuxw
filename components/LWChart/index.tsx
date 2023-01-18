@@ -1,8 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import WeightData from "../../models/WeightData";
 
-const LWChart = (props: any) => {
+interface WeightProps {
+  weights: WeightData[];
+}
+
+const LWChart = ({ weights }: WeightProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
-  const { data } = props;
 
   const backgroundColor = "#FFFFFF00";
   const textColor = "black";
@@ -27,7 +31,7 @@ const LWChart = (props: any) => {
       );
 
       const newSeries = chart.addCandlestickSeries();
-      newSeries.setData(data);
+      newSeries.setData(weights);
 
       chart.timeScale().fitContent();
 
@@ -37,12 +41,13 @@ const LWChart = (props: any) => {
         chart.remove();
       };
     })();
-  }, [data]);
+  }, [weights]);
 
   return (
     <div
       ref={chartContainerRef}
       style={{ display: "flex", height: "100%", width: "100%" }}
+      key={weights[0].open} // For re-rendering purposes
     />
   );
 };

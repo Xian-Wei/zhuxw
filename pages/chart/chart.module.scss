@@ -5,7 +5,12 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: calc(110vh - $navbarHeight);
+  height: calc(100vh - $navbarHeight);
+  padding-inline: 80px;
+
+  @media screen and (max-width: $lg) {
+    padding-inline: 5px;
+  }
 }
 
 // Top
@@ -21,7 +26,7 @@
 
 .infoContainer {
   display: inline-flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -36,9 +41,9 @@
   border-right: 1px solid $neutralColor;
   font-size: 23px;
 
-  @media screen and (max-width: $sm) {
-    font-size: 16px;
-    padding-inline: 8px;
+  @media screen and (max-width: $md) {
+    font-size: 12px;
+    padding-inline: 10px;
   }
 }
 
@@ -47,9 +52,9 @@
   padding-inline: 28px;
   font-size: 22px;
 
-  @media screen and (max-width: $sm) {
-    font-size: 16px;
-    padding-inline: 4px;
+  @media screen and (max-width: $md) {
+    font-size: 15px;
+    padding-inline: 5px;
   }
 }
 
@@ -59,16 +64,17 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding-inline: 1.2vw;
+  padding-inline: 0.5vw;
 }
 
 .priceLabel {
   display: flex;
   justify-content: center;
   font-weight: bold;
+  font-size: 18px;
 
-  @media screen and (max-width: $sm) {
-    font-size: 9px;
+  @media screen and (max-width: $md) {
+    font-size: 10px;
   }
 }
 
@@ -76,7 +82,7 @@
   display: flex;
   font-size: 18px;
 
-  @media screen and (max-width: $sm) {
+  @media screen and (max-width: $md) {
     font-size: 10px;
   }
 }
@@ -85,7 +91,7 @@
   display: flex;
   font-size: 20px;
 
-  @media screen and (max-width: $sm) {
+  @media screen and (max-width: $md) {
     font-size: 10px;
   }
 }
@@ -94,8 +100,22 @@
   display: flex;
   font-size: 20px;
 
-  @media screen and (max-width: $sm) {
+  @media screen and (max-width: $md) {
     font-size: 10px;
+  }
+}
+
+.timeframeButton {
+  display: flex;
+  padding: 10px;
+  margin-inline: 5px;
+  font-size: 18px;
+  border-radius: 4px;
+  background-color: $primaryColor;
+
+  @media screen and (max-width: $md) {
+    padding: 5px;
+    font-size: 12px;
   }
 }
 
