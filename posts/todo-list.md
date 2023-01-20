@@ -51,3 +51,13 @@ tags:
 **Reverse Lottery**
 
 - Same entry fee for everyone, everyone but one person gets their money back. The rest is split amongst the winners.
+
+---
+
+# Other projects
+
+**Chawi**
+
+**Chawi Go**
+
+**Chawi Legends**
