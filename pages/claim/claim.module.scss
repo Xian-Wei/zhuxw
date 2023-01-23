@@ -1,0 +1,17 @@
+@import "../../styles/constants.module.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - $navbarHeight - $footerHeight);
+  width: 100%;
+}
+
+.claimButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

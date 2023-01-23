@@ -88,8 +88,9 @@
 }
 
 .searchInput {
-  border-radius: 4px;
   margin-bottom: 20px;
+  border: 1px solid $neutralColor;
+  border-radius: 4px;
 }
 
 .tags {
