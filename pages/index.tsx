@@ -6,7 +6,7 @@ export const siteTitle = "Xian-Wei Zhu";
 
 export default function Home() {
   return (
-    <Layout>
+    <Layout navbarEnabled={true} footerEnabled={true}>
       <Head>
         <title>{siteTitle}</title>
         <meta

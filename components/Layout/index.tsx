@@ -3,12 +3,16 @@ import Footer from "../Footer";
 import Navbar from "../Navbar";
 import styles from "./layout.module.scss";
 
-const Layout = ({ children }: any) => {
+const Layout = (props: {
+  children: any;
+  navbarEnabled: boolean;
+  footerEnabled: boolean;
+}) => {
   return (
     <>
-      <Navbar />
-      <div className={styles.children}>{children}</div>
-      <Footer />
+      {props.navbarEnabled && <Navbar />}
+      <div className={styles.children}>{props.children}</div>
+      {props.footerEnabled && <Footer />}
     </>
   );
 };

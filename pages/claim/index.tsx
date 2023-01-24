@@ -4,7 +4,7 @@ import styles from "./claim.module.scss";
 
 const Claim = () => {
   return (
-    <Layout>
+    <Layout navbarEnabled={true} footerEnabled={false}>
       <div className={styles.container}>
         <div className={styles.claimButton}>Claim</div>
       </div>
