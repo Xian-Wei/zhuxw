@@ -21,7 +21,7 @@
   flex: 0.1;
   min-height: 50px;
   width: 100%;
-  background-color: bisque;
+  border: 1px solid $neutralColor;
 }
 
 .infoContainer {
@@ -140,6 +140,7 @@
   height: 100%;
   min-width: 50%;
   width: 100%;
+  border: 1px solid $neutralColor;
 
   @media screen and (max-width: $md) {
     flex: 0.8;
@@ -152,7 +153,7 @@
   align-items: center;
   height: 100%;
   min-width: 250px;
-  background-color: rgba(81, 255, 0, 0.993);
+  border: 1px solid $neutralColor;
 
   @media screen and (max-width: $md) {
     flex: 0.2;
@@ -169,7 +170,7 @@
   flex: 0.2;
   min-height: 100px;
   width: 100%;
-  background-color: rgb(83, 83, 83);
+  border: 1px solid $neutralColor;
 }
 
 .bettingContainer {

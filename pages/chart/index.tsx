@@ -58,7 +58,7 @@ export default function Chart() {
   }, [timeframe]);
 
   return (
-    <Layout navbarEnabled={true} footerEnabled={true}>
+    <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
       {weights != null && (
         <div className={styles.container}>
           <div className={styles.topContainer}>

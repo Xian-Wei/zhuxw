@@ -8,6 +8,7 @@
   align-items: center;
   height: $footerHeight;
   width: 100%;
+  z-index: inherit;
 }
 
 .iconContainer {
@@ -16,6 +17,7 @@
   align-items: flex-end;
   gap: 20px;
   margin-inline: auto;
+  z-index: inherit;
 }
 
 .icon {
@@ -31,4 +33,5 @@
   color: #747474;
   font-size: 20px;
   font-weight: 500;
+  z-index: inherit;
 }

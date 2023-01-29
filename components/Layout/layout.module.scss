@@ -3,4 +3,31 @@
 .children {
   min-height: calc(100vh - $footerHeight);
   padding-top: $navbarHeight;
+  z-index: 5;
+}
+
+.backgroundImage {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: $navbarHeight;
+  left: 0;
+  object-fit: cover;
+  opacity: 1;
+  pointer-events: none;
+  background-image: $backgroundImage;
+  background-size: $backgroundSize;
+  z-index: 0;
+
+  @media screen and (max-width: $md) {
+    background-size: $backgroundSizeMobile;
+  }
+}
+
+.header {
+  z-index: 10;
+}
+
+.footer {
+  z-index: 10;
 }

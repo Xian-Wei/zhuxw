@@ -9,36 +9,43 @@ $lg: 1000px;
 $xl: 1380px;
 $xxl: 1536px;
 
-// Navbar
-$navbarBackground: rgba(0, 150, 250, 0.4);
-$navbarBorder: rgba(0, 150, 250, 0.6);
-$collapsedBackground: linear-gradient(
-  to bottom,
-  rgba(0, 0, 0, 1),
-  rgba(0, 0, 0, 0.7)
-);
-$collapsedHoverBackground: rgba(50, 50, 50, 0.2);
-
 // Background
+$backgroundImage: url("../../public/images/background.png");
 $backgroundColor: linear-gradient(
   to bottom right,
-  rgb(240, 240, 255),
-  rgb(200, 230, 255)
+  rgb(15, 15, 30),
+  rgb(10, 10, 20)
 );
+$backgroundSize: 1920px 1080px;
+$backgroundSizeMobile: 1280px 720px;
 
 // Colors
-$primaryColor: rgb(0, 150, 250);
+$primaryColor: rgb(100, 100, 200);
 $neutralColor: rgb(150, 150, 150);
 $disabledColor: rgb(128, 128, 128);
 
 // Colors on hover
-$primaryColorHover: rgb(0, 130, 230);
+$primaryColorHover: rgb(70, 70, 160);
 $neutralColorHover: rgb(130, 130, 130);
 $disabledColorHover: rgb(100, 100, 100);
 
+// Navbar
+$navbarBackground: rgba(15, 15, 30, 0.9);
+$navbarBorder: rgba(30, 30, 60, 0.6);
+$collapsedBackground: rgb(10, 10, 20);
+$collapsedLinkBackground: url("../../public/images/background-link.png");
+
+// Input
+$inputBackground: rgb(15, 15, 30);
+
 // Post
-$postBackground: rgba(0, 150, 250, 0.1);
+$postBackground: rgba(60, 60, 140, 0.2);
 $postBorder: rgba(150, 150, 150, 0.5);
+
+// Card
+$cardBackground: rgba(15, 15, 30, 0.8);
+$cardBorder: rgba(80, 80, 160, 1);
+$cardBackgroundHover: rgba(20, 20, 40, 0.9);
 
 /* Export */
 :export {

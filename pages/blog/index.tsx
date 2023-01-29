@@ -106,7 +106,7 @@ export default function Blog({ posts }: PostProps) {
   }, [searchedPosts, tagStates]);
 
   return (
-    <Layout navbarEnabled={true} footerEnabled={true}>
+    <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
       <Head>
         <title>{siteTitle}</title>
         <meta

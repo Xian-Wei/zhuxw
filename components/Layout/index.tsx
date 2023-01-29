@@ -7,12 +7,22 @@ const Layout = (props: {
   children: any;
   navbarEnabled: boolean;
   footerEnabled: boolean;
+  backgroundEnabled: boolean;
 }) => {
   return (
     <>
-      {props.navbarEnabled && <Navbar />}
+      {props.backgroundEnabled && <div className={styles.backgroundImage} />}
+      {props.navbarEnabled && (
+        <div className={styles.header}>
+          <Navbar />
+        </div>
+      )}
       <div className={styles.children}>{props.children}</div>
-      {props.footerEnabled && <Footer />}
+      {props.footerEnabled && (
+        <div className={styles.header}>
+          <Footer />
+        </div>
+      )}
     </>
   );
 };

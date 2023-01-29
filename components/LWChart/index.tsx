@@ -9,7 +9,7 @@ const LWChart = ({ weights }: WeightProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
 
   const backgroundColor = "#FFFFFF00";
-  const textColor = "black";
+  const textColor = "white";
 
   useEffect(() => {
     (async () => {

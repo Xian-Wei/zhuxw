@@ -11,6 +11,7 @@
 
 body {
   background-image: $backgroundColor;
+  color: white;
 }
 
 // Removes arrows from number inputs
@@ -19,4 +20,12 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+// Disables blue background when selecting
+::selection {
+  background: transparent;
+}
+::-moz-selection {
+  background: transparent;
 }

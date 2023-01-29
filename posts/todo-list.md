@@ -11,14 +11,14 @@ tags:
 
 **_App_**
 
-- Dark mode
-- Low opacity background image to blend with the background
+- ~~Dark mode~~
+- ~~Low opacity background image to blend with the background~~
 - ~~Responsive navbar + transparent with blur~~
 - ~~Footer~~
 - ~~Rework layouts (Have a main layout with header and footer and children layouts)~~
-- Page transition doesn't work when switching to other pages (feature not a bug ?)
+- ~~Page transition doesn't work when switching to other pages (feature not a bug ?)~~
 - ~~Navbar transition on hamburger click + window resize~~
-- Add option in Layout component to hide header/footer
+- ~~Add option in Layout component to hide header/footer~~
 
 **Blog**
 

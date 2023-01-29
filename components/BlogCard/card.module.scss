@@ -3,10 +3,11 @@
 .container {
   display: flex;
   flex-direction: column;
-  border: 1px solid $primaryColor;
+  border: 1px solid $cardBorder;
   width: 350px;
   margin: 20px;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 8px;
+  z-index: inherit;
 }
 
 .container:hover .image {
@@ -14,7 +15,7 @@
 }
 
 .container:hover .infoContainer {
-  background-color: #e0f0ff;
+  background-color: $cardBackgroundHover;
 }
 
 .imageContainer {
@@ -34,7 +35,7 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
-  background-color: #cee6ff;
+  background-color: $cardBackground;
   transition: background-color 0.2s;
 }
 
