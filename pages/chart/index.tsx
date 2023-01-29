@@ -37,10 +37,6 @@ export default function Chart() {
     }
   };
 
-  const setWeightsByTime = () => {
-    setWeights(timeframe == Timeframe.Weekly ? weeklyWeights : dailyWeights);
-  };
-
   const long = () => {
     console.log(longValue);
   };
@@ -50,11 +46,11 @@ export default function Chart() {
   };
 
   useEffect(() => {
-    setWeightsByTime();
+    setWeights(timeframe == Timeframe.Weekly ? weeklyWeights : dailyWeights);
   }, []);
 
   useEffect(() => {
-    setWeightsByTime();
+    setWeights(timeframe == Timeframe.Weekly ? weeklyWeights : dailyWeights);
   }, [timeframe]);
 
   return (

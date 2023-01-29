@@ -18,17 +18,17 @@ const Web3Wallet = () => {
     }
   };
 
-  const initialize = async () => {
-    if (provider) {
-      const accounts: string[] = await provider.listAccounts();
-
-      if (accounts.length > 0) {
-        setWalletAddress(accounts[0]);
-      }
-    }
-  };
-
   useEffect(() => {
+    const initialize = async () => {
+      if (provider) {
+        const accounts: string[] = await provider.listAccounts();
+
+        if (accounts.length > 0) {
+          setWalletAddress(accounts[0]);
+        }
+      }
+    };
+
     initialize();
   }, [provider]);
 
