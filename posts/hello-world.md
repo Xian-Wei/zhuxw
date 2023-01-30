@@ -2,25 +2,26 @@
 id: 1
 title: "Hello World!"
 description: "Who I am and what to expect from this blog"
-image: images/giraffe.png
+image: images/blog/thumbnails/hi.png
 date: "2022-12-22"
 tags:
-  - life
-  - shitpost
+  - zhuxw
 ---
 
 **Hello and welcome to my very first blog post !**
 
-I am Xian-Wei Zhu, a wantrepreneur WSB regard who's passionate about tech in general (especially money-making technologies such as cryptocurrencies).
+Hello everybody I am Xian-Wei Zhu, a hopeless 24 years old wantrepreneur kid from the internet whose interests vary day to day.
 
-**I like money.**
+This is a first from a (hopefully) long series of blog posts where I'll be sharing all the boring things I do in my life.
+
+I like to call myself a developer as 90% of my free time is dedicated to ~~procrastinating~~ developing random stuff, so you can mainly expect tech/development-related articles from this site. \
+I also really like video games, so who knows ? Maybe I'll be posting a game review (that nobody cares about) one of these days.
 
 As of now I've developed anything but useful stuff, however this blog is the first step towards productivity and financial freedom.
 
 ## What this blog is about
 
-The purpose of this blog is for me to keep track of everything I do as well as share my work to the world. \
-This is pretty much what you can expect from this blog :
+This is what I think I will be posting in here (I have no inspiration right now and am basically forcing myself to write this) :
 
 1. Shitposts
 2. Devlogs
@@ -31,7 +32,7 @@ This is pretty much what you can expect from this blog :
 
 ## My life so far
 
-![I'm tired yes](/images/imtired.png)
+![I'm tired yes](/images/blog/1-imtired.png)
 
 - Procrastinating for years
 - Stuck in tutorial hell for whatever I was planning on doing
@@ -44,7 +45,7 @@ This is pretty much what you can expect from this blog :
 
 ```js
 export default function zhuxw() {
-  return "This blog was made using NextJS, Tailwind and Markdown";
+  return "This blog was made using NextJS, Tailwind Typography plugin and Markdown";
 }
 ```
 

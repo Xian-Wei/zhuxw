@@ -6,7 +6,7 @@ import Layout from "../../components/Layout";
 export default function PostPage({ frontmatter, content }: any) {
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
-      <div className="prose prose-invert mx-auto px-10 py-10">
+      <div className="prose prose-invert mx-auto py-10 px-5">
         <h1>{frontmatter.title}</h1>
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
       </div>

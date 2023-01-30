@@ -2,11 +2,11 @@
 id: 2
 title: "To-Do list"
 description: "This is a To-Do list in case I'm lost in what I was planning on doing before"
-image: images/blunderbuss.png
+image: images/blog/thumbnails/tired.png
 date: "2023-01-04"
 tags:
-  - work
-  - project
+  - zhuxw
+  - todo
 ---
 
 **_App_**
