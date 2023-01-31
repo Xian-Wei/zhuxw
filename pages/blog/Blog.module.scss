@@ -8,7 +8,7 @@
   overflow-x: auto;
   z-index: inherit;
 
-  @media screen and (max-width: $xxl) {
+  @media screen and (max-width: $xl) {
     display: none;
   }
 }
@@ -26,14 +26,19 @@
   min-height: 300px;
   padding-inline: 200px;
   z-index: inherit;
+  transition: padding-inline 0.3s ease;
 
   @media screen and (max-width: $xl) {
     padding-inline: 50px;
   }
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     flex-direction: column;
     padding-inline: 20px;
+  }
+
+  @media screen and (max-width: $sm) {
+    padding-inline: 10px;
   }
 }
 
@@ -55,7 +60,7 @@
   flex-direction: column;
   margin-right: 50px;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     margin-right: 0px;
   }
 }
@@ -67,7 +72,7 @@
   padding-left: 20px;
   border-left: 1px solid $neutralColor;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     border-left: none;
     padding-left: 0px;
     margin-top: 40px;
