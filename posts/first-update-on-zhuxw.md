@@ -27,7 +27,7 @@ I also added a nice background freshly drawn on Photoshop in 5 minutes with my m
 Feature-wise I added tags for posts as well as a search bar so you can filter my innumerable posts however you like.
 
 Not gonna lie it took me waaaay longer than I thought it would take. \
-My CSS and design skills, being absolutely deplorable, made it so I spent 80% of my time developing the interface than the features.
+My CSS and design skills, being absolutely deplorable, made it so I spent 80% of my time developing the interface.
 
 That's it, that's all I have for now. Yes.
 

@@ -4,7 +4,7 @@ $footerHeight: 110px;
 
 // Screen size
 $sm: 640px;
-$md: 868px;
+$md: 968px;
 $lg: 1000px;
 $xl: 1380px;
 $xxl: 1536px;
@@ -25,9 +25,12 @@ $neutralColor: rgb(150, 150, 150);
 $disabledColor: rgb(128, 128, 128);
 
 // Colors on hover
-$primaryColorHover: rgb(70, 70, 160);
+$primaryColorHover: rgb(70, 70, 140);
 $neutralColorHover: rgb(130, 130, 130);
 $disabledColorHover: rgb(100, 100, 100);
+
+// Colors active
+$primaryColorActive: rgb(80, 80, 160);
 
 // Navbar
 $navbarBackground: rgba(15, 15, 30, 0.9);
@@ -46,6 +49,12 @@ $postBorder: rgba(150, 150, 150, 0.5);
 $cardBackground: rgba(15, 15, 30, 0.8);
 $cardBorder: rgba(80, 80, 160, 1);
 $cardBackgroundHover: rgba(20, 20, 40, 0.9);
+
+// Chart
+$chartBackground: rgb(20, 20, 40);
+$chartBorder: rgb(80, 80, 160, 0.4);
+$chartButtonBackground: rgba(30, 30, 50, 0.9);
+$chartButtonBackgroundActive: rgba(70, 70, 140, 1);
 
 /* Export */
 :export {

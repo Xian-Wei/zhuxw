@@ -17,9 +17,15 @@ const Layout = (props: {
           <Navbar />
         </div>
       )}
-      <div className={styles.children}>{props.children}</div>
+      <div
+        className={
+          props.footerEnabled ? styles.children : styles.childrenFooterless
+        }
+      >
+        {props.children}
+      </div>
       {props.footerEnabled && (
-        <div className={styles.header}>
+        <div className={styles.footer}>
           <Footer />
         </div>
       )}

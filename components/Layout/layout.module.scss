@@ -6,6 +6,12 @@
   z-index: 5;
 }
 
+.childrenFooterless {
+  min-height: 100vh;
+  padding-top: $navbarHeight;
+  z-index: 5;
+}
+
 .backgroundImage {
   position: fixed;
   height: 100%;

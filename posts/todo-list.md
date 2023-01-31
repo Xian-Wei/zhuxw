@@ -37,7 +37,9 @@ tags:
 - ~~Convert Chart component into TypeScript~~
 - Make 2 buttons to long/short my weight
 - Order book to see how many longs and shorts there are for the week
-- UI Rework
+- ~~UI Rework~~
+- Add Moving Average indicator
+- Get weight from API endpoint
 
 **Web3**
 

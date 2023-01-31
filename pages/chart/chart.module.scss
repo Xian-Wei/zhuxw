@@ -2,254 +2,181 @@
 
 .container {
   display: flex;
+  position: relative;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  height: calc(100vh - $navbarHeight);
-  padding-inline: 80px;
+  gap: 20px;
+  height: calc(100vh - $footerHeight);
+  width: 100%;
+  padding-block: 40px;
+  padding-inline: 40px;
+  z-index: inherit;
 
-  @media screen and (max-width: $lg) {
-    padding-inline: 5px;
+  @media screen and (max-width: $md) {
+    flex-direction: column;
+    padding-block: 20px;
+    padding-inline: 0px;
   }
 }
 
-// Top
-.topContainer {
+.leftContainer {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 0.1;
-  min-height: 50px;
-  width: 100%;
-  border: 1px solid $neutralColor;
-}
-
-.infoContainer {
-  display: inline-flex;
+  flex-direction: column;
   justify-content: flex-start;
+  gap: 20px;
+  height: 100%;
+  width: 70%;
+
+  @media screen and (max-width: $md) {
+    gap: 10px;
+    height: 400%;
+    width: 95%;
+  }
+}
+
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 300px;
+  width: 20%;
+  padding-inline: 20px;
+  border: 1px solid $chartBorder;
+  border-radius: 5px;
+  background-color: $chartBackground;
+
+  @media screen and (max-width: $md) {
+    width: 95%;
+  }
+}
+
+// Left
+.infoContainer {
+  display: flex;
+  flex: 0.1;
+  align-items: center;
+  padding-inline: 20px;
+  border: 1px solid $chartBorder;
+  border-radius: 5px;
+  background-color: $chartBackground;
+}
+
+.chart {
+  flex: 0.6;
+  justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
-  gap: 8px;
-}
-
-.pair {
-  display: flex;
-  align-items: center;
-  height: 80%;
-  padding-inline: 30px;
-  border-right: 1px solid $neutralColor;
-  font-size: 23px;
+  border: 1px solid $chartBorder;
+  border-radius: 5px;
+  background-color: $chartBackground;
 
   @media screen and (max-width: $md) {
-    font-size: 12px;
-    padding-inline: 10px;
+    flex: 0.7;
   }
 }
 
-.price {
+.timeframeButtons {
   display: flex;
-  padding-inline: 28px;
-  font-size: 22px;
-
-  @media screen and (max-width: $md) {
-    font-size: 15px;
-    padding-inline: 5px;
-  }
-}
-
-.priceContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  padding-inline: 0.5vw;
-}
-
-.priceLabel {
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 18px;
-
-  @media screen and (max-width: $md) {
-    font-size: 10px;
-  }
-}
-
-.priceChange {
-  display: flex;
-  font-size: 18px;
-
-  @media screen and (max-width: $md) {
-    font-size: 10px;
-  }
-}
-
-.priceHigh {
-  display: flex;
-  font-size: 20px;
-
-  @media screen and (max-width: $md) {
-    font-size: 10px;
-  }
-}
-
-.priceLow {
-  display: flex;
-  font-size: 20px;
-
-  @media screen and (max-width: $md) {
-    font-size: 10px;
-  }
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 15px;
+  gap: 10px;
 }
 
 .timeframeButton {
   display: flex;
-  padding: 10px;
-  margin-inline: 5px;
-  font-size: 18px;
-  border-radius: 4px;
-  background-color: $primaryColor;
-
-  @media screen and (max-width: $md) {
-    padding: 5px;
-    font-size: 12px;
-  }
-}
-
-// Center
-.centerContainer {
-  display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
-  flex: 0.7;
-  width: 100%;
-
-  @media screen and (max-width: $md) {
-    flex-direction: column;
-  }
+  height: 30px;
+  width: 40px;
+  border-radius: 5px;
+  background-color: $disabledColor;
+  transition: 0.1s background-color ease-in-out;
+  z-index: 6;
 }
 
-.centerLeftContainer {
+.timeframeButton:hover {
+  background-color: $disabledColorHover;
+}
+
+.timeframeButtonActive {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  min-width: 50%;
-  width: 100%;
-  border: 1px solid $neutralColor;
-
-  @media screen and (max-width: $md) {
-    flex: 0.8;
-  }
+  height: 30px;
+  width: 40px;
+  border-radius: 5px;
+  background-color: $primaryColorActive;
+  z-index: 6;
 }
 
-.centerRightContainer {
+.positions {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  min-width: 250px;
-  border: 1px solid $neutralColor;
-
-  @media screen and (max-width: $md) {
-    flex: 0.2;
-    min-height: 100px;
-    width: 100%;
-  }
-}
-
-// Bottom
-.bottomContainer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
   flex: 0.2;
-  min-height: 100px;
-  width: 100%;
-  border: 1px solid $neutralColor;
-}
-
-.bettingContainer {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex: 0.45;
-  gap: 7px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid $chartBorder;
+  border-radius: 5px;
+  background-color: $chartBackground;
 }
 
-.longButton {
+// Right
+.tabs {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 100%;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 6px;
-  color: white;
-  background-color: #1eff29;
-  transition: background-color 0.1s;
+  height: 60px;
+  margin-block: 10px;
 }
 
-.longButton:hover {
-  background-color: #00ec0c;
-}
-
-.longButton:active {
-  background-color: #5eff00;
-}
-
-.shortButton {
+.shortSwitchTab {
   display: flex;
+  flex: 0.5;
   justify-content: center;
   align-items: center;
-  height: 40px;
-  width: 100%;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 6px;
-  color: white;
-  background-color: #ff3434;
-  transition: background-color 0.1s;
+  margin-block: 10px;
+  border: 1px solid $navbarBorder;
+  border-radius: 7px 0% 0% 7px;
+  background-color: $chartButtonBackground;
 }
 
-.shortButton:hover {
-  background-color: #eb0e0e;
-}
-
-.shortButton:active {
-  background-color: #ff0000;
-}
-
-.valueInputContainer {
-  display: inline-flex;
+.shortSwitchTabActive {
+  display: flex;
+  flex: 0.5;
+  justify-content: center;
   align-items: center;
-  width: 100%;
-  padding-block: 3px;
+  margin-block: 10px;
+  border: 1px solid $navbarBorder;
+  border-radius: 7px 0% 0% 7px;
+  background-color: $chartButtonBackgroundActive;
+}
+
+.longSwitchTab {
+  display: flex;
+  flex: 0.5;
+  justify-content: center;
+  align-items: center;
+  margin-block: 10px;
+  border: 1px solid $navbarBorder;
+  border-radius: 0% 7px 7px 0%;
+  background-color: $chartButtonBackground;
+}
+
+.longSwitchTabActive {
+  display: flex;
+  flex: 0.5;
+  justify-content: center;
+  align-items: center;
+  margin-block: 10px;
+  border: 1px solid $navbarBorder;
+  border-radius: 0% 7px 7px 0%;
+  background-color: $chartButtonBackgroundActive;
 }
 
 .valueInput {
   display: flex;
-  width: 100%;
-  padding-block: 0.8vh;
-  padding-right: 50px;
-  text-align: right;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  color: white;
-  background-color: rgb(121, 121, 121);
-  outline: none;
-}
-
-.valueCurrency {
-  display: flex;
-  margin-left: -42px;
-  font-weight: 500;
-  color: white;
+  flex: 0.6;
 }
