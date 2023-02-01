@@ -109,19 +109,17 @@ export default function Blog({ posts }: PostProps) {
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
       <Head>
         <title>{siteTitle}</title>
+        <meta name="og:title" content={siteTitle} />
         <meta
-          name="description"
+          name="og:description"
           content="This is Xian-Wei's very personal blog, enter at your own risk."
+        />
+        <meta
+          property="og:image"
+          content={`https://zhuxw.com/images/comedy.png`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          property="og:image"
-          content={`https://upload-os-bbs.hoyolab.com/upload/2022/05/25/24882171/ea53f903a1b5db7b585594b12ad59baf_9035185298557925351.png`}
-        />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <div className={styles.highlighted}>
         {posts

@@ -19,6 +19,9 @@ tags:
 - ~~Page transition doesn't work when switching to other pages (feature not a bug ?)~~
 - ~~Navbar transition on hamburger click + window resize~~
 - ~~Add option in Layout component to hide header/footer~~
+- ~~Add Head content to all pages~~
+- Meta Description only showing up in Claim page
+- Add more data to meta (twitter cards...)
 
 **Blog**
 
@@ -31,6 +34,7 @@ tags:
 - ~~Add hover animation to Card~~
 - Show detailed vertical cards on mobile
 - Pagination
+- Custom head title, description and image for each blog post
 
 **Chart**
 

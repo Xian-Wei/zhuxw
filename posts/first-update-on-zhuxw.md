@@ -16,7 +16,7 @@ Just so you know I had previously created 2 posts in this blog, the [first](/pos
 
 ![Damn bug](/images/blog/3-screenshot.png)
 
-Yeah I'm definitely fixing this bug before I take on the rest of this post.
+Yeah I'm definitely fixing this bug before I take on the rest of this post. \
 I must say past Xian-Wei from a week ago really disappoints.
 
 ## The so-called "update"

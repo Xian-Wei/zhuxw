@@ -9,19 +9,17 @@ export default function Home() {
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
       <Head>
         <title>{siteTitle}</title>
+        <meta name="og:title" content={siteTitle} />
         <meta
-          name="description"
-          content="Hi I'm Xian-Wei, wannabe web3 builder at @XianWeiCorp. Don't expect anything from this website."
+          name="og:description"
+          content="Hi I'm Xian-Wei, wannabe web3 builder at @XianWeiCorp. Don't expect anything from this website. I'm drinking tea as I'm typing this. I'm just trying to have a nice and long description. Yes."
+        />
+        <meta
+          property="og:image"
+          content={`https://zhuxw.com/images/comedy.png`}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta
-          property="og:image"
-          content={`https://upload-os-bbs.hoyolab.com/upload/2022/05/25/24882171/ea53f903a1b5db7b585594b12ad59baf_9035185298557925351.png`}
-        />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
       </Head>
       <main className={styles.main}>Home</main>
     </Layout>

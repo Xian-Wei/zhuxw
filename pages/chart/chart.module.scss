@@ -13,7 +13,7 @@
   padding-inline: 40px;
   z-index: inherit;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     flex-direction: column;
     padding-block: 20px;
     padding-inline: 0px;
@@ -28,7 +28,7 @@
   height: 100%;
   width: 70%;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     gap: 10px;
     height: 400%;
     width: 95%;
@@ -46,7 +46,7 @@
   border-radius: 5px;
   background-color: $chartBackground;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     width: 95%;
   }
 }
@@ -72,7 +72,7 @@
   border-radius: 5px;
   background-color: $chartBackground;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     flex: 0.7;
   }
 }

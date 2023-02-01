@@ -1,8 +1,11 @@
+import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import Layout from "../../components/Layout";
 import LWChart from "../../components/LWChart";
 import { Timeframe } from "../../models/Timeframe";
 import styles from "./chart.module.scss";
+import weeklyWeightData from "../../json/weight_weekly.json";
+import dailyWeightData from "../../json/weight_daily.json";
 
 enum Position {
   Long,
@@ -16,6 +19,33 @@ const Chart = () => {
 
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
+      <Head>
+        <title>
+          {(timeframe == Timeframe.Daily
+            ? dailyWeightData.reverse()[0].close
+            : weeklyWeightData.reverse()[0].close
+          ).toString() + " KG | XWZ/KG"}
+        </title>
+        <meta
+          name="og:title"
+          content={
+            (timeframe == Timeframe.Daily
+              ? dailyWeightData.reverse()[0].close
+              : weeklyWeightData.reverse()[0].close
+            ).toString() + " KG | XWZ/KG"
+          }
+        />
+        <meta
+          name="og:description"
+          content="Xian-Wei Zhu's weight in a candlestick chart. Highly volatile and unpredictable, trade at your own risk. Not financial advice."
+        />
+        <meta
+          property="og:image"
+          content={`https://zhuxw.com/images/comedy.png`}
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className={styles.container}>
         {/* Left */}
         <div className={styles.leftContainer}>
