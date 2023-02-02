@@ -32,9 +32,11 @@ tags:
 - ~~Make separate tag component with onClick for filter~~
 - ~~Add more info in Card and Post components (date, description...)~~
 - ~~Add hover animation to Card~~
-- Show detailed vertical cards on mobile
+- ~~Show detailed vertical cards on mobile~~
 - Pagination
-- Custom head title, description and image for each blog post
+- ~~Custom head title, description and image for each blog post~~
+- Make image grow according to info container when resizing
+- Make date and tag stick to bottom in Post component
 
 **Chart**
 

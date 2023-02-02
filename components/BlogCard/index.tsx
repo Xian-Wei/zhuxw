@@ -6,10 +6,11 @@ interface BlogCardProps {
   slug: string;
   image: string;
   title: string;
+  description: string;
   tags: string[];
 }
 
-const BlogCard = ({ slug, image, title, tags }: BlogCardProps) => {
+const BlogCard = ({ slug, image, title, description, tags }: BlogCardProps) => {
   return (
     <div className={styles.container}>
       <Link href={`/post/${slug}`}>
@@ -24,6 +25,7 @@ const BlogCard = ({ slug, image, title, tags }: BlogCardProps) => {
         </div>
         <div className={styles.infoContainer}>
           <div className={styles.title}>{title}</div>
+          <div className={styles.description}>{description}</div>
           <div className={styles.tags}>
             {tags?.map((tag) => {
               return (

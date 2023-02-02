@@ -4,13 +4,17 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 150px;
+  min-height: 150px;
   padding-block: 10px;
   padding-inline: 10px;
   border-top: 1px solid $postBorder;
   border-left: 0px solid $primaryColor;
   border-right: 0px solid $primaryColor;
-  transition: height 0.1s ease;
+  transition: padding-left 0.1s ease-in-out, height 0.1s ease;
+
+  @media screen and (max-width: $lg) {
+    min-height: 100%;
+  }
 
   @media screen and (max-width: $sm) {
     height: 100%;
@@ -42,6 +46,7 @@
   flex: 0.25;
   justify-content: flex-start;
   align-items: flex-start;
+  height: 100%;
 }
 
 .image {
@@ -51,6 +56,11 @@
   height: 100%;
   min-width: 200px;
   width: 100%;
+
+  @media screen and (max-width: $lg) {
+    min-height: 200%;
+    height: 100%;
+  }
 
   @media screen and (max-width: $md) {
     min-height: 20px;
@@ -62,7 +72,7 @@
 
   @media screen and (max-width: $sm) {
     min-height: 20px;
-    height: 60px;
+    height: 50px;
     min-width: 50px;
     width: 90px;
   }
@@ -72,6 +82,7 @@
   display: flex;
   flex-direction: column;
   flex: 0.75;
+  height: 100%;
   padding-left: 20px;
 
   @media screen and (max-width: $sm) {
@@ -102,6 +113,7 @@
 .description {
   display: flex;
   flex: 0.6;
+  height: 100%;
   font-weight: 200;
 
   @media screen and (max-width: $md) {
@@ -117,6 +129,7 @@
   display: flex;
   align-items: center;
   flex: 0.15;
+  padding-top: 10px;
 
   @media screen and (max-width: $sm) {
     flex: 0.5;
@@ -130,9 +143,10 @@
   display: flex;
   flex: 0.65;
   flex-direction: row;
+  align-items: flex-end;
   height: 100%;
   width: 100%;
-  padding-bottom: 5px;
+  padding-top: 5px;
 
   @media screen and (max-width: $sm) {
     display: none;
@@ -170,6 +184,7 @@
   align-items: flex-end;
   flex: 0.35;
   padding-top: 5px;
+  font-size: 14px;
 
   @media screen and (max-width: $md) {
     font-size: 13px;

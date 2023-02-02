@@ -3,13 +3,13 @@
 .highlighted {
   display: flex;
   justify-content: center;
-  padding-block: 20px;
-  margin-block: 20px;
-  overflow-x: auto;
+  gap: 20px;
+  margin: 20px;
   z-index: inherit;
+  transition: gap 0.1s ease-in-out;
 
-  @media screen and (max-width: $xl) {
-    display: none;
+  @media screen and (max-width: $xxl) {
+    gap: 10px;
   }
 }
 
@@ -107,4 +107,23 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiperSlide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-block: 20px;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

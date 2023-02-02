@@ -2,14 +2,21 @@ import { useEffect, useState } from "react";
 import fs from "fs";
 import matter from "gray-matter";
 import Head from "next/head";
-import styles from "./Blog.module.scss";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
 
+import "swiper/css";
+import "swiper/css/navigation";
+
+import styles from "./Blog.module.scss";
 import Post from "../../models/Post";
 import Layout from "../../components/Layout";
 import BlogCard from "../../components/BlogCard";
 import BlogPost from "../../components/BlogPost";
 import BlogPostTag from "../../components/BlogPostTag";
 import BlogPostTagState from "../../models/BlogPostTagState";
+import useIsWidth from "../../hooks/useIsWidth";
+import { WindowWidth } from "../../models/WindowWidth";
 
 interface PostProps {
   posts: Post[];
@@ -22,6 +29,8 @@ export default function Blog({ posts }: PostProps) {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [tagStates, setTagStates] = useState<BlogPostTagState[]>([]);
   const [firstFilter, setFirstFilter] = useState<boolean>(true);
+
+  const isWidth = useIsWidth(WindowWidth.xl);
 
   // Text search
   const onSearch = (search: string) => {
@@ -121,20 +130,41 @@ export default function Blog({ posts }: PostProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className={styles.highlighted}>
-        {posts
-          ?.slice(0, 4)
-          .reverse()
-          .map((post) => (
-            <BlogCard
-              key={post.frontmatter.id}
-              slug={post.slug}
-              image={post.frontmatter.image}
-              title={post.frontmatter.title}
-              tags={post.frontmatter.tags}
-            />
-          ))}
-      </div>
+      {isWidth ? (
+        <Swiper navigation={true} modules={[Navigation]}>
+          {posts
+            ?.slice(0, 4)
+            .reverse()
+            .map((post) => (
+              <SwiperSlide className={styles.swiperSlide}>
+                <BlogCard
+                  key={post.frontmatter.id}
+                  slug={post.slug}
+                  image={post.frontmatter.image}
+                  title={post.frontmatter.title}
+                  description={post.frontmatter.description}
+                  tags={post.frontmatter.tags}
+                />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      ) : (
+        <div className={styles.highlighted}>
+          {posts
+            ?.slice(0, 4)
+            .reverse()
+            .map((post) => (
+              <BlogCard
+                key={post.frontmatter.id}
+                slug={post.slug}
+                image={post.frontmatter.image}
+                title={post.frontmatter.title}
+                description={post.frontmatter.description}
+                tags={post.frontmatter.tags}
+              />
+            ))}
+        </div>
+      )}
       <div className={styles.container}>
         <div className={styles.subcontainer}>
           <div className={styles.postContainer}>
@@ -194,6 +224,16 @@ export async function getStaticProps() {
       slug,
       frontmatter,
     };
+  });
+
+  posts.sort((post1, post2) => {
+    if (post1.frontmatter.id < post2.frontmatter.id) {
+      return -1;
+    }
+    if (post1.frontmatter.id > post2.frontmatter.id) {
+      return 1;
+    }
+    return 0;
   });
 
   return {

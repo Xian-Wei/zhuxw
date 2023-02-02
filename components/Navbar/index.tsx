@@ -2,18 +2,19 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import styles from "./navbar.module.scss";
-import useIsMobile from "../../hooks/useIsMobile";
+import useIsWidth from "../../hooks/useIsWidth";
 import Web3Wallet from "../Web3Wallet";
+import { WindowWidth } from "../../models/WindowWidth";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
-  const isMobile = useIsMobile();
+  const isWidth = useIsWidth(WindowWidth.md);
 
   useEffect(() => {
-    if (!isMobile) {
+    if (!isWidth) {
       setNavbarToggle(false);
     }
-  }, [isMobile]);
+  }, [isWidth]);
 
   return (
     <nav className={styles.nav}>
