@@ -3,7 +3,7 @@
 .nav {
   display: flex;
   position: fixed;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   height: $navbarHeight;
   width: 100%;
@@ -19,11 +19,12 @@
 
 .leftContainer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex: 0.15;
   height: 100%;
   width: 100%;
+  margin-left: 50px;
 
   @media screen and (max-width: $md) {
     justify-content: flex-start;
@@ -46,11 +47,12 @@
 
 .rightContainer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex: 0.15;
   height: 100%;
   width: 100%;
+  margin-right: 50px;
 
   @media screen and (max-width: $md) {
     justify-content: flex-end;
@@ -61,7 +63,6 @@
 
 .homeLink {
   display: flex;
-  margin-inline: 20px;
 }
 
 .link {

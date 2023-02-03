@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Timeframe } from "../../models/Timeframe";
-import WeightData from "../../models/WeightData";
 import weeklyWeightData from "../../json/weight_weekly.json";
 import dailyWeightData from "../../json/weight_daily.json";
 import { IChartApi, ISeriesApi } from "lightweight-charts";

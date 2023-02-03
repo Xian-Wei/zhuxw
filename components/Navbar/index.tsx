@@ -5,6 +5,7 @@ import styles from "./navbar.module.scss";
 import useIsWidth from "../../hooks/useIsWidth";
 import Web3Wallet from "../Web3Wallet";
 import { WindowWidth } from "../../models/WindowWidth";
+import Web3Network from "../Web3Network";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
@@ -39,6 +40,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className={styles.rightContainer}>
+        <Web3Network />
         <Web3Wallet />
         {navbarToggle ? (
           <FaTimes

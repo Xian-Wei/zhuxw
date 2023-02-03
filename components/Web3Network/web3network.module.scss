@@ -1,0 +1,28 @@
+@import "../../styles/constants.module.scss";
+
+.supportedChain {
+  display: flex;
+  padding-block: 8px;
+  padding-inline: 20px;
+  margin-right: 5px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  background-color: $primaryColor;
+  transition: 0.1s background-color;
+}
+
+.unsupportedChain {
+  display: flex;
+  padding-block: 8px;
+  padding-inline: 20px;
+  margin-right: 5px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  background-color: $disabledColor;
+}
+
+.button:hover {
+  background-color: $primaryColorHover;
+}

@@ -20,8 +20,9 @@ tags:
 - ~~Navbar transition on hamburger click + window resize~~
 - ~~Add option in Layout component to hide header/footer~~
 - ~~Add Head content to all pages~~
-- Meta Description only showing up in Claim page
+- ~~Meta Description only showing up in Claim page~~
 - Add more data to meta (twitter cards...)
+- Hide all crypto-related features if MetaMask is not installed
 
 **Blog**
 
@@ -51,7 +52,7 @@ tags:
 
 - Add typing to window.ethereum
 - Display connected wallet according to MetaMask
-- Display network according to MetaMask
+- ~~Display network according to MetaMask~~
 
 **NFT**
 

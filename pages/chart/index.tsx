@@ -14,7 +14,6 @@ enum Position {
 
 const Chart = () => {
   const [timeframe, setTimeframe] = useState<Timeframe>(Timeframe.Weekly);
-
   const [position, setPosition] = useState(Position.Short);
 
   return (
@@ -103,7 +102,12 @@ const Chart = () => {
               Long
             </div>
           </div>
-          <div className={styles.valueInput}>Yes</div>
+          <div className={styles.sliders}>Sliders</div>
+          {position == Position.Short ? (
+            <div className={styles.shortButton}>Short</div>
+          ) : (
+            <div className={styles.longButton}>Long</div>
+          )}
         </div>
       </div>
     </Layout>

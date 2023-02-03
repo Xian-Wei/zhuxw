@@ -14,6 +14,7 @@
   z-index: inherit;
 
   @media screen and (max-width: $lg) {
+    height: calc(160vh - $footerHeight);
     flex-direction: column;
     padding-block: 20px;
     padding-inline: 0px;
@@ -30,7 +31,7 @@
 
   @media screen and (max-width: $lg) {
     gap: 10px;
-    height: 400%;
+    height: 100%;
     width: 95%;
   }
 }
@@ -47,6 +48,7 @@
   background-color: $chartBackground;
 
   @media screen and (max-width: $lg) {
+    height: 50%;
     width: 95%;
   }
 }
@@ -128,8 +130,13 @@
 .tabs {
   display: flex;
   justify-content: center;
+  flex: 0.1;
   height: 60px;
   margin-block: 10px;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.2;
+  }
 }
 
 .shortSwitchTab {
@@ -140,7 +147,7 @@
   margin-block: 10px;
   border: 1px solid $navbarBorder;
   border-radius: 7px 0% 0% 7px;
-  background-color: $chartButtonBackground;
+  background-color: $chartSwitchBackground;
 }
 
 .shortSwitchTabActive {
@@ -151,7 +158,7 @@
   margin-block: 10px;
   border: 1px solid $navbarBorder;
   border-radius: 7px 0% 0% 7px;
-  background-color: $chartButtonBackgroundActive;
+  background-color: $chartSwitchBackgroundActive;
 }
 
 .longSwitchTab {
@@ -162,7 +169,7 @@
   margin-block: 10px;
   border: 1px solid $navbarBorder;
   border-radius: 0% 7px 7px 0%;
-  background-color: $chartButtonBackground;
+  background-color: $chartSwitchBackground;
 }
 
 .longSwitchTabActive {
@@ -173,10 +180,53 @@
   margin-block: 10px;
   border: 1px solid $navbarBorder;
   border-radius: 0% 7px 7px 0%;
-  background-color: $chartButtonBackgroundActive;
+  background-color: $chartSwitchBackgroundActive;
 }
 
-.valueInput {
+.sliders {
+  flex: 0.8;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.6;
+  }
+}
+
+.shortButton {
   display: flex;
-  flex: 0.6;
+  flex: 0.1;
+  justify-content: center;
+  align-items: center;
+  margin-block: 20px;
+  border: 1px solid $chartBorder;
+  border-radius: 5px;
+  background-color: $chartShortButton;
+  transition: 0.1s background-color ease-in-out;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.2;
+  }
+}
+
+.shortButton:hover {
+  background-color: $chartShortButtonHover;
+}
+
+.longButton {
+  display: flex;
+  flex: 0.1;
+  justify-content: center;
+  align-items: center;
+  margin-block: 20px;
+  border: 1px solid $chartBorder;
+  border-radius: 5px;
+  background-color: $chartLongButton;
+  transition: 0.1s background-color ease-in-out;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.2;
+  }
+}
+
+.longButton:hover {
+  background-color: $chartLongButtonHover;
 }

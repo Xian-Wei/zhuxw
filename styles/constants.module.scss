@@ -38,6 +38,8 @@ $navbarBorder: rgba(30, 30, 60, 0.6);
 $collapsedBackground: rgb(10, 10, 20);
 $collapsedLinkBackground: url("../../public/images/background-link.png");
 
+/***** Blog *****/
+
 // Input
 $inputBackground: rgb(15, 15, 30);
 
@@ -50,11 +52,20 @@ $cardBackground: rgba(15, 15, 30, 0.8);
 $cardBorder: rgba(80, 80, 160, 1);
 $cardBackgroundHover: rgba(20, 20, 40, 0.9);
 
-// Chart
+/***** Chart *****/
+
 $chartBackground: rgb(20, 20, 40);
 $chartBorder: rgb(80, 80, 160, 0.4);
-$chartButtonBackground: rgba(30, 30, 50, 0.9);
-$chartButtonBackgroundActive: rgba(70, 70, 140, 1);
+
+// Long/Short switch
+$chartSwitchBackground: rgba(30, 30, 50, 0.9);
+$chartSwitchBackgroundActive: rgba(70, 70, 140, 1);
+
+// Long/Short buttons
+$chartShortButton: rgb(120, 30, 30);
+$chartShortButtonHover: rgb(150, 30, 30);
+$chartLongButton: rgb(30, 120, 30);
+$chartLongButtonHover: rgb(30, 150, 30);
 
 /* Export */
 :export {
