@@ -136,7 +136,10 @@ export default function Blog({ posts }: PostProps) {
             ?.slice(0, 4)
             .reverse()
             .map((post) => (
-              <SwiperSlide className={styles.swiperSlide}>
+              <SwiperSlide
+                className={styles.swiperSlide}
+                key={post.frontmatter.id}
+              >
                 <BlogCard
                   key={post.frontmatter.id}
                   slug={post.slug}

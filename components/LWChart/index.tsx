@@ -13,7 +13,7 @@ const LWChart = ({ timeframe }: TimeframeProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const [chart, setChart] = useState<IChartApi>();
   const [series, setSeries] = useState<ISeriesApi<"Candlestick">>();
-  
+
   const backgroundColor = "#FFFFFF00";
   const textColor = "white";
   const gridColor = "#6e6e6e1a";
@@ -43,7 +43,7 @@ const LWChart = ({ timeframe }: TimeframeProps) => {
         setChart(newChart);
       }
     })();
-  }, []);
+  }, [chart]);
 
   useEffect(() => {
     (async () => {
@@ -113,18 +113,21 @@ const LWChart = ({ timeframe }: TimeframeProps) => {
   }, [chart]);
 
   useEffect(() => {
-    if (chart && series) {
-      const newSeries = chart.addCandlestickSeries();
+    const updateChart = () => {
+      if (chart && series) {
+        const newSeries = chart.addCandlestickSeries();
 
-      chart?.removeSeries(series);
-      if (timeframe == Timeframe.Daily) {
-        newSeries.setData(dailyWeightData);
-      } else if (timeframe == Timeframe.Weekly) {
-        newSeries.setData(weeklyWeightData);
+        chart?.removeSeries(series);
+        if (timeframe == Timeframe.Daily) {
+          newSeries.setData(dailyWeightData);
+        } else if (timeframe == Timeframe.Weekly) {
+          newSeries.setData(weeklyWeightData);
+        }
+
+        setSeries(newSeries);
       }
-
-      setSeries(newSeries);
-    }
+    };
+    updateChart();
   }, [timeframe]);
 
   return (
