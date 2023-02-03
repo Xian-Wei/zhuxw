@@ -24,23 +24,25 @@ const LWChart = ({ timeframe }: TimeframeProps) => {
   useEffect(() => {
     (async () => {
       if (!chart) {
-        const Chart = await import("lightweight-charts");
-        const newChart = Chart.createChart(
-          chartContainerRef.current as string | HTMLElement,
-          {
-            layout: {
-              background: {
-                type: Chart.ColorType.Solid,
-                color: backgroundColor,
+        if (await import("lightweight-charts")) {
+          const Chart = await import("lightweight-charts");
+          const newChart = Chart.createChart(
+            chartContainerRef.current as string | HTMLElement,
+            {
+              layout: {
+                background: {
+                  type: Chart.ColorType.Solid,
+                  color: backgroundColor,
+                },
+                textColor,
               },
-              textColor,
-            },
-            width: chartContainerRef.current?.clientWidth,
-            height: chartContainerRef.current?.clientHeight,
-          }
-        );
+              width: chartContainerRef.current?.clientWidth,
+              height: chartContainerRef.current?.clientHeight,
+            }
+          );
 
-        setChart(newChart);
+          setChart(newChart);
+        }
       }
     })();
   }, [chart]);
