@@ -3,11 +3,13 @@ import { ethers } from "ethers";
 import useWeb3Provider from "../../hooks/useWeb3Provider";
 import styles from "./web3network.module.scss";
 import { Chains } from "../../models/Chains";
+import useIsMetamaskInstalled from "../../hooks/useIsMetamaskInstalled";
 
 const Web3Network = () => {
   const [network, setNetwork] = useState<string>("");
   const [supported, setSupported] = useState<boolean>(false);
   const provider = useWeb3Provider();
+  const isMetamaskInstalled = useIsMetamaskInstalled();
 
   const setNetworkName = (chain: string) => {
     const chainId: number = Number(chain);
@@ -34,13 +36,15 @@ const Web3Network = () => {
     })();
   }, [provider]);
 
-  return (
-    <div
-      className={supported ? styles.supportedChain : styles.unsupportedChain}
-    >
-      {network}
-    </div>
-  );
+  if (isMetamaskInstalled) {
+    return (
+      <div
+        className={supported ? styles.supportedChain : styles.unsupportedChain}
+      >
+        {network}
+      </div>
+    );
+  }
 };
 
 export default Web3Network;
