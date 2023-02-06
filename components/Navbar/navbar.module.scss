@@ -12,7 +12,7 @@
   border-bottom: 1px solid $navbarBorder;
   z-index: inherit;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     justify-content: space-between;
   }
 }
@@ -24,12 +24,12 @@
   flex: 0.15;
   height: 100%;
   width: 100%;
-  margin-left: 50px;
+  margin-left: 70px;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     justify-content: flex-start;
     flex: 0.3;
-    margin-left: 20px;
+    margin-left: 25px;
   }
 }
 
@@ -40,7 +40,7 @@
   flex: 0.6;
   gap: 70px;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     display: none;
   }
 }
@@ -52,12 +52,12 @@
   flex: 0.15;
   height: 100%;
   width: 100%;
-  margin-right: 50px;
+  margin-right: 70px;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     justify-content: flex-end;
     flex: 0.7;
-    margin-right: 20px;
+    margin-right: 25px;
   }
 }
 
@@ -74,12 +74,13 @@
 .toggle {
   display: none;
   font-size: 20px;
+  margin-left: 15px;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     display: flex;
-    margin-inline: 20px;
   }
 }
+
 .mobileLinks {
   display: flex;
   position: absolute;
@@ -97,7 +98,7 @@
   background-image: $backgroundImage;
   background-size: $backgroundSize;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     background-size: $backgroundSizeMobile;
   }
 }

@@ -44,7 +44,7 @@ const Web3Network = () => {
         {network}
       </div>
     );
-  }
+  } else return <> </>;
 };
 
 export default Web3Network;

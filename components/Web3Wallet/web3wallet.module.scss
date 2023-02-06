@@ -3,12 +3,17 @@
 .button {
   display: flex;
   padding-block: 8px;
-  padding-inline: 20px;
+  padding-inline: 15px;
   border-radius: 10px;
   color: white;
   text-decoration: none;
   background-color: $primaryColor;
   transition: 0.1s background-color;
+
+  @media screen and (max-width: $sm) {
+    padding-inline: 13px;
+    font-size: 12px;
+  }
 }
 
 .button:hover {

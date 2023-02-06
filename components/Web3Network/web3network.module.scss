@@ -3,24 +3,34 @@
 .supportedChain {
   display: flex;
   padding-block: 8px;
-  padding-inline: 20px;
+  padding-inline: 15px;
   margin-right: 5px;
   border-radius: 10px;
   color: white;
   text-decoration: none;
   background-color: $primaryColor;
   transition: 0.1s background-color;
+
+  @media screen and (max-width: $sm) {
+    padding-inline: 10px;
+    font-size: 12px;
+  }
 }
 
 .unsupportedChain {
   display: flex;
   padding-block: 8px;
-  padding-inline: 20px;
+  padding-inline: 15px;
   margin-right: 5px;
   border-radius: 10px;
   color: white;
   text-decoration: none;
   background-color: $disabledColor;
+
+  @media screen and (max-width: $sm) {
+    padding-inline: 10px;
+    font-size: 12px;
+  }
 }
 
 .button:hover {

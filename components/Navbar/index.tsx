@@ -9,7 +9,7 @@ import Web3Network from "../Web3Network";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
-  const isWidth = useIsWidth(WindowWidth.md);
+  const isWidth = useIsWidth(WindowWidth.lg);
 
   useEffect(() => {
     if (!isWidth) {

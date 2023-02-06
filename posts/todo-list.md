@@ -62,6 +62,11 @@ tags:
 
 - Same entry fee for everyone, everyone but one person gets their money back. The rest is split amongst the winners.
 
+**Chess 2**
+
+- Knook
+- Gary Chess bot
+
 ---
 
 # Other projects

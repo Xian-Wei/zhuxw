@@ -39,7 +39,7 @@ const Web3Wallet = () => {
     }
   }, [provider]);
 
-  if (isMetamaskInstalled)
+  if (isMetamaskInstalled) {
     return (
       <div className={styles.button} onClick={connect}>
         {walletAddress != ""
@@ -52,6 +52,7 @@ const Web3Wallet = () => {
           : "Connect"}
       </div>
     );
+  } else return <> </>;
 };
 
 export default Web3Wallet;
