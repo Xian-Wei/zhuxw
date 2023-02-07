@@ -1,11 +1,15 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
+import { ethers } from "ethers";
+
 import Layout from "../../components/Layout";
 import LWChart from "../../components/LWChart";
 import { Timeframe } from "../../models/Timeframe";
 import styles from "./chart.module.scss";
 import weeklyWeightData from "../../json/weight_weekly.json";
 import dailyWeightData from "../../json/weight_daily.json";
+import useWeb3Provider from "../../hooks/useWeb3Provider";
+import useWeb3ChainId from "../../hooks/useWeb3Network";
 
 enum Position {
   Long,
@@ -14,7 +18,10 @@ enum Position {
 
 const Chart = () => {
   const [timeframe, setTimeframe] = useState<Timeframe>(Timeframe.Weekly);
-  const [position, setPosition] = useState(Position.Short);
+  const [position, setPosition] = useState<Position>(Position.Short);
+
+  const provider: ethers.providers.Web3Provider | null = useWeb3Provider();
+  const chainId: number | null = useWeb3ChainId();
 
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>

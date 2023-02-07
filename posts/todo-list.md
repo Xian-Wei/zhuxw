@@ -23,6 +23,7 @@ tags:
 - ~~Meta Description only showing up in Claim page~~
 - Add more data to meta (twitter cards...)
 - Hide all crypto-related features if MetaMask is not installed
+- Convert Number/String wrapper to primitive types across project
 
 **Blog**
 
@@ -47,6 +48,9 @@ tags:
 - ~~UI Rework~~
 - Add Moving Average indicator
 - Get weight from API endpoint
+- Handle tx rejections
+- Stop MetaMask pop-up when switching to the tab with no connected account
+- Update balance and stop contract interactions according to wallet/network
 
 **Web3**
 
