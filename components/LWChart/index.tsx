@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Timeframe } from "../../models/Timeframe";
-import weeklyWeightData from "../../json/weight_weekly.json";
-import dailyWeightData from "../../json/weight_daily.json";
 import { IChartApi, ISeriesApi } from "lightweight-charts";
 
-interface TimeframeProps {
+interface ChartProps {
+  weeklyWeights: any;
+  dailyWeights: any;
   timeframe: Timeframe;
 }
 
-const LWChart = ({ timeframe }: TimeframeProps) => {
+const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const [chart, setChart] = useState<IChartApi>();
   const [series, setSeries] = useState<ISeriesApi<"Candlestick">>();
@@ -55,7 +55,7 @@ const LWChart = ({ timeframe }: TimeframeProps) => {
 
         // Series
         const newSeries = chart.addCandlestickSeries();
-        newSeries.setData(weeklyWeightData);
+        newSeries.setData(weeklyWeights);
 
         setSeries(newSeries);
 
@@ -120,9 +120,9 @@ const LWChart = ({ timeframe }: TimeframeProps) => {
 
         chart?.removeSeries(series);
         if (timeframe == Timeframe.Daily) {
-          newSeries.setData(dailyWeightData);
+          newSeries.setData(dailyWeights);
         } else if (timeframe == Timeframe.Weekly) {
-          newSeries.setData(weeklyWeightData);
+          newSeries.setData(weeklyWeights);
         }
 
         setSeries(newSeries);
