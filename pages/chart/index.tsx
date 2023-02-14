@@ -24,7 +24,7 @@ const Chart = () => {
     data: weeklyWeights,
     error: weeklyError,
     isLoading: weeklyIsLoading,
-  }: { data: any; error: any; isLoading: any } = useSWR(
+  }: { data: any; error: any; isLoading: boolean } = useSWR(
     "https://zhuxw.com/weight_weekly.json",
     fetcher
   );
@@ -32,7 +32,7 @@ const Chart = () => {
     data: dailyWeights,
     error: dailyError,
     isLoading: dailyIsLoading,
-  }: { data: any; error: any; isLoading: any } = useSWR(
+  }: { data: any; error: any; isLoading: boolean } = useSWR(
     "https://zhuxw.com/weight_daily.json",
     fetcher
   );
@@ -44,7 +44,7 @@ const Chart = () => {
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
       <Head>
         <title>
-          {weeklyWeights || dailyWeights
+          {weeklyWeights && dailyWeights
             ? (timeframe == Timeframe.Daily && weeklyWeights && dailyWeights
                 ? dailyWeights.reverse()[0].close
                 : weeklyWeights.reverse()[0].close
@@ -54,7 +54,7 @@ const Chart = () => {
         <meta
           name="og:title"
           content={
-            weeklyWeights || dailyWeights
+            weeklyWeights && dailyWeights
               ? (timeframe == Timeframe.Daily
                   ? dailyWeights.reverse()[0].close
                   : weeklyWeights.reverse()[0].close
@@ -77,7 +77,6 @@ const Chart = () => {
         {/* Left */}
         <div className={styles.leftContainer}>
           <div className={styles.infoContainer}>XWZ / KG</div>
-
           <div className={styles.chart}>
             <div className={styles.timeframeButtons}>
               <div

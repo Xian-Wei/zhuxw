@@ -48,7 +48,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
 
   useEffect(() => {
     (async () => {
-      if (chart) {
+      if (chart && weeklyWeights && dailyWeights) {
         const handleResize = () => {
           chart.applyOptions({ width: chartContainerRef.current?.clientWidth });
         };
@@ -111,11 +111,11 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
         };
       }
     })();
-  }, [chart]);
+  }, [chart, dailyWeights, weeklyWeights]);
 
   useEffect(() => {
     const updateChart = () => {
-      if (chart && series) {
+      if (chart && series && weeklyWeights && dailyWeights) {
         const newSeries = chart.addCandlestickSeries();
 
         chart?.removeSeries(series);
@@ -129,7 +129,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
       }
     };
     updateChart();
-  }, [timeframe]);
+  }, [timeframe, dailyWeights, weeklyWeights]);
 
   return (
     <div
