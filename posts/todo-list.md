@@ -43,19 +43,20 @@ tags:
 **Chart**
 
 - ~~Convert Chart component into TypeScript~~
-- Make 2 buttons to long/short my weight
+- ~~Make 2 buttons to long/short my weight~~
 - Order book to see how many longs and shorts there are for the week
 - ~~UI Rework~~
 - Add Moving Average indicator
-- Get weight from API endpoint
+- ~~Get weight from API endpoint~~
 - Handle tx rejections
 - Stop MetaMask pop-up when switching to the tab with no connected account
-- Update balance and stop contract interactions according to wallet/network
+- ~~Update balance and stop contract interactions according to wallet/network~~
+- Fix error when switching networks
 
 **Web3**
 
 - Add typing to window.ethereum
-- Display connected wallet according to MetaMask
+- ~~Display connected wallet according to MetaMask~~
 - ~~Display network according to MetaMask~~
 
 **NFT**

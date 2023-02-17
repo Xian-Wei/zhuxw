@@ -10,6 +10,9 @@ import { Timeframe } from "../../models/Timeframe";
 import styles from "./chart.module.scss";
 import useWeb3Provider from "../../hooks/useWeb3Provider";
 import useWeb3ChainId from "../../hooks/useWeb3Network";
+import contractAddresses from "../../data/artifacts/contractAddresses.json";
+import zhuAbi from "../../data/artifacts/Zhu.json";
+import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 
 enum Position {
   Long,
@@ -20,25 +23,96 @@ const Chart = () => {
   const [timeframe, setTimeframe] = useState<Timeframe>(Timeframe.Weekly);
   const [position, setPosition] = useState<Position>(Position.Short);
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
-  const {
-    data: weeklyWeights,
-    error: weeklyError,
-    isLoading: weeklyIsLoading,
-  }: { data: any; error: any; isLoading: boolean } = useSWR(
+  const { data: weeklyWeights }: { data: any } = useSWR(
     "https://zhuxw.com/weight_weekly.json",
     fetcher
   );
-  const {
-    data: dailyWeights,
-    error: dailyError,
-    isLoading: dailyIsLoading,
-  }: { data: any; error: any; isLoading: boolean } = useSWR(
+  const { data: dailyWeights }: { data: any } = useSWR(
     "https://zhuxw.com/weight_daily.json",
     fetcher
   );
 
   const provider: ethers.providers.Web3Provider | null = useWeb3Provider();
   const chainId: number | null = useWeb3ChainId();
+  const zhuContractAddress: string | null = chainId
+    ? String(chainId) in contractAddresses
+      ? contractAddresses[String(chainId) as keyof typeof contractAddresses][0]
+      : null
+    : null;
+  const zhuExchangeContractAddress: string | null = chainId
+    ? String(chainId) in contractAddresses
+      ? contractAddresses[String(chainId) as keyof typeof contractAddresses][1]
+      : null
+    : null;
+
+  const [balance, setBalance] = useState<string>("0");
+  const [isFaucetLocked, setIsFaucetLocked] = useState<boolean>(true);
+
+  const short = async () => {
+    console.log("Short");
+  };
+
+  const long = async () => {
+    console.log("Long");
+  };
+
+  const faucet = async () => {
+    if (zhuContractAddress && provider && !isFaucetLocked) {
+      const signer = provider.getSigner();
+      const zhuContract = new ethers.Contract(
+        zhuContractAddress,
+        zhuAbi,
+        signer
+      );
+      await provider.send("eth_requestAccounts", []);
+
+      const tx = await zhuContract.faucet({ gasLimit: 100000 });
+      await tx.wait();
+      await getBalance();
+    }
+  };
+
+  const getBalance = async () => {
+    if (zhuContractAddress && provider) {
+      const zhuContract = new ethers.Contract(
+        zhuContractAddress,
+        zhuAbi,
+        provider
+      );
+      let accounts = await provider.send("eth_requestAccounts", []);
+      let account = accounts[0];
+
+      const balance = await zhuContract.balanceOf(account);
+      setBalance(balance.toString());
+    } else setBalance("Not supported");
+  };
+
+  const getFaucetLockState = async () => {
+    if (zhuContractAddress && provider) {
+      const zhuContract = new ethers.Contract(
+        zhuContractAddress,
+        zhuAbi,
+        provider
+      );
+      let accounts = await provider.send("eth_requestAccounts", []);
+      let account = accounts[0];
+
+      const locked = await zhuContract.isFaucetLockedFor(account);
+      setIsFaucetLocked(locked);
+    }
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      getFaucetLockState();
+    }, 1000);
+
+    getBalance();
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [chainId]);
 
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
@@ -133,11 +207,35 @@ const Chart = () => {
               Long
             </div>
           </div>
-          <div className={styles.sliders}>Sliders</div>
-          {position == Position.Short ? (
-            <div className={styles.shortButton}>Short</div>
+          <div className={styles.sliders}>
+            <div className={styles.balance}>Balance : {balance}</div>
+            {zhuContractAddress ? (
+              <div
+                className={
+                  isFaucetLocked ? styles.disabledFaucet : styles.faucet
+                }
+                onClick={faucet}
+              >
+                Faucet
+              </div>
+            ) : (
+              <div className={styles.disabledFaucet}>
+                Not available on this network
+              </div>
+            )}
+          </div>
+          {zhuExchangeContractAddress ? (
+            position == Position.Short ? (
+              <div className={styles.shortButton} onClick={() => short()}>
+                Short
+              </div>
+            ) : (
+              <div className={styles.longButton} onClick={() => long()}>
+                Long
+              </div>
+            )
           ) : (
-            <div className={styles.longButton}>Long</div>
+            <div className={styles.disabledButton}>Not available</div>
           )}
         </div>
       </div>

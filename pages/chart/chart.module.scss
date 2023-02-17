@@ -197,6 +197,30 @@
   }
 }
 
+.balance {
+  flex: 0.3;
+}
+
+.faucet {
+  display: flex;
+  flex: 0.2;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 7px;
+  background-color: $primaryColor;
+}
+
+.disabledFaucet {
+  display: flex;
+  flex: 0.2;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  border-radius: 7px;
+  background-color: $disabledColor;
+}
+
 .shortButton {
   display: flex;
   flex: 0.1;
@@ -237,4 +261,20 @@
 
 .longButton:hover {
   background-color: $chartLongButtonHover;
+}
+
+.disabledButton {
+  display: flex;
+  flex: 0.1;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  margin-block: 20px;
+  border: 1px solid $chartBorder;
+  border-radius: 5px;
+  background-color: $disabledColor;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.2;
+  }
 }
