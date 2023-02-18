@@ -201,6 +201,16 @@
   flex: 0.3;
 }
 
+.amountInput {
+  flex: 0.2;
+  width: 100%;
+  padding-left: 5px;
+  margin-block: 20px;
+  border: 1px solid $neutralColor;
+  border-radius: 4px;
+  background-color: $chartBackground;
+}
+
 .faucet {
   display: flex;
   flex: 0.2;

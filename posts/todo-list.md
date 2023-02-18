@@ -52,6 +52,7 @@ tags:
 - Stop MetaMask pop-up when switching to the tab with no connected account
 - ~~Update balance and stop contract interactions according to wallet/network~~
 - Fix error when switching networks
+- Listen to executeTrades event
 
 **Web3**
 

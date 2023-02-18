@@ -46,14 +46,79 @@ const Chart = () => {
     : null;
 
   const [balance, setBalance] = useState<string>("0");
+  const [amount, setAmount] = useState<number>(0);
   const [isFaucetLocked, setIsFaucetLocked] = useState<boolean>(true);
+  const [approved, setApproved] = useState<boolean>(false);
+
+  const setLongShortValue = (value: number) => {
+    if (value >= 0 && value <= Number(balance)) {
+      setAmount(value);
+    }
+  };
 
   const short = async () => {
-    console.log("Short");
+    if (zhuExchangeContractAddress && provider) {
+      const signer = provider.getSigner();
+      const zhuExchangeContract = new ethers.Contract(
+        zhuExchangeContractAddress,
+        zhuExchangeAbi,
+        signer
+      );
+      await provider.send("eth_requestAccounts", []);
+
+      const tx = await zhuExchangeContract.short(
+        amount,
+        dailyWeights[dailyWeights.length - 1].close * 10,
+        { gasLimit: 1000000 }
+      );
+      await tx.wait();
+      console.log("Short submitted");
+      await getBalance();
+      setApproved(false);
+    }
   };
 
   const long = async () => {
-    console.log("Long");
+    if (zhuExchangeContractAddress && provider) {
+      const signer = provider.getSigner();
+      const zhuExchangeContract = new ethers.Contract(
+        zhuExchangeContractAddress,
+        zhuExchangeAbi,
+        signer
+      );
+      await provider.send("eth_requestAccounts", []);
+
+      const tx = await zhuExchangeContract.long(
+        amount,
+        dailyWeights[dailyWeights.length - 1].close * 10,
+        { gasLimit: 1000000 }
+      );
+      await tx.wait();
+      console.log("Long submitted");
+      await getBalance();
+      setApproved(false);
+    }
+  };
+
+  const approve = async () => {
+    if (zhuContractAddress && provider) {
+      const signer = provider.getSigner();
+      const zhuContract = new ethers.Contract(
+        zhuContractAddress,
+        zhuAbi,
+        signer
+      );
+      await provider.send("eth_requestAccounts", []);
+
+      const tx = await zhuContract._approve(
+        zhuExchangeContractAddress,
+        amount,
+        { gasLimit: 100000 }
+      );
+      await tx.wait();
+      console.log(`Approved ${amount} ZHU`);
+      setApproved(true);
+    }
   };
 
   const faucet = async () => {
@@ -83,7 +148,9 @@ const Chart = () => {
       let account = accounts[0];
 
       const balance = await zhuContract.balanceOf(account);
-      setBalance(balance.toString());
+      setBalance(
+        balance.toString().substring(0, balance.toString().length - 18)
+      );
     } else setBalance("Not supported");
   };
 
@@ -113,6 +180,41 @@ const Chart = () => {
       clearInterval(interval);
     };
   }, [chainId]);
+
+  const LongShortButton = () => {
+    if (zhuExchangeContractAddress) {
+      if (approved) {
+        if (position == Position.Short) {
+          return (
+            <div className={styles.shortButton} onClick={() => short()}>
+              Short
+            </div>
+          );
+        } else {
+          return (
+            <div className={styles.longButton} onClick={() => long()}>
+              Long
+            </div>
+          );
+        }
+      } else {
+        return (
+          <div
+            className={
+              position == Position.Short
+                ? styles.shortButton
+                : styles.longButton
+            }
+            onClick={() => approve()}
+          >
+            Approve
+          </div>
+        );
+      }
+    } else {
+      return <div className={styles.disabledButton}>Not available</div>;
+    }
+  };
 
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
@@ -223,20 +325,19 @@ const Chart = () => {
                 Not available on this network
               </div>
             )}
+            {zhuExchangeContractAddress && (
+              <input
+                type="number"
+                min={0}
+                max={balance}
+                className={styles.amountInput}
+                onChange={(e) => {
+                  setLongShortValue(e.target.valueAsNumber);
+                }}
+              ></input>
+            )}
           </div>
-          {zhuExchangeContractAddress ? (
-            position == Position.Short ? (
-              <div className={styles.shortButton} onClick={() => short()}>
-                Short
-              </div>
-            ) : (
-              <div className={styles.longButton} onClick={() => long()}>
-                Long
-              </div>
-            )
-          ) : (
-            <div className={styles.disabledButton}>Not available</div>
-          )}
+          <LongShortButton />
         </div>
       </div>
     </Layout>
