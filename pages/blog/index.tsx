@@ -17,6 +17,7 @@ import BlogPostTag from "../../components/BlogPostTag";
 import BlogPostTagState from "../../models/BlogPostTagState";
 import useIsWidth from "../../hooks/useIsWidth";
 import { WindowWidth } from "../../models/WindowWidth";
+import MetaTags from "../../components/MetaTags";
 
 interface PostProps {
   posts: Post[];
@@ -118,17 +119,13 @@ export default function Blog({ posts }: PostProps) {
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
       <Head>
         <title>{siteTitle}</title>
-        <meta name="og:title" content={siteTitle} />
-        <meta
-          name="og:description"
-          content="This is Xian-Wei's very personal blog, enter at your own risk."
+        <MetaTags
+          title={siteTitle}
+          description={
+            "This is Xian-Wei's very personal blog, enter at your own risk."
+          }
+          url={"https://zhuxw.com/blog"}
         />
-        <meta
-          property="og:image"
-          content={`https://zhuxw.com/images/comedy.png`}
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       {isWidth ? (
         <Swiper navigation={true} modules={[Navigation]}>

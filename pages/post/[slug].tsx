@@ -3,20 +3,19 @@ import matter from "gray-matter";
 import md from "markdown-it";
 import Head from "next/head";
 import Layout from "../../components/Layout";
+import MetaTags from "../../components/MetaTags";
 
-export default function PostPage({ frontmatter, content }: any) {
+export default function PostPage({ slug, frontmatter, content }: any) {
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
       <Head>
         <title>{frontmatter.title}</title>
-        <meta name="og:title" content={frontmatter.title} />
-        <meta name="og:description" content={frontmatter.description} />
-        <meta
-          property="og:image"
-          content={`https://zhuxw.com/images/comedy.png`}
+        <MetaTags
+          title={frontmatter.title}
+          description={frontmatter.description}
+          url={`https://zhuxw.com/post/${slug}`}
+          type="article"
         />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="prose prose-invert mx-auto py-10 px-5">
         <h1>{frontmatter.title}</h1>
@@ -43,8 +42,10 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params: { slug } }: any) {
   const fileName = fs.readFileSync(`posts/${slug}.md`, "utf-8");
   const { data: frontmatter, content } = matter(fileName);
+
   return {
     props: {
+      slug,
       frontmatter,
       content,
     },

@@ -21,9 +21,10 @@ tags:
 - ~~Add option in Layout component to hide header/footer~~
 - ~~Add Head content to all pages~~
 - ~~Meta Description only showing up in Claim page~~
-- Add more data to meta (twitter cards...)
+- ~~Add more data to meta (twitter cards...)~~
 - Hide all crypto-related features if MetaMask is not installed
 - Convert Number/String wrapper to primitive types across project
+- Adding username and NFT profile picture to wallet
 
 **Blog**
 

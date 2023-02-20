@@ -13,6 +13,7 @@ import useWeb3ChainId from "../../hooks/useWeb3Network";
 import contractAddresses from "../../data/artifacts/contractAddresses.json";
 import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
+import MetaTags from "../../components/MetaTags";
 
 enum Position {
   Long,
@@ -227,27 +228,20 @@ const Chart = () => {
               ).toString() + " KG | XWZ/KG"
             : "XWZ/KG"}
         </title>
-        <meta
-          name="og:title"
-          content={
+        <MetaTags
+          title={
             weeklyWeights && dailyWeights
-              ? (timeframe == Timeframe.Daily
+              ? (timeframe == Timeframe.Daily && weeklyWeights && dailyWeights
                   ? dailyWeights.reverse()[0].close
                   : weeklyWeights.reverse()[0].close
                 ).toString() + " KG | XWZ/KG"
               : "XWZ/KG"
           }
+          description={
+            "Xian-Wei Zhu's weight in a candlestick chart. Highly volatile and unpredictable, trade at your own risk. Not financial advice."
+          }
+          url={"https://zhuxw.com/chart"}
         />
-        <meta
-          name="og:description"
-          content="Xian-Wei Zhu's weight in a candlestick chart. Highly volatile and unpredictable, trade at your own risk. Not financial advice."
-        />
-        <meta
-          property="og:image"
-          content={`https://zhuxw.com/images/comedy.png`}
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className={styles.container}>
         {/* Left */}
