@@ -1,0 +1,141 @@
+@import "../../styles/constants.module.scss";
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-block: 10px;
+  padding-inline: 20px;
+  border-bottom: 1px solid $chartBorder;
+
+  @media screen and (max-width: $lg) {
+    padding-block: 5px;
+    padding-inline: 0px;
+    margin-block: 0px;
+  }
+}
+
+.positionSymbolShort {
+  display: flex;
+  flex: 0.2;
+  justify-content: flex-start;
+  align-items: center;
+  color: $chartShortText;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionSymbolLong {
+  display: flex;
+  flex: 0.2;
+  justify-content: flex-start;
+  align-items: center;
+  color: $chartLongText;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionSize {
+  display: flex;
+  flex: 0.25;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionEntryPrice {
+  display: flex;
+  flex: 0.2;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionLiquidationPrice {
+  display: flex;
+  flex: 0.3;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionPNL {
+  display: flex;
+  flex: 0.1;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionPNLLoss {
+  display: flex;
+  flex: 0.1;
+  justify-content: flex-start;
+  align-items: center;
+  color: $chartShortText;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionPNLGain {
+  display: flex;
+  flex: 0.1;
+  justify-content: flex-start;
+  align-items: center;
+  color: $chartLongText;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}

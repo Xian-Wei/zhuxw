@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Timeframe } from "../../models/Timeframe";
 import { IChartApi, ISeriesApi } from "lightweight-charts";
+import styles from "./lwchart.module.scss";
 
 interface ChartProps {
   weeklyWeights: any;
@@ -50,7 +51,10 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
     (async () => {
       if (chart && weeklyWeights && dailyWeights) {
         const handleResize = () => {
-          chart.applyOptions({ width: chartContainerRef.current?.clientWidth });
+          chart.applyOptions({
+            height: chartContainerRef.current?.clientHeight,
+            width: chartContainerRef.current?.clientWidth,
+          });
         };
 
         // Series
@@ -131,12 +135,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
     updateChart();
   }, [timeframe, dailyWeights, weeklyWeights]);
 
-  return (
-    <div
-      ref={chartContainerRef}
-      style={{ display: "flex", height: "100%", width: "100%" }}
-    />
-  );
+  return <div ref={chartContainerRef} className={styles.chart} />;
 };
 
 export default LWChart;

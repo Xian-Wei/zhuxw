@@ -1,0 +1,12 @@
+@import "../../styles/constants.module.scss";
+
+.chart {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  min-height: 450px;
+
+  @media screen and (max-width: $lg) {
+    min-height: 200px;
+  }
+}

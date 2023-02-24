@@ -7,14 +7,14 @@
   justify-content: center;
   align-items: flex-start;
   gap: 20px;
-  height: calc(100vh - $footerHeight);
+  height: calc(100vh - $navbarHeight);
   width: 100%;
-  padding-block: 40px;
+  padding-block: 25px;
   padding-inline: 40px;
   z-index: inherit;
 
   @media screen and (max-width: $lg) {
-    height: calc(160vh - $footerHeight);
+    height: calc(150vh);
     flex-direction: column;
     align-items: center;
     padding-block: 20px;
@@ -40,7 +40,7 @@
 .rightContainer {
   display: flex;
   flex-direction: column;
-  min-height: 450px;
+  min-height: 400px;
   height: 70%;
   min-width: 300px;
   width: 20%;
@@ -68,7 +68,7 @@
 }
 
 .chart {
-  flex: 0.6;
+  flex: 0.8;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -117,17 +117,130 @@
   z-index: 6;
 }
 
-.positions {
+.positionContainer {
   display: flex;
-  flex: 0.2;
+  flex: 0.1;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 120px;
-  height: 100%;
+  max-height: 255px;
   width: 100%;
+  padding-block: 10px;
+  padding-inline: 20px;
   border: 1px solid $chartBorder;
   border-radius: 5px;
   background-color: $chartBackground;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.2;
+  }
+}
+
+.positions {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  max-height: 155px;
+  overflow: auto;
+
+  @media screen and (max-width: $lg) {
+    max-height: 125px;
+  }
+}
+
+.positions::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+.positionDescription {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-block: 5px;
+  padding-inline: 20px;
+  border-bottom: 1px solid $chartBorder;
+
+  @media screen and (max-width: $lg) {
+    padding-inline: 0px;
+  }
+}
+
+.positionSymbol {
+  display: flex;
+  flex: 0.2;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionSize {
+  display: flex;
+  flex: 0.25;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionEntryPrice {
+  display: flex;
+  flex: 0.2;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionLiquidationPrice {
+  display: flex;
+  flex: 0.3;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
+}
+
+.positionPNL {
+  display: flex;
+  flex: 0.1;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (max-width: $md) {
+    font-size: 13px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 11px;
+  }
 }
 
 // Right

@@ -7,7 +7,7 @@ const useWeb3Provider = () => {
 
   useEffect(() => {
     if (window.ethereum) {
-      setProvider(new ethers.providers.Web3Provider(window.ethereum));
+      setProvider(new ethers.providers.Web3Provider(window.ethereum, "any"));
     }
   }, []);
 

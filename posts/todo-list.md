@@ -26,6 +26,7 @@ tags:
 - Convert Number/String wrapper to primitive types across project
 - Adding username and NFT profile picture to wallet
 - og:type and og:url not showing up ? Client-side problem ?
+- og:title not working either
 
 **Blog**
 

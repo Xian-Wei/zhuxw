@@ -15,15 +15,18 @@ import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 import MetaTags from "../../components/MetaTags";
 import useWeb3Wallet from "../../hooks/useWeb3Wallet";
+import PositionLine from "../../components/PositionLine";
 
-enum Position {
+enum PositionType {
   Long,
   Short,
 }
 
 const Chart = () => {
   const [timeframe, setTimeframe] = useState<Timeframe>(Timeframe.Weekly);
-  const [position, setPosition] = useState<Position>(Position.Short);
+  const [positionType, setPositionType] = useState<PositionType>(
+    PositionType.Short
+  );
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data: weeklyWeights }: { data: any } = useSWR(
     "https://zhuxw.com/weight_weekly.json",
@@ -50,6 +53,7 @@ const Chart = () => {
 
   const [balance, setBalance] = useState<string>("0");
   const [amount, setAmount] = useState<number>(0);
+  const [positions, setPositions] = useState([]);
   const [isFaucetLocked, setIsFaucetLocked] = useState<boolean>(true);
   const [approved, setApproved] = useState<boolean>(false);
   const MINIMUM_AMOUNT = 1000;
@@ -68,129 +72,172 @@ const Chart = () => {
 
   const short = async () => {
     if (zhuExchangeContractAddress && provider) {
-      const signer = provider.getSigner();
-      const zhuExchangeContract = new ethers.Contract(
-        zhuExchangeContractAddress,
-        zhuExchangeAbi,
-        signer
-      );
-      await provider.send("eth_requestAccounts", []);
+      try {
+        const signer = provider.getSigner();
+        const zhuExchangeContract = new ethers.Contract(
+          zhuExchangeContractAddress,
+          zhuExchangeAbi,
+          signer
+        );
+        await provider.send("eth_requestAccounts", []);
 
-      const tx = await zhuExchangeContract.short(
-        amount,
-        dailyWeights[dailyWeights.length - 1].close * 10,
-        { gasLimit: 1000000 }
-      );
-      await tx.wait();
-      console.log("Short submitted");
-      await getBalance();
-      setApproved(false);
-      setAmount(0);
+        const tx = await zhuExchangeContract.short(
+          amount,
+          dailyWeights[dailyWeights.length - 1].close * 10,
+          { gasLimit: 1000000 }
+        );
+        await tx.wait();
+        console.log("Short submitted");
+        await getBalance();
+        setApproved(false);
+        setAmount(0);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
   const long = async () => {
     if (zhuExchangeContractAddress && provider) {
-      const signer = provider.getSigner();
-      const zhuExchangeContract = new ethers.Contract(
-        zhuExchangeContractAddress,
-        zhuExchangeAbi,
-        signer
-      );
-      await provider.send("eth_requestAccounts", []);
+      try {
+        const signer = provider.getSigner();
+        const zhuExchangeContract = new ethers.Contract(
+          zhuExchangeContractAddress,
+          zhuExchangeAbi,
+          signer
+        );
+        await provider.send("eth_requestAccounts", []);
 
-      const tx = await zhuExchangeContract.long(
-        amount,
-        dailyWeights[dailyWeights.length - 1].close * 10,
-        { gasLimit: 1000000 }
-      );
-      await tx.wait();
-      console.log("Long submitted");
-      await getBalance();
-      setApproved(false);
-      setAmount(0);
+        const tx = await zhuExchangeContract.long(
+          amount,
+          dailyWeights[dailyWeights.length - 1].close * 10,
+          { gasLimit: 1000000 }
+        );
+        await tx.wait();
+        console.log("Long submitted");
+        await getBalance();
+        setApproved(false);
+        setAmount(0);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
   const approve = async () => {
     if (zhuContractAddress && provider) {
-      const signer = provider.getSigner();
-      const zhuContract = new ethers.Contract(
-        zhuContractAddress,
-        zhuAbi,
-        signer
-      );
-      await provider.send("eth_requestAccounts", []);
+      try {
+        const signer = provider.getSigner();
+        const zhuContract = new ethers.Contract(
+          zhuContractAddress,
+          zhuAbi,
+          signer
+        );
+        await provider.send("eth_requestAccounts", []);
 
-      const tx = await zhuContract._approve(
-        zhuExchangeContractAddress,
-        amount,
-        { gasLimit: 100000 }
-      );
-      await tx.wait();
-      console.log(`Approved ${amount} ZHU`);
-      setApproved(true);
+        const tx = await zhuContract._approve(
+          zhuExchangeContractAddress,
+          amount,
+          { gasLimit: 100000 }
+        );
+        await tx.wait();
+        console.log(`Approved ${amount} ZHU`);
+        setApproved(true);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
   const faucet = async () => {
     if (zhuContractAddress && provider && !isFaucetLocked) {
-      const signer = provider.getSigner();
-      const zhuContract = new ethers.Contract(
-        zhuContractAddress,
-        zhuAbi,
-        signer
-      );
-      await provider.send("eth_requestAccounts", []);
+      try {
+        const signer = provider.getSigner();
+        const zhuContract = new ethers.Contract(
+          zhuContractAddress,
+          zhuAbi,
+          signer
+        );
+        await provider.send("eth_requestAccounts", []);
 
-      const tx = await zhuContract.faucet({ gasLimit: 100000 });
-      await tx.wait();
-      await getBalance();
+        const tx = await zhuContract.faucet({ gasLimit: 100000 });
+        await tx.wait();
+        await getBalance();
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
   const getBalance = async () => {
     if (zhuContractAddress && provider) {
-      const zhuContract = new ethers.Contract(
-        zhuContractAddress,
-        zhuAbi,
-        provider
-      );
-      let accounts = await provider.send("eth_requestAccounts", []);
-      let account = accounts[0];
-
-      const balance = await zhuContract.balanceOf(account);
-
-      if (balance.toString() != "0") {
-        setBalance(
-          balance.toString().substring(0, balance.toString().length - 18)
+      try {
+        const zhuContract = new ethers.Contract(
+          zhuContractAddress,
+          zhuAbi,
+          provider
         );
-      } else setBalance("0");
+        let accounts = await provider.send("eth_requestAccounts", []);
+        let account = accounts[0];
 
-      return true;
+        const balance = await zhuContract.balanceOf(account);
+
+        if (balance.toString() != "0") {
+          setBalance(
+            balance.toString().substring(0, balance.toString().length - 18)
+          );
+        } else setBalance("0");
+
+        return true;
+      } catch (e) {
+        console.error(e);
+      }
     } else {
-      setBalance("Not supported");
+      setBalance("0");
       return false;
     }
   };
 
   const getFaucetLockState = async () => {
     if (zhuContractAddress && provider) {
-      const zhuContract = new ethers.Contract(
-        zhuContractAddress,
-        zhuAbi,
-        provider
-      );
-      let accounts = await provider.send("eth_requestAccounts", []);
-      let account = accounts[0];
+      try {
+        const zhuContract = new ethers.Contract(
+          zhuContractAddress,
+          zhuAbi,
+          provider
+        );
+        let accounts = await provider.send("eth_requestAccounts", []);
+        let account = accounts[0];
 
-      const locked = await zhuContract.isFaucetLockedFor(account);
-      setIsFaucetLocked(locked);
+        const locked = await zhuContract.isFaucetLockedFor(account);
+        setIsFaucetLocked(locked);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
+  const getPositions = async () => {
+    if (zhuExchangeContractAddress && provider) {
+      try {
+        const zhuExchangeContract = new ethers.Contract(
+          zhuExchangeContractAddress,
+          zhuExchangeAbi,
+          provider
+        );
+
+        const positions = await zhuExchangeContract.getPositions();
+        setPositions(positions);
+        console.log(positions);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
   useEffect(() => {
     getBalance();
+    getPositions();
   }, [wallet]);
 
   useEffect(() => {
@@ -230,7 +277,7 @@ const Chart = () => {
         return <div className={styles.disabledButton}>Enter an amount</div>;
       } else if (amount >= MINIMUM_AMOUNT) {
         if (approved) {
-          if (position == Position.Short) {
+          if (positionType == PositionType.Short) {
             return (
               <div className={styles.shortButton} onClick={() => short()}>
                 Short
@@ -247,7 +294,7 @@ const Chart = () => {
           return (
             <div
               className={
-                position == Position.Short
+                positionType == PositionType.Short
                   ? styles.shortButton
                   : styles.longButton
               }
@@ -268,7 +315,11 @@ const Chart = () => {
   };
 
   return (
-    <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
+    <Layout
+      navbarEnabled={true}
+      footerEnabled={false}
+      backgroundEnabled={false}
+    >
       <Head>
         <title>
           {weeklyWeights && dailyWeights
@@ -327,28 +378,92 @@ const Chart = () => {
               timeframe={timeframe}
             />
           </div>
-          <div className={styles.positions}>Positions</div>
+          <div className={styles.positionContainer}>
+            <div className={styles.positionDescription}>
+              <div className={styles.positionSymbol}>Symbol</div>
+              <div className={styles.positionSize}>Size</div>
+              <div className={styles.positionEntryPrice}>Entry</div>
+              <div className={styles.positionLiquidationPrice}>Liquidation</div>
+              <div className={styles.positionPNL}>PNL</div>
+            </div>
+            <div className={styles.positions}>
+              {dailyWeights && (
+                <>
+                  <PositionLine
+                    amount={"69420"}
+                    positionType={0}
+                    weightSnapshot={783}
+                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
+                  />
+                  <PositionLine
+                    amount={"45220"}
+                    positionType={1}
+                    weightSnapshot={453}
+                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
+                  />
+                  <PositionLine
+                    amount={"45220"}
+                    positionType={1}
+                    weightSnapshot={453}
+                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
+                  />
+                  <PositionLine
+                    amount={"45220"}
+                    positionType={1}
+                    weightSnapshot={453}
+                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
+                  />
+                  <PositionLine
+                    amount={"69450"}
+                    positionType={0}
+                    weightSnapshot={785}
+                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
+                  />
+                  <PositionLine
+                    amount={"8620"}
+                    positionType={1}
+                    weightSnapshot={813}
+                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
+                  />
+                </>
+              )}
+              {dailyWeights &&
+                positions.map((position: any, index: number) => {
+                  return (
+                    <PositionLine
+                      amount={position.amount.toString()}
+                      positionType={position.positionType}
+                      weightSnapshot={position.weightSnapshot / 10}
+                      currentWeight={
+                        dailyWeights[dailyWeights.length - 1].close
+                      }
+                      key={index}
+                    />
+                  );
+                })}
+            </div>
+          </div>
         </div>
         {/* Right */}
         <div className={styles.rightContainer}>
           <div className={styles.tabs}>
             <div
               className={
-                position == Position.Short
+                positionType == PositionType.Short
                   ? styles.shortSwitchTabActive
                   : styles.shortSwitchTab
               }
-              onClick={() => setPosition(Position.Short)}
+              onClick={() => setPositionType(PositionType.Short)}
             >
               Short
             </div>
             <div
               className={
-                position == Position.Long
+                positionType == PositionType.Long
                   ? styles.longSwitchTabActive
                   : styles.longSwitchTab
               }
-              onClick={() => setPosition(Position.Long)}
+              onClick={() => setPositionType(PositionType.Long)}
             >
               Long
             </div>
