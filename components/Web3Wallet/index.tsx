@@ -1,11 +1,10 @@
-import { useState, useEffect } from "react";
-
 import styles from "./web3wallet.module.scss";
 import useWeb3Provider from "../../hooks/useWeb3Provider";
 import useIsMetamaskInstalled from "../../hooks/useIsMetamaskInstalled";
+import useWeb3Wallet from "../../hooks/useWeb3Wallet";
 
 const Web3Wallet = () => {
-  const [walletAddress, setWalletAddress] = useState<string>("");
+  const { wallet, setWallet } = useWeb3Wallet();
   const provider = useWeb3Provider();
   const isMetamaskInstalled = useIsMetamaskInstalled();
 
@@ -16,39 +15,17 @@ const Web3Wallet = () => {
       const signer = provider.getSigner();
       const address = await signer.getAddress();
 
-      setWalletAddress(address);
+      setWallet(address);
     }
   };
-
-  useEffect(() => {
-    const initialize = async () => {
-      if (provider) {
-        const accounts: string[] = await provider.listAccounts();
-
-        if (accounts.length > 0) {
-          setWalletAddress(accounts[0]);
-        }
-      }
-    };
-    initialize();
-
-    if (provider) {
-      window.ethereum.on("accountsChanged", (account: string) => {
-        setWalletAddress(account[0]);
-      });
-    }
-  }, [provider]);
 
   if (isMetamaskInstalled) {
     return (
       <div className={styles.button} onClick={connect}>
-        {walletAddress != ""
-          ? walletAddress.substring(0, 5) +
+        {wallet != ""
+          ? wallet.substring(0, 5) +
             "..." +
-            walletAddress.substring(
-              walletAddress.length - 3,
-              walletAddress.length
-            )
+            wallet.substring(wallet.length - 3, wallet.length)
           : "Connect"}
       </div>
     );

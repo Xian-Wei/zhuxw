@@ -26,11 +26,3 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-
-// Disables blue background when selecting
-::selection {
-  background: transparent;
-}
-::-moz-selection {
-  background: transparent;
-}

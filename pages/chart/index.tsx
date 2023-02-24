@@ -14,6 +14,7 @@ import contractAddresses from "../../data/artifacts/contractAddresses.json";
 import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 import MetaTags from "../../components/MetaTags";
+import useWeb3Wallet from "../../hooks/useWeb3Wallet";
 
 enum Position {
   Long,
@@ -34,6 +35,7 @@ const Chart = () => {
   );
 
   const provider: ethers.providers.Web3Provider | null = useWeb3Provider();
+  const { wallet } = useWeb3Wallet();
   const chainId: number | null = useWeb3ChainId();
   const zhuContractAddress: string | null = chainId
     ? String(chainId) in contractAddresses
@@ -50,10 +52,17 @@ const Chart = () => {
   const [amount, setAmount] = useState<number>(0);
   const [isFaucetLocked, setIsFaucetLocked] = useState<boolean>(true);
   const [approved, setApproved] = useState<boolean>(false);
+  const MINIMUM_AMOUNT = 1000;
 
-  const setLongShortValue = (value: number) => {
-    if (value >= 0 && value <= Number(balance)) {
-      setAmount(value);
+  const setLongShortValue = (value: string) => {
+    const regex = /^[0-9\b]+$/;
+
+    if (value === "" || regex.test(value)) {
+      if (Number(value) <= Number(balance)) {
+        setAmount(Number(value));
+      } else {
+        setAmount(Number(balance));
+      }
     }
   };
 
@@ -76,6 +85,7 @@ const Chart = () => {
       console.log("Short submitted");
       await getBalance();
       setApproved(false);
+      setAmount(0);
     }
   };
 
@@ -98,6 +108,7 @@ const Chart = () => {
       console.log("Long submitted");
       await getBalance();
       setApproved(false);
+      setAmount(0);
     }
   };
 
@@ -149,10 +160,18 @@ const Chart = () => {
       let account = accounts[0];
 
       const balance = await zhuContract.balanceOf(account);
-      setBalance(
-        balance.toString().substring(0, balance.toString().length - 18)
-      );
-    } else setBalance("Not supported");
+
+      if (balance.toString() != "0") {
+        setBalance(
+          balance.toString().substring(0, balance.toString().length - 18)
+        );
+      } else setBalance("0");
+
+      return true;
+    } else {
+      setBalance("Not supported");
+      return false;
+    }
   };
 
   const getFaucetLockState = async () => {
@@ -171,45 +190,76 @@ const Chart = () => {
   };
 
   useEffect(() => {
+    getBalance();
+  }, [wallet]);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       getFaucetLockState();
     }, 1000);
 
-    getBalance();
+    (async () => {
+      await getBalance();
+    })();
 
     return () => {
       clearInterval(interval);
     };
   }, [chainId]);
 
+  useEffect(() => {
+    if (provider) {
+      let tradesExecuted: any = {
+        address: zhuExchangeContractAddress,
+        topics: [ethers.utils.id("TradesExecuted()")],
+      };
+      provider.on(tradesExecuted, async () => {
+        console.log("Trades executed");
+        console.log(zhuContractAddress); // It's zero after event is emitted todo
+      });
+
+      return () => {
+        provider.off(tradesExecuted);
+      };
+    }
+  }, [provider]);
+
   const LongShortButton = () => {
     if (zhuExchangeContractAddress) {
-      if (approved) {
-        if (position == Position.Short) {
-          return (
-            <div className={styles.shortButton} onClick={() => short()}>
-              Short
-            </div>
-          );
+      if (amount == 0) {
+        return <div className={styles.disabledButton}>Enter an amount</div>;
+      } else if (amount >= MINIMUM_AMOUNT) {
+        if (approved) {
+          if (position == Position.Short) {
+            return (
+              <div className={styles.shortButton} onClick={() => short()}>
+                Short
+              </div>
+            );
+          } else {
+            return (
+              <div className={styles.longButton} onClick={() => long()}>
+                Long
+              </div>
+            );
+          }
         } else {
           return (
-            <div className={styles.longButton} onClick={() => long()}>
-              Long
+            <div
+              className={
+                position == Position.Short
+                  ? styles.shortButton
+                  : styles.longButton
+              }
+              onClick={() => approve()}
+            >
+              Approve
             </div>
           );
         }
       } else {
         return (
-          <div
-            className={
-              position == Position.Short
-                ? styles.shortButton
-                : styles.longButton
-            }
-            onClick={() => approve()}
-          >
-            Approve
-          </div>
+          <div className={styles.disabledButton}>Min {MINIMUM_AMOUNT} $ZHU</div>
         );
       }
     } else {
@@ -304,33 +354,59 @@ const Chart = () => {
             </div>
           </div>
           <div className={styles.sliders}>
-            <div className={styles.balance}>Balance : {balance}</div>
-            {zhuContractAddress ? (
-              <div
-                className={
-                  isFaucetLocked ? styles.disabledFaucet : styles.faucet
-                }
-                onClick={faucet}
-              >
-                Faucet
-              </div>
-            ) : (
-              <div className={styles.disabledFaucet}>
-                Not available on this network
-              </div>
-            )}
-            {zhuExchangeContractAddress && (
-              <input
-                type="number"
-                min={0}
-                max={balance}
-                className={styles.amountInput}
-                onChange={(e) => {
-                  setLongShortValue(e.target.valueAsNumber);
-                }}
-              ></input>
+            {dailyWeights && weeklyWeights && (
+              <>
+                {zhuContractAddress && (
+                  <div className={styles.balance}>Balance : {balance} ZHU</div>
+                )}
+                <div className={styles.amountInputBox}>
+                  <div className={styles.amountLabel}>Weight</div>
+                  <div className={styles.amountText}>
+                    {dailyWeights[dailyWeights.length - 1].close}
+                  </div>
+                  <div className={styles.amountTicker}>KG</div>
+                </div>
+                <div className={styles.amountInputBox}>
+                  <div className={styles.amountLabel}>Amount</div>
+                  <input
+                    type="number"
+                    min={0}
+                    max={balance}
+                    className={styles.amountInput}
+                    value={amount}
+                    onChange={(e) => {
+                      setLongShortValue(e.target.value);
+                    }}
+                  />
+                  <div className={styles.amountTicker}>ZHU</div>
+                </div>
+                <input
+                  type="range"
+                  min={0}
+                  max={balance}
+                  step={1}
+                  disabled={zhuContractAddress == undefined}
+                  className={styles.amountSlider}
+                  value={amount}
+                  onChange={(e) => {
+                    setLongShortValue(e.target.value);
+                  }}
+                />
+              </>
             )}
           </div>
+          {zhuContractAddress ? (
+            <div
+              className={isFaucetLocked ? styles.disabledFaucet : styles.faucet}
+              onClick={faucet}
+            >
+              Faucet
+            </div>
+          ) : (
+            <div className={styles.disabledFaucet}>
+              Not available on this network
+            </div>
+          )}
           <LongShortButton />
         </div>
       </div>

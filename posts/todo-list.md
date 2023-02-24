@@ -25,6 +25,7 @@ tags:
 - Hide all crypto-related features if MetaMask is not installed
 - Convert Number/String wrapper to primitive types across project
 - Adding username and NFT profile picture to wallet
+- og:type and og:url not showing up ? Client-side problem ?
 
 **Blog**
 
