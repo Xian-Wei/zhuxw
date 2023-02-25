@@ -16,6 +16,10 @@
   }
 }
 
+.line:last-child {
+  border-bottom: none;
+}
+
 .positionSymbolShort {
   display: flex;
   flex: 0.2;

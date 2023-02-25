@@ -16,6 +16,7 @@ import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 import MetaTags from "../../components/MetaTags";
 import useWeb3Wallet from "../../hooks/useWeb3Wallet";
 import PositionLine from "../../components/PositionLine";
+import LoadingAnimation from "../../components/LoadingAnimation";
 
 enum PositionType {
   Long,
@@ -36,6 +37,8 @@ const Chart = () => {
     "https://zhuxw.com/weight_daily.json",
     fetcher
   );
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFaucetLoading, setIsFaucetLoading] = useState(false);
 
   const provider: ethers.providers.Web3Provider | null = useWeb3Provider();
   const { wallet } = useWeb3Wallet();
@@ -86,12 +89,14 @@ const Chart = () => {
           dailyWeights[dailyWeights.length - 1].close * 10,
           { gasLimit: 1000000 }
         );
+        setIsLoading(true);
         await tx.wait();
         console.log("Short submitted");
         await getBalance();
         setApproved(false);
         setAmount(0);
         await getPositions();
+        setIsLoading(false);
       } catch (e) {
         console.error(e);
       }
@@ -108,18 +113,19 @@ const Chart = () => {
           signer
         );
         await provider.send("eth_requestAccounts", []);
-
         const tx = await zhuExchangeContract.long(
           amount,
           dailyWeights[dailyWeights.length - 1].close * 10,
           { gasLimit: 1000000 }
         );
+        setIsLoading(true);
         await tx.wait();
         console.log("Long submitted");
         await getBalance();
         setApproved(false);
         setAmount(0);
         await getPositions();
+        setIsLoading(false);
       } catch (e) {
         console.error(e);
       }
@@ -142,9 +148,11 @@ const Chart = () => {
           amount,
           { gasLimit: 100000 }
         );
+        setIsLoading(true);
         await tx.wait();
         console.log(`Approved ${amount} ZHU`);
         setApproved(true);
+        setIsLoading(false);
       } catch (e) {
         console.error(e);
       }
@@ -152,7 +160,7 @@ const Chart = () => {
   };
 
   const faucet = async () => {
-    if (zhuContractAddress && provider && !isFaucetLocked) {
+    if (zhuContractAddress && provider && !isFaucetLocked && !isFaucetLoading) {
       try {
         const signer = provider.getSigner();
         const zhuContract = new ethers.Contract(
@@ -163,8 +171,11 @@ const Chart = () => {
         await provider.send("eth_requestAccounts", []);
 
         const tx = await zhuContract.faucet({ gasLimit: 100000 });
+        setIsFaucetLoading(true);
+        setIsFaucetLocked(true);
         await tx.wait();
         await getBalance();
+        setIsFaucetLoading(false);
       } catch (e) {
         console.error(e);
       }
@@ -239,13 +250,6 @@ const Chart = () => {
   };
 
   useEffect(() => {
-    if (wallet) {
-      getBalance();
-      getPositions();
-    }
-  }, [wallet]);
-
-  useEffect(() => {
     const interval = setInterval(() => {
       if (wallet) {
         getFaucetLockState();
@@ -253,7 +257,10 @@ const Chart = () => {
     }, 1000);
 
     (async () => {
-      if (wallet) await getBalance();
+      if (wallet) {
+        await getBalance();
+        await getPositions();
+      }
     })();
 
     return () => {
@@ -289,41 +296,49 @@ const Chart = () => {
   const LongShortButton = () => {
     if (wallet) {
       if (zhuExchangeContractAddress) {
-        if (amount == 0) {
-          return <div className={styles.disabledButton}>Enter an amount</div>;
-        } else if (amount >= MINIMUM_AMOUNT) {
-          if (approved) {
-            if (positionType == PositionType.Short) {
-              return (
-                <div className={styles.shortButton} onClick={() => short()}>
-                  Short
-                </div>
-              );
+        if (!isLoading) {
+          if (amount == 0) {
+            return <div className={styles.disabledButton}>Enter an amount</div>;
+          } else if (amount >= MINIMUM_AMOUNT) {
+            if (approved) {
+              if (positionType == PositionType.Short) {
+                return (
+                  <div className={styles.shortButton} onClick={() => short()}>
+                    Short
+                  </div>
+                );
+              } else {
+                return (
+                  <div className={styles.longButton} onClick={() => long()}>
+                    Long
+                  </div>
+                );
+              }
             } else {
               return (
-                <div className={styles.longButton} onClick={() => long()}>
-                  Long
+                <div
+                  className={
+                    positionType == PositionType.Short
+                      ? styles.shortButton
+                      : styles.longButton
+                  }
+                  onClick={() => approve()}
+                >
+                  Approve
                 </div>
               );
             }
           } else {
             return (
-              <div
-                className={
-                  positionType == PositionType.Short
-                    ? styles.shortButton
-                    : styles.longButton
-                }
-                onClick={() => approve()}
-              >
-                Approve
+              <div className={styles.disabledButton}>
+                Min {MINIMUM_AMOUNT} $ZHU
               </div>
             );
           }
         } else {
           return (
             <div className={styles.disabledButton}>
-              Min {MINIMUM_AMOUNT} $ZHU
+              <LoadingAnimation />
             </div>
           );
         }
@@ -506,13 +521,16 @@ const Chart = () => {
           {zhuContractAddress ? (
             <div
               className={
-                !isFaucetLocked && zhuContractAddress && wallet
+                !isFaucetLocked &&
+                zhuContractAddress &&
+                wallet &&
+                !isFaucetLoading
                   ? styles.faucet
                   : styles.disabledFaucet
               }
               onClick={faucet}
             >
-              Faucet
+              {isFaucetLoading ? <LoadingAnimation /> : "Faucet"}
             </div>
           ) : (
             <div className={styles.disabledFaucet}>Not available</div>

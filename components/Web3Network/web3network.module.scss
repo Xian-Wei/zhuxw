@@ -37,7 +37,7 @@
 
 @keyframes slideInFromLeft {
   0% {
-    right: -20%;
+    right: -50%;
   }
   100% {
     right: 0%;
@@ -56,7 +56,7 @@
   }
 
   @media screen and (max-width: $md) {
-    width: 180px;
+    width: 150px;
   }
 }
 
