@@ -11,6 +11,8 @@
 
 body {
   background-image: $backgroundColor;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: white;
 }
 

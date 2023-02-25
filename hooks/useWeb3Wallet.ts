@@ -19,7 +19,8 @@ const useWeb3Wallet = () => {
 
     if (window.ethereum && provider) {
       window.ethereum.on("accountsChanged", (account: string) => {
-        setWallet(account[0]);
+        if (account.length > 0) setWallet(account[0]);
+        else setWallet("");
       });
     }
   }, [provider]);

@@ -91,6 +91,7 @@ const Chart = () => {
         await getBalance();
         setApproved(false);
         setAmount(0);
+        await getPositions();
       } catch (e) {
         console.error(e);
       }
@@ -118,6 +119,7 @@ const Chart = () => {
         await getBalance();
         setApproved(false);
         setAmount(0);
+        await getPositions();
       } catch (e) {
         console.error(e);
       }
@@ -228,7 +230,6 @@ const Chart = () => {
 
         const positions = await zhuExchangeContract.getPositions();
         setPositions(positions);
-        console.log(positions);
       } catch (e) {
         console.error(e);
       }
@@ -236,81 +237,99 @@ const Chart = () => {
   };
 
   useEffect(() => {
-    getBalance();
-    getPositions();
+    if (wallet) {
+      getBalance();
+      getPositions();
+    }
   }, [wallet]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      getFaucetLockState();
+      if (wallet) {
+        getFaucetLockState();
+      }
     }, 1000);
 
     (async () => {
-      await getBalance();
+      if (wallet) await getBalance();
     })();
 
     return () => {
-      clearInterval(interval);
+      if (interval) clearInterval(interval);
     };
-  }, [chainId]);
+  }, [chainId, wallet]);
 
   useEffect(() => {
     if (provider) {
+      let positionAdded: any = {
+        address: zhuExchangeContractAddress,
+        topics: [ethers.utils.id("PositionAdded()")],
+      };
+      provider.on(positionAdded, async () => {
+        await getPositions();
+      });
+
       let tradesExecuted: any = {
         address: zhuExchangeContractAddress,
         topics: [ethers.utils.id("TradesExecuted()")],
       };
       provider.on(tradesExecuted, async () => {
-        console.log("Trades executed");
-        console.log(zhuContractAddress); // It's zero after event is emitted todo
+        await getBalance();
       });
 
       return () => {
+        provider.off(positionAdded);
         provider.off(tradesExecuted);
       };
     }
   }, [provider]);
 
   const LongShortButton = () => {
-    if (zhuExchangeContractAddress) {
-      if (amount == 0) {
-        return <div className={styles.disabledButton}>Enter an amount</div>;
-      } else if (amount >= MINIMUM_AMOUNT) {
-        if (approved) {
-          if (positionType == PositionType.Short) {
-            return (
-              <div className={styles.shortButton} onClick={() => short()}>
-                Short
-              </div>
-            );
+    if (wallet) {
+      if (zhuExchangeContractAddress) {
+        if (amount == 0) {
+          return <div className={styles.disabledButton}>Enter an amount</div>;
+        } else if (amount >= MINIMUM_AMOUNT) {
+          if (approved) {
+            if (positionType == PositionType.Short) {
+              return (
+                <div className={styles.shortButton} onClick={() => short()}>
+                  Short
+                </div>
+              );
+            } else {
+              return (
+                <div className={styles.longButton} onClick={() => long()}>
+                  Long
+                </div>
+              );
+            }
           } else {
             return (
-              <div className={styles.longButton} onClick={() => long()}>
-                Long
+              <div
+                className={
+                  positionType == PositionType.Short
+                    ? styles.shortButton
+                    : styles.longButton
+                }
+                onClick={() => approve()}
+              >
+                Approve
               </div>
             );
           }
         } else {
           return (
-            <div
-              className={
-                positionType == PositionType.Short
-                  ? styles.shortButton
-                  : styles.longButton
-              }
-              onClick={() => approve()}
-            >
-              Approve
+            <div className={styles.disabledButton}>
+              Min {MINIMUM_AMOUNT} $ZHU
             </div>
           );
         }
       } else {
-        return (
-          <div className={styles.disabledButton}>Min {MINIMUM_AMOUNT} $ZHU</div>
-        );
+        return <div className={styles.disabledButton}>Change network</div>;
       }
     } else {
-      return <div className={styles.disabledButton}>Not available</div>;
+      return <div className={styles.disabledButton}>Connect your wallet</div>;
     }
   };
 
@@ -387,46 +406,6 @@ const Chart = () => {
               <div className={styles.positionPNL}>PNL</div>
             </div>
             <div className={styles.positions}>
-              {dailyWeights && (
-                <>
-                  <PositionLine
-                    amount={"69420"}
-                    positionType={0}
-                    weightSnapshot={783}
-                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
-                  />
-                  <PositionLine
-                    amount={"45220"}
-                    positionType={1}
-                    weightSnapshot={453}
-                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
-                  />
-                  <PositionLine
-                    amount={"45220"}
-                    positionType={1}
-                    weightSnapshot={453}
-                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
-                  />
-                  <PositionLine
-                    amount={"45220"}
-                    positionType={1}
-                    weightSnapshot={453}
-                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
-                  />
-                  <PositionLine
-                    amount={"69450"}
-                    positionType={0}
-                    weightSnapshot={785}
-                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
-                  />
-                  <PositionLine
-                    amount={"8620"}
-                    positionType={1}
-                    weightSnapshot={813}
-                    currentWeight={dailyWeights[dailyWeights.length - 1].close}
-                  />
-                </>
-              )}
               {dailyWeights &&
                 positions.map((position: any, index: number) => {
                   return (
@@ -471,20 +450,32 @@ const Chart = () => {
           <div className={styles.sliders}>
             {dailyWeights && weeklyWeights && (
               <>
-                {zhuContractAddress && (
+                {zhuContractAddress && wallet && (
                   <div className={styles.balance}>Balance : {balance} ZHU</div>
                 )}
-                <div className={styles.amountInputBox}>
+                <div
+                  className={
+                    wallet
+                      ? styles.amountInputBox
+                      : styles.amountInputBoxDisabled
+                  }
+                >
                   <div className={styles.amountLabel}>Weight</div>
                   <div className={styles.amountText}>
                     {dailyWeights[dailyWeights.length - 1].close}
                   </div>
                   <div className={styles.amountTicker}>KG</div>
                 </div>
-                <div className={styles.amountInputBox}>
+                <div
+                  className={
+                    wallet
+                      ? styles.amountInputBox
+                      : styles.amountInputBoxDisabled
+                  }
+                >
                   <div className={styles.amountLabel}>Amount</div>
                   <input
-                    type="number"
+                    type="text"
                     min={0}
                     max={balance}
                     className={styles.amountInput}
@@ -500,7 +491,7 @@ const Chart = () => {
                   min={0}
                   max={balance}
                   step={1}
-                  disabled={zhuContractAddress == undefined}
+                  disabled={wallet == ""}
                   className={styles.amountSlider}
                   value={amount}
                   onChange={(e) => {
@@ -518,9 +509,7 @@ const Chart = () => {
               Faucet
             </div>
           ) : (
-            <div className={styles.disabledFaucet}>
-              Not available on this network
-            </div>
+            <div className={styles.disabledFaucet}>Not available</div>
           )}
           <LongShortButton />
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PositionLine.module.scss";
+import styles from "./positionline.module.scss";
 
 interface PositionLineProps {
   amount: string;
