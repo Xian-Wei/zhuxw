@@ -227,8 +227,10 @@ const Chart = () => {
           zhuExchangeAbi,
           provider
         );
+        let accounts = await provider.send("eth_requestAccounts", []);
+        let account = accounts[0];
 
-        const positions = await zhuExchangeContract.getPositions();
+        const positions = await zhuExchangeContract.getPositionsOf(account);
         setPositions(positions);
       } catch (e) {
         console.error(e);
@@ -455,7 +457,7 @@ const Chart = () => {
                 )}
                 <div
                   className={
-                    wallet
+                    zhuExchangeContractAddress && wallet
                       ? styles.amountInputBox
                       : styles.amountInputBoxDisabled
                   }
@@ -468,7 +470,7 @@ const Chart = () => {
                 </div>
                 <div
                   className={
-                    wallet
+                    zhuExchangeContractAddress && wallet
                       ? styles.amountInputBox
                       : styles.amountInputBoxDisabled
                   }
@@ -491,7 +493,7 @@ const Chart = () => {
                   min={0}
                   max={balance}
                   step={1}
-                  disabled={wallet == ""}
+                  disabled={!zhuExchangeContractAddress || !wallet}
                   className={styles.amountSlider}
                   value={amount}
                   onChange={(e) => {
@@ -503,7 +505,11 @@ const Chart = () => {
           </div>
           {zhuContractAddress ? (
             <div
-              className={isFaucetLocked ? styles.disabledFaucet : styles.faucet}
+              className={
+                !isFaucetLocked && zhuContractAddress && wallet
+                  ? styles.faucet
+                  : styles.disabledFaucet
+              }
               onClick={faucet}
             >
               Faucet

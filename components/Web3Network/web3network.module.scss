@@ -9,6 +9,7 @@
   color: white;
   text-decoration: none;
   background-color: $primaryColor;
+  user-select: none;
   transition: 0.1s background-color;
 
   @media screen and (max-width: $sm) {
@@ -26,6 +27,7 @@
   color: white;
   text-decoration: none;
   background-color: $disabledColor;
+  user-select: none;
 
   @media screen and (max-width: $sm) {
     padding-inline: 10px;
@@ -33,6 +35,48 @@
   }
 }
 
-.button:hover {
+@keyframes slideInFromLeft {
+  0% {
+    right: -20%;
+  }
+  100% {
+    right: 0%;
+  }
+}
+
+.networkList {
+  position: absolute;
+  width: 250px;
+  right: 0;
+  top: $navbarHeight;
+  animation: 0.3s ease-out 0s 1 slideInFromLeft;
+
+  @media screen and (max-width: $lg) {
+    width: 200px;
+  }
+
+  @media screen and (max-width: $md) {
+    width: 180px;
+  }
+}
+
+.network {
+  display: flex;
+  padding-block: 8px;
+  padding-inline: 15px;
+  margin-block: 1px;
+  border-radius: 20px 0px 0px 20px;
+  text-decoration: none;
+  border: 1px solid $chartBorder;
+  background-color: $primaryColor;
+  transition: 0.1s background-color;
+
+  @media screen and (max-width: $sm) {
+    padding-inline: 10px;
+    font-size: 12px;
+  }
+}
+
+.network:active {
   background-color: $primaryColorHover;
 }
