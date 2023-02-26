@@ -55,17 +55,162 @@
 }
 
 // Left
+
+// Info bar
 .infoContainer {
   display: flex;
   flex: 0.1;
+  justify-content: flex-start;
   align-items: center;
   min-height: 75px;
   padding-inline: 20px;
   border: 1px solid $chartBorder;
   border-radius: 5px;
   background-color: $chartBackground;
+
+  @media screen and (max-width: $md) {
+    justify-content: space-around;
+  }
 }
 
+.pair {
+  display: flex;
+  flex: 0.2;
+  justify-content: flex-start;
+  font-size: 18px;
+  font-weight: 500;
+
+  @media screen and (max-width: $lg) {
+    font-size: 17px;
+  }
+
+  @media screen and (max-width: $md) {
+    flex: 0.3;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 13px;
+  }
+}
+
+.currentWeight {
+  display: flex;
+  flex: 0.2;
+  font-size: 18px;
+  font-weight: 600;
+
+  @media screen and (max-width: $lg) {
+    font-size: 17px;
+  }
+
+  @media screen and (max-width: $md) {
+    flex: 0.3;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 13px;
+  }
+}
+
+.labelGroup {
+  display: flex;
+  flex: 0.2;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+
+  @media screen and (max-width: $md) {
+    flex: 0.3;
+    align-items: center;
+  }
+}
+
+.labelGroupNoMobile {
+  display: flex;
+  flex: 0.2;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+
+  @media screen and (max-width: $md) {
+    display: none;
+  }
+}
+
+.label {
+  display: flex;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  @media screen and (max-width: $lg) {
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 12px;
+  }
+}
+
+.dailyChangeGreen {
+  display: flex;
+  flex: 0.2;
+  font-size: 17px;
+  font-weight: 600;
+  color: green;
+
+  @media screen and (max-width: $lg) {
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 12px;
+  }
+}
+
+.dailyChangeRed {
+  display: flex;
+  flex: 0.2;
+  font-size: 17px;
+  font-weight: 600;
+  color: red;
+
+  @media screen and (max-width: $lg) {
+    font-size: 15px;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 12px;
+  }
+}
+
+.weeklyLow {
+  display: flex;
+  flex: 0.2;
+  font-size: 17px;
+  font-weight: 600;
+
+  @media screen and (max-width: $lg) {
+    font-size: 15px;
+  }
+}
+
+.weeklyHigh {
+  display: flex;
+  flex: 0.2;
+  font-size: 17px;
+  font-weight: 600;
+
+  @media screen and (max-width: $lg) {
+    font-size: 15px;
+  }
+}
+
+// Chart
 .chart {
   flex: 0.5;
   justify-content: center;
@@ -117,6 +262,7 @@
   z-index: 6;
 }
 
+// Positions
 .positionContainer {
   display: flex;
   flex: 0.1;
@@ -257,6 +403,7 @@
   }
 }
 
+// Tabs
 .shortSwitchTab {
   display: flex;
   flex: 0.5;
@@ -305,6 +452,7 @@
   background-color: $chartSwitchBackgroundActive;
 }
 
+// Slider and input
 .sliders {
   flex: 0.7;
 
@@ -415,6 +563,7 @@
   background-color: red;
 }
 
+// Faucet
 .faucet {
   display: flex;
   flex: 0.1;
@@ -444,6 +593,7 @@
   }
 }
 
+// Short/Long buttons
 .shortButton {
   display: flex;
   flex: 0.1;

@@ -1,4 +1,6 @@
 import React from "react";
+
+import { percentageDifference } from "../../utils/ChartUtils";
 import styles from "./positionline.module.scss";
 
 interface PositionLineProps {
@@ -7,10 +9,6 @@ interface PositionLineProps {
   weightSnapshot: number;
   currentWeight: number;
 }
-
-const percentageDifference = (a: number, b: number) => {
-  return ((b - a) / a) * 100;
-};
 
 const PositionLine = ({
   amount,

@@ -17,6 +17,11 @@ import MetaTags from "../../components/MetaTags";
 import useWeb3Wallet from "../../hooks/useWeb3Wallet";
 import PositionLine from "../../components/PositionLine";
 import LoadingAnimation from "../../components/LoadingAnimation";
+import {
+  getHighestCloseInLastSevenElements,
+  getLowestCloseInLastSevenElements,
+  percentageDifference,
+} from "../../utils/ChartUtils";
 
 enum PositionType {
   Long,
@@ -28,6 +33,8 @@ const Chart = () => {
   const [positionType, setPositionType] = useState<PositionType>(
     PositionType.Short
   );
+
+  // API
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data: weeklyWeights }: { data: any } = useSWR(
     "https://zhuxw.com/weight_weekly.json",
@@ -37,9 +44,8 @@ const Chart = () => {
     "https://zhuxw.com/weight_daily.json",
     fetcher
   );
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFaucetLoading, setIsFaucetLoading] = useState(false);
 
+  // Web3
   const provider: ethers.providers.Web3Provider | null = useWeb3Provider();
   const { wallet } = useWeb3Wallet();
   const chainId: number | null = useWeb3ChainId();
@@ -56,10 +62,14 @@ const Chart = () => {
 
   const [balance, setBalance] = useState<string>("0");
   const [amount, setAmount] = useState<number>(0);
-  const [positions, setPositions] = useState([]);
-  const [isFaucetLocked, setIsFaucetLocked] = useState<boolean>(true);
+  const [approvedAmount, setApprovedAmount] = useState<number>(0);
   const [approved, setApproved] = useState<boolean>(false);
+  const [isFaucetLocked, setIsFaucetLocked] = useState<boolean>(true);
   const MINIMUM_AMOUNT = 1000;
+
+  const [positions, setPositions] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isFaucetLoading, setIsFaucetLoading] = useState(false);
 
   const setLongShortValue = (value: string) => {
     const regex = /^[0-9\b]+$/;
@@ -85,18 +95,18 @@ const Chart = () => {
         await provider.send("eth_requestAccounts", []);
 
         const tx = await zhuExchangeContract.short(
-          amount,
+          approvedAmount,
           dailyWeights[dailyWeights.length - 1].close * 10,
           { gasLimit: 1000000 }
         );
         setIsLoading(true);
         await tx.wait();
-        console.log("Short submitted");
         await getBalance();
-        setApproved(false);
-        setAmount(0);
         await getPositions();
+        setApproved(false);
         setIsLoading(false);
+        setAmount(0);
+        setApprovedAmount(0);
       } catch (e) {
         console.error(e);
       }
@@ -114,18 +124,18 @@ const Chart = () => {
         );
         await provider.send("eth_requestAccounts", []);
         const tx = await zhuExchangeContract.long(
-          amount,
+          approvedAmount,
           dailyWeights[dailyWeights.length - 1].close * 10,
           { gasLimit: 1000000 }
         );
         setIsLoading(true);
         await tx.wait();
-        console.log("Long submitted");
         await getBalance();
-        setApproved(false);
-        setAmount(0);
         await getPositions();
+        setApproved(false);
         setIsLoading(false);
+        setAmount(0);
+        setApprovedAmount(0);
       } catch (e) {
         console.error(e);
       }
@@ -150,7 +160,7 @@ const Chart = () => {
         );
         setIsLoading(true);
         await tx.wait();
-        console.log(`Approved ${amount} ZHU`);
+        setApprovedAmount(amount);
         setApproved(true);
         setIsLoading(false);
       } catch (e) {
@@ -270,6 +280,7 @@ const Chart = () => {
 
   useEffect(() => {
     if (provider) {
+      // After a successful Long/Short
       let positionAdded: any = {
         address: zhuExchangeContractAddress,
         topics: [ethers.utils.id("PositionAdded()")],
@@ -278,6 +289,7 @@ const Chart = () => {
         await getPositions();
       });
 
+      // After trades are executed on-chain
       let tradesExecuted: any = {
         address: zhuExchangeContractAddress,
         topics: [ethers.utils.id("TradesExecuted()")],
@@ -301,20 +313,25 @@ const Chart = () => {
             return <div className={styles.disabledButton}>Enter an amount</div>;
           } else if (amount >= MINIMUM_AMOUNT) {
             if (approved) {
+              // Short
               if (positionType == PositionType.Short) {
                 return (
                   <div className={styles.shortButton} onClick={() => short()}>
                     Short
                   </div>
                 );
-              } else {
+              }
+              // Long
+              else {
                 return (
                   <div className={styles.longButton} onClick={() => long()}>
                     Long
                   </div>
                 );
               }
-            } else {
+            }
+            // Not approved
+            else {
               return (
                 <div
                   className={
@@ -328,24 +345,32 @@ const Chart = () => {
                 </div>
               );
             }
-          } else {
+          }
+          // Amount is less than MINIMUM_AMOUNT
+          else {
             return (
               <div className={styles.disabledButton}>
                 Min {MINIMUM_AMOUNT} $ZHU
               </div>
             );
           }
-        } else {
+        }
+        // Loading
+        else {
           return (
             <div className={styles.disabledButton}>
               <LoadingAnimation />
             </div>
           );
         }
-      } else {
+      }
+      // No contract in this network
+      else {
         return <div className={styles.disabledButton}>Change network</div>;
       }
-    } else {
+    }
+    // Wallet not connected
+    else {
       return <div className={styles.disabledButton}>Connect your wallet</div>;
     }
   };
@@ -360,8 +385,8 @@ const Chart = () => {
         <title>
           {weeklyWeights && dailyWeights
             ? (timeframe == Timeframe.Daily && weeklyWeights && dailyWeights
-                ? dailyWeights.reverse()[0].close
-                : weeklyWeights.reverse()[0].close
+                ? dailyWeights[dailyWeights.length - 1].close
+                : weeklyWeights[weeklyWeights.length - 1].close
               ).toString() + " KG | XWZ/KG"
             : "XWZ/KG"}
         </title>
@@ -369,8 +394,8 @@ const Chart = () => {
           title={
             weeklyWeights && dailyWeights
               ? (timeframe == Timeframe.Daily && weeklyWeights && dailyWeights
-                  ? dailyWeights.reverse()[0].close
-                  : weeklyWeights.reverse()[0].close
+                  ? dailyWeights[dailyWeights.length - 1].close
+                  : weeklyWeights[weeklyWeights.length - 1].close
                 ).toString() + " KG | XWZ/KG"
               : "XWZ/KG"
           }
@@ -383,8 +408,57 @@ const Chart = () => {
       <div className={styles.container}>
         {/* Left */}
         <div className={styles.leftContainer}>
-          <div className={styles.infoContainer}>XWZ / KG</div>
+          <div className={styles.infoContainer}>
+            {/* Pair */}
+            <div className={styles.pair}>XWZ / KG</div>
+            {/* Weight */}
+            <div className={styles.currentWeight}>
+              {dailyWeights && dailyWeights[dailyWeights.length - 1].close} KG
+            </div>
+            {/* 24h Change */}
+            <div className={styles.labelGroup}>
+              <div className={styles.label}>24h Change</div>
+              {dailyWeights &&
+                (percentageDifference(
+                  dailyWeights[dailyWeights.length - 2].close,
+                  dailyWeights[dailyWeights.length - 1].close
+                ) < 0 ? (
+                  <div className={styles.dailyChangeRed}>
+                    {percentageDifference(
+                      dailyWeights[dailyWeights.length - 2].close,
+                      dailyWeights[dailyWeights.length - 1].close
+                    ).toFixed(2)}
+                    %
+                  </div>
+                ) : (
+                  <div className={styles.dailyChangeGreen}>
+                    +
+                    {percentageDifference(
+                      dailyWeights[dailyWeights.length - 2].close,
+                      dailyWeights[dailyWeights.length - 1].close
+                    ).toFixed(2)}
+                    %
+                  </div>
+                ))}
+            </div>
+            {/* Weekly high */}
+            <div className={styles.labelGroupNoMobile}>
+              <div className={styles.label}>7d High</div>
+              <div className={styles.weeklyHigh}>
+                {getHighestCloseInLastSevenElements(dailyWeights)} KG
+              </div>
+            </div>
+            {/* Weekly low */}
+            <div className={styles.labelGroupNoMobile}>
+              <div className={styles.label}>7d Low</div>
+              <div className={styles.weeklyLow}>
+                {getLowestCloseInLastSevenElements(dailyWeights)} KG
+              </div>
+            </div>
+          </div>
+          {/* Chart */}
           <div className={styles.chart}>
+            {/* Timeframe buttons */}
             <div className={styles.timeframeButtons}>
               <div
                 className={
@@ -407,13 +481,14 @@ const Chart = () => {
                 1W
               </div>
             </div>
-
+            {/* Chart component */}
             <LWChart
               weeklyWeights={weeklyWeights}
               dailyWeights={dailyWeights}
               timeframe={timeframe}
             />
           </div>
+          {/* Position */}
           <div className={styles.positionContainer}>
             <div className={styles.positionDescription}>
               <div className={styles.positionSymbol}>Symbol</div>
@@ -422,6 +497,7 @@ const Chart = () => {
               <div className={styles.positionLiquidationPrice}>Liquidation</div>
               <div className={styles.positionPNL}>PNL</div>
             </div>
+            {/* Position lines*/}
             <div className={styles.positions}>
               {dailyWeights &&
                 positions.map((position: any, index: number) => {
@@ -442,6 +518,7 @@ const Chart = () => {
         </div>
         {/* Right */}
         <div className={styles.rightContainer}>
+          {/* Short/Long tabs */}
           <div className={styles.tabs}>
             <div
               className={
@@ -464,12 +541,15 @@ const Chart = () => {
               Long
             </div>
           </div>
+          {/* Slider and input */}
           <div className={styles.sliders}>
             {dailyWeights && weeklyWeights && (
               <>
+                {/* Balance */}
                 {zhuContractAddress && wallet && (
                   <div className={styles.balance}>Balance : {balance} ZHU</div>
                 )}
+                {/* Weight text */}
                 <div
                   className={
                     zhuExchangeContractAddress && wallet
@@ -483,9 +563,10 @@ const Chart = () => {
                   </div>
                   <div className={styles.amountTicker}>KG</div>
                 </div>
+                {/* Amount input */}
                 <div
                   className={
-                    zhuExchangeContractAddress && wallet
+                    zhuExchangeContractAddress && wallet && !approved
                       ? styles.amountInputBox
                       : styles.amountInputBoxDisabled
                   }
@@ -497,6 +578,7 @@ const Chart = () => {
                     max={balance}
                     className={styles.amountInput}
                     value={amount}
+                    disabled={approved}
                     onChange={(e) => {
                       setLongShortValue(e.target.value);
                     }}
@@ -508,7 +590,7 @@ const Chart = () => {
                   min={0}
                   max={balance}
                   step={1}
-                  disabled={!zhuExchangeContractAddress || !wallet}
+                  disabled={!zhuExchangeContractAddress || !wallet || approved}
                   className={styles.amountSlider}
                   value={amount}
                   onChange={(e) => {
@@ -518,6 +600,7 @@ const Chart = () => {
               </>
             )}
           </div>
+          {/* Faucet */}
           {zhuContractAddress ? (
             <div
               className={
