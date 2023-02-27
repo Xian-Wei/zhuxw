@@ -60,8 +60,12 @@
   object-fit: cover;
   min-height: 120px;
   height: 100%;
-  min-width: 200px;
+  min-width: 240px;
   width: 100%;
+
+  @media screen and (max-width: $md) {
+    min-width: 200px;
+  }
 
   @media screen and (max-width: $sm) {
     min-height: 20px;

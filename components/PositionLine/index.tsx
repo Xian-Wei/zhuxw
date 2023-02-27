@@ -27,7 +27,7 @@ const PositionLine = ({
       if (positionType == 0) {
         return (
           <div className={styles.positionPNLGain}>
-            {-percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
+            +{-percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
           </div>
         );
       }
@@ -54,7 +54,7 @@ const PositionLine = ({
       else {
         return (
           <div className={styles.positionPNLGain}>
-            {percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
+            +{percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
           </div>
         );
       }

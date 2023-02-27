@@ -18,8 +18,8 @@ import useWeb3Wallet from "../../hooks/useWeb3Wallet";
 import PositionLine from "../../components/PositionLine";
 import LoadingAnimation from "../../components/LoadingAnimation";
 import {
-  getHighestCloseInLastSevenElements,
-  getLowestCloseInLastSevenElements,
+  getHighestHighInLastSevenElements,
+  getLowestLowInLastSevenElements,
   percentageDifference,
 } from "../../utils/ChartUtils";
 
@@ -306,72 +306,80 @@ const Chart = () => {
   }, [provider]);
 
   const LongShortButton = () => {
-    if (wallet) {
-      if (zhuExchangeContractAddress) {
-        if (!isLoading) {
-          if (amount == 0) {
-            return <div className={styles.disabledButton}>Enter an amount</div>;
-          } else if (amount >= MINIMUM_AMOUNT) {
-            if (approved) {
-              // Short
-              if (positionType == PositionType.Short) {
-                return (
-                  <div className={styles.shortButton} onClick={() => short()}>
-                    Short
-                  </div>
-                );
+    if (provider) {
+      if (wallet) {
+        if (zhuExchangeContractAddress) {
+          if (!isLoading) {
+            if (amount == 0) {
+              return (
+                <div className={styles.disabledButton}>Enter an amount</div>
+              );
+            } else if (amount >= MINIMUM_AMOUNT) {
+              if (approved) {
+                // Short
+                if (positionType == PositionType.Short) {
+                  return (
+                    <div className={styles.shortButton} onClick={() => short()}>
+                      Short
+                    </div>
+                  );
+                }
+                // Long
+                else {
+                  return (
+                    <div className={styles.longButton} onClick={() => long()}>
+                      Long
+                    </div>
+                  );
+                }
               }
-              // Long
+              // Not approved
               else {
                 return (
-                  <div className={styles.longButton} onClick={() => long()}>
-                    Long
+                  <div
+                    className={
+                      positionType == PositionType.Short
+                        ? styles.shortButton
+                        : styles.longButton
+                    }
+                    onClick={() => approve()}
+                  >
+                    Approve
                   </div>
                 );
               }
             }
-            // Not approved
+            // Amount is less than MINIMUM_AMOUNT
             else {
               return (
-                <div
-                  className={
-                    positionType == PositionType.Short
-                      ? styles.shortButton
-                      : styles.longButton
-                  }
-                  onClick={() => approve()}
-                >
-                  Approve
+                <div className={styles.disabledButton}>
+                  Min {MINIMUM_AMOUNT} $ZHU
                 </div>
               );
             }
           }
-          // Amount is less than MINIMUM_AMOUNT
+          // Loading
           else {
             return (
               <div className={styles.disabledButton}>
-                Min {MINIMUM_AMOUNT} $ZHU
+                <LoadingAnimation />
               </div>
             );
           }
         }
-        // Loading
+        // No contract in this network
         else {
-          return (
-            <div className={styles.disabledButton}>
-              <LoadingAnimation />
-            </div>
-          );
+          return <div className={styles.disabledButton}>Change network</div>;
         }
       }
-      // No contract in this network
+      // Wallet not connected
       else {
-        return <div className={styles.disabledButton}>Change network</div>;
+        return <div className={styles.disabledButton}>Connect your wallet</div>;
       }
-    }
-    // Wallet not connected
-    else {
-      return <div className={styles.disabledButton}>Connect your wallet</div>;
+    } else {
+      return (
+        <div className={styles.disabledButton}>Ethereum wallet required</div>
+      );
     }
   };
 
@@ -445,14 +453,14 @@ const Chart = () => {
             <div className={styles.labelGroupNoMobile}>
               <div className={styles.label}>7d High</div>
               <div className={styles.weeklyHigh}>
-                {getHighestCloseInLastSevenElements(dailyWeights)} KG
+                {getHighestHighInLastSevenElements(dailyWeights)} KG
               </div>
             </div>
             {/* Weekly low */}
             <div className={styles.labelGroupNoMobile}>
               <div className={styles.label}>7d Low</div>
               <div className={styles.weeklyLow}>
-                {getLowestCloseInLastSevenElements(dailyWeights)} KG
+                {getLowestLowInLastSevenElements(dailyWeights)} KG
               </div>
             </div>
           </div>

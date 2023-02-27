@@ -2,7 +2,7 @@ export const percentageDifference = (a: number, b: number) => {
   return ((b - a) / a) * 100;
 };
 
-export const getHighestCloseInLastSevenElements = (elements: any[]) => {
+export const getHighestHighInLastSevenElements = (elements: any[]) => {
   if (elements) {
     const lastSevenElements = elements.slice(-7);
 
@@ -15,7 +15,7 @@ export const getHighestCloseInLastSevenElements = (elements: any[]) => {
   } else return 0;
 };
 
-export const getLowestCloseInLastSevenElements = (elements: any[]) => {
+export const getLowestLowInLastSevenElements = (elements: any[]) => {
   if (elements) {
     const lastSevenElements = elements.slice(-7);
 
