@@ -27,7 +27,11 @@ const PositionLine = ({
       if (positionType == 0) {
         return (
           <div className={styles.positionPNLGain}>
-            +{-percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
+            +
+            {(
+              -percentageDifference(weightSnapshot, currentWeight) * 20
+            ).toFixed(2)}
+            %
           </div>
         );
       }
@@ -35,7 +39,10 @@ const PositionLine = ({
       else {
         return (
           <div className={styles.positionPNLLoss}>
-            {percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
+            {(percentageDifference(weightSnapshot, currentWeight) * 20).toFixed(
+              2
+            )}
+            %
           </div>
         );
       }
@@ -46,7 +53,10 @@ const PositionLine = ({
       if (positionType == 0) {
         return (
           <div className={styles.positionPNLLoss}>
-            {-percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
+            {(
+              -percentageDifference(weightSnapshot, currentWeight) * 20
+            ).toFixed(2)}
+            %
           </div>
         );
       }
@@ -54,7 +64,11 @@ const PositionLine = ({
       else {
         return (
           <div className={styles.positionPNLGain}>
-            +{percentageDifference(weightSnapshot, currentWeight).toFixed(2)}%
+            +
+            {(percentageDifference(weightSnapshot, currentWeight) * 20).toFixed(
+              2
+            )}
+            %
           </div>
         );
       }
@@ -76,8 +90,8 @@ const PositionLine = ({
       <div className={styles.positionEntryPrice}>{weightSnapshot} KG</div>
       <div className={styles.positionLiquidationPrice}>
         {positionType == 0
-          ? `${(weightSnapshot - weightSnapshot / 10).toFixed(1)} KG`
-          : `${(weightSnapshot + weightSnapshot / 10).toFixed(1)} KG`}
+          ? `${(weightSnapshot + weightSnapshot / 20).toFixed(1)} KG`
+          : `${(weightSnapshot - weightSnapshot / 20).toFixed(1)} KG`}
       </div>
       <PNL />
     </div>
