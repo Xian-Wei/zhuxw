@@ -1,4 +1,4 @@
-import BlogPostTagState from "../../models/BlogPostTagState";
+import BlogPostTagState from "../../../models/BlogPostTagState";
 import styles from "./posttag.module.scss";
 
 interface BlogPostTagProps {

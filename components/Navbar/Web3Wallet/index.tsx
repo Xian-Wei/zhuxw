@@ -1,7 +1,7 @@
 import styles from "./web3wallet.module.scss";
-import useWeb3Provider from "../../hooks/useWeb3Provider";
-import useIsMetamaskInstalled from "../../hooks/useIsMetamaskInstalled";
-import useWeb3Wallet from "../../hooks/useWeb3Wallet";
+import useWeb3Provider from "../../../hooks/useWeb3Provider";
+import useIsMetamaskInstalled from "../../../hooks/useIsMetamaskInstalled";
+import useWeb3Wallet from "../../../hooks/useWeb3Wallet";
 
 const Web3Wallet = () => {
   const { wallet, setWallet } = useWeb3Wallet();

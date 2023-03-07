@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./web3network.module.scss";
-import { Chains } from "../../models/Chains";
-import useWeb3ChainId from "../../hooks/useWeb3Network";
-import useWeb3Wallet from "../../hooks/useWeb3Wallet";
+import { Chains } from "../../../models/Chains";
+import useWeb3ChainId from "../../../hooks/useWeb3Network";
+import useWeb3Wallet from "../../../hooks/useWeb3Wallet";
 
 const Web3Network = () => {
   const [network, setNetwork] = useState<string>("");

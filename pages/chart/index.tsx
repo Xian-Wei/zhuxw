@@ -15,7 +15,7 @@ import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 import MetaTags from "../../components/MetaTags";
 import useWeb3Wallet from "../../hooks/useWeb3Wallet";
-import PositionLine from "../../components/PositionLine";
+import PositionLine from "../../components/Blog/PositionLine";
 import LoadingAnimation from "../../components/LoadingAnimation";
 import {
   getHighestHighInLastSevenElements,

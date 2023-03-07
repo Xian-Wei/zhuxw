@@ -1,6 +1,6 @@
 // Variables
 $navbarHeight: 60px;
-$footerHeight: 110px;
+$footerHeight: 140px;
 
 // Screen size
 $sm: 500px;
@@ -11,11 +11,7 @@ $xxl: 1600px;
 
 // Background
 $backgroundImage: url("../../public/images/background.png");
-$backgroundColor: linear-gradient(
-  to bottom right,
-  rgb(15, 15, 30),
-  rgb(10, 10, 20)
-);
+$backgroundColor: linear-gradient(to right, rgb(15, 15, 30), rgb(10, 10, 20));
 $backgroundSize: 1920px 1080px;
 $backgroundSizeMobile: 1280px 720px;
 

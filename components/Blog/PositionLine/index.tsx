@@ -1,6 +1,6 @@
 import React from "react";
 
-import { percentageDifference } from "../../utils/ChartUtils";
+import { percentageDifference } from "../../../utils/ChartUtils";
 import styles from "./positionline.module.scss";
 
 interface PositionLineProps {

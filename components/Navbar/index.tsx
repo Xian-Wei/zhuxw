@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import styles from "./navbar.module.scss";
 import useIsWidth from "../../hooks/useIsWidth";
-import Web3Wallet from "../Web3Wallet";
+import Web3Wallet from "./Web3Wallet";
 import { WindowWidth } from "../../models/WindowWidth";
-import Web3Network from "../Web3Network";
+import Web3Network from "./Web3Network";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);

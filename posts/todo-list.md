@@ -22,11 +22,15 @@ tags:
 - ~~Add Head content to all pages~~
 - ~~Meta Description only showing up in Claim page~~
 - ~~Add more data to meta (twitter cards...)~~
-- Hide all crypto-related features if MetaMask is not installed
+- ~~Hide all crypto-related features if MetaMask is not installed~~
 - Convert Number/String wrapper to primitive types across project
 - Adding username and NFT profile picture to wallet
 - og:type and og:url not showing up ? Client-side problem ?
 - og:title not working either
+
+**Home**
+
+- Different background according to the time of the day
 
 **Blog**
 
@@ -51,11 +55,11 @@ tags:
 - ~~UI Rework~~
 - Add Moving Average indicator
 - ~~Get weight from API endpoint~~
-- Handle tx rejections
-- Stop MetaMask pop-up when switching to the tab with no connected account
+- ~~Handle tx rejections~~
+- ~~Stop MetaMask pop-up when switching to the tab with no connected account~~
 - ~~Update balance and stop contract interactions according to wallet/network~~
-- Fix error when switching networks
-- Listen to executeTrades event
+- ~~Fix error when switching networks~~
+- ~~Listen to executeTrades event~~
 
 **Web3**
 
