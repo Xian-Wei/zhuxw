@@ -25,7 +25,7 @@
   background-size: $backgroundSize;
   z-index: 0;
 
-  @media screen and (max-width: $md) {
+  @media screen and (max-width: $lg) {
     background-size: $backgroundSizeMobile;
   }
 }

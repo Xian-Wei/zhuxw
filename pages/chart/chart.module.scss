@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: flex-start;
   gap: 20px;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   padding-block: 40px;
   padding-inline: 100px;
@@ -52,6 +52,7 @@
 
   @media screen and (max-width: $lg) {
     height: 50%;
+    min-width: 95%;
     width: 95%;
   }
 }

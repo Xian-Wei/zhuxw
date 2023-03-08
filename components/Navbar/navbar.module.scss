@@ -89,10 +89,10 @@
   align-items: center;
   gap: 40px;
   width: 100%;
-  right: 0;
+  left: 0;
   top: $navbarHeight;
   height: calc(100vh - $navbarHeight);
-  width: 100vw;
+  width: calc(100vw - 18px);
   padding: 20px;
   background: $collapsedBackground;
   background-image: $backgroundImage;
@@ -128,7 +128,7 @@
   display: flex;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
   opacity: 0;
   transition: 0.5s all;
   pointer-events: none;

@@ -384,11 +384,7 @@ const Chart = () => {
   };
 
   return (
-    <Layout
-      navbarEnabled={true}
-      footerEnabled={false}
-      backgroundEnabled={false}
-    >
+    <Layout navbarEnabled={true} footerEnabled={false} backgroundEnabled={true}>
       <Head>
         <title>
           {weeklyWeights && dailyWeights
