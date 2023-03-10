@@ -9,7 +9,7 @@
   width: 100%;
   background-color: $navbarBackground;
   backdrop-filter: blur(50px);
-  border-bottom: 1px solid $navbarBorder;
+  border-bottom: 1px solid $primaryBorder;
   z-index: inherit;
 
   @media screen and (max-width: $lg) {

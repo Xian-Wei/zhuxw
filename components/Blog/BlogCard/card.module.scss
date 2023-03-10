@@ -4,12 +4,12 @@
   display: block;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid $cardBorder;
+  border: 1px solid $primaryBorder;
   min-width: 300px;
   width: 350px;
   min-height: 200px;
   box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
-  background-color: $cardBackground;
+  background-color: $bodyBackground;
   z-index: inherit;
   transition: background-color 0.2s;
 
@@ -31,7 +31,7 @@
 }
 
 .container:hover {
-  background-color: $cardBackgroundHover;
+  background-color: $bodyBackgroundHover;
 }
 
 .imageContainer {

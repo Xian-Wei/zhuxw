@@ -18,6 +18,10 @@
   }
 }
 
+.supportedChain:hover {
+  background-color: $primaryColorHover;
+}
+
 .unsupportedChain {
   display: flex;
   padding-block: 8px;
@@ -33,6 +37,10 @@
     padding-inline: 10px;
     font-size: 12px;
   }
+}
+
+.unsupportedChain:hover {
+  background-color: $disabledColorHover;
 }
 
 @keyframes slideInFromLeft {
@@ -67,7 +75,7 @@
   margin-block: 1px;
   border-radius: 20px 0px 0px 20px;
   text-decoration: none;
-  border: 1px solid $chartBorder;
+  border: 1px solid $primaryBorder;
   background-color: $primaryColor;
   transition: 0.1s background-color;
 
@@ -77,6 +85,10 @@
   }
 }
 
-.network:active {
+.network:hover {
   background-color: $primaryColorHover;
+}
+
+.network:active {
+  background-color: $primaryColorActive;
 }

@@ -7,7 +7,7 @@
   min-height: 150px;
   padding-block: 10px;
   padding-inline: 10px;
-  border-top: 1px solid $postBorder;
+  border-top: 1px solid $secondaryBorder;
   border-left: 0px solid $primaryColor;
   border-right: 0px solid $primaryColor;
   transition: padding-left 0.1s ease-in-out, height 0.1s ease;
@@ -26,7 +26,7 @@
   padding-left: 20px;
   border: 1px solid $primaryColor;
   border-bottom: none;
-  background-color: $postBackground;
+  background-color: $primaryBackground;
 }
 
 .post:hover + .post {
@@ -34,7 +34,7 @@
 }
 
 .post:last-child {
-  border-bottom: 1px solid $postBorder;
+  border-bottom: 1px solid $secondaryBorder;
 }
 
 .post:last-child:hover {

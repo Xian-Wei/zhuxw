@@ -14,8 +14,8 @@
   height: 100%;
   min-width: 230px;
   width: 100%;
-  background-color: $sidebarBackground;
-  border-right: 5px solid $sidebarBorder;
+  background-color: $navbarBackground;
+  border-right: 1px solid $primaryBorder;
   z-index: inherit;
 
   @media screen and (max-width: $xl) {
@@ -44,7 +44,7 @@
   left: -220px;
   margin-top: 100px;
   border-radius: 0% 20px 20px 0%;
-  background-color: $sidebarCollapsedBackground;
+  background-color: $sidebarBackground;
   backdrop-filter: blur(50px);
   z-index: 100;
   animation: slideRight 0.2s ease;
@@ -56,10 +56,17 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-block: 10px;
-  gap: 10px;
+  gap: 30px;
+  padding-block: 30px;
   height: 100%;
   width: 100%;
+
+  @media screen and (max-width: $xl) {
+    gap: 10px;
+    padding-block: 10px;
+    border: 1px solid $primaryBorder;
+    border-right: none;
+  }
 }
 
 .sidebarLink {
@@ -68,9 +75,13 @@
   align-items: center;
   height: 50px;
   width: 90%;
-  padding-block: 10px;
+  padding-block: 40px;
   border-radius: 20px;
   transition: background-color 0.2s;
+
+  @media screen and (max-width: $xl) {
+    padding-block: 20px;
+  }
 }
 
 .sidebarLink:hover {
@@ -82,9 +93,9 @@
   justify-content: center;
   align-items: center;
   padding-inline: 10px;
-  border-left: 1px solid $sidebarButtonBorder;
+  border: 1px solid $primaryBorder;
   border-radius: 0% 20px 20px 0%;
-  background-color: $sidebarButtonBackground;
+  background-color: $sidebarBackground;
   z-index: 100;
   transition: background-color 0.2s;
 
@@ -95,7 +106,7 @@
 }
 
 .sidebarToggle:hover {
-  background-color: $sidebarButtonBackgroundHover;
+  background-color: $sidebarBackgroundHover;
 }
 
 .content {

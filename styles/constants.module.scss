@@ -9,18 +9,18 @@ $lg: 960px;
 $xl: 1280px;
 $xxl: 1600px;
 
-// Background
+// Body color & background image
 $backgroundImage: url("../../public/images/background.png");
 $backgroundColor: linear-gradient(to right, rgb(15, 15, 30), rgb(10, 10, 20));
 $backgroundSize: 1920px 1080px;
 $backgroundSizeMobile: 1280px 720px;
 
 // Colors
-$primaryColor: rgb(100, 100, 200);
-$neutralColor: rgb(150, 150, 150);
-$disabledColor: rgb(128, 128, 128);
+$primaryColor: rgb(80, 80, 160);
+$secondaryColor: rgb(150, 150, 150);
+$disabledColor: rgb(125, 125, 125);
 
-// Colors on hover
+// Colors hover
 $primaryColorHover: rgb(70, 70, 140);
 $neutralColorHover: rgb(130, 130, 130);
 $disabledColorHover: rgb(100, 100, 100);
@@ -28,54 +28,41 @@ $disabledColorHover: rgb(100, 100, 100);
 // Colors active
 $primaryColorActive: rgb(80, 80, 160);
 
+// Border
+$primaryBorder: rgba(60, 60, 120, 0.9);
+$secondaryBorder: rgba(120, 120, 120, 0.9);
+$disabledBorder: rgba(110, 110, 110, 0.5);
+
+// Background
+$primaryBackground: rgba(60, 60, 140, 0.2);
+$bodyBackground: rgb(15, 15, 30);
+$bodyBackgroundHover: rgb(25, 25, 50);
+
 // Navbar
-$navbarBackground: rgba(15, 15, 30, 0.9);
-$navbarBorder: rgba(30, 30, 60, 0.6);
+$navbarBackground: rgba(20, 20, 40, 0.9);
 $collapsedBackground: rgb(10, 10, 20);
 $collapsedLinkBackground: url("../../public/images/background-link.png");
 
-/***** Blog *****/
-
-// Input
-$inputBackground: rgb(15, 15, 30);
-
-// Post
-$postBackground: rgba(60, 60, 140, 0.2);
-$postBorder: rgba(150, 150, 150, 0.5);
-
-// Card
-$cardBackground: rgba(15, 15, 30, 0.8);
-$cardBorder: rgba(80, 80, 160, 1);
-$cardBackgroundHover: rgba(20, 20, 40, 0.9);
-
-/***** Web3 *****/
-$sidebarBackground: rgb(15, 15, 30);
-$sidebarCollapsedBackground: rgb(40, 40, 90);
-$sidebarBorder: rgb(21, 21, 40);
-$sidebarButtonBackground: rgba(40, 40, 90);
-$sidebarButtonBackgroundHover: rgba(45, 45, 90, 1);
-$sidebarButtonBorder: rgb(70, 70, 140);
-$sidebarLinkBackground: rgba(50, 50, 100, 0.6);
+// Sidebar
+$sidebarBackground: rgb(30, 30, 60);
+$sidebarBackgroundHover: rgb(40, 40, 80);
+$sidebarLinkBackground: rgba(45, 45, 90, 0.5);
 
 /***** Chart *****/
-
-$chartBackground: rgb(20, 20, 40);
-$chartBorder: rgb(80, 80, 160, 0.4);
+$chartBackground: rgb(25, 25, 50);
 $chartShortText: rgb(255, 0, 0);
 $chartLongText: rgb(0, 255, 0);
+$chartInputBackground: rgb(50, 50, 100, 0.4);
 
 // Long/Short switch
-$chartSwitchBackground: rgba(30, 30, 50, 0.9);
-$chartSwitchBackgroundActive: rgba(70, 70, 140, 1);
+$chartSwitchBackground: rgb(25, 25, 50);
+$chartSwitchBackgroundActive: rgb(70, 70, 140);
 
 // Long/Short buttons
 $chartShortButton: rgb(120, 30, 30);
 $chartShortButtonHover: rgb(150, 30, 30);
 $chartLongButton: rgb(30, 120, 30);
 $chartLongButtonHover: rgb(30, 150, 30);
-
-// Input
-$chartInputBackground: rgb(50, 50, 100, 0.4);
 
 /* Export */
 :export {

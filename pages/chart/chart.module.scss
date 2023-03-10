@@ -28,7 +28,7 @@
   gap: 20px;
   height: 100%;
   min-width: 250px;
-  width: 60%;
+  width: 62%;
 
   @media screen and (max-width: $lg) {
     gap: 10px;
@@ -43,10 +43,10 @@
   flex-direction: column;
   min-height: 450px;
   height: 55%;
-  min-width: 250px;
+  min-width: 300px;
   width: 22%;
   padding-inline: 20px;
-  border: 1px solid $chartBorder;
+  border: 1px solid $primaryBorder;
   border-radius: 5px;
   background-color: $chartBackground;
 
@@ -67,7 +67,7 @@
   align-items: center;
   min-height: 75px;
   padding-inline: 20px;
-  border: 1px solid $chartBorder;
+  border: 1px solid $primaryBorder;
   border-radius: 5px;
   background-color: $chartBackground;
 
@@ -220,7 +220,7 @@
   align-items: center;
   min-height: 350px;
   width: 100%;
-  border: 1px solid $chartBorder;
+  border: 1px solid $primaryBorder;
   border-radius: 5px;
   background-color: $chartBackground;
 
@@ -276,7 +276,7 @@
   width: 100%;
   padding-block: 10px;
   padding-inline: 20px;
-  border: 1px solid $chartBorder;
+  border: 1px solid $primaryBorder;
   border-radius: 5px;
   background-color: $chartBackground;
 
@@ -311,7 +311,7 @@
   width: 100%;
   padding-block: 5px;
   padding-inline: 20px;
-  border-bottom: 1px solid $chartBorder;
+  border-bottom: 1px solid $primaryBorder;
 
   @media screen and (max-width: $lg) {
     padding-inline: 0px;
@@ -414,7 +414,8 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $navbarBorder;
+  border: 1px solid $primaryBorder;
+  border-right: none;
   border-radius: 7px 0% 0% 7px;
   background-color: $chartSwitchBackground;
 }
@@ -426,7 +427,8 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $navbarBorder;
+  border: 1px solid $primaryBorder;
+  border-right: none;
   border-radius: 7px 0% 0% 7px;
   background-color: $chartSwitchBackgroundActive;
 }
@@ -438,7 +440,8 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $navbarBorder;
+  border: 1px solid $primaryBorder;
+  border-left: none;
   border-radius: 0% 7px 7px 0%;
   background-color: $chartSwitchBackground;
 }
@@ -450,7 +453,8 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $navbarBorder;
+  border: 1px solid $primaryBorder;
+  border-left: none;
   border-radius: 0% 7px 7px 0%;
   background-color: $chartSwitchBackgroundActive;
 }
@@ -479,7 +483,7 @@
   width: 100%;
   padding-block: 10px;
   margin-bottom: 20px;
-  border: 1px solid $chartBackground;
+  border: 1px solid $primaryBorder;
   border-radius: 4px;
   background-color: $chartInputBackground;
   font-size: 16px;
@@ -559,11 +563,11 @@
 .amountSlider {
   flex: 0.2;
   width: 100%;
+  cursor: pointer;
 }
 
 .amountSlider:disabled {
   opacity: 0.1;
-  background-color: red;
 }
 
 // Faucet
@@ -604,7 +608,6 @@
   align-items: center;
   min-height: 50px;
   margin-block: 20px;
-  border: 1px solid $chartBorder;
   border-radius: 5px;
   background-color: $chartShortButton;
   transition: 0.1s background-color ease-in-out;
@@ -625,7 +628,6 @@
   align-items: center;
   min-height: 50px;
   margin-block: 20px;
-  border: 1px solid $chartBorder;
   border-radius: 5px;
   background-color: $chartLongButton;
   transition: 0.1s background-color ease-in-out;
@@ -646,7 +648,7 @@
   align-items: center;
   min-height: 50px;
   margin-block: 20px;
-  border: 1px solid $chartBorder;
+  border: 1px solid $primaryBorder;
   border-radius: 5px;
   background-color: $disabledColor;
 
