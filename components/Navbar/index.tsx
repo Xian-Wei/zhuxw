@@ -32,11 +32,8 @@ const Navbar = () => {
         <Link href="/blog" className={styles.link}>
           Blog
         </Link>
-        <Link href="/chart" className={styles.link}>
-          Chart
-        </Link>
-        <Link href="/claim" className={styles.link}>
-          Claim
+        <Link href="/web3" className={styles.link}>
+          Web3
         </Link>
       </div>
       <div className={styles.rightContainer}>
@@ -64,18 +61,11 @@ const Navbar = () => {
             Blog
           </Link>
           <Link
-            href="/chart"
+            href="/web3"
             className={styles.mobileLink}
             onClick={() => setNavbarToggle(false)}
           >
-            Chart
-          </Link>
-          <Link
-            href="/claim"
-            className={styles.mobileLink}
-            onClick={() => setNavbarToggle(false)}
-          >
-            Claim
+            Web3
           </Link>
         </div>
       </div>

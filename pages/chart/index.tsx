@@ -384,7 +384,7 @@ const Chart = () => {
   };
 
   return (
-    <Layout navbarEnabled={true} footerEnabled={false} backgroundEnabled={true}>
+    <div style={{ height: "100%", width: "100%" }}>
       <Head>
         <title>
           {weeklyWeights && dailyWeights
@@ -625,7 +625,7 @@ const Chart = () => {
           <LongShortButton />
         </div>
       </div>
-    </Layout>
+    </div>
   );
 };
 

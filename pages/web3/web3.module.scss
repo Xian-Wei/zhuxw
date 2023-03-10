@@ -1,0 +1,120 @@
+@import "../../styles/constants.module.scss";
+
+.container {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  z-index: inherit;
+}
+
+.sidebar {
+  display: flex;
+  flex: 0.15;
+  height: 100%;
+  min-width: 230px;
+  width: 100%;
+  background-color: $sidebarBackground;
+  border-right: 5px solid $sidebarBorder;
+  z-index: inherit;
+
+  @media screen and (max-width: $xl) {
+    display: none;
+  }
+}
+
+.mobileSidebar {
+  display: none;
+  position: fixed;
+  width: 250px;
+  margin-top: 100px;
+  z-index: 100;
+
+  @media screen and (max-width: $xl) {
+    display: flex;
+    left: -220px;
+  }
+}
+
+.collapsedMobileSidebar {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  width: 250px;
+  left: -220px;
+  margin-top: 100px;
+  border-radius: 0% 20px 20px 0%;
+  background-color: $sidebarCollapsedBackground;
+  backdrop-filter: blur(50px);
+  z-index: 100;
+  animation: slideRight 0.2s ease;
+  animation-fill-mode: forwards;
+}
+
+.sidebarLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-block: 10px;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+}
+
+.sidebarLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 90%;
+  padding-block: 10px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+}
+
+.sidebarLink:hover {
+  background-color: $sidebarLinkBackground;
+}
+
+.sidebarToggle {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 10px;
+  border-left: 1px solid $sidebarButtonBorder;
+  border-radius: 0% 20px 20px 0%;
+  background-color: $sidebarButtonBackground;
+  z-index: 100;
+  transition: background-color 0.2s;
+
+  @media screen and (max-width: $xl) {
+    display: flex;
+    flex: 0.1;
+  }
+}
+
+.sidebarToggle:hover {
+  background-color: $sidebarButtonBackgroundHover;
+}
+
+.content {
+  display: flex;
+  flex: 0.85;
+  height: 100%;
+  width: 100%;
+  z-index: inherit;
+
+  @media screen and (max-width: $xl) {
+    flex: 1;
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    left: -230px;
+  }
+  100% {
+    left: 0px;
+  }
+}

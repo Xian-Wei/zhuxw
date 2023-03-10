@@ -101,6 +101,10 @@
   @media screen and (max-width: $lg) {
     background-size: $backgroundSizeMobile;
   }
+
+  @media screen and (max-width: $sm) {
+    width: calc(100vw);
+  }
 }
 
 .mobileLink {
