@@ -3,28 +3,33 @@ import Footer from "../Footer";
 import Navbar from "../Navbar";
 import styles from "./layout.module.scss";
 
-const Layout = (props: {
+interface LayoutProps {
   children: any;
-  navbarEnabled: boolean;
-  footerEnabled: boolean;
-  backgroundEnabled: boolean;
-}) => {
+  navbarEnabled?: boolean;
+  footerEnabled?: boolean;
+  backgroundEnabled?: boolean;
+}
+
+const Layout = ({
+  children,
+  navbarEnabled = false,
+  footerEnabled = false,
+  backgroundEnabled = false,
+}: LayoutProps) => {
   return (
     <>
-      {props.backgroundEnabled && <div className={styles.backgroundImage} />}
-      {props.navbarEnabled && (
+      {backgroundEnabled && <div className={styles.backgroundImage} />}
+      {navbarEnabled && (
         <div className={styles.header}>
           <Navbar />
         </div>
       )}
       <div
-        className={
-          props.footerEnabled ? styles.children : styles.childrenFooterless
-        }
+        className={footerEnabled ? styles.children : styles.childrenFooterless}
       >
-        {props.children}
+        {children}
       </div>
-      {props.footerEnabled && (
+      {footerEnabled && (
         <div className={styles.footer}>
           <Footer />
         </div>

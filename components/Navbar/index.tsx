@@ -6,10 +6,12 @@ import useIsWidth from "../../hooks/useIsWidth";
 import Web3Wallet from "./Web3Wallet";
 import { WindowWidth } from "../../models/WindowWidth";
 import Web3Network from "./Web3Network";
+import useIsEasterEgg from "../../hooks/useIsEasterEgg";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
   const isWidth = useIsWidth(WindowWidth.lg);
+  const { isCaca } = useIsEasterEgg();
 
   useEffect(() => {
     if (!isWidth) {
@@ -35,6 +37,11 @@ const Navbar = () => {
         <Link href="/web3" className={styles.link}>
           Web3
         </Link>
+        {isCaca && (
+          <Link href="/dev" className={styles.link}>
+            Dev
+          </Link>
+        )}
       </div>
       <div className={styles.rightContainer}>
         <Web3Network />
@@ -67,6 +74,11 @@ const Navbar = () => {
           >
             Web3
           </Link>
+          {isCaca && (
+            <Link href="/dev" className={styles.mobileLink}>
+              Dev
+            </Link>
+          )}
         </div>
       </div>
     </nav>

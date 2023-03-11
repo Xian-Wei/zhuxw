@@ -28,7 +28,7 @@
   position: fixed;
   width: 250px;
   margin-top: 100px;
-  z-index: 100;
+  z-index: 9;
 
   @media screen and (max-width: $xl) {
     display: flex;
@@ -46,7 +46,7 @@
   border-radius: 0% 20px 20px 0%;
   background-color: $sidebarBackground;
   backdrop-filter: blur(50px);
-  z-index: 100;
+  z-index: 9;
   animation: slideRight 0.2s ease;
   animation-fill-mode: forwards;
 }
@@ -65,6 +65,7 @@
     gap: 10px;
     padding-block: 10px;
     border: 1px solid $primaryBorder;
+    border-left: none;
     border-right: none;
   }
 }
@@ -96,7 +97,7 @@
   border: 1px solid $primaryBorder;
   border-radius: 0% 20px 20px 0%;
   background-color: $sidebarBackground;
-  z-index: 100;
+  z-index: 9;
   transition: background-color 0.2s;
 
   @media screen and (max-width: $xl) {

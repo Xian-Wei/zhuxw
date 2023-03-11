@@ -27,6 +27,7 @@ tags:
 - Adding username and NFT profile picture to wallet
 - og:type and og:url not showing up ? Client-side problem ?
 - og:title not working either
+- Rework the whole website (3D?)
 
 **Home**
 
@@ -46,6 +47,7 @@ tags:
 - ~~Custom head title, description and image for each blog post~~
 - ~~Make image grow according to info container when resizing~~
 - ~~Make date and tag stick to bottom in Post component~~
+- Remove search/filters (or make it look better)
 
 **Chart**
 
