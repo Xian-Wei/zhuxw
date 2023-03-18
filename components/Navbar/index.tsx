@@ -11,7 +11,7 @@ import useIsEasterEgg from "../../hooks/useIsEasterEgg";
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
   const isWidth = useIsWidth(WindowWidth.lg);
-  const { isCaca } = useIsEasterEgg();
+  const { isDev } = useIsEasterEgg();
 
   useEffect(() => {
     if (!isWidth) {
@@ -37,7 +37,7 @@ const Navbar = () => {
         <Link href="/web3" className={styles.link}>
           Web3
         </Link>
-        {isCaca && (
+        {isDev && (
           <Link href="/dev" className={styles.link}>
             Dev
           </Link>
@@ -74,7 +74,7 @@ const Navbar = () => {
           >
             Web3
           </Link>
-          {isCaca && (
+          {isDev && (
             <Link href="/dev" className={styles.mobileLink}>
               Dev
             </Link>

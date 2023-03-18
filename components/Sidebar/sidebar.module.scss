@@ -1,0 +1,112 @@
+@import "../../styles/constants.module.scss";
+
+.sidebar {
+  display: flex;
+  flex: 0.15;
+  height: 100%;
+  min-width: 230px;
+  width: 100%;
+  background-color: $navbarBackground;
+  border-right: 1px solid $primaryBorder;
+  z-index: inherit;
+
+  @media screen and (max-width: $xl) {
+    display: none;
+  }
+}
+
+.mobileSidebar {
+  display: none;
+  position: fixed;
+  width: 250px;
+  margin-top: 100px;
+  z-index: 9;
+
+  @media screen and (max-width: $xl) {
+    display: flex;
+    left: -220px;
+  }
+}
+
+.collapsedMobileSidebar {
+  display: flex;
+  position: fixed;
+  flex-direction: row;
+  width: 250px;
+  left: -220px;
+  margin-top: 100px;
+  border-radius: 0% 20px 20px 0%;
+  background-color: $sidebarBackground;
+  backdrop-filter: blur(50px);
+  z-index: 9;
+  animation: slideRight 0.2s cubic-bezier(0, 0.8, 1, 1);
+  animation-fill-mode: forwards;
+}
+
+.sidebarLinks {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  padding-block: 30px;
+  height: 100%;
+  width: 100%;
+
+  @media screen and (max-width: $xl) {
+    gap: 10px;
+    padding-block: 10px;
+    border: 1px solid $primaryBorder;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+.sidebarLink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 90%;
+  padding-block: 40px;
+  border-radius: 20px;
+  transition: background-color 0.2s;
+
+  @media screen and (max-width: $xl) {
+    padding-block: 20px;
+  }
+}
+
+.sidebarLink:hover {
+  background-color: $sidebarLinkBackground;
+}
+
+.sidebarToggle {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding-inline: 10px;
+  border: 1px solid $primaryBorder;
+  border-radius: 0% 20px 20px 0%;
+  background-color: $sidebarBackground;
+  z-index: 9;
+  transition: background-color 0.2s;
+
+  @media screen and (max-width: $xl) {
+    display: flex;
+    flex: 0.1;
+  }
+}
+
+.sidebarToggle:hover {
+  background-color: $sidebarBackgroundHover;
+}
+
+@keyframes slideRight {
+  0% {
+    left: -230px;
+  }
+  100% {
+    left: 0px;
+  }
+}

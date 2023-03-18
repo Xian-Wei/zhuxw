@@ -4,7 +4,6 @@ import { ethers } from "ethers";
 import useSWR from "swr";
 import axios from "axios";
 
-import Layout from "../../components/Layout";
 import LWChart from "../../components/LWChart";
 import { Timeframe } from "../../models/Timeframe";
 import styles from "./chart.module.scss";
