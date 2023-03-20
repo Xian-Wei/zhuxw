@@ -28,11 +28,12 @@ const Sidebar = ({ pages, setPage }: SidebarProps) => {
       {/* Sidebar */}
       <div className={styles.sidebar}>
         <div className={styles.sidebarLinks}>
-          {pages.map((page) => {
+          {pages.map((page, index) => {
             return (
               <div
                 className={styles.sidebarLink}
                 onClick={() => onPageSwitch(page)}
+                key={index}
               >
                 {page}
               </div>
@@ -47,11 +48,12 @@ const Sidebar = ({ pages, setPage }: SidebarProps) => {
         }
       >
         <div className={styles.sidebarLinks}>
-          {pages.map((page) => {
+          {pages.map((page, index) => {
             return (
               <div
                 className={styles.sidebarLink}
                 onClick={() => onPageSwitch(page)}
+                key={index}
               >
                 {page}
               </div>
