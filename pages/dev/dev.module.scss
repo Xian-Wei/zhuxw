@@ -11,6 +11,8 @@
 .content {
   display: flex;
   flex: 0.85;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
   z-index: inherit;
@@ -18,4 +20,45 @@
   @media screen and (max-width: $xl) {
     flex: 1;
   }
+}
+
+/* Login */
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 600px;
+  width: 350px;
+  padding-inline: 20px;
+  border: 1px solid $secondaryBorder;
+  border-radius: 20px;
+  background-color: $bodyBackground;
+}
+
+.formInput {
+  display: flex;
+  height: 40px;
+  width: 100%;
+  padding-left: 15px;
+  margin-block: 20px;
+  border: 1px solid $secondaryBorder;
+  border-radius: 4px;
+  background-color: $bodyBackground;
+}
+
+.submitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 100%;
+  margin-block: 40px;
+  margin-inline: 20px;
+  padding: 20px;
+  border: 1px solid $secondaryBorder;
+  border-radius: 4px;
+  background-color: $bodyBackground;
+  cursor: pointer;
 }
