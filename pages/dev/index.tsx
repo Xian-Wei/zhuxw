@@ -26,7 +26,7 @@ const Dev = () => {
   const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [statusCode, setStatusCode] = useState("");
+    const [statusMessage, setStatusMessage] = useState("");
 
     const onUsernameChange = (username: string) => {
       setUsername(username);
@@ -47,17 +47,26 @@ const Dev = () => {
           }
         );
         console.log(result);
-        setStatusCode("Success!");
+        setStatusMessage("Success!");
       } catch (e: any) {
         console.log(e);
-        setStatusCode(e.response.data);
+
+        try {
+          if (e.response.data.errors) {
+            setStatusMessage("Your credentials are invalid.");
+          } else if (e.response.data) {
+            setStatusMessage(e.response.data);
+          }
+        } catch (e) {
+          setStatusMessage("Server is not responding.");
+        }
       }
     };
 
     return (
       <form className={styles.formContainer} onSubmit={(e) => login(e)}>
         <div>Login</div>
-        <div>{statusCode}</div>
+        <div>{statusMessage}</div>
         <input
           type="text"
           className={styles.formInput}
@@ -80,7 +89,7 @@ const Dev = () => {
   const RegisterPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [statusCode, setStatusCode] = useState("");
+    const [statusMessage, setStatusMessage] = useState("");
 
     const onUsernameChange = (username: string) => {
       setUsername(username);
@@ -101,16 +110,26 @@ const Dev = () => {
           }
         );
         console.log(result);
-        setStatusCode("Success!");
+        setStatusMessage("Success!");
       } catch (e: any) {
-        setStatusCode(e.response.data);
+        console.log(e);
+
+        try {
+          if (e.response.data.errors) {
+            setStatusMessage("Your credentials are invalid.");
+          } else if (e.response.data) {
+            setStatusMessage(e.response.data);
+          }
+        } catch (e) {
+          setStatusMessage("Server is not responding.");
+        }
       }
     };
 
     return (
       <form className={styles.formContainer} onSubmit={(e) => register(e)}>
         <div>Register</div>
-        <div>{statusCode}</div>
+        <div>{statusMessage}</div>
         <input
           type="text"
           className={styles.formInput}
