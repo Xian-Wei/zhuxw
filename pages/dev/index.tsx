@@ -1,13 +1,26 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Layout from "../../components/Layout";
 import Sidebar from "../../components/Sidebar";
-import styles from "./dev.module.scss";
+import { connect, disconnect } from "../../store/slices/authSlice";
+import { RootState } from "../../store/store";
 
-const pages = ["Login", "Register", "Contract"];
+import styles from "./dev.module.scss";
 
 const Dev = () => {
   const [selectedPage, setSelectedPage] = useState<string>("Login");
+  const isLogin = useSelector((state: RootState) => state.auth.login);
+  const dispatch = useDispatch();
+  const pages = isLogin ? ["Contract"] : ["Login", "Register"];
+
+  useEffect(() => {
+    if (!isLogin) {
+      setSelectedPage("Login");
+    } else {
+      setSelectedPage("Contract");
+    }
+  }, [isLogin]);
 
   const renderPage = () => {
     switch (selectedPage) {
@@ -48,6 +61,7 @@ const Dev = () => {
         );
         console.log(result);
         setStatusMessage("Success!");
+        dispatch(connect());
       } catch (e: any) {
         console.log(e);
 
@@ -150,7 +164,13 @@ const Dev = () => {
   };
 
   const ContractPage = () => {
-    return <div>Contract</div>;
+    return (
+      <div>
+        <div>Contract</div>
+        <br />
+        <div onClick={() => dispatch(disconnect())}>Logout</div>
+      </div>
+    );
   };
 
   return (
