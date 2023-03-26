@@ -5,6 +5,7 @@ import Layout from "../../components/Layout";
 import Sidebar from "../../components/Sidebar";
 import { connect, disconnect } from "../../store/slices/authSlice";
 import { RootState } from "../../store/store";
+import Auth from "../../utils/Auth";
 
 import styles from "./dev.module.scss";
 
@@ -13,6 +14,14 @@ const Dev = () => {
   const isLogin = useSelector((state: RootState) => state.auth.login);
   const dispatch = useDispatch();
   const pages = isLogin ? ["Contract"] : ["Login", "Register"];
+
+  useEffect(() => {
+    const token = Auth.getToken();
+
+    if (token) {
+      dispatch(connect());
+    }
+  }, []);
 
   useEffect(() => {
     if (!isLogin) {
@@ -59,8 +68,7 @@ const Dev = () => {
             password: password,
           }
         );
-        console.log(result);
-        setStatusMessage("Success!");
+        Auth.storeToken(result.data);
         dispatch(connect());
       } catch (e: any) {
         console.log(e);
@@ -164,11 +172,16 @@ const Dev = () => {
   };
 
   const ContractPage = () => {
+    const unlogin = () => {
+      dispatch(disconnect());
+      Auth.deleteToken();
+    };
+
     return (
       <div>
         <div>Contract</div>
         <br />
-        <div onClick={() => dispatch(disconnect())}>Logout</div>
+        <div onClick={unlogin}>Logout</div>
       </div>
     );
   };
