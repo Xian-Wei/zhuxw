@@ -15,12 +15,35 @@ const Dev = () => {
   const dispatch = useDispatch();
   const pages = isLogin ? ["Contract"] : ["Login", "Register"];
 
-  useEffect(() => {
-    const token = Auth.getToken();
+  const checkTokenValidity = async () => {
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${Auth.getToken()}`,
+        },
+      };
 
-    if (token) {
-      dispatch(connect());
+      const result = await axios.get(
+        "https://localhost:5000/api/auth/token",
+        config
+      );
+
+      if (result.data == true) return true;
+      else return false;
+    } catch (e: any) {
+      console.error(e);
+      return false;
     }
+  };
+
+  useEffect(() => {
+    (async () => {
+      const isTokenValid = await checkTokenValidity();
+
+      if (isTokenValid) {
+        dispatch(connect());
+      }
+    })();
   }, []);
 
   useEffect(() => {
