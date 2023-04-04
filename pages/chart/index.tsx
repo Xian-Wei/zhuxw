@@ -14,7 +14,7 @@ import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 import MetaTags from "../../components/MetaTags";
 import useWeb3Wallet from "../../hooks/useWeb3Wallet";
-import PositionLine from "../../components/Blog/PositionLine";
+import PositionLine from "../../components/PositionLine";
 import LoadingAnimation from "../../components/LoadingAnimation";
 import {
   getHighestHighInLastSevenElements,
@@ -50,12 +50,16 @@ const Chart = () => {
   const chainId: number | null = useWeb3ChainId();
   const zhuContractAddress: string | null = chainId
     ? String(chainId) in contractAddresses
-      ? contractAddresses[String(chainId) as keyof typeof contractAddresses][0]
+      ? contractAddresses[String(chainId) as keyof typeof contractAddresses][
+          "Zhu"
+        ][0]
       : null
     : null;
   const zhuExchangeContractAddress: string | null = chainId
     ? String(chainId) in contractAddresses
-      ? contractAddresses[String(chainId) as keyof typeof contractAddresses][1]
+      ? contractAddresses[String(chainId) as keyof typeof contractAddresses][
+          "ZhuExchange"
+        ][0]
       : null
     : null;
 
@@ -250,7 +254,12 @@ const Chart = () => {
         let accounts = await provider.send("eth_requestAccounts", []);
         let account = accounts[0];
 
-        const positions = await zhuExchangeContract.getPositionsOf(account);
+        let positions = await zhuExchangeContract.getPositionsOf(account);
+
+        positions = positions.filter((position: any) => {
+          return position.weightSnapshot != 0;
+        });
+
         setPositions(positions);
       } catch (e) {
         console.error(e);
@@ -295,6 +304,7 @@ const Chart = () => {
       };
       provider.on(tradesExecuted, async () => {
         await getBalance();
+        await getPositions();
       });
 
       return () => {
