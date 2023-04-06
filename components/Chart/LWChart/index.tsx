@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Timeframe } from "../../models/Timeframe";
+import { Timeframe } from "../../../models/Timeframe";
 import { IChartApi, ISeriesApi } from "lightweight-charts";
 import styles from "./lwchart.module.scss";
 

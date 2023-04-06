@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import useSWR from "swr";
 import axios from "axios";
 
-import LWChart from "../../components/LWChart";
+import LWChart from "../../components/Chart/LWChart";
 import { Timeframe } from "../../models/Timeframe";
 import styles from "./chart.module.scss";
 import useWeb3Provider from "../../hooks/useWeb3Provider";
@@ -14,7 +14,7 @@ import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 import MetaTags from "../../components/MetaTags";
 import useWeb3Wallet from "../../hooks/useWeb3Wallet";
-import PositionLine from "../../components/PositionLine";
+import PositionLine from "../../components/Chart/PositionLine";
 import LoadingAnimation from "../../components/LoadingAnimation";
 import {
   getHighestHighInLastSevenElements,

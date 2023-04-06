@@ -1,4 +1,4 @@
-@import "../../styles/constants.module.scss";
+@import "../../../styles/constants.module.scss";
 
 .line {
   display: flex;
@@ -8,12 +8,17 @@
   padding-block: 10px;
   padding-inline: 20px;
   border-bottom: 1px solid $primaryBorder;
+  transition: background-color 0.1s;
 
   @media screen and (max-width: $lg) {
     padding-block: 5px;
     padding-inline: 0px;
     margin-block: 0px;
   }
+}
+
+.line:hover {
+  background-color: $chartInputBackground;
 }
 
 .line:last-child {
