@@ -14,7 +14,7 @@ const Navbar = () => {
   const { isDev } = useIsEasterEgg();
 
   useEffect(() => {
-    if (!isWidth) {
+    if (isWidth) {
       setNavbarToggle(false);
     }
   }, [isWidth]);

@@ -25,7 +25,7 @@ const useIsWidth = (windowWidth: WindowWidth) => {
   }
 
   let handleWindowSizeChange = () => {
-    setIsWidth(window.innerWidth <= size);
+    setIsWidth(window.innerWidth >= size);
   };
 
   useEffect(() => {

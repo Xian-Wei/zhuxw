@@ -18,7 +18,7 @@ const Sidebar = ({ pages, setPage }: SidebarProps) => {
   };
 
   useEffect(() => {
-    if (!isWidth) {
+    if (isWidth) {
       setSidebarToggle(false);
     }
   }, [isWidth]);

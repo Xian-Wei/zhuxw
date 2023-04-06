@@ -127,7 +127,7 @@ export default function Blog({ posts }: PostProps) {
           url={"https://zhuxw.com/blog"}
         />
       </Head>
-      {isWidth ? (
+      {!isWidth ? (
         <Swiper navigation={true} modules={[Navigation]}>
           {posts
             ?.slice(0, 4)
