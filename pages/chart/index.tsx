@@ -89,7 +89,7 @@ const Chart = () => {
   const short = async () => {
     if (zhuExchangeContractAddress && provider) {
       try {
-        const signer = provider.getSigner();
+        const signer = await provider.getSigner();
         const zhuExchangeContract = new ethers.Contract(
           zhuExchangeContractAddress,
           zhuExchangeAbi,
@@ -119,7 +119,7 @@ const Chart = () => {
   const long = async () => {
     if (zhuExchangeContractAddress && provider) {
       try {
-        const signer = provider.getSigner();
+        const signer = await provider.getSigner();
         const zhuExchangeContract = new ethers.Contract(
           zhuExchangeContractAddress,
           zhuExchangeAbi,
@@ -148,7 +148,7 @@ const Chart = () => {
   const approve = async () => {
     if (zhuContractAddress && provider) {
       try {
-        const signer = provider.getSigner();
+        const signer = await provider.getSigner();
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,
@@ -175,7 +175,7 @@ const Chart = () => {
   const faucet = async () => {
     if (zhuContractAddress && provider && !isFaucetLocked && !isFaucetLoading) {
       try {
-        const signer = provider.getSigner();
+        const signer = await provider.getSigner();
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,

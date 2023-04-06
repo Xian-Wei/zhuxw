@@ -41,7 +41,7 @@ const Web3Network = () => {
                 {
                   chainId: "0x7A69",
                   rpcUrls: ["http://localhost:8545"],
-                  chainName: "Local",
+                  chainName: "Localhost",
                   nativeCurrency: {
                     name: "Ethereum",
                     symbol: "ETH",
@@ -94,7 +94,7 @@ const Web3Network = () => {
               className={styles.network}
               onClick={() => switchNetwork(31337)}
             >
-              Local
+              Localhost
             </div>
           </div>
         )}

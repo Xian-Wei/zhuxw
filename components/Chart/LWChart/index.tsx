@@ -72,7 +72,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
         });
 
         // Border vertical axis
-        chart.priceScale().applyOptions({ borderColor: borderColor });
+        chart.priceScale("right").applyOptions({ borderColor: borderColor });
 
         // Border horizontal axis
         chart.timeScale().applyOptions({ borderColor: borderColor });
