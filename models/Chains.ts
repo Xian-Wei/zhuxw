@@ -6,6 +6,8 @@ export const Chains: { [key: number]: { name: string; supported: boolean } } = {
   10: { name: "Optimism", supported: false },
   250: { name: "Fantom", supported: false },
   43114: { name: "Avalanche", supported: false },
-  5: { name: "Goerli", supported: true },
+  5: { name: "Goerli", supported: false },
   31337: { name: "Localhost", supported: true },
+  11155111: { name: "Sepolia", supported: true },
+  80001: { name: "Mumbai", supported: true },
 };

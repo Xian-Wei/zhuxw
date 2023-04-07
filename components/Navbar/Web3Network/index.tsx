@@ -16,24 +16,6 @@ const Web3Network = () => {
     if (window.ethereum) {
       try {
         switch (chainId) {
-          case 5:
-            window.ethereum.request({
-              method: "wallet_addEthereumChain",
-              params: [
-                {
-                  chainId: "0x5",
-                  rpcUrls: ["https://goerli.infura.io/v3/"],
-                  chainName: "Goerli",
-                  nativeCurrency: {
-                    name: "Ethereum",
-                    symbol: "ETH",
-                    decimals: 18,
-                  },
-                  blockExplorerUrls: ["https://goerli.etherscan.io"],
-                },
-              ],
-            });
-            break;
           case 31337:
             window.ethereum.request({
               method: "wallet_addEthereumChain",
@@ -48,6 +30,42 @@ const Web3Network = () => {
                     decimals: 18,
                   },
                   blockExplorerUrls: null,
+                },
+              ],
+            });
+            break;
+          case 80001:
+            window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: "0x13881",
+                  rpcUrls: ["https://rpc-mumbai.maticvigil.com"],
+                  chainName: "Mumbai",
+                  nativeCurrency: {
+                    name: "MATIC",
+                    symbol: "MATIC",
+                    decimals: 18,
+                  },
+                  blockExplorerUrls: "https://mumbai.polygonscan.com/",
+                },
+              ],
+            });
+            break;
+          case 11155111:
+            window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: "0xAA36A7",
+                  rpcUrls: ["https://sepolia.infura.io/v3/"],
+                  chainName: "Sepolia test network",
+                  nativeCurrency: {
+                    name: "Ethereum",
+                    symbol: "SepoliaETH",
+                    decimals: 18,
+                  },
+                  blockExplorerUrls: ["https://sepolia.etherscan.io"],
                 },
               ],
             });
@@ -87,8 +105,17 @@ const Web3Network = () => {
         </div>
         {showNetworkList && (
           <div className={styles.networkList}>
-            <div className={styles.network} onClick={() => switchNetwork(5)}>
-              Goerli
+            <div
+              className={styles.network}
+              onClick={() => switchNetwork(11155111)}
+            >
+              Sepolia
+            </div>
+            <div
+              className={styles.network}
+              onClick={() => switchNetwork(80001)}
+            >
+              Mumbai
             </div>
             <div
               className={styles.network}

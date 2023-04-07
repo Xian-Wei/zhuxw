@@ -1,8 +1,4 @@
 {
-  "5": {
-    "Zhu": ["0xD8e83ad747DabD1b9490C7Ded98383cb34651fe6"],
-    "ZhuExchange": ["0x8Ba398Ba840e58EcF4f3921c4B4d4bb03B2C70a9"]
-  },
   "31337": {
     "Zhu": ["0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"],
     "ZhuExchange": ["0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9"],
@@ -10,7 +6,12 @@
   },
   "80001": {
     "Zhu": ["0xDCeF22327f3ba596100ed334D19A7e68b1DCfcA5"],
-    "ZhuExchange": ["0x3189E437198b67BAD105dbBfB874495B9F043818"],
+    "ZhuExchange": ["0x7345300B4c418D013E2D44cb05310d7d6e2Ea90e"],
     "Zhuba": ["0x361522Fa74Ed577E03755166B63652A3650a750D"]
+  },
+  "11155111": {
+    "Zhu": ["0xDCeF22327f3ba596100ed334D19A7e68b1DCfcA5"],
+    "ZhuExchange": ["0x0aFfFCDd9f226EA44dE699108E8Fb6D37AE5BB5e"],
+    "Zhuba": ["0xc5cb9c60338ffe80b2C7a66C5516c8eEd9574900"]
   }
 }
