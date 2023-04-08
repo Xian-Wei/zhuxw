@@ -47,7 +47,7 @@ const Web3Network = () => {
                     symbol: "MATIC",
                     decimals: 18,
                   },
-                  blockExplorerUrls: "https://mumbai.polygonscan.com/",
+                  blockExplorerUrls: null,
                 },
               ],
             });

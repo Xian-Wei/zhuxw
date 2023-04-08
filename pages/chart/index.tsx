@@ -267,6 +267,31 @@ const Chart = () => {
     }
   };
 
+  const closeTrade = async (id: number) => {
+    if (zhuExchangeContractAddress && provider) {
+      try {
+        const signer = await provider.getSigner();
+        const zhuExchangeContract = new ethers.Contract(
+          zhuExchangeContractAddress,
+          zhuExchangeAbi,
+          signer
+        );
+        await provider.send("eth_requestAccounts", []);
+
+        const tx = await zhuExchangeContract.closeTrade(
+          dailyWeights[dailyWeights.length - 1].close * 10,
+          id,
+          { gasLimit: 100000 }
+        );
+        await tx.wait();
+        await getBalance();
+        await getPositions();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       if (wallet) {
@@ -515,15 +540,17 @@ const Chart = () => {
               {dailyWeights &&
                 positions.map((position: any, index: number) => {
                   return (
-                    <PositionLine
-                      amount={position.amount.toString()}
-                      positionType={position.positionType}
-                      weightSnapshot={position.weightSnapshot / 10}
-                      currentWeight={
-                        dailyWeights[dailyWeights.length - 1].close
-                      }
-                      key={index}
-                    />
+                    <div onClick={() => closeTrade(position.id)}>
+                      <PositionLine
+                        amount={position.amount.toString()}
+                        positionType={position.positionType}
+                        weightSnapshot={position.weightSnapshot / 10}
+                        currentWeight={
+                          dailyWeights[dailyWeights.length - 1].close
+                        }
+                        key={index}
+                      />
+                    </div>
                   );
                 })}
             </div>
