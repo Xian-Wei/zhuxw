@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import useSWR from "swr";
 import axios from "axios";
@@ -195,7 +195,26 @@ const Chart = () => {
     }
   };
 
-  const getBalance = async () => {
+  const getFaucetLockState = useCallback(async () => {
+    if (zhuContractAddress && provider) {
+      try {
+        const zhuContract = new ethers.Contract(
+          zhuContractAddress,
+          zhuAbi,
+          provider
+        );
+        let accounts = await provider.send("eth_requestAccounts", []);
+        let account = accounts[0];
+
+        const locked = await zhuContract.isFaucetLockedFor(account);
+        setIsFaucetLocked(locked);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, [chainId, wallet]);
+
+  const getBalance = useCallback(async () => {
     if (zhuContractAddress && provider) {
       try {
         const zhuContract = new ethers.Contract(
@@ -222,28 +241,9 @@ const Chart = () => {
       setBalance("0");
       return false;
     }
-  };
+  }, [chainId, wallet]);
 
-  const getFaucetLockState = async () => {
-    if (zhuContractAddress && provider) {
-      try {
-        const zhuContract = new ethers.Contract(
-          zhuContractAddress,
-          zhuAbi,
-          provider
-        );
-        let accounts = await provider.send("eth_requestAccounts", []);
-        let account = accounts[0];
-
-        const locked = await zhuContract.isFaucetLockedFor(account);
-        setIsFaucetLocked(locked);
-      } catch (e) {
-        console.error(e);
-      }
-    }
-  };
-
-  const getPositions = async () => {
+  const getPositions = useCallback(async () => {
     if (zhuExchangeContractAddress && provider) {
       try {
         const zhuExchangeContract = new ethers.Contract(
@@ -265,7 +265,7 @@ const Chart = () => {
         console.error(e);
       }
     }
-  };
+  }, [chainId, wallet]);
 
   const closeTrade = async (id: number) => {
     if (zhuExchangeContractAddress && provider) {
@@ -293,9 +293,9 @@ const Chart = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       if (wallet) {
-        getFaucetLockState();
+        await getFaucetLockState();
       }
     }, 1000);
 
@@ -309,7 +309,7 @@ const Chart = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [chainId, wallet]);
+  }, [chainId, wallet, getBalance, getPositions, getFaucetLockState]);
 
   useEffect(() => {
     if (provider) {
@@ -337,7 +337,7 @@ const Chart = () => {
         provider.off(tradesExecuted);
       };
     }
-  }, [provider]);
+  }, [provider, getBalance, getPositions, zhuExchangeContractAddress]);
 
   const LongShortButton = () => {
     if (provider) {
@@ -540,7 +540,7 @@ const Chart = () => {
               {dailyWeights &&
                 positions.map((position: any, index: number) => {
                   return (
-                    <div onClick={() => closeTrade(position.id)}>
+                    <div onClick={() => closeTrade(position.id)} key={index}>
                       <PositionLine
                         amount={position.amount.toString()}
                         positionType={position.positionType}
@@ -548,7 +548,6 @@ const Chart = () => {
                         currentWeight={
                           dailyWeights[dailyWeights.length - 1].close
                         }
-                        key={index}
                       />
                     </div>
                   );
