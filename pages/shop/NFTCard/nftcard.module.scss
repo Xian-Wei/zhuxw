@@ -1,0 +1,66 @@
+@import "../../../styles/constants.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 450px;
+  width: 300px;
+  border: 1px solid $bodyBackground;
+  border-radius: 35px 35px 20px 20px;
+  background-color: $bodyBackgroundHover;
+}
+
+.image {
+  display: flex;
+  border-radius: 35px;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+  display: flex;
+  flex: 0.2;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  color: lightgray;
+}
+
+.price {
+  display: flex;
+  flex: 0.2;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.mintButton {
+  display: flex;
+  flex: 0.3;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  border-radius: 10px;
+  background-color: $primaryColor;
+  cursor: pointer;
+}
+
+.disabledButton {
+  display: flex;
+  flex: 0.3;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  border-radius: 10px;
+  background-color: $disabledColor;
+}

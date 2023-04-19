@@ -2,6 +2,7 @@
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100%;
@@ -9,11 +10,24 @@
   z-index: inherit;
 }
 
-.shopButton {
+.balance {
   display: flex;
+  flex: 0.05;
   justify-content: center;
   align-items: center;
-  height: 100%;
   width: 100%;
-  z-index: inherit;
+  margin-block: 20px;
+  background-color: $bodyBackgroundHover;
+}
+
+.card {
+  display: flex;
+  flex: 0.9;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 40px;
+
+  @media screen and (max-width: $lg) {
+    margin-top: 0px;
+  }
 }

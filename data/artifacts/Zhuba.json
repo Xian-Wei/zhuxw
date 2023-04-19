@@ -18,7 +18,8 @@
         "internalType": "string[5]",
         "name": "zhubaTokenUris",
         "type": "string[5]"
-      }
+      },
+      { "internalType": "address", "name": "zhuAddress", "type": "address" }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
@@ -32,7 +33,7 @@
     "type": "error"
   },
   { "inputs": [], "name": "Zhuba__AlreadyInitialized", "type": "error" },
-  { "inputs": [], "name": "Zhuba__NeedMoreETHSent", "type": "error" },
+  { "inputs": [], "name": "Zhuba__NotEnoughAllowance", "type": "error" },
   { "inputs": [], "name": "Zhuba__RangeOutOfBounds", "type": "error" },
   { "inputs": [], "name": "Zhuba__TransferFailed", "type": "error" },
   {
@@ -235,6 +236,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "getZhuContractAddress",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "uint256", "name": "index", "type": "uint256" }
     ],
@@ -303,7 +311,7 @@
     "outputs": [
       { "internalType": "uint256", "name": "requestId", "type": "uint256" }
     ],
-    "stateMutability": "payable",
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
