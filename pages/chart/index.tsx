@@ -4,7 +4,7 @@ import { ethers } from "ethers";
 import useSWR from "swr";
 import axios from "axios";
 
-import LWChart from "../../components/Chart/LWChart";
+import LWChart from "../../components/Web3/LWChart";
 import { Timeframe } from "../../models/Timeframe";
 import styles from "./chart.module.scss";
 import useWeb3Provider from "../../hooks/useWeb3Provider";
@@ -14,7 +14,7 @@ import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
 import MetaTags from "../../components/MetaTags";
 import useWeb3Wallet from "../../hooks/useWeb3Wallet";
-import PositionLine from "../../components/Chart/PositionLine";
+import PositionLine from "../../components/Web3/PositionLine";
 import LoadingAnimation from "../../components/LoadingAnimation";
 import {
   getHighestHighInLastSevenElements,
@@ -112,6 +112,7 @@ const Chart = () => {
         setApprovedAmount(0);
       } catch (e) {
         console.error(e);
+        setIsLoading(false);
       }
     }
   };
@@ -141,6 +142,7 @@ const Chart = () => {
         setApprovedAmount(0);
       } catch (e) {
         console.error(e);
+        setIsLoading(false);
       }
     }
   };
@@ -168,6 +170,7 @@ const Chart = () => {
         setIsLoading(false);
       } catch (e) {
         console.error(e);
+        setIsLoading(false);
       }
     }
   };
@@ -191,6 +194,7 @@ const Chart = () => {
         setIsFaucetLoading(false);
       } catch (e) {
         console.error(e);
+        setIsFaucetLoading(false);
       }
     }
   };
@@ -212,7 +216,7 @@ const Chart = () => {
         console.error(e);
       }
     }
-  }, [chainId, wallet]);
+  }, [provider, zhuContractAddress]);
 
   const getBalance = useCallback(async () => {
     if (zhuContractAddress && provider) {
@@ -241,7 +245,7 @@ const Chart = () => {
       setBalance("0");
       return false;
     }
-  }, [chainId, wallet]);
+  }, [provider, zhuContractAddress]);
 
   const getPositions = useCallback(async () => {
     if (zhuExchangeContractAddress && provider) {
@@ -265,7 +269,7 @@ const Chart = () => {
         console.error(e);
       }
     }
-  }, [chainId, wallet]);
+  }, [provider, zhuExchangeContractAddress]);
 
   const closeTrade = async (id: number) => {
     if (zhuExchangeContractAddress && provider) {

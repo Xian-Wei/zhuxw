@@ -44,7 +44,7 @@ const Dev = () => {
         dispatch(connect());
       }
     })();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (!isLogin) {

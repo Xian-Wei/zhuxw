@@ -8,7 +8,7 @@ import zhuAbi from "../../data/artifacts/Zhu.json";
 import zhubaAbi from "../../data/artifacts/Zhuba.json";
 import { ethers } from "ethers";
 import useWeb3Provider from "../../hooks/useWeb3Provider";
-import NFTCard from "./NFTCard";
+import NFTCard from "../../components/Web3/NFTCard";
 
 export const siteTitle = "XWZ Web3 Shop";
 
@@ -114,13 +114,13 @@ const Shop = () => {
       setBalance("0");
       return false;
     }
-  }, [chainId]);
+  }, [provider, zhuContractAddress]);
 
   useEffect(() => {
     (async () => {
       await getBalance();
     })();
-  }, [chainId]);
+  }, [chainId, getBalance]);
 
   useEffect(() => {
     if (provider && zhuContractAddress && zhubaContractAddress) {
@@ -146,7 +146,7 @@ const Shop = () => {
           <NFTCard
             title="Zhuba NFT Gacha"
             price={10000}
-            image="/../public/images/zhuba.gif"
+            image="/images/zhuba.gif"
             alt="Zhuba GIF"
             approve={approve}
             mint={mint}

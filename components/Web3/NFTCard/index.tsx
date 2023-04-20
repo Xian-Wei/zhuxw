@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./nftcard.module.scss";
 import Image from "next/image";
-import LoadingAnimation from "../../../components/LoadingAnimation";
+import LoadingAnimation from "../../LoadingAnimation";
 
 interface NFTCardInterface {
   title: string;
