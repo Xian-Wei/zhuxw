@@ -130,8 +130,9 @@ export default function Blog({ posts }: PostProps) {
       {!isWidth ? (
         <Swiper navigation={true} modules={[Navigation]}>
           {posts
-            ?.slice(0, 4)
+            ?.slice(0, 100)
             .reverse()
+            .slice(0, 4)
             .map((post) => (
               <SwiperSlide
                 className={styles.swiperSlide}
@@ -151,8 +152,9 @@ export default function Blog({ posts }: PostProps) {
       ) : (
         <div className={styles.highlighted}>
           {posts
-            ?.slice(0, 4)
+            ?.slice(0, 100)
             .reverse()
+            .slice(0, 4)
             .map((post) => (
               <BlogCard
                 key={post.frontmatter.id}

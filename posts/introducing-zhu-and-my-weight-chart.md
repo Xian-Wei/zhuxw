@@ -1,7 +1,8 @@
 ---
 id: 4
 title: "Introducing $ZHU and weight trading"
-description: "The very first feature of zhuxw. Speculate on my weight."image: images/blog/thumbnails/stonks.png
+description: "The very first feature of zhuxw. Speculate on my weight."
+image: images/blog/thumbnails/stonks.png
 date: "2023-02-27"
 tags:
   - zhuxw
