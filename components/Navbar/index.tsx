@@ -7,11 +7,13 @@ import Web3Wallet from "./Web3Wallet";
 import { WindowWidth } from "../../models/WindowWidth";
 import Web3Network from "./Web3Network";
 import useIsEasterEgg from "../../hooks/useIsEasterEgg";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
   const isWidth = useIsWidth(WindowWidth.lg);
   const { isDev } = useIsEasterEgg();
+  const router = useRouter();
 
   useEffect(() => {
     if (isWidth) {
@@ -20,7 +22,7 @@ const Navbar = () => {
   }, [isWidth]);
 
   return (
-    <nav className={styles.nav}>
+    <nav className={router.pathname == "/" ? styles.navHome : styles.nav}>
       <div className={styles.leftContainer}>
         <Link
           href="/"
