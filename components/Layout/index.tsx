@@ -2,6 +2,7 @@ import React from "react";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import styles from "./layout.module.scss";
+import { useRouter } from "next/router";
 
 interface LayoutProps {
   children: any;
@@ -16,6 +17,8 @@ const Layout = ({
   footerEnabled = false,
   backgroundEnabled = false,
 }: LayoutProps) => {
+  const router = useRouter();
+
   return (
     <>
       {backgroundEnabled && <div className={styles.backgroundImage} />}
@@ -25,7 +28,13 @@ const Layout = ({
         </div>
       )}
       <div
-        className={footerEnabled ? styles.children : styles.childrenFooterless}
+        className={
+          router.pathname == "/"
+            ? styles.childrenNoPadding
+            : footerEnabled
+            ? styles.children
+            : styles.childrenFooterless
+        }
       >
         {children}
       </div>

@@ -12,6 +12,11 @@
   z-index: 5;
 }
 
+.childrenNoPadding {
+  min-height: calc(100vh - $footerHeight);
+  z-index: 5;
+}
+
 .backgroundImage {
   position: fixed;
   height: 100%;
