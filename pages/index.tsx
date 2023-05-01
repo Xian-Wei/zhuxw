@@ -4,6 +4,8 @@ import { Canvas, useFrame, ThreeElements } from "@react-three/fiber";
 import Layout from "../components/Layout";
 import MetaTags from "../components/MetaTags";
 import styles from "../styles/Home.module.scss";
+import Link from "next/link";
+import { Blunderbuss } from "../components/3D/Blunderbuss";
 
 export const siteTitle = "Xian-Wei Zhu";
 
@@ -41,24 +43,36 @@ export default function Home() {
         />
       </Head>
       <main className={styles.container}>
-        <div className={styles.firstScreen}>
-          <div className={styles.firstScreenContent}>
-            <h1>Hi I'm Xian-Wei Zhu</h1>
+        <div className={styles.heroContent}>
+          <div className={styles.heroLeftContent}>
+            <div className={styles.heroLeftTitle}>
+              The most pointless and random website of all time.
+            </div>
+            <div className={styles.heroLeftDescription}>
+              zhuxw is an web application that does anything but useful stuff.
+              <br /> A blog, personal weight tracker, decentralized weight
+              trading, NFT shop and more useless stuff to come.
+            </div>
+            <div className={styles.heroLeftCta}>
+              <Link href="/web3" className={styles.heroLeftCtaButton}>
+                Trade
+              </Link>
+            </div>
+          </div>
+          <div className={styles.heroRightContent}>
+            <div className={styles.canvas}>
+              <Canvas>
+                <ambientLight />
+                <Blunderbuss position={[0, 0, 1.5]} />
+              </Canvas>
+            </div>
           </div>
         </div>
-        <div className={styles.secondScreen}>
+        {/* <div className={styles.secondScreen}>
           <div className={styles.secondScreenContent}>
             <h1>Yes</h1>
           </div>
-        </div>
-        <div className={styles.canvas}>
-          <Canvas>
-            <ambientLight />
-            <pointLight position={[10, 10, 10]} />
-            <Box position={[-1.2, 0, -12]} />
-            <Box position={[1.2, 0, -7]} />
-          </Canvas>
-        </div>
+        </div> */}
       </main>
     </Layout>
   );
