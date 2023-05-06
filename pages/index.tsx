@@ -37,7 +37,7 @@ export default function Home() {
         <MetaTags
           title={siteTitle}
           description={
-            "Hi I'm Xian-Wei Zhu, wannabe web3 builder and wantrepreneur at @XianWeiCorp. Don't expect anything from this website. I'm drinking tea as I'm typing this. I'm just trying to have a nice long description. Yes."
+            "Hi I'm Xian-Wei Zhu, wannabe web3 builder and wantrepreneur at @XianWeiCorp. I'm trying to beat the other Xian-Wei Zhu website in Google Search. Don't mind me."
           }
           url={"https://zhuxw.com/"}
         />
@@ -63,7 +63,7 @@ export default function Home() {
             <div className={styles.canvas}>
               <Canvas>
                 <ambientLight />
-                <Blunderbuss position={[0, 0, 1.5]} />
+                <Blunderbuss position={[0, 0, 1.4]} />
               </Canvas>
             </div>
           </div>
