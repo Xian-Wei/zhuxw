@@ -133,6 +133,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
       }
     };
     updateChart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeframe, dailyWeights, weeklyWeights]);
 
   return <div ref={chartContainerRef} className={styles.chart} />;

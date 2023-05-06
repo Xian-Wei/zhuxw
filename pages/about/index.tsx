@@ -49,8 +49,8 @@ const About = () => {
                 things, unlike me.
               </div>
               <div className={styles.block}>
-                On top of overshadowing me in life, he's taking over the Google
-                search results for our name.
+                On top of overshadowing me in life, he&apos;s taking over the
+                Google search results for our name.
               </div>
               <div className={styles.block}>
                 I shall not let things go his way.
@@ -82,8 +82,8 @@ const About = () => {
                 fingers on your mobile device.
               </div>
               <div className={styles.block}>
-                Anything that shows up in there will likely not work, I'm just
-                typing this out to fill the space in my About section.
+                Anything that shows up in there will likely not work, I&apos;m
+                just typing this out to fill the space in my About section.
               </div>
             </div>
           </div>
