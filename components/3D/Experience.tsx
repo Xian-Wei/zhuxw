@@ -4,9 +4,9 @@ import { Letters } from "./Letters";
 export const Experience = () => {
   return (
     <>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={0.1} />
       <OrbitControls enableZoom={true} />
-      <Letters />
+      <Letters position={[0, 0, -1]} />
     </>
   );
 };
