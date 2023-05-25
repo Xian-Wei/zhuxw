@@ -5,10 +5,14 @@ import Layout from "../components/Layout";
 import MetaTags from "../components/MetaTags";
 import styles from "../styles/Home.module.scss";
 import { Experience } from "../components/3D/Experience";
+import useIsWidth from "../hooks/useIsWidth";
+import { WindowWidth } from "../models/WindowWidth";
 
 export const siteTitle = "Xian-Wei Zhu";
 
 export default function Home() {
+  const isWidth = useIsWidth(WindowWidth.md);
+
   return (
     <Layout
       navbarEnabled={true}
@@ -27,7 +31,10 @@ export default function Home() {
       </Head>
       <main className={styles.container}>
         <div className={styles.heroContent}>
-          <Canvas>
+          <div className={styles.text}>Xian-Wei Zhu</div>
+          <Canvas
+            camera={isWidth ? { fov: 35, zoom: 0.25 } : { fov: 25, zoom: 0.1 }}
+          >
             <ambientLight />
             <Experience />
           </Canvas>
