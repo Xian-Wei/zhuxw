@@ -4,15 +4,15 @@ import { Letters } from "./Letters";
 export const Experience = () => {
   return (
     <>
-      <ambientLight intensity={0.1} />
+      <ambientLight intensity={0.2} />
       <OrbitControls
         enableZoom={true}
         minDistance={0}
-        maxDistance={5}
+        maxDistance={9}
         minPolarAngle={Math.PI / 20}
         maxPolarAngle={Math.PI - Math.PI / 2}
       />
-      <Letters position={[0, 0, -1]} />
+      <Letters position={[0, 0, 0]} />
     </>
   );
 };

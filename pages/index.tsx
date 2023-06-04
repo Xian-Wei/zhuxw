@@ -33,7 +33,7 @@ export default function Home() {
         <div className={styles.heroContent}>
           <div className={styles.text}>Xian-Wei Zhu</div>
           <Canvas
-            camera={isWidth ? { fov: 35, zoom: 0.25 } : { fov: 25, zoom: 0.1 }}
+            camera={isWidth ? { fov: 5, zoom: 0.03 } : { fov: 10, zoom: 0.025 }}
           >
             <ambientLight />
             <Experience />
