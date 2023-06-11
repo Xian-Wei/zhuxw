@@ -30,9 +30,11 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
+    "react-tsparticles": "^2.10.1",
     "swiper": "^9.2.0",
     "swr": "^2.1.2",
     "three": "^0.151.3",
+    "tsparticles": "^2.10.1",
     "typescript": "5.0.3"
   },
   "devDependencies": {
