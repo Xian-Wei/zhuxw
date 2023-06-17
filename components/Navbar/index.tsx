@@ -42,6 +42,9 @@ const Navbar = () => {
         <Link href="/web3" className={styles.link}>
           Web3
         </Link>
+        <Link href="/ai" className={styles.link}>
+          AI
+        </Link>
         {isDev && (
           <Link href="/dev" className={styles.link}>
             Dev
@@ -85,6 +88,13 @@ const Navbar = () => {
             onClick={() => setNavbarToggle(false)}
           >
             Web3
+          </Link>
+          <Link
+            href="/ai"
+            className={styles.mobileLink}
+            onClick={() => setNavbarToggle(false)}
+          >
+            AI
           </Link>
           {isDev && (
             <Link href="/dev" className={styles.mobileLink}>
