@@ -10,6 +10,7 @@
     "export": "next export"
   },
   "dependencies": {
+    "@huggingface/inference": "^2.5.1",
     "@react-three/drei": "^9.66.1",
     "@react-three/fiber": "^8.12.2",
     "@reduxjs/toolkit": "^1.9.3",

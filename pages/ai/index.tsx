@@ -13,7 +13,7 @@ const AI = () => {
       <div className={styles.container}>
         <div className={styles.chat}>
           {messages.map((m) => (
-            <div key={m.id}>
+            <div key={m.id} className={styles.conversation}>
               {m.role}: {m.content}
             </div>
           ))}
