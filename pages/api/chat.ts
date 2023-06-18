@@ -8,7 +8,7 @@ const openai = new OpenAIApi(config);
 
 export const runtime = "edge";
 
-export default async function POST(req: Request) {
+export async function POST(req: Request) {
   const { messages } = await req.json();
 
   const response = await openai.createChatCompletion({
