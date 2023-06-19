@@ -7,6 +7,10 @@
   height: 100%;
   width: 100%;
   z-index: inherit;
+
+  @media screen and (max-width: $md) {
+    align-items: flex-start;
+  }
 }
 
 .chat {
@@ -14,13 +18,19 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  gap: 10px;
-  height: 90%;
+  height: 80%;
   width: 800px;
   margin: 15px;
-  background-color: $primaryColorHover;
+  background-color: $primaryColor;
   border-radius: 10px;
   z-index: inherit;
+
+  @media screen and (max-width: $md) {
+    position: fixed;
+    height: 75%;
+    width: 90%;
+    padding-bottom: 0 !important;
+  }
 }
 
 .chatLines {
@@ -71,4 +81,8 @@
   padding-left: 7px;
   color: black;
   border-radius: 5px;
+}
+
+.chatInput:focus {
+  outline: none;
 }
