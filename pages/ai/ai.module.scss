@@ -1,3 +1,5 @@
+@import "../../styles/constants.module.scss";
+
 .container {
   display: flex;
   justify-content: center;
@@ -8,11 +10,65 @@
 }
 
 .chat {
-  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  height: 90%;
+  width: 800px;
+  margin: 15px;
+  background-color: $primaryColorHover;
+  border-radius: 10px;
   z-index: inherit;
 }
 
-.conversation {
+.chatLines {
+  flex: 0.95;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  overflow: auto;
+}
+
+.chatLine {
+  padding-block: 10px;
+  padding-inline: 15px;
+  background-color: $primaryColor;
+  font-size: 20px;
   color: white;
   z-index: inherit;
+
+  @media screen and (max-width: $lg) {
+    font-size: 15px;
+  }
+}
+
+.chatLineAi {
+  padding-block: 10px;
+  padding-inline: 15px;
+  background-color: $primaryBorder;
+  font-size: 20px;
+  color: white;
+  z-index: inherit;
+
+  @media screen and (max-width: $lg) {
+    font-size: 15px;
+  }
+}
+
+.chatForm {
+  display: flex;
+  flex: 0.05;
+  height: 100%;
+  width: 100%;
+}
+
+.chatInput {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  padding-left: 7px;
+  color: black;
+  border-radius: 5px;
 }
