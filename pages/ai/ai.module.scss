@@ -21,14 +21,15 @@
   height: 80%;
   width: 800px;
   margin: 15px;
-  background-color: $primaryColor;
+  background-color: $primaryBackground;
+  border: 1px solid $primaryBorder;
   border-radius: 10px;
   z-index: inherit;
 
   @media screen and (max-width: $md) {
     position: fixed;
-    height: 75%;
-    width: 90%;
+    height: 85%;
+    width: 95%;
     padding-bottom: 0 !important;
   }
 }
@@ -37,16 +38,15 @@
   flex: 0.95;
   height: 100%;
   width: 100%;
-  border-radius: 5px;
   overflow: auto;
 }
 
 .chatLine {
   padding-block: 10px;
   padding-inline: 15px;
-  background-color: $primaryColor;
-  font-size: 20px;
+  font-size: 18px;
   color: white;
+  border-bottom: 1px solid $primaryBorder;
   z-index: inherit;
 
   @media screen and (max-width: $lg) {
@@ -57,9 +57,10 @@
 .chatLineAi {
   padding-block: 10px;
   padding-inline: 15px;
-  background-color: $primaryBorder;
-  font-size: 20px;
+  background-color: $chatLineBackground;
+  font-size: 18px;
   color: white;
+  border-bottom: 1px solid $primaryBorder;
   z-index: inherit;
 
   @media screen and (max-width: $lg) {
@@ -76,11 +77,14 @@
 
 .chatInput {
   display: flex;
+  min-height: 50px;
   height: 100%;
   width: 100%;
-  padding-left: 7px;
-  color: black;
-  border-radius: 5px;
+  padding-left: 15px;
+  color: white;
+  border-top: 1px solid $primaryBorder;
+  border-radius: 0px 0px 10px 10px;
+  background-color: $inputBackground;
 }
 
 .chatInput:focus {

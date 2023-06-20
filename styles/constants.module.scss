@@ -34,9 +34,11 @@ $secondaryBorder: rgba(120, 120, 120, 0.9);
 $disabledBorder: rgba(110, 110, 110, 0.5);
 
 // Background
-$primaryBackground: rgba(60, 60, 140, 0.2);
+$primaryBackground: rgb(25, 25, 50);
+$primaryTransparentBackground: rgba(60, 60, 140, 0.2);
 $bodyBackground: rgb(15, 15, 30);
 $bodyBackgroundHover: rgb(25, 25, 50);
+$inputBackground: rgb(50, 50, 100, 0.4);
 
 // Navbar
 $navbarBackground: rgba(20, 20, 40, 0.9);
@@ -49,20 +51,21 @@ $sidebarBackgroundHover: rgb(40, 40, 80);
 $sidebarLinkBackground: rgba(45, 45, 90, 0.5);
 
 /***** Chart *****/
-$chartBackground: rgb(25, 25, 50);
-$chartShortText: rgb(255, 0, 0);
-$chartLongText: rgb(0, 255, 0);
-$chartInputBackground: rgb(50, 50, 100, 0.4);
 
-// Long/Short switch
+// Switch buttons
 $chartSwitchBackground: rgb(25, 25, 50);
 $chartSwitchBackgroundActive: rgb(70, 70, 140);
 
-// Long/Short buttons
+// Long/Short
 $chartShortButton: rgb(120, 30, 30);
 $chartShortButtonHover: rgb(150, 30, 30);
 $chartLongButton: rgb(30, 120, 30);
 $chartLongButtonHover: rgb(30, 150, 30);
+$chartShortText: rgb(255, 0, 0);
+$chartLongText: rgb(0, 255, 0);
+
+/***** Chart *****/
+$chatLineBackground: rgba(90, 90, 170, 0.2);
 
 /* Export */
 :export {
