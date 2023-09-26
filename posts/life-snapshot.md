@@ -10,7 +10,7 @@ tags:
 
 This is a life snapshot because I have no idea what to write about, and it's been 2 months since my last post.
 
-### 29th September 2023, 23:36
+### 29th August 2023, 23:36
 
 **About me** :
 
