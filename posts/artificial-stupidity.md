@@ -1,7 +1,7 @@
 ---
 id: 6
 title: "Artificial Stupidity"
-description: 'Articial "intelligence" on zhuxw live now.'
+description: 'Artificial "intelligence" on zhuxw live now.'
 image: images/blog/thumbnails/robot.png
 date: "2023-06-22"
 tags:
