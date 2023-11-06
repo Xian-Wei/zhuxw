@@ -36,11 +36,11 @@ const Chart = () => {
   // API
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const { data: weeklyWeights }: { data: any } = useSWR(
-    "https://zhuxw.com/weight_weekly.json",
+    "/api/weight-weekly",
     fetcher
   );
   const { data: dailyWeights }: { data: any } = useSWR(
-    "https://zhuxw.com/weight_daily.json",
+    "/api/weight-daily",
     fetcher
   );
 
