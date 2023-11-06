@@ -128,7 +128,7 @@ export default function Blog({ posts }: PostProps) {
         />
       </Head>
       {!isWidth ? (
-        <Swiper navigation={true} modules={[Navigation]}>
+        <Swiper navigation={true} loop={true} modules={[Navigation]}>
           {posts
             ?.slice(0, 100)
             .reverse()
