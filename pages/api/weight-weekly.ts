@@ -41,7 +41,7 @@ export default async function handler(
       const weeklyWeights = calculateWeeklyWeights(dataArray.weights);
 
       res.status(200).json(weeklyWeights as any);
-    }
+    } else return res.status(404).json({ message: "Couldn't fetch weights" });
   } catch (e: any) {
     res.status(404).json({ message: e });
   }

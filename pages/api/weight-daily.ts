@@ -16,6 +16,7 @@ export default async function handler(
     const dataArray = docSnap.data();
 
     if (dataArray) res.status(200).json(dataArray.weights);
+    else return res.status(404).json({ message: "Couldn't fetch weights" });
   } catch (e: any) {
     res.status(404).json({ message: e });
   }
