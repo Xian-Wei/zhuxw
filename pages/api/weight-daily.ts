@@ -11,7 +11,7 @@ export default async function handler(
   res: NextApiResponse<ResponseData>
 ) {
   try {
-    const docRef = doc(db, "weight", "xw");
+    const docRef = doc(db, "weights", "xw");
     const docSnap = await getDoc(docRef);
     const dataArray = docSnap.data();
 
