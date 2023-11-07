@@ -10,10 +10,10 @@ function calculateWeeklyWeights(data: any) {
   const weeklyWeights = [];
   let allWeightsInWeek = [];
 
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 1; i < data.length; i++) {
     allWeightsInWeek.push(data[i]);
 
-    if (allWeightsInWeek.length === 7) {
+    if (allWeightsInWeek.length === 7 || i == data.length - 1) {
       const weightEntry = {
         time: allWeightsInWeek[0].time,
         open: allWeightsInWeek[0].open,
