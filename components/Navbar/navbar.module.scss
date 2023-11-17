@@ -17,21 +17,6 @@
   }
 }
 
-.navHome {
-  display: flex;
-  position: fixed;
-  justify-content: space-between;
-  align-items: center;
-  height: $navbarHeight;
-  width: 100%;
-  backdrop-filter: blur(50px);
-  z-index: inherit;
-
-  @media screen and (max-width: $lg) {
-    justify-content: space-between;
-  }
-}
-
 .leftContainer {
   display: flex;
   justify-content: flex-start;
