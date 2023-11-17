@@ -13,7 +13,9 @@ const About = () => {
         <title>{siteTitle}</title>
         <MetaTags
           title={siteTitle}
-          description={"Who the great Xian-Wei Zhu is."}
+          description={
+            "Welcome to Xian-Wei's life tracker page - where every misstep, questionable decision, and triumph are meticulously documented for your entertainment."
+          }
           url={"https://zhuxw.com/about"}
         />
       </Head>

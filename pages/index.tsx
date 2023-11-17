@@ -34,7 +34,7 @@ export default function Home() {
         <MetaTags
           title={siteTitle}
           description={
-            "Hi I'm Xian-Wei Zhu, wannabe web3 builder and wantrepreneur at @XianWeiCorp. I'm trying to beat the other Xian-Wei Zhu website in Google Search. Don't mind me."
+            "zhuxw - Navigate through the virtual void where excitement takes a vacation, and innovation is on sabbatical."
           }
           url={"https://zhuxw.com/"}
         />

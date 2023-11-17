@@ -135,7 +135,7 @@ const Shop = () => {
         <MetaTags
           title={siteTitle}
           description={
-            "The zhuxw shop is the world's most useless Web3 shop as it exclusively contains worthless NFTs."
+            "Welcome to Xian-Wei's NFT shop, where my attempts at creating digital art are on display like a gallery of questionable life choices."
           }
           url={"https://zhuxw.com/shop"}
         />

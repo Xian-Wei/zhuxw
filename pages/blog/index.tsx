@@ -122,7 +122,7 @@ export default function Blog({ posts }: PostProps) {
         <MetaTags
           title={siteTitle}
           description={
-            "This is Xian-Wei's very personal blog, enter at your own risk."
+            "Welcome to Xian-Wei's blog, where I attempt to write in a way that doesn't put you to sleep."
           }
           url={"https://zhuxw.com/blog"}
         />
