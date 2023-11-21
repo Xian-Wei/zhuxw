@@ -20,8 +20,8 @@ const Navbar = () => {
   }, [isWidth]);
 
   return (
-    <nav className={styles.nav}>
-      <div className={styles.leftContainer}>
+    <header className={styles.nav}>
+      <nav className={styles.leftContainer}>
         <Link
           href="/"
           className={styles.homeLink}
@@ -29,8 +29,8 @@ const Navbar = () => {
         >
           zhuxw
         </Link>
-      </div>
-      <div className={styles.middleContainer}>
+      </nav>
+      <nav className={styles.middleContainer}>
         <Link href="/about" className={styles.link}>
           About
         </Link>
@@ -48,8 +48,8 @@ const Navbar = () => {
             Dev
           </Link>
         )}
-      </div>
-      <div className={styles.rightContainer}>
+      </nav>
+      <nav className={styles.rightContainer}>
         <Web3Network />
         <Web3Wallet />
         {navbarToggle ? (
@@ -63,8 +63,8 @@ const Navbar = () => {
             onClick={() => setNavbarToggle(true)}
           />
         )}
-      </div>
-      <div className={navbarToggle ? styles.fadeIn : styles.fadeOut}>
+      </nav>
+      <nav className={navbarToggle ? styles.fadeIn : styles.fadeOut}>
         <div className={styles.mobileLinks}>
           <Link
             href="/about"
@@ -100,8 +100,8 @@ const Navbar = () => {
             </Link>
           )}
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
 };
 

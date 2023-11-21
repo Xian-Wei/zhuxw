@@ -26,7 +26,7 @@ const Sidebar = ({ pages, setPage }: SidebarProps) => {
   return (
     <>
       {/* Sidebar */}
-      <div className={styles.sidebar}>
+      <nav className={styles.sidebar}>
         <div className={styles.sidebarLinks}>
           {pages.map((page, index) => {
             return (
@@ -40,9 +40,9 @@ const Sidebar = ({ pages, setPage }: SidebarProps) => {
             );
           })}
         </div>
-      </div>
+      </nav>
       {/* Mobile Sidebar */}
-      <div
+      <nav
         className={
           sidebarToggle ? styles.collapsedMobileSidebar : styles.mobileSidebar
         }
@@ -66,7 +66,7 @@ const Sidebar = ({ pages, setPage }: SidebarProps) => {
         >
           {sidebarToggle ? <b>{"<"}</b> : <b>{">"}</b>}
         </div>
-      </div>
+      </nav>
     </>
   );
 };
