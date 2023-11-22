@@ -1,7 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Head from "next/head";
 import MetaTags from "../components/MetaTags";
 import styles from "../styles/Home.module.scss";
+import { Canvas } from "@react-three/fiber";
+import Loader from "../components/Loader";
+import { Experience } from "../components/3D/Experience";
+import Layout from "../components/Layout";
 
 export const siteTitle = "Xian-Wei Zhu";
 
@@ -18,7 +22,15 @@ export default function Home() {
           url={"https://zhuxw.com/"}
         />
       </Head>
-      <main className={styles.container}>Home</main>
+      <Layout navbarEnabled={true}>
+        <section className={styles.container}>
+          <Suspense fallback={<Loader />}>
+            <Canvas className={styles.canvas} camera={{ near: 0.1, far: 1000 }}>
+              <Experience />
+            </Canvas>
+          </Suspense>
+        </section>
+      </Layout>
     </>
   );
 }
