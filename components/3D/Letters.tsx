@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import { useFrame } from "@react-three/fiber";
@@ -22,15 +22,23 @@ export function Letters(props: JSX.IntrinsicElements["group"]) {
   const refLetters = useRef<THREE.Mesh>(null!);
   const refMonten = useRef<THREE.Mesh>(null!);
   const refCannon = useRef<THREE.Mesh>(null!);
+  const [isClicked, setIsClicked] = useState(false);
 
   useFrame((state, delta) => {
-    refLetters.current.rotation.y += delta / 10;
-    refMonten.current.rotation.y += delta / 10;
-    refCannon.current.rotation.y += delta / 10;
+    if (!isClicked) {
+      refLetters.current.rotation.y += delta / 10;
+      refMonten.current.rotation.y += delta / 10;
+      refCannon.current.rotation.y += delta / 10;
+    }
   });
 
   return (
-    <group {...props} dispose={null}>
+    <group
+      {...props}
+      dispose={null}
+      onPointerDown={() => setIsClicked(true)}
+      onPointerUp={() => setIsClicked(false)}
+    >
       <mesh
         ref={refLetters}
         geometry={nodes.Letters.geometry}
