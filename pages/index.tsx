@@ -6,7 +6,7 @@ import { Canvas } from "@react-three/fiber";
 import Loader from "../components/Loader";
 import Layout from "../components/Layout";
 import Sky from "../components/3D/Sky";
-import { Island } from "../components/3D/Island";
+import { Experience } from "../components/3D/Experience";
 
 export const siteTitle = "Xian-Wei Zhu";
 
@@ -45,13 +45,8 @@ export default function Home() {
         <section className={styles.container}>
           <Suspense fallback={<Loader />}>
             <Canvas className={styles.canvas} camera={{ near: 0.1, far: 1000 }}>
-              <directionalLight position={[1, 1, 1]} intensity={1} />
               <ambientLight intensity={0.5} />
-              <Island
-                position={islandPosition as any}
-                scale={islandScale as any}
-                rotation={islandRotation as any}
-              />
+              <Experience />
               <Sky />
             </Canvas>
           </Suspense>
