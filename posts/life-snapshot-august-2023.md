@@ -1,8 +1,8 @@
 ---
 id: 7
-title: "Life snapshot"
+title: "Life snapshot (August 2023)"
 description: "Capturing the present."
-image: images/blog/thumbnails/nope.png
+image: images/blog/thumbnails/life-snapshot-august.png
 date: "2023-08-29"
 tags:
   - life
