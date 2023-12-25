@@ -11,7 +11,7 @@ interface MetaTagsProps {
 const MetaTags = ({
   title,
   description,
-  image = `https://zhuxw.com/images/comedy.png`,
+  image = `https://zhuxw.com/images/metalogo.png`,
   url,
   type = "website",
 }: MetaTagsProps) => {
