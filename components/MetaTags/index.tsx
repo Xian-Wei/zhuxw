@@ -24,6 +24,7 @@ const MetaTags = ({
       <meta property="og:image" content={image} />
       <meta property="og:type" content={type} />
       <meta property="og:url" content={url} />
+      <meta name="twitter:card" content="summary_large_image" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <link rel="icon" href="/favicon.ico" />
     </>
