@@ -16,7 +16,10 @@ export const Experience = () => {
         minPolarAngle={Math.PI / 20}
         maxPolarAngle={Math.PI - Math.PI / 2}
       />
-      <Letters position={[0, 0.5, 0]} scale={isWidth ? 0.9 : 0.25} />
+      <Letters
+        position={isWidth ? [0, 0, 0] : [0, 0.5, 0]}
+        scale={isWidth ? 0.7 : 0.25}
+      />
     </>
   );
 };

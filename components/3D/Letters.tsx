@@ -23,21 +23,30 @@ export function Letters(props: JSX.IntrinsicElements["group"]) {
   const refMonten = useRef<THREE.Mesh>(null!);
   const refCannon = useRef<THREE.Mesh>(null!);
   const [isClicked, setIsClicked] = useState(false);
+  const [stopRotation, setStopRotation] = useState(true);
 
   useFrame((state, delta) => {
-    if (!isClicked) {
+    if (!isClicked && !stopRotation) {
       refLetters.current.rotation.y += delta / 10;
       refMonten.current.rotation.y += delta / 10;
       refCannon.current.rotation.y += delta / 10;
     }
   });
 
+  const onModelClick = (clicked: boolean) => {
+    setIsClicked(clicked);
+
+    if (clicked) {
+      setStopRotation(!stopRotation);
+    }
+  };
+
   return (
     <group
       {...props}
       dispose={null}
-      onPointerDown={() => setIsClicked(true)}
-      onPointerUp={() => setIsClicked(false)}
+      onPointerDown={() => onModelClick(true)}
+      onPointerUp={() => onModelClick(false)}
     >
       <mesh
         ref={refLetters}
