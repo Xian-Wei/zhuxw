@@ -8,7 +8,7 @@ export const Experience = () => {
 
   return (
     <>
-      <ambientLight intensity={0.6} />
+      <ambientLight intensity={2} />
       <OrbitControls
         enableZoom={true}
         minDistance={0}
