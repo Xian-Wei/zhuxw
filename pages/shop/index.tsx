@@ -13,7 +13,7 @@ import NFTCard from "../../components/Web3/NFTCard";
 export const siteTitle = "XWZ Web3 Shop";
 
 const Shop = () => {
-  const provider: ethers.providers.Web3Provider | null = useWeb3Provider();
+  const provider: ethers.BrowserProvider | null = useWeb3Provider();
   const chainId: number | null = useWeb3ChainId();
   const zhuContractAddress: string | null = chainId
     ? String(chainId) in contractAddresses

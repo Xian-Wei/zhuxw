@@ -45,7 +45,7 @@ const Chart = () => {
   );
 
   // Web3
-  const provider: ethers.providers.Web3Provider | null = useWeb3Provider();
+  const provider: ethers.BrowserProvider | null = useWeb3Provider();
   const { wallet } = useWeb3Wallet();
   const chainId: number | null = useWeb3ChainId();
   const zhuContractAddress: string | null = chainId
@@ -320,7 +320,7 @@ const Chart = () => {
       // After a successful Long/Short
       let positionAdded: any = {
         address: zhuExchangeContractAddress,
-        topics: [ethers.utils.id("PositionAdded()")],
+        topics: [ethers.id("PositionAdded()")],
       };
       provider.on(positionAdded, async () => {
         await getPositions();
@@ -329,7 +329,7 @@ const Chart = () => {
       // After trades are executed on-chain
       let tradesExecuted: any = {
         address: zhuExchangeContractAddress,
-        topics: [ethers.utils.id("TradesExecuted()")],
+        topics: [ethers.id("TradesExecuted()")],
       };
       provider.on(tradesExecuted, async () => {
         await getBalance();
