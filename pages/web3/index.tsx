@@ -4,8 +4,9 @@ import Sidebar from "../../components/Sidebar";
 import Chart from "../chart";
 import Shop from "../shop";
 import styles from "./web3.module.scss";
+import Web3FAQ from "../web3faq";
 
-const pages = ["Chart", "Shop"];
+const pages = ["Chart", "Shop", "FAQ"];
 
 const Web3 = () => {
   const [selectedPage, setSelectedPage] = useState<string>("Chart");
@@ -16,6 +17,8 @@ const Web3 = () => {
         return <Chart />;
       case "Shop":
         return <Shop />;
+      case "FAQ":
+        return <Web3FAQ />;
       default:
         break;
     }

@@ -1,0 +1,50 @@
+@import "../../styles/constants.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+  padding: 50px;
+  overflow-y: auto;
+
+  @media screen and (max-width: $md) {
+    padding: 25px;
+  }
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  border: 1px solid $primaryBorder;
+  border-radius: 5px;
+
+  @media screen and (max-width: $md) {
+    width: 100%;
+  }
+}
+
+.itemTitle {
+  display: flex;
+  padding: 15px;
+  border-radius: 5px 5px 0px 0px;
+  font-size: 17px;
+  font-weight: 700;
+  background-color: $sidebarBackground;
+}
+
+.itemContent {
+  display: flex;
+  padding: 15px;
+  border-radius: 0px 0px 5px 5px;
+  font-size: 16px;
+  background-color: $bodyBackground;
+
+  @media screen and (max-width: $md) {
+    font-size: 14px;
+  }
+}
