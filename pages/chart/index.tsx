@@ -548,7 +548,7 @@ const Chart = () => {
                       <PositionLine
                         amount={position.amount.toString()}
                         positionType={position.positionType}
-                        weightSnapshot={position.weightSnapshot / 10}
+                        weightSnapshot={Number(position.weightSnapshot) / 10}
                         currentWeight={
                           dailyWeights[dailyWeights.length - 1].close
                         }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import useWeb3Provider from "./useWeb3Provider";
+import { JsonRpcSigner } from "ethers";
 
 const useWeb3Wallet = () => {
   const [wallet, setWallet] = useState<string>("");
@@ -8,10 +9,10 @@ const useWeb3Wallet = () => {
   useEffect(() => {
     const initialize = async () => {
       if (provider) {
-        const accounts: string[] = await provider.listAccounts();
+        const accounts: JsonRpcSigner[] = await provider.listAccounts();
 
         if (accounts.length > 0) {
-          setWallet(accounts[0]);
+          setWallet(accounts[0].address);
         }
       }
     };

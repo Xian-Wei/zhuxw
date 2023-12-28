@@ -8,8 +8,8 @@ const useWeb3ChainId = () => {
   useEffect(() => {
     (async () => {
       if (window.ethereum && provider) {
-        const newNetwork = await provider._networkPromise;
-        setChainId(newNetwork.chainId);
+        const newNetwork = await provider.getNetwork();
+        setChainId(Number(newNetwork.chainId));
 
         window.ethereum.on("chainChanged", (chain: string) =>
           setChainId(Number(chain))

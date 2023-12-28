@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { ethers } from "ethers";
 
 const useWeb3Provider = () => {
-  const [provider, setProvider] =
-    useState<ethers.providers.Web3Provider | null>(null);
+  const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
 
   useEffect(() => {
     if (window.ethereum) {
-      setProvider(new ethers.providers.Web3Provider(window.ethereum, "any"));
+      setProvider(new ethers.BrowserProvider(window.ethereum, "any"));
     }
   }, []);
 

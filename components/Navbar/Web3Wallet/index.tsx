@@ -12,7 +12,7 @@ const Web3Wallet = () => {
     if (provider) {
       await provider.send("eth_requestAccounts", []);
 
-      const signer = provider.getSigner();
+      const signer = await provider.getSigner();
       const address = await signer.getAddress();
 
       setWallet(address);
