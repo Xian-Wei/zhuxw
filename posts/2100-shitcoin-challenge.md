@@ -1,7 +1,7 @@
 ---
 id: 9
 title: "$2100 shitcoin challenge"
-description: "Optimism, Hopes, and Dreams."
+description: "Watch me lose 2100 dollars in record time."
 image: images/blog/thumbnails/shitcoin.png
 date: "2024-01-01"
 tags:
