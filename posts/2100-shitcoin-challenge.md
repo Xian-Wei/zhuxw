@@ -47,6 +47,14 @@ Without further ado, this is my shitcoin portfolio :
 
 All of these coins are currently worth exactly 300 dollars.
 
+**Exceptional update 1 day later**:\
+I'm up $150 since all coins have increased $20 to $30 in value, totaling $2258.61.\
+Life is great.
+
+**Final update 2 days later**:\
+I'm now down almost $100 from the initial value, bringing the portfolio to $2012.03.\
+Life is not so great.
+
 ## Conclusion
 
 No research was conducted before purchasing these coins.
