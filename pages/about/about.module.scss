@@ -2,81 +2,20 @@
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 100vh;
   width: 100%;
+  z-index: inherit;
 }
 
 .content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 40%;
-
-  @media screen and (max-width: $xl) {
-    width: 90%;
-  }
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  font-size: 2rem;
-  font-weight: 700;
-
-  @media screen and (max-width: $xl) {
-    font-size: 1.5em;
-  }
-}
-
-.text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  flex: 0.85;
   height: 100%;
   width: 100%;
-}
-
-.paragraphTitle {
-  display: block;
-  padding-top: 20px;
-  padding-bottom: 10px;
-  font-size: 23px;
-  font-weight: 700;
+  z-index: inherit;
 
   @media screen and (max-width: $xl) {
-    font-size: 21px;
+    flex: 1;
   }
-}
-
-.paragraph {
-  display: block;
-  font-size: 20px;
-  font-weight: 200;
-
-  @media screen and (max-width: $xl) {
-    font-size: 18px;
-  }
-}
-
-.block {
-  display: block;
-  padding-block: 3px;
-
-  @media screen and (max-width: $xl) {
-    padding-block: 5px;
-  }
-}
-
-.link {
-  display: inline;
-  font-weight: 500;
 }
