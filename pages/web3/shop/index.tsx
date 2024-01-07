@@ -1,14 +1,14 @@
 import Head from "next/head";
 import React, { useCallback, useState, useEffect } from "react";
-import MetaTags from "../../components/MetaTags";
+import MetaTags from "../../../components/MetaTags";
 import styles from "./shop.module.scss";
-import useWeb3ChainId from "../../hooks/useWeb3Network";
-import contractAddresses from "../../data/artifacts/contractAddresses.json";
-import zhuAbi from "../../data/artifacts/Zhu.json";
-import zhubaAbi from "../../data/artifacts/Zhuba.json";
+import useWeb3ChainId from "../../../hooks/useWeb3Network";
+import contractAddresses from "../../../data/artifacts/contractAddresses.json";
+import zhuAbi from "../../../data/artifacts/Zhu.json";
+import zhubaAbi from "../../../data/artifacts/Zhuba.json";
 import { ethers } from "ethers";
-import useWeb3Provider from "../../hooks/useWeb3Provider";
-import NFTCard from "../../components/Web3/NFTCard";
+import useWeb3Provider from "../../../hooks/useWeb3Provider";
+import NFTCard from "../../../components/Web3/NFTCard";
 
 export const siteTitle = "XWZ Web3 Shop";
 

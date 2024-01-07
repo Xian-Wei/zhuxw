@@ -4,23 +4,23 @@ import { ethers } from "ethers";
 import useSWR from "swr";
 import axios from "axios";
 
-import LWChart from "../../components/Web3/LWChart";
-import { Timeframe } from "../../models/Timeframe";
+import LWChart from "../../../components/Web3/LWChart";
+import { Timeframe } from "../../../models/Timeframe";
 import styles from "./chart.module.scss";
-import useWeb3Provider from "../../hooks/useWeb3Provider";
-import useWeb3ChainId from "../../hooks/useWeb3Network";
-import contractAddresses from "../../data/artifacts/contractAddresses.json";
-import zhuAbi from "../../data/artifacts/Zhu.json";
-import zhuExchangeAbi from "../../data/artifacts/ZhuExchange.json";
-import MetaTags from "../../components/MetaTags";
-import useWeb3Wallet from "../../hooks/useWeb3Wallet";
-import PositionLine from "../../components/Web3/PositionLine";
-import LoadingAnimation from "../../components/LoadingAnimation";
+import useWeb3Provider from "../../../hooks/useWeb3Provider";
+import useWeb3ChainId from "../../../hooks/useWeb3Network";
+import contractAddresses from "../../../data/artifacts/contractAddresses.json";
+import zhuAbi from "../../../data/artifacts/Zhu.json";
+import zhuExchangeAbi from "../../../data/artifacts/ZhuExchange.json";
+import MetaTags from "../../../components/MetaTags";
+import useWeb3Wallet from "../../../hooks/useWeb3Wallet";
+import PositionLine from "../../../components/Web3/PositionLine";
+import LoadingAnimation from "../../../components/LoadingAnimation";
 import {
   getHighestHighInLastSevenElements,
   getLowestLowInLastSevenElements,
   percentageDifference,
-} from "../../utils/ChartUtils";
+} from "../../../utils/ChartUtils";
 
 enum PositionType {
   Long,

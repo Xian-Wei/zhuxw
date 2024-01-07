@@ -4,7 +4,7 @@ import styles from "./about.module.scss";
 import MetaTags from "../../components/MetaTags";
 import Layout from "../../components/Layout";
 import Sidebar from "../../components/Sidebar";
-import Web3FAQ from "../web3faq";
+import Web3FAQ from "../web3/web3faq";
 
 export const siteTitle = "Xian-Wei Zhu";
 const pages = ["Dashboard", "Weight", "Caca"];

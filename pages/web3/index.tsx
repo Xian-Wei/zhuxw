@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Layout from "../../components/Layout";
 import Sidebar from "../../components/Sidebar";
-import Chart from "../chart";
-import Shop from "../shop";
+import Chart from "./chart";
+import Shop from "./shop";
 import styles from "./web3.module.scss";
-import Web3FAQ from "../web3faq";
+import Web3FAQ from "./web3faq";
 
 const pages = ["Chart", "Shop", "FAQ"];
 
