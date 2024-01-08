@@ -45,17 +45,36 @@ const Dashboard = () => {
   const getChartData = () => {
     let chartData: { [key: string]: number | string }[] = [];
     let weightsByYear: Weight[][] | null = getDataSortedByYear();
+    let chartEntry: { [key: string]: number | string };
 
-    for (let i = 0; i < weightsByYear[1].length; i++) {
-      let chartEntry: { [key: string]: number | string } = {
-        name: weightsByYear[1][i].time.substring(5),
-        2019: weightsByYear[0][i] && weightsByYear[0][i].close,
-        2020: weightsByYear[1][i] && weightsByYear[1][i].close,
-        2021: weightsByYear[2][i] && weightsByYear[2][i].close,
-        2022: weightsByYear[3][i] && weightsByYear[3][i].close,
-        2023: weightsByYear[4][i] && weightsByYear[4][i].close,
-        2024: weightsByYear[5][i] && weightsByYear[5][i].close,
-      };
+    for (let i = 0; i < 366; i++) {
+      if (i > 59) {
+        chartEntry = {
+          name: weightsByYear[1][i].time.substring(5),
+          2019: weightsByYear[0][i - 1] && weightsByYear[0][i - 1].close,
+          2020: weightsByYear[1][i] && weightsByYear[1][i].close,
+          2021: weightsByYear[2][i - 1] && weightsByYear[2][i - 1].close,
+          2022: weightsByYear[3][i - 1] && weightsByYear[3][i - 1].close,
+          2023: weightsByYear[4][i - 1] && weightsByYear[4][i - 1].close,
+          2024: weightsByYear[5][i] && weightsByYear[5][i].close,
+        };
+      } else if (i < 59) {
+        chartEntry = {
+          name: weightsByYear[1][i].time.substring(5),
+          2019: weightsByYear[0][i] && weightsByYear[0][i].close,
+          2020: weightsByYear[1][i] && weightsByYear[1][i].close,
+          2021: weightsByYear[2][i] && weightsByYear[2][i].close,
+          2022: weightsByYear[3][i] && weightsByYear[3][i].close,
+          2023: weightsByYear[4][i] && weightsByYear[4][i].close,
+          2024: weightsByYear[5][i] && weightsByYear[5][i].close,
+        };
+      } else {
+        chartEntry = {
+          name: weightsByYear[1][i].time.substring(5),
+          2020: weightsByYear[1][i] && weightsByYear[1][i].close,
+          2024: weightsByYear[5][i] && weightsByYear[5][i].close,
+        };
+      }
 
       chartData.push(chartEntry);
     }
