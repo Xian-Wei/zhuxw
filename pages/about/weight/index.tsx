@@ -52,15 +52,15 @@ const Weight = () => {
   };
 
   const getChartData = () => {
-    let chartData: { [key: string]: number | string }[] = [];
+    let chartData: { [key: string]: (number | string) | undefined }[] = [];
     let weightsByYear: Weight[][] | null = getDataSortedByYear();
-    let chartEntry: { [key: string]: number | string };
+    let chartEntry: { [key: string]: (number | string) | undefined };
 
     for (let i = 0; i < 366; i++) {
       if (i > 59) {
         chartEntry = {
           name: weightsByYear[1][i].time.substring(5),
-          2019: weightsByYear[0][i - 1] && weightsByYear[0][i - 1].close,
+          2019: i > 243 ? weightsByYear[0][i - 244].close : undefined,
           2020: weightsByYear[1][i] && weightsByYear[1][i].close,
           2021: weightsByYear[2][i - 1] && weightsByYear[2][i - 1].close,
           2022: weightsByYear[3][i - 1] && weightsByYear[3][i - 1].close,
@@ -70,7 +70,6 @@ const Weight = () => {
       } else if (i < 59) {
         chartEntry = {
           name: weightsByYear[1][i].time.substring(5),
-          2019: weightsByYear[0][i] && weightsByYear[0][i].close,
           2020: weightsByYear[1][i] && weightsByYear[1][i].close,
           2021: weightsByYear[2][i] && weightsByYear[2][i].close,
           2022: weightsByYear[3][i] && weightsByYear[3][i].close,
