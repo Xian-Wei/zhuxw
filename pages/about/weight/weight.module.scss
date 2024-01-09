@@ -10,7 +10,7 @@
 
 .content {
   display: flex;
-  flex: 0.85;
+  flex: 1;
   height: 100%;
   width: 100%;
   z-index: inherit;
@@ -18,4 +18,27 @@
   @media screen and (max-width: $xl) {
     flex: 1;
   }
+}
+
+.title {
+  display: flex;
+  width: 100%;
+  padding: 10px 0px 30px 40px;
+  margin: 20px 0px 40px 0px;
+  font-size: 30px;
+  border-bottom: 1px solid $primaryBorder;
+
+  @media screen and (max-width: $lg) {
+    padding: 20px 0px 20px 20px;
+    margin: 0px 0px 20px 0px;
+    font-size: 23px;
+  }
+}
+
+.weightChart {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
