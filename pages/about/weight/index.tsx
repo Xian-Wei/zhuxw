@@ -120,7 +120,7 @@ const Weight = () => {
   return (
     <div className={styles.weightChart}>
       <div className={styles.title}>Xian-Wei&apos;s weight</div>
-      <ResponsiveContainer width="95%" height="50%">
+      <ResponsiveContainer width="95%" height="60%">
         <LineChart width={200} height={200} data={chartData}>
           <XAxis dataKey="name" domain={["auto", "auto"]} />
           <YAxis type="number" domain={["auto", "auto"]} />
