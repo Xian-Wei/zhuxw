@@ -8,7 +8,8 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Label,
+  AreaChart,
+  Area,
 } from "recharts";
 import useSWR from "swr";
 import axios from "axios";
@@ -51,7 +52,7 @@ const Weight = () => {
     }
   };
 
-  const getChartData = () => {
+  const getChartDataByYear = () => {
     let chartData: { [key: string]: (number | string) | undefined }[] = [];
     let weightsByYear: Weight[][] | null = getDataSortedByYear();
     let chartEntry: { [key: string]: (number | string) | undefined };
@@ -113,13 +114,49 @@ const Weight = () => {
     }
   };
 
+  const getChartData = () => {
+    if (dailyWeights && dailyWeights.length > 0) {
+      const weightCloseArray: {
+        [key: string]: (number | string) | undefined;
+      }[] = [];
+
+      dailyWeights.forEach((weight) => {
+        let chartObject = { name: weight.time, weight: weight.close };
+        weightCloseArray.push(chartObject);
+      });
+
+      return weightCloseArray;
+    } else {
+      return [];
+    }
+  };
+
   const chartData =
-    dailyWeights && dailyWeights.length > 0 ? getChartData() : [];
+    dailyWeights && dailyWeights.length > 0 ? getChartDataByYear() : [];
+  const chartData2 = getChartData();
 
   return (
-    <div className={styles.weightChart}>
+    <div className={styles.content}>
       <div className={styles.title}>Xian-Wei&apos;s weight</div>
-      <ResponsiveContainer width="95%" height="60%">
+      <ResponsiveContainer width="95%" height="50%">
+        <AreaChart width={200} height={200} data={chartData2}>
+          <XAxis dataKey="name" domain={["auto", "auto"]} />
+          <YAxis domain={["auto", "auto"]} />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "rgb(20, 20, 40)",
+              borderColor: "rgb(80, 80, 160)",
+            }}
+          />
+          <Area
+            type="monotone"
+            dataKey="weight"
+            stroke="#8884d8"
+            fill="#8884d8"
+          />
+        </AreaChart>
+      </ResponsiveContainer>
+      <ResponsiveContainer width="95%" height="50%">
         <LineChart width={200} height={200} data={chartData}>
           <XAxis dataKey="name" domain={["auto", "auto"]} />
           <YAxis type="number" domain={["auto", "auto"]} />
