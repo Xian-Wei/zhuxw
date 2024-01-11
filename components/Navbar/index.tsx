@@ -7,6 +7,7 @@ import Web3Wallet from "./Web3Wallet";
 import { WindowWidth } from "../../models/WindowWidth";
 import Web3Network from "./Web3Network";
 import useIsEasterEgg from "../../hooks/useIsEasterEgg";
+import Image from "next/image";
 
 const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
@@ -27,7 +28,12 @@ const Navbar = () => {
           className={styles.homeLink}
           onClick={() => setNavbarToggle(false)}
         >
-          zhuxw
+          <Image
+            src="/images/metalogo.png"
+            height={80}
+            width={80}
+            alt="zhuxw logo"
+          />
         </Link>
       </nav>
       <nav className={styles.middleContainer}>
