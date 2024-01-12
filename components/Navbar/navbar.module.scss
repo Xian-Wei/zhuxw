@@ -115,18 +115,20 @@
 
 .mobileLink {
   display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 50px;
-  padding-inline: 100px;
+  width: 250px;
   border-radius: 5px;
   background: $collapsedLinkBackground;
-  background-size: 250px 120px;
+  background-size: 250px 125px;
   background-repeat: no-repeat;
   transition: 0.2s filter;
 
   @media screen and (max-width: $sm) {
-    padding: 35px;
-    padding-inline: 65px;
-    background-size: 180px 100px;
+    padding: 30px;
+    width: 200px;
+    background-size: 200px 80px;
   }
 }
 
