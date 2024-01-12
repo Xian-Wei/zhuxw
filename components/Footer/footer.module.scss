@@ -11,6 +11,18 @@
   z-index: inherit;
 }
 
+.footerBorder {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
+  height: $footerHeight;
+  width: 100%;
+  border-top: 1px solid $primaryBorder;
+  z-index: inherit;
+}
+
 .iconContainer {
   display: flex;
   flex: 0.5;

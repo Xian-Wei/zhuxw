@@ -1,10 +1,17 @@
 import { FaTwitter, FaGithub, FaReddit } from "react-icons/fa";
 
 import styles from "./footer.module.scss";
+import { useRouter } from "next/router";
 
 const Footer = () => {
+  const router = useRouter();
+
   return (
-    <footer className={styles.footer}>
+    <footer
+      className={
+        router.pathname == "/about" ? styles.footerBorder : styles.footer
+      }
+    >
       <div className={styles.iconContainer}>
         <a href="https://twitter.com/xianweizhu" className={styles.icon}>
           <FaTwitter />
