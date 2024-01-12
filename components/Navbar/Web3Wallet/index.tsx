@@ -9,13 +9,17 @@ const Web3Wallet = () => {
   const isMetamaskInstalled = useIsMetamaskInstalled();
 
   const connect = async () => {
-    if (provider) {
-      await provider.send("eth_requestAccounts", []);
+    try {
+      if (provider) {
+        await provider.send("eth_requestAccounts", []);
 
-      const signer = await provider.getSigner();
-      const address = await signer.getAddress();
+        const signer = await provider.getSigner();
+        const address = await signer.getAddress();
 
-      setWallet(address);
+        setWallet(address);
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
