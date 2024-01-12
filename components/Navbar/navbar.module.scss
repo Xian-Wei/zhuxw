@@ -55,11 +55,14 @@
   margin-right: 70px;
 
   @media screen and (max-width: $lg) {
+    display: flex;
     position: absolute;
     justify-content: flex-end;
     flex: 1;
     right: 0px;
-    margin-right: 30px;
+    padding-right: 20px;
+    margin-right: 0px;
+    width: 150px;
   }
 }
 
@@ -79,7 +82,7 @@
   margin-left: 15px;
 
   @media screen and (max-width: $lg) {
-    display: flex;
+    display: block;
   }
 }
 
@@ -106,7 +109,7 @@
 
   @media screen and (max-width: $sm) {
     width: calc(100vw);
-    gap: 15px;
+    gap: 10px;
   }
 }
 
@@ -119,6 +122,12 @@
   background-size: 250px 120px;
   background-repeat: no-repeat;
   transition: 0.2s filter;
+
+  @media screen and (max-width: $sm) {
+    padding: 35px;
+    padding-inline: 65px;
+    background-size: 180px 100px;
+  }
 }
 
 .mobileLink:hover {
