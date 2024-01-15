@@ -11,6 +11,8 @@
 .content {
   display: flex;
   flex: 0.85;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
   z-index: inherit;
@@ -20,8 +22,21 @@
   }
 }
 
-.weightChart {
-  display: flex;
-  flex: 1;
-  height: 90%;
+.gridContainer {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+
+  @media screen and (max-width: $md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.gridItem {
+  height: 200px;
+  width: 200px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+  background-color: red;
 }
