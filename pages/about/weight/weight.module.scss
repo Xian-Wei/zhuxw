@@ -32,6 +32,7 @@
   width: 70%;
   border: 1px solid $primaryBorder;
   background-color: $bodyBackgroundHover;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 22px 70px 4px;
 
   @media screen and (max-width: $lg) {
     width: 100%;
