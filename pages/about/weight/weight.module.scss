@@ -14,9 +14,9 @@
   flex: 1;
   justify-content: flex-start;
   align-items: center;
-  gap: 50px;
+  gap: 30px;
   min-height: 100%;
-  padding: 40px;
+  padding: 20px 30px 0px 30px;
 
   @media screen and (max-width: $lg) {
     gap: 20px;
@@ -29,12 +29,12 @@
   flex-direction: column;
   flex: 0.4;
   height: 300px;
-  width: 100%;
+  width: 70%;
   border: 1px solid $primaryBorder;
   background-color: $bodyBackgroundHover;
 
   @media screen and (max-width: $lg) {
-    flex: 0.45;
+    width: 100%;
   }
 }
 
