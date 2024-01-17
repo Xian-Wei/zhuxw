@@ -500,35 +500,43 @@ const Chart = () => {
           </div>
           {/* Chart */}
           <div className={styles.chart}>
-            {/* Timeframe buttons */}
-            <div className={styles.timeframeButtons}>
-              <div
-                className={
-                  timeframe == Timeframe.Daily
-                    ? styles.timeframeButtonActive
-                    : styles.timeframeButton
-                }
-                onClick={() => setTimeframe(Timeframe.Daily)}
-              >
-                1D
+            {dailyWeights ? (
+              <>
+                {/* Timeframe buttons */}
+                <div className={styles.timeframeButtons}>
+                  <div
+                    className={
+                      timeframe == Timeframe.Daily
+                        ? styles.timeframeButtonActive
+                        : styles.timeframeButton
+                    }
+                    onClick={() => setTimeframe(Timeframe.Daily)}
+                  >
+                    1D
+                  </div>
+                  <div
+                    className={
+                      timeframe == Timeframe.Weekly
+                        ? styles.timeframeButtonActive
+                        : styles.timeframeButton
+                    }
+                    onClick={() => setTimeframe(Timeframe.Weekly)}
+                  >
+                    1W
+                  </div>
+                </div>
+                {/* Chart component */}
+                <LWChart
+                  weeklyWeights={weeklyWeights}
+                  dailyWeights={dailyWeights}
+                  timeframe={timeframe}
+                />
+              </>
+            ) : (
+              <div className={styles.chartLoading}>
+                <LoadingAnimation />
               </div>
-              <div
-                className={
-                  timeframe == Timeframe.Weekly
-                    ? styles.timeframeButtonActive
-                    : styles.timeframeButton
-                }
-                onClick={() => setTimeframe(Timeframe.Weekly)}
-              >
-                1W
-              </div>
-            </div>
-            {/* Chart component */}
-            <LWChart
-              weeklyWeights={weeklyWeights}
-              dailyWeights={dailyWeights}
-              timeframe={timeframe}
-            />
+            )}
           </div>
           {/* Position */}
           <div className={styles.positionContainer}>

@@ -230,6 +230,17 @@
   }
 }
 
+.chartLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+
+  @media screen and (max-width: $lg) {
+    min-height: 300px;
+  }
+}
+
 .timeframeButtons {
   display: flex;
   position: absolute;
