@@ -138,88 +138,130 @@ const Weight = () => {
 
   return (
     <div className={styles.content}>
-      <div className={styles.title}>Xian-Wei&apos;s weight</div>
       {dailyWeights ? (
         <>
-          <ResponsiveContainer width="95%" height="50%">
-            <AreaChart width={200} height={200} data={chartData2}>
-              <XAxis dataKey="name" domain={["auto", "auto"]} />
-              <YAxis domain={["auto", "auto"]} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "rgb(20, 20, 40)",
-                  borderColor: "rgb(80, 80, 160)",
-                }}
-              />
-              <Area
-                type="monotone"
-                dataKey="weight"
-                stroke="#8884d8"
-                fill="#8884d8"
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-          <ResponsiveContainer width="95%" height="50%">
-            <LineChart width={200} height={200} data={chartData}>
-              <XAxis dataKey="name" domain={["auto", "auto"]} />
-              <YAxis type="number" domain={["auto", "auto"]} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "rgb(20, 20, 40)",
-                  borderColor: "rgb(80, 80, 160)",
-                }}
-              />
-              <Legend onClick={(e) => toggleYear(e.dataKey)} />
+          <div className={styles.block}>
+            <div className={styles.blockTitle}>Weight since September 2019</div>
+            <ResponsiveContainer
+              className={styles.blockContent}
+              height="85%"
+              width="100%"
+            >
+              <AreaChart
+                data={chartData2}
+                margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+              >
+                <XAxis
+                  dataKey="name"
+                  domain={["auto", "auto"]}
+                  tick={false}
+                  axisLine={false}
+                  height={0}
+                />
+                <YAxis
+                  domain={["auto", "auto"]}
+                  tick={false}
+                  axisLine={false}
+                  width={0}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgb(20, 20, 40)",
+                    borderColor: "rgb(80, 80, 160)",
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="weight"
+                  stroke="#8884d8"
+                  fill="#8884d8"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+          <div className={styles.block}>
+            <div className={styles.blockTitle}>Weight by year</div>
+            <ResponsiveContainer
+              className={styles.blockContent}
+              height="50%"
+              width="100%"
+            >
+              <LineChart
+                data={chartData}
+                margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+              >
+                <XAxis
+                  dataKey="name"
+                  domain={["auto", "auto"]}
+                  tick={false}
+                  axisLine={false}
+                  height={0}
+                />
+                <YAxis
+                  type="number"
+                  domain={["auto", "auto"]}
+                  tick={false}
+                  axisLine={false}
+                  width={0}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgb(20, 20, 40)",
+                    borderColor: "rgb(80, 80, 160)",
+                  }}
+                />
+                <Legend onClick={(e) => toggleYear(e.dataKey)} />
 
-              <Line
-                type="monotone"
-                dataKey="2019"
-                stroke="#FF0000"
-                dot={false}
-                hide={filters[2019]}
-              />
+                <Line
+                  type="monotone"
+                  dataKey="2019"
+                  stroke="#FF0000"
+                  dot={false}
+                  hide={filters[2019]}
+                />
 
-              <Line
-                type="monotone"
-                dataKey="2020"
-                stroke="#00FF00"
-                dot={false}
-                hide={filters[2020]}
-              />
+                <Line
+                  type="monotone"
+                  dataKey="2020"
+                  stroke="#00FF00"
+                  dot={false}
+                  hide={filters[2020]}
+                />
 
-              <Line
-                type="monotone"
-                dataKey="2021"
-                stroke="#00FFFF"
-                dot={false}
-                hide={filters[2021]}
-              />
+                <Line
+                  type="monotone"
+                  dataKey="2021"
+                  stroke="#00FFFF"
+                  dot={false}
+                  hide={filters[2021]}
+                />
 
-              <Line
-                type="monotone"
-                dataKey="2022"
-                stroke="#FFFF00"
-                dot={false}
-                hide={filters[2022]}
-              />
+                <Line
+                  type="monotone"
+                  dataKey="2022"
+                  stroke="#FFFF00"
+                  dot={false}
+                  hide={filters[2022]}
+                />
 
-              <Line
-                type="monotone"
-                dataKey="2023"
-                stroke="#FF00FF"
-                dot={false}
-                hide={filters[2023]}
-              />
+                <Line
+                  type="monotone"
+                  dataKey="2023"
+                  stroke="#FF00FF"
+                  dot={false}
+                  hide={filters[2023]}
+                />
 
-              <Line
-                type="monotone"
-                dataKey="2024"
-                stroke="#8888FF"
-                dot={false}
-                hide={filters[2024]}
-              />
-            </LineChart>
-          </ResponsiveContainer>
+                <Line
+                  type="monotone"
+                  dataKey="2024"
+                  stroke="#8888FF"
+                  dot={false}
+                  hide={filters[2024]}
+                />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </>
       ) : (
         <Loader />

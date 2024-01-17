@@ -13,29 +13,46 @@
   flex-direction: column;
   flex: 1;
   justify-content: flex-start;
-  align-items: flex-start;
-  gap: 30px;
-}
-
-.title {
-  display: flex;
-  width: 100%;
-  padding: 10px 0px 30px 40px;
-  margin: 20px 0px 40px 0px;
-  font-size: 30px;
-  border-bottom: 1px solid $primaryBorder;
+  align-items: center;
+  gap: 50px;
+  min-height: 100%;
+  padding: 40px;
 
   @media screen and (max-width: $lg) {
-    padding: 20px 0px 20px 20px;
-    margin: 0px 0px 20px 0px;
-    font-size: 23px;
+    gap: 20px;
+    padding: 20px;
   }
 }
 
-.weightCharts {
+.block {
   display: flex;
   flex-direction: column;
+  flex: 0.4;
+  height: 300px;
+  width: 100%;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.45;
+  }
+}
+
+.blockTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid $primaryBorder;
+  font-size: 20px;
+}
+
+.blockContent {
+  display: flex;
   flex: 1;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  background-color: $bodyBackgroundHover;
 }
