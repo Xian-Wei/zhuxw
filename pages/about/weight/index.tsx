@@ -34,6 +34,15 @@ const Weight = () => {
     2023: false,
     2024: false,
   });
+  const [hoveredYear, setHoveredYear] = useState<{ [key: string]: boolean }>({
+    2019: false,
+    2020: false,
+    2021: false,
+    2022: false,
+    2023: false,
+    2024: false,
+  });
+  const hoveredYearStrokeWidth = 3;
 
   const getWeightsByYear = () => {
     if (dailyWeights) {
@@ -137,6 +146,30 @@ const Weight = () => {
         break;
       case "2024":
         setFilters({ ...filters, 2024: !filters[2024].valueOf() });
+        break;
+    }
+  };
+
+  const hoverYear = (year: string, activate: boolean) => {
+    console.log(year, activate);
+    switch (year) {
+      case "2019":
+        setHoveredYear({ ...hoveredYear, 2019: activate });
+        break;
+      case "2020":
+        setHoveredYear({ ...hoveredYear, 2020: activate });
+        break;
+      case "2021":
+        setHoveredYear({ ...hoveredYear, 2021: activate });
+        break;
+      case "2022":
+        setHoveredYear({ ...hoveredYear, 2022: activate });
+        break;
+      case "2023":
+        setHoveredYear({ ...hoveredYear, 2023: activate });
+        break;
+      case "2024":
+        setHoveredYear({ ...hoveredYear, 2024: activate });
         break;
     }
   };
@@ -410,54 +443,70 @@ const Weight = () => {
                     borderColor: "rgb(80, 80, 160)",
                   }}
                 />
-                <Legend onClick={(e) => toggleYear(e.dataKey)} />
+                <Legend
+                  onClick={(e) => toggleYear(e.dataKey)}
+                  onPointerEnter={(e) => hoverYear(e.dataKey, true)}
+                  onPointerLeave={(e) => hoverYear(e.dataKey, false)}
+                />
 
                 <Line
                   type="monotone"
                   dataKey="2019"
                   stroke="#FF0000"
+                  opacity={hoveredYear[2019] ? 1 : 0.8}
                   dot={false}
                   hide={filters[2019]}
+                  strokeWidth={hoveredYear[2019] ? hoveredYearStrokeWidth : 1}
                 />
 
                 <Line
                   type="monotone"
                   dataKey="2020"
                   stroke="#00FF00"
+                  opacity={hoveredYear[2020] ? 1 : 0.8}
                   dot={false}
                   hide={filters[2020]}
+                  strokeWidth={hoveredYear[2020] ? hoveredYearStrokeWidth : 1}
                 />
 
                 <Line
                   type="monotone"
                   dataKey="2021"
                   stroke="#00FFFF"
+                  opacity={hoveredYear[2021] ? 1 : 0.8}
                   dot={false}
                   hide={filters[2021]}
+                  strokeWidth={hoveredYear[2021] ? hoveredYearStrokeWidth : 1}
                 />
 
                 <Line
                   type="monotone"
                   dataKey="2022"
                   stroke="#FFFF00"
+                  opacity={hoveredYear[2022] ? 1 : 0.8}
                   dot={false}
                   hide={filters[2022]}
+                  strokeWidth={hoveredYear[2022] ? hoveredYearStrokeWidth : 1}
                 />
 
                 <Line
                   type="monotone"
                   dataKey="2023"
                   stroke="#FF00FF"
+                  opacity={hoveredYear[2023] ? 1 : 0.8}
                   dot={false}
                   hide={filters[2023]}
+                  strokeWidth={hoveredYear[2023] ? hoveredYearStrokeWidth : 1}
                 />
 
                 <Line
                   type="monotone"
                   dataKey="2024"
                   stroke="#FFFFFF"
+                  opacity={hoveredYear[2024] ? 1 : 0.8}
                   dot={false}
                   hide={filters[2024]}
+                  strokeWidth={hoveredYear[2024] ? hoveredYearStrokeWidth : 1}
                 />
               </LineChart>
             </ResponsiveContainer>
