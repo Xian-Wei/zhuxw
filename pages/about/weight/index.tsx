@@ -10,6 +10,9 @@ import {
   ResponsiveContainer,
   AreaChart,
   Area,
+  BarChart,
+  ReferenceLine,
+  Bar,
 } from "recharts";
 import useSWR from "swr";
 import axios from "axios";
@@ -53,9 +56,31 @@ const Weight = () => {
     }
   };
 
+  const getWeightsByMonth = () => {
+    if (dailyWeights) {
+      let weightsByMonth: Weight[][] = [[]];
+      let currentMonth = "09";
+      let monthIndex = 0;
+
+      for (let i = 0; i < dailyWeights.length; i++) {
+        if (dailyWeights[i].time.substring(5, 7) !== currentMonth) {
+          currentMonth = dailyWeights[i].time.substring(5, 7);
+          weightsByMonth.push([]);
+          monthIndex++;
+        }
+
+        weightsByMonth[monthIndex].push(dailyWeights[i]);
+      }
+
+      return weightsByMonth;
+    } else {
+      return [];
+    }
+  };
+
   const getChartDataByYear = () => {
-    let chartData: { [key: string]: (number | string) | undefined }[] = [];
     let weightsByYear: Weight[][] | null = getWeightsByYear();
+    let chartData: { [key: string]: (number | string) | undefined }[] = [];
     let chartEntry: { [key: string]: (number | string) | undefined };
 
     for (let i = 0; i < 366; i++) {
@@ -132,9 +157,42 @@ const Weight = () => {
     }
   };
 
+  function formatDate(dateString: string): string {
+    const [year, month, day] = dateString.split("-");
+    const monthName = new Date(`${year}-${month}-01`).toLocaleString(
+      "default",
+      { month: "long" }
+    );
+    return `${monthName} ${year}`;
+  }
+
+  const getGainLossByMonth = () => {
+    const weightsByMonth = getWeightsByMonth();
+    let chartData: { [key: string]: (number | string) | undefined }[] = [];
+    let chartEntry: { [key: string]: (number | string) | undefined };
+
+    for (let i = 0; i < weightsByMonth.length; i++) {
+      const gainLoss = (
+        weightsByMonth[i][0].close -
+        weightsByMonth[i][weightsByMonth[i].length - 1].close
+      ).toFixed(1);
+
+      chartEntry = {
+        name: formatDate(weightsByMonth[i][0].time),
+        kilogram: -gainLoss,
+      };
+
+      chartData.push(chartEntry);
+    }
+
+    return chartData;
+  };
+
   const chartData = getChartData();
   const chartDataByYear =
     dailyWeights && dailyWeights.length > 0 ? getChartDataByYear() : [];
+  const gainLossByMonth =
+    dailyWeights && dailyWeights.length > 0 ? getGainLossByMonth() : [];
 
   return (
     <div className={styles.content}>
@@ -177,6 +235,28 @@ const Weight = () => {
                   fill="#8884d8"
                 />
               </AreaChart>
+            </ResponsiveContainer>
+          </div>
+          <div className={styles.block}>
+            <div className={styles.blockTitle}>Weight by year</div>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart width={500} height={300} data={gainLossByMonth}>
+                <XAxis
+                  dataKey="name"
+                  tick={false}
+                  axisLine={false}
+                  height={0}
+                />
+                <YAxis tick={true} axisLine={true} width={30} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgb(20, 20, 40)",
+                    borderColor: "rgb(80, 80, 160)",
+                  }}
+                />
+                <ReferenceLine y={0} stroke="#FFF" />
+                <Bar dataKey="kilogram" fill="#8884d8" />
+              </BarChart>
             </ResponsiveContainer>
           </div>
           <div className={styles.block}>
