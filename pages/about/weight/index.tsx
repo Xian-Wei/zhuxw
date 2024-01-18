@@ -151,7 +151,6 @@ const Weight = () => {
   };
 
   const hoverYear = (year: string, activate: boolean) => {
-    console.log(year, activate);
     switch (year) {
       case "2019":
         setHoveredYear({ ...hoveredYear, 2019: activate });
