@@ -158,6 +158,29 @@ const Weight = () => {
     }
   };
 
+  const getChartDataForCurrentYear = () => {
+    if (dailyWeights && dailyWeights.length > 0) {
+      const weightCloseArray: {
+        [key: string]: (number | string) | undefined;
+      }[] = [];
+      const currentYear = dailyWeights[dailyWeights.length - 1].time.substring(
+        0,
+        4
+      );
+
+      dailyWeights.forEach((weight) => {
+        if (weight.time.substring(0, 4) == currentYear) {
+          let chartObject = { name: weight.time, weight: weight.close };
+          weightCloseArray.push(chartObject);
+        }
+      });
+
+      return weightCloseArray;
+    } else {
+      return [];
+    }
+  };
+
   function formatDate(dateString: string): string {
     const [year, month, day] = dateString.split("-");
     const monthName = new Date(`${year}-${month}-01`).toLocaleString(
@@ -212,6 +235,7 @@ const Weight = () => {
   };
 
   const chartData = getChartData();
+  const chartDataForCurrentYear = getChartDataForCurrentYear();
   const chartDataByYear =
     dailyWeights && dailyWeights.length > 0 ? getChartDataByYear() : [];
   const gainLossByMonth =
@@ -223,6 +247,45 @@ const Weight = () => {
     <div className={styles.content}>
       {dailyWeights ? (
         <>
+          <div className={styles.block}>
+            <div className={styles.blockTitle}>Weight in 2024</div>
+            <ResponsiveContainer
+              className={styles.blockContent}
+              height="100%"
+              width="100%"
+            >
+              <AreaChart
+                data={chartDataForCurrentYear}
+                margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
+              >
+                <XAxis
+                  dataKey="name"
+                  domain={["auto", "auto"]}
+                  tick={false}
+                  axisLine={false}
+                  height={0}
+                />
+                <YAxis
+                  domain={["auto", "auto"]}
+                  tick={false}
+                  axisLine={false}
+                  width={0}
+                />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgb(20, 20, 40)",
+                    borderColor: "rgb(80, 80, 160)",
+                  }}
+                />
+                <Area
+                  type="monotone"
+                  dataKey="weight"
+                  stroke="rgb(100, 100, 200)"
+                  fill="rgb(80, 80, 160)"
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
           <div className={styles.block}>
             <div className={styles.blockTitle}>Weight since September 2019</div>
             <ResponsiveContainer
