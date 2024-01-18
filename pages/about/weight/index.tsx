@@ -188,11 +188,35 @@ const Weight = () => {
     return chartData;
   };
 
+  const getGainLossByYear = () => {
+    const weightsByYear = getWeightsByYear();
+    let chartData: { [key: string]: (number | string) | undefined }[] = [];
+    let chartEntry: { [key: string]: (number | string) | undefined };
+
+    for (let i = 0; i < weightsByYear.length; i++) {
+      const gainLoss = (
+        weightsByYear[i][0].close -
+        weightsByYear[i][weightsByYear[i].length - 1].close
+      ).toFixed(1);
+
+      chartEntry = {
+        name: weightsByYear[i][0].time.substring(0, 4),
+        kilogram: -gainLoss,
+      };
+
+      chartData.push(chartEntry);
+    }
+
+    return chartData;
+  };
+
   const chartData = getChartData();
   const chartDataByYear =
     dailyWeights && dailyWeights.length > 0 ? getChartDataByYear() : [];
   const gainLossByMonth =
     dailyWeights && dailyWeights.length > 0 ? getGainLossByMonth() : [];
+  const gainLossByYear =
+    dailyWeights && dailyWeights.length > 0 ? getGainLossByYear() : [];
 
   return (
     <div className={styles.content}>
@@ -241,6 +265,28 @@ const Weight = () => {
             <div className={styles.blockTitle}>Monthly weight changes</div>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart width={500} height={300} data={gainLossByMonth}>
+                <XAxis
+                  dataKey="name"
+                  tick={false}
+                  axisLine={false}
+                  height={0}
+                />
+                <YAxis tick={true} axisLine={true} width={20} />
+                <Tooltip
+                  contentStyle={{
+                    backgroundColor: "rgb(20, 20, 40)",
+                    borderColor: "rgb(80, 80, 160)",
+                  }}
+                />
+                <ReferenceLine y={0} stroke="#FFF" />
+                <Bar dataKey="kilogram" fill="#8884d8" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+          <div className={styles.block}>
+            <div className={styles.blockTitle}>Yearly weight changes</div>
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart width={500} height={300} data={gainLossByYear}>
                 <XAxis
                   dataKey="name"
                   tick={false}
