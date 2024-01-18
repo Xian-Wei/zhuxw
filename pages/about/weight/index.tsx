@@ -13,6 +13,7 @@ import {
   BarChart,
   ReferenceLine,
   Bar,
+  Rectangle,
 } from "recharts";
 import useSWR from "swr";
 import axios from "axios";
@@ -255,8 +256,8 @@ const Weight = () => {
                 <Area
                   type="monotone"
                   dataKey="weight"
-                  stroke="#8884d8"
-                  fill="#8884d8"
+                  stroke="rgb(100, 100, 200)"
+                  fill="rgb(80, 80, 160)"
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -273,13 +274,18 @@ const Weight = () => {
                 />
                 <YAxis tick={true} axisLine={true} width={20} />
                 <Tooltip
+                  cursor={{ fill: "rgb(35, 35, 70)" }}
                   contentStyle={{
                     backgroundColor: "rgb(20, 20, 40)",
                     borderColor: "rgb(80, 80, 160)",
                   }}
                 />
-                <ReferenceLine y={0} stroke="#FFF" />
-                <Bar dataKey="kilogram" fill="#8884d8" />
+                <ReferenceLine y={0} stroke="rgb(100, 100, 200)" />
+                <Bar
+                  dataKey="kilogram"
+                  fill="rgb(100, 100, 200)"
+                  activeBar={<Rectangle fill="rgb(150, 150, 255)" />}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -299,9 +305,14 @@ const Weight = () => {
                     backgroundColor: "rgb(20, 20, 40)",
                     borderColor: "rgb(80, 80, 160)",
                   }}
+                  cursor={{ fill: "rgb(35, 35, 70)" }}
                 />
-                <ReferenceLine y={0} stroke="#FFF" />
-                <Bar dataKey="kilogram" fill="#8884d8" />
+                <ReferenceLine y={0} stroke="rgb(100, 100, 200)" />
+                <Bar
+                  dataKey="kilogram"
+                  fill="rgb(100, 100, 200)"
+                  activeBar={<Rectangle fill="rgb(150, 150, 255)" />}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -381,7 +392,7 @@ const Weight = () => {
                 <Line
                   type="monotone"
                   dataKey="2024"
-                  stroke="#8888FF"
+                  stroke="#FFFFFF"
                   dot={false}
                   hide={filters[2024]}
                 />
