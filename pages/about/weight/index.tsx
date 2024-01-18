@@ -31,7 +31,7 @@ const Weight = () => {
     2024: false,
   });
 
-  const getDataSortedByYear = () => {
+  const getWeightsByYear = () => {
     if (dailyWeights) {
       let weightsByYear: Weight[][] = [[]];
       let currentYear = "2019";
@@ -55,7 +55,7 @@ const Weight = () => {
 
   const getChartDataByYear = () => {
     let chartData: { [key: string]: (number | string) | undefined }[] = [];
-    let weightsByYear: Weight[][] | null = getDataSortedByYear();
+    let weightsByYear: Weight[][] | null = getWeightsByYear();
     let chartEntry: { [key: string]: (number | string) | undefined };
 
     for (let i = 0; i < 366; i++) {
@@ -132,9 +132,9 @@ const Weight = () => {
     }
   };
 
-  const chartData =
+  const chartData = getChartData();
+  const chartDataByYear =
     dailyWeights && dailyWeights.length > 0 ? getChartDataByYear() : [];
-  const chartData2 = getChartData();
 
   return (
     <div className={styles.content}>
@@ -148,7 +148,7 @@ const Weight = () => {
               width="100%"
             >
               <AreaChart
-                data={chartData2}
+                data={chartData}
                 margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
               >
                 <XAxis
@@ -187,7 +187,7 @@ const Weight = () => {
               width="100%"
             >
               <LineChart
-                data={chartData}
+                data={chartDataByYear}
                 margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
               >
                 <XAxis
