@@ -202,7 +202,7 @@ const Weight = () => {
             <div className={styles.blockTitle}>Weight since September 2019</div>
             <ResponsiveContainer
               className={styles.blockContent}
-              height="85%"
+              height="100%"
               width="100%"
             >
               <AreaChart
@@ -238,7 +238,7 @@ const Weight = () => {
             </ResponsiveContainer>
           </div>
           <div className={styles.block}>
-            <div className={styles.blockTitle}>Weight by year</div>
+            <div className={styles.blockTitle}>Monthly weight changes</div>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart width={500} height={300} data={gainLossByMonth}>
                 <XAxis
@@ -247,7 +247,7 @@ const Weight = () => {
                   axisLine={false}
                   height={0}
                 />
-                <YAxis tick={true} axisLine={true} width={30} />
+                <YAxis tick={true} axisLine={true} width={20} />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: "rgb(20, 20, 40)",
@@ -263,7 +263,7 @@ const Weight = () => {
             <div className={styles.blockTitle}>Weight by year</div>
             <ResponsiveContainer
               className={styles.blockContent}
-              height="50%"
+              height="100%"
               width="100%"
             >
               <LineChart

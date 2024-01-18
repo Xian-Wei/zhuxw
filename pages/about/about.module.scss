@@ -4,19 +4,13 @@
   display: flex;
   justify-content: center;
   min-height: 100vh;
-  height: 100vh;
   width: 100%;
   z-index: inherit;
 }
 
 .content {
   display: flex;
-  flex: 0.85;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   z-index: inherit;
-
-  @media screen and (max-width: $xl) {
-    flex: 1;
-  }
 }
