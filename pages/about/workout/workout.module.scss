@@ -1,21 +1,49 @@
 @import "../../../styles/constants.module.scss";
 
-.container {
-  display: flex;
-  justify-content: center;
-  height: 100vh;
-  width: 100%;
-  z-index: inherit;
-}
-
 .content {
   display: flex;
-  flex: 0.85;
-  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 30px;
+  min-height: 100%;
   width: 100%;
-  z-index: inherit;
+  padding: 20px 30px 20px 30px;
 
-  @media screen and (max-width: $xl) {
-    flex: 1;
+  @media screen and (max-width: $lg) {
+    gap: 20px;
+    padding: 20px;
   }
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  width: 70%;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 22px 70px 4px;
+
+  @media screen and (max-width: $lg) {
+    height: 200px;
+    width: 100%;
+  }
+}
+
+.blockTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  border-bottom: 1px solid $primaryBorder;
+  font-size: 20px;
+}
+
+.blockContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: $bodyBackgroundHover;
 }
