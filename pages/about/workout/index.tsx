@@ -43,6 +43,24 @@ const Workout = () => {
     return allWorkoutsCounts;
   };
 
+  const getWorkoutsByYear = () => {
+    let allWorkoutsCounts: WorkoutItem[][] = [[]];
+    let currentYear = "2019";
+    let yearIndex = 0;
+
+    for (let i = 0; i < workouts.length; i++) {
+      if (workouts[i].date.substring(0, 4) !== currentYear) {
+        currentYear = workouts[i].date.substring(0, 4);
+        allWorkoutsCounts.push([]);
+        yearIndex++;
+      }
+
+      allWorkoutsCounts[yearIndex].push(workouts[i]);
+    }
+
+    return allWorkoutsCounts;
+  };
+
   function formatDate(dateString: string): string {
     const [year, month, day] = dateString.split("-");
     const monthName = new Date(`${year}-${month}-01`).toLocaleString(
@@ -52,8 +70,10 @@ const Workout = () => {
     return `${monthName} ${year}`;
   }
 
-  const getChartDataWithGymSort = () => {
-    const workouts: WorkoutItem[][] = getWorkoutsByMonth();
+  const getChartDataWithGymSort = (
+    workouts: WorkoutItem[][],
+    dateFormatWithMonth: boolean,
+  ) => {
     let chartData: { [key: string]: (number | string) | undefined }[] = [];
 
     for (let i = 0; i < workouts.length; i++) {
@@ -68,7 +88,9 @@ const Workout = () => {
       });
 
       chartData.push({
-        name: formatDate(workouts[i][0].date),
+        name: dateFormatWithMonth
+          ? formatDate(workouts[i][0].date)
+          : workouts[i][0].date.substring(0, 4),
         gym: gym,
         home: notGym,
       });
@@ -126,48 +148,6 @@ const Workout = () => {
     } else return 0;
   };
 
-  // const incrementMonth = (month: string) => {
-  //   if (month === "12") {
-  //     return "01";
-  //   } else {
-  //     const nextMonth = parseInt(month) + 1;
-  //     return nextMonth.toString().padStart(2, "0");
-  //   }
-  // };
-
-  // const getSumOfMonthlyWorkoutsPerYear = () => {
-  //   if (workouts) {
-  //     let allWorkoutsCounts: number[][] = [[]];
-  //     let currentMonth = "01";
-  //     let currentYear = "2019";
-  //     let currentYearIndex = 0;
-  //     let workoutCountForMonth = 0;
-
-  //     for (let i = 0; i < workouts.length; i++) {
-  //       if (workouts[i].date.substring(5, 7) == currentMonth) {
-  //         workoutCountForMonth++;
-  //       } else {
-  //         allWorkoutsCounts[currentYearIndex].push(workoutCountForMonth);
-  //         workoutCountForMonth = 1;
-  //         currentMonth = incrementMonth(currentMonth);
-
-  //         if (currentMonth != workouts[i].date.substring(5, 7)) {
-  //           workoutCountForMonth = 0;
-  //         }
-  //       }
-
-  //       if (currentYear != workouts[i].date.substring(0, 4)) {
-  //         currentYear = workouts[i].date.substring(0, 4);
-  //         allWorkoutsCounts.push([]);
-  //         currentYearIndex++;
-  //       }
-  //     }
-  //     allWorkoutsCounts[currentYearIndex].push(workoutCountForMonth);
-
-  //     return allWorkoutsCounts;
-  //   }
-  // };
-
   function formatDateAgo(inputDate: string): string {
     const currentDate = new Date();
     const inputDateObject = new Date(inputDate);
@@ -186,7 +166,13 @@ const Workout = () => {
   }
 
   const workoutsPerMonth =
-    workouts && workouts.length > 0 ? getChartDataWithGymSort() : [];
+    workouts && workouts.length > 0
+      ? getChartDataWithGymSort(getWorkoutsByMonth(), true)
+      : [];
+  const workoutsPerYear =
+    workouts && workouts.length > 0
+      ? getChartDataWithGymSort(getWorkoutsByYear(), false)
+      : [];
   const lastWorkout =
     workouts && workouts.length > 0
       ? formatDateAgo(workouts[workouts.length - 1].date)
@@ -225,6 +211,25 @@ const Workout = () => {
           <div className={styles.blockTitle}>Workouts per month</div>
           <ResponsiveContainer width="100%" height="100%">
             <BarChart width={500} height={300} data={workoutsPerMonth}>
+              <XAxis dataKey="name" tick={false} axisLine={false} height={0} />
+              <YAxis tick={false} axisLine={false} width={0} />
+              <Tooltip
+                cursor={{ fill: "rgb(35, 35, 70)" }}
+                contentStyle={{
+                  backgroundColor: "rgb(20, 20, 40)",
+                  borderColor: "rgb(80, 80, 160)",
+                }}
+              />
+              <Legend />
+              <Bar dataKey="gym" fill="#8884d8" />
+              <Bar dataKey="home" fill="#82ca9d" />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className={styles.block}>
+          <div className={styles.blockTitle}>Workouts per year</div>
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart width={500} height={300} data={workoutsPerYear}>
               <XAxis dataKey="name" tick={false} axisLine={false} height={0} />
               <YAxis tick={false} axisLine={false} width={0} />
               <Tooltip
