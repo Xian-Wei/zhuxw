@@ -77,6 +77,55 @@ const Workout = () => {
     return chartData;
   };
 
+  function getCurrentMonth(): string {
+    const currentDate = new Date();
+    const monthIndex = currentDate.getMonth() + 1;
+    const formattedMonth = monthIndex.toString().padStart(2, "0");
+    return formattedMonth;
+  }
+
+  function getThisWeekMonday(currentDate: Date): Date {
+    const currentDay = currentDate.getDay(); // Sunday is 0, Monday is 1, ..., Saturday is 6
+    const daysSinceMonday = currentDay === 0 ? 6 : currentDay - 1;
+
+    const mondayDate = new Date(currentDate);
+    mondayDate.setDate(currentDate.getDate() - daysSinceMonday);
+
+    return mondayDate;
+  }
+
+  const getWorkoutCountForWeek = () => {
+    const thisMondayDay = getThisWeekMonday(new Date()).getDate();
+    const currentMonth = getCurrentMonth();
+    let workoutCount = 0;
+
+    if (workouts) {
+      for (let i = workouts.length - 1; i > workouts.length - 7; i--) {
+        if (
+          Number(workouts[i].date.substring(8, 10)) >= thisMondayDay &&
+          workouts[i].date.substring(5, 7) == currentMonth
+        ) {
+          workoutCount++;
+        }
+      }
+      return workoutCount;
+    } else return 0;
+  };
+
+  const getWorkoutCountForMonth = () => {
+    const currentMonth = getCurrentMonth();
+    let workoutCount = 0;
+
+    if (workouts) {
+      for (let i = workouts.length - 1; i > workouts.length - 30; i--) {
+        if (workouts[i].date.substring(5, 7) == currentMonth) {
+          workoutCount++;
+        }
+      }
+      return workoutCount;
+    } else return 0;
+  };
+
   // const incrementMonth = (month: string) => {
   //   if (month === "12") {
   //     return "01";
@@ -119,19 +168,59 @@ const Workout = () => {
   //   }
   // };
 
-  useEffect(() => {
-    if (workouts) {
-      const yes = getChartDataWithGymSort();
-      console.log(yes);
+  function formatDateAgo(inputDate: string): string {
+    const currentDate = new Date();
+    const inputDateObject = new Date(inputDate);
+
+    const timeDifference = currentDate.getTime() - inputDateObject.getTime();
+
+    const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+    if (daysAgo === 0) {
+      return "Today";
+    } else if (daysAgo === 1) {
+      return "1 day ago";
+    } else {
+      return `${daysAgo} days ago`;
     }
-  }, [workouts]);
+  }
 
   const workoutsPerMonth =
     workouts && workouts.length > 0 ? getChartDataWithGymSort() : [];
+  const lastWorkout =
+    workouts && workouts.length > 0
+      ? formatDateAgo(workouts[workouts.length - 1].date)
+      : "None";
+  const lastMuscleWorked =
+    workouts && workouts.length > 0
+      ? workouts[workouts.length - 1].muscle
+      : "None";
+  const workoutCountsForWeek =
+    workouts && workouts.length > 0 ? getWorkoutCountForWeek() : 0;
+  const workoutCountsForMonth =
+    workouts && workouts.length > 0 ? getWorkoutCountForMonth() : 0;
 
   return (
     <>
       <div className={styles.content}>
+        <div className={styles.topInfos}>
+          <div className={styles.topInfoItem}>
+            Last workout
+            <div className={styles.topInfoText}>{lastWorkout}</div>
+          </div>
+          <div className={styles.topInfoItem}>
+            Muscle worked
+            <div className={styles.topInfoText}>{lastMuscleWorked}</div>
+          </div>
+          <div className={styles.topInfoItem}>
+            Sessions this week
+            <div className={styles.topInfoText}>{workoutCountsForWeek}</div>
+          </div>
+          <div className={styles.topInfoItem}>
+            Sessions this month
+            <div className={styles.topInfoText}>{workoutCountsForMonth}</div>
+          </div>
+        </div>
         <div className={styles.block}>
           <div className={styles.blockTitle}>Workouts per month</div>
           <ResponsiveContainer width="100%" height="100%">
