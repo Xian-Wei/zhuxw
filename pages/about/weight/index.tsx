@@ -274,11 +274,56 @@ const Weight = () => {
     dailyWeights && dailyWeights.length > 0 ? getGainLossByMonth() : [];
   const gainLossByYear =
     dailyWeights && dailyWeights.length > 0 ? getGainLossByYear() : [];
+  const currentWeight =
+    dailyWeights && dailyWeights.length > 0
+      ? dailyWeights[dailyWeights.length - 1].close
+      : 0;
+  const dailyChange =
+    dailyWeights && dailyWeights.length > 0
+      ? dailyWeights[dailyWeights.length - 1].close -
+        dailyWeights[dailyWeights.length - 2].close
+      : 0;
+  const weeklyChange =
+    dailyWeights && dailyWeights.length > 0
+      ? dailyWeights[dailyWeights.length - 1].close -
+        dailyWeights[dailyWeights.length - 7].close
+      : 0;
+  const monthlyChange =
+    dailyWeights && dailyWeights.length > 0
+      ? dailyWeights[dailyWeights.length - 1].close -
+        dailyWeights[dailyWeights.length - 30].close
+      : 0;
 
   return (
     <div className={styles.content}>
       {dailyWeights ? (
         <>
+          <div className={styles.topInfos}>
+            <div className={styles.topInfoItem}>
+              Today
+              <div className={styles.topInfoText}>
+                {currentWeight.toFixed(2)} KG
+              </div>
+            </div>
+            <div className={styles.topInfoItem}>
+              1D change
+              <div className={styles.topInfoText}>
+                {dailyChange.toFixed(2)} KG
+              </div>
+            </div>
+            <div className={styles.topInfoItem}>
+              7D change
+              <div className={styles.topInfoText}>
+                {weeklyChange.toFixed(2)} KG
+              </div>
+            </div>
+            <div className={styles.topInfoItem}>
+              30D change
+              <div className={styles.topInfoText}>
+                {monthlyChange.toFixed(2)} KG
+              </div>
+            </div>
+          </div>
           <div className={styles.block}>
             <div className={styles.blockTitle}>Weight in 2024</div>
             <ResponsiveContainer
@@ -447,7 +492,6 @@ const Weight = () => {
                   onPointerEnter={(e) => hoverYear(e.dataKey, true)}
                   onPointerLeave={(e) => hoverYear(e.dataKey, false)}
                 />
-
                 <Line
                   type="monotone"
                   dataKey="2019"
@@ -467,7 +511,6 @@ const Weight = () => {
                   hide={filters[2020]}
                   strokeWidth={hoveredYear[2020] ? hoveredYearStrokeWidth : 1}
                 />
-
                 <Line
                   type="monotone"
                   dataKey="2021"
@@ -477,7 +520,6 @@ const Weight = () => {
                   hide={filters[2021]}
                   strokeWidth={hoveredYear[2021] ? hoveredYearStrokeWidth : 1}
                 />
-
                 <Line
                   type="monotone"
                   dataKey="2022"
@@ -487,7 +529,6 @@ const Weight = () => {
                   hide={filters[2022]}
                   strokeWidth={hoveredYear[2022] ? hoveredYearStrokeWidth : 1}
                 />
-
                 <Line
                   type="monotone"
                   dataKey="2023"
@@ -497,7 +538,6 @@ const Weight = () => {
                   hide={filters[2023]}
                   strokeWidth={hoveredYear[2023] ? hoveredYearStrokeWidth : 1}
                 />
-
                 <Line
                   type="monotone"
                   dataKey="2024"

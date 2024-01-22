@@ -47,3 +47,50 @@
   width: 100%;
   background-color: $bodyBackgroundHover;
 }
+
+.topInfos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
+  height: 200px;
+  width: 70%;
+
+  @media screen and (max-width: $lg) {
+    width: 100%;
+  }
+}
+
+.topInfoItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+  font-size: 22px;
+  font-weight: 500;
+
+  @media screen and (max-width: $md) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    padding-left: 0px;
+    font-size: 16px;
+  }
+}
+
+.topInfoText {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 8px;
+  font-size: 22px;
+  font-weight: 700;
+
+  @media screen and (max-width: $md) {
+    padding-left: 6px;
+    font-size: 16px;
+  }
+}
