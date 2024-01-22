@@ -19,10 +19,10 @@ interface WorkoutItem {
 }
 
 const Workout = () => {
-  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const fetcher = (url: string) => axios.get(url).then(res => res.data);
   const { data: workouts }: { data: WorkoutItem[] } = useSWR(
     "/api/workout",
-    fetcher
+    fetcher,
   );
 
   const getWorkoutsByMonth = () => {
@@ -47,7 +47,7 @@ const Workout = () => {
     const [year, month, day] = dateString.split("-");
     const monthName = new Date(`${year}-${month}-01`).toLocaleString(
       "default",
-      { month: "long" }
+      { month: "long" },
     );
     return `${monthName} ${year}`;
   }
@@ -59,7 +59,7 @@ const Workout = () => {
     for (let i = 0; i < workouts.length; i++) {
       let gym = 0;
       let notGym = 0;
-      workouts[i].forEach((workout) => {
+      workouts[i].forEach(workout => {
         if (workout.gym) {
           gym++;
         } else {

@@ -32,8 +32,8 @@ const Layout = ({
           router.pathname == "/"
             ? styles.childrenNoPadding
             : footerEnabled
-            ? styles.children
-            : styles.childrenFooterless
+              ? styles.children
+              : styles.childrenFooterless
         }
       >
         {children}

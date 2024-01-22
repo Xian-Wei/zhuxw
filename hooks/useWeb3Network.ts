@@ -12,7 +12,7 @@ const useWeb3ChainId = () => {
         setChainId(Number(newNetwork.chainId));
 
         window.ethereum.on("chainChanged", (chain: string) =>
-          setChainId(Number(chain))
+          setChainId(Number(chain)),
         );
       }
     })();

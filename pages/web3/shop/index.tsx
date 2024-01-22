@@ -40,12 +40,12 @@ const Shop = () => {
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,
-          signer
+          signer,
         );
         const zhubaContract = new ethers.Contract(
           zhubaContractAddress,
           zhubaAbi,
-          signer
+          signer,
         );
         await provider.send("eth_requestAccounts", []);
 
@@ -70,7 +70,7 @@ const Shop = () => {
         const zhubaContract = new ethers.Contract(
           zhubaContractAddress,
           zhubaAbi,
-          signer
+          signer,
         );
         await provider.send("eth_requestAccounts", []);
 
@@ -93,7 +93,7 @@ const Shop = () => {
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,
-          provider
+          provider,
         );
         let accounts = await provider.send("eth_requestAccounts", []);
         let account = accounts[0];
@@ -102,7 +102,7 @@ const Shop = () => {
 
         if (balance.toString() != "0") {
           setBalance(
-            balance.toString().substring(0, balance.toString().length - 18)
+            balance.toString().substring(0, balance.toString().length - 18),
           );
         } else setBalance("0");
 

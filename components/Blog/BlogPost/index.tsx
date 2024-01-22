@@ -22,7 +22,7 @@ const BlogPost = ({ slug, frontmatter }: Post) => {
         <div className={styles.description}>{frontmatter.description}</div>
         <div className={styles.bottomInfo}>
           <div className={styles.tags}>
-            {frontmatter.tags.map((tag) => (
+            {frontmatter.tags.map(tag => (
               <div className={styles.tag} key={tag}>
                 {tag}
               </div>

@@ -30,18 +30,18 @@ enum PositionType {
 const Chart = () => {
   const [timeframe, setTimeframe] = useState<Timeframe>(Timeframe.Weekly);
   const [positionType, setPositionType] = useState<PositionType>(
-    PositionType.Short
+    PositionType.Short,
   );
 
   // API
-  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const fetcher = (url: string) => axios.get(url).then(res => res.data);
   const { data: weeklyWeights }: { data: any } = useSWR(
     "/api/weight-weekly",
-    fetcher
+    fetcher,
   );
   const { data: dailyWeights }: { data: any } = useSWR(
     "/api/weight-daily",
-    fetcher
+    fetcher,
   );
 
   // Web3
@@ -93,14 +93,14 @@ const Chart = () => {
         const zhuExchangeContract = new ethers.Contract(
           zhuExchangeContractAddress,
           zhuExchangeAbi,
-          signer
+          signer,
         );
         await provider.send("eth_requestAccounts", []);
 
         const tx = await zhuExchangeContract.short(
           approvedAmount,
           dailyWeights[dailyWeights.length - 1].close * 10,
-          { gasLimit: 1000000 }
+          { gasLimit: 1000000 },
         );
         setIsLoading(true);
         await tx.wait();
@@ -124,13 +124,13 @@ const Chart = () => {
         const zhuExchangeContract = new ethers.Contract(
           zhuExchangeContractAddress,
           zhuExchangeAbi,
-          signer
+          signer,
         );
         await provider.send("eth_requestAccounts", []);
         const tx = await zhuExchangeContract.long(
           approvedAmount,
           dailyWeights[dailyWeights.length - 1].close * 10,
-          { gasLimit: 1000000 }
+          { gasLimit: 1000000 },
         );
         setIsLoading(true);
         await tx.wait();
@@ -154,14 +154,14 @@ const Chart = () => {
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,
-          signer
+          signer,
         );
         await provider.send("eth_requestAccounts", []);
 
         const tx = await zhuContract._approve(
           zhuExchangeContractAddress,
           amount,
-          { gasLimit: 100000 }
+          { gasLimit: 100000 },
         );
         setIsLoading(true);
         await tx.wait();
@@ -182,7 +182,7 @@ const Chart = () => {
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,
-          signer
+          signer,
         );
         await provider.send("eth_requestAccounts", []);
 
@@ -205,7 +205,7 @@ const Chart = () => {
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,
-          provider
+          provider,
         );
         let accounts = await provider.send("eth_requestAccounts", []);
         let account = accounts[0];
@@ -224,7 +224,7 @@ const Chart = () => {
         const zhuContract = new ethers.Contract(
           zhuContractAddress,
           zhuAbi,
-          provider
+          provider,
         );
         let accounts = await provider.send("eth_requestAccounts", []);
         let account = accounts[0];
@@ -233,7 +233,7 @@ const Chart = () => {
 
         if (balance.toString() != "0") {
           setBalance(
-            balance.toString().substring(0, balance.toString().length - 18)
+            balance.toString().substring(0, balance.toString().length - 18),
           );
         } else setBalance("0");
 
@@ -253,7 +253,7 @@ const Chart = () => {
         const zhuExchangeContract = new ethers.Contract(
           zhuExchangeContractAddress,
           zhuExchangeAbi,
-          provider
+          provider,
         );
         let accounts = await provider.send("eth_requestAccounts", []);
         let account = accounts[0];
@@ -278,14 +278,14 @@ const Chart = () => {
         const zhuExchangeContract = new ethers.Contract(
           zhuExchangeContractAddress,
           zhuExchangeAbi,
-          signer
+          signer,
         );
         await provider.send("eth_requestAccounts", []);
 
         const tx = await zhuExchangeContract.closeTrade(
           dailyWeights[dailyWeights.length - 1].close * 10,
           id,
-          { gasLimit: 100000 }
+          { gasLimit: 100000 },
         );
         await tx.wait();
         await getBalance();
@@ -463,12 +463,12 @@ const Chart = () => {
               {dailyWeights &&
                 (percentageDifference(
                   dailyWeights[dailyWeights.length - 2].close,
-                  dailyWeights[dailyWeights.length - 1].close
+                  dailyWeights[dailyWeights.length - 1].close,
                 ) < 0 ? (
                   <div className={styles.dailyChangeRed}>
                     {percentageDifference(
                       dailyWeights[dailyWeights.length - 2].close,
-                      dailyWeights[dailyWeights.length - 1].close
+                      dailyWeights[dailyWeights.length - 1].close,
                     ).toFixed(2)}
                     %
                   </div>
@@ -477,7 +477,7 @@ const Chart = () => {
                     +
                     {percentageDifference(
                       dailyWeights[dailyWeights.length - 2].close,
-                      dailyWeights[dailyWeights.length - 1].close
+                      dailyWeights[dailyWeights.length - 1].close,
                     ).toFixed(2)}
                     %
                   </div>
@@ -630,7 +630,7 @@ const Chart = () => {
                     className={styles.amountInput}
                     value={amount}
                     disabled={approved}
-                    onChange={(e) => {
+                    onChange={e => {
                       setLongShortValue(e.target.value);
                     }}
                   />
@@ -644,7 +644,7 @@ const Chart = () => {
                   disabled={!zhuExchangeContractAddress || !wallet || approved}
                   className={styles.amountSlider}
                   value={amount}
-                  onChange={(e) => {
+                  onChange={e => {
                     setLongShortValue(e.target.value);
                   }}
                 />

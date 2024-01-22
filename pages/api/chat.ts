@@ -9,7 +9,7 @@ export const runtime = "edge";
 
 // Build a prompt from the messages
 function buildPompt(
-  messages: { content: string; role: "system" | "user" | "assistant" }[]
+  messages: { content: string; role: "system" | "user" | "assistant" }[],
 ) {
   return (
     messages

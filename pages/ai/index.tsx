@@ -18,7 +18,7 @@ const AI = () => {
       <div className={styles.container}>
         <div className={styles.chat}>
           <div className={styles.chatLines}>
-            {messages.map((m) => (
+            {messages.map(m => (
               <div
                 key={m.id}
                 className={

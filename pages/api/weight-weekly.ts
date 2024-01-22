@@ -17,8 +17,8 @@ function calculateWeeklyWeights(data: any) {
       const weightEntry = {
         time: allWeightsInWeek[0].time,
         open: allWeightsInWeek[0].open,
-        high: Math.max(...allWeightsInWeek.map((weight) => weight.high)),
-        low: Math.min(...allWeightsInWeek.map((weight) => weight.low)),
+        high: Math.max(...allWeightsInWeek.map(weight => weight.high)),
+        low: Math.min(...allWeightsInWeek.map(weight => weight.low)),
         close: allWeightsInWeek[allWeightsInWeek.length - 1].close,
       };
       weeklyWeights.push(weightEntry);
@@ -30,7 +30,7 @@ function calculateWeeklyWeights(data: any) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>
+  res: NextApiResponse<ResponseData>,
 ) {
   try {
     const docRef = doc(db, "weights", "xw");

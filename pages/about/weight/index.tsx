@@ -21,10 +21,10 @@ import { Weight } from "../../../models/Weight";
 import Loader from "../../../components/Loader";
 
 const Weight = () => {
-  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const fetcher = (url: string) => axios.get(url).then(res => res.data);
   const { data: dailyWeights }: { data: Weight[] } = useSWR(
     "/api/weight-daily",
-    fetcher
+    fetcher,
   );
   const [filters, setFilters] = useState<{ [key: string]: boolean }>({
     2019: false,
@@ -179,7 +179,7 @@ const Weight = () => {
         [key: string]: (number | string) | undefined;
       }[] = [];
 
-      dailyWeights.forEach((weight) => {
+      dailyWeights.forEach(weight => {
         let chartObject = { name: weight.time, weight: weight.close };
         weightCloseArray.push(chartObject);
       });
@@ -197,10 +197,10 @@ const Weight = () => {
       }[] = [];
       const currentYear = dailyWeights[dailyWeights.length - 1].time.substring(
         0,
-        4
+        4,
       );
 
-      dailyWeights.forEach((weight) => {
+      dailyWeights.forEach(weight => {
         if (weight.time.substring(0, 4) == currentYear) {
           let chartObject = { name: weight.time, weight: weight.close };
           weightCloseArray.push(chartObject);
@@ -217,7 +217,7 @@ const Weight = () => {
     const [year, month, day] = dateString.split("-");
     const monthName = new Date(`${year}-${month}-01`).toLocaleString(
       "default",
-      { month: "long" }
+      { month: "long" },
     );
     return `${monthName} ${year}`;
   }
@@ -488,9 +488,9 @@ const Weight = () => {
                   }}
                 />
                 <Legend
-                  onClick={(e) => toggleYear(e.dataKey)}
-                  onPointerEnter={(e) => hoverYear(e.dataKey, true)}
-                  onPointerLeave={(e) => hoverYear(e.dataKey, false)}
+                  onClick={e => toggleYear(e.dataKey)}
+                  onPointerEnter={e => hoverYear(e.dataKey, true)}
+                  onPointerLeave={e => hoverYear(e.dataKey, false)}
                 />
                 <Line
                   type="monotone"

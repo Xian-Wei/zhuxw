@@ -40,7 +40,7 @@ const PositionLine = ({
         return (
           <div className={styles.positionPNLLoss}>
             {(percentageDifference(weightSnapshot, currentWeight) * 20).toFixed(
-              2
+              2,
             )}
             %
           </div>
@@ -66,7 +66,7 @@ const PositionLine = ({
           <div className={styles.positionPNLGain}>
             +
             {(percentageDifference(weightSnapshot, currentWeight) * 20).toFixed(
-              2
+              2,
             )}
             %
           </div>

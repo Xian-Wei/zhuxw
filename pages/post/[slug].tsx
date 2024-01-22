@@ -34,7 +34,7 @@ export default function PostPage({ slug, frontmatter, content }: any) {
 
 export async function getStaticPaths() {
   const files = fs.readdirSync("posts");
-  const paths = files.map((fileName) => ({
+  const paths = files.map(fileName => ({
     params: {
       slug: fileName.replace(".md", ""),
     },

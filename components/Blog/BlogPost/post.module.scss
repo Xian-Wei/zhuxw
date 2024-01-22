@@ -10,7 +10,9 @@
   border-top: 1px solid $secondaryBorder;
   border-left: 0px solid $primaryColor;
   border-right: 0px solid $primaryColor;
-  transition: padding-left 0.1s ease-in-out, height 0.1s ease;
+  transition:
+    padding-left 0.1s ease-in-out,
+    height 0.1s ease;
 
   @media screen and (max-width: $lg) {
     min-height: 100%;

@@ -38,7 +38,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
               },
               width: chartContainerRef.current?.clientWidth,
               height: chartContainerRef.current?.clientHeight,
-            }
+            },
           );
 
           setChart(newChart);

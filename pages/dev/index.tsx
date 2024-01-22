@@ -25,7 +25,7 @@ const Dev = () => {
 
       const result = await axios.get(
         "https://localhost:5000/api/auth/token",
-        config
+        config,
       );
 
       if (result.data == true) return true;
@@ -89,7 +89,7 @@ const Dev = () => {
           {
             username: username,
             password: password,
-          }
+          },
         );
         Auth.storeToken(result.data);
         dispatch(connect());
@@ -109,7 +109,7 @@ const Dev = () => {
     };
 
     return (
-      <form className={styles.formContainer} onSubmit={(e) => login(e)}>
+      <form className={styles.formContainer} onSubmit={e => login(e)}>
         <div>Login</div>
         <div>{statusMessage}</div>
         <input
@@ -117,14 +117,14 @@ const Dev = () => {
           className={styles.formInput}
           placeholder="Username"
           value={username}
-          onChange={(e) => onUsernameChange(e.target.value)}
+          onChange={e => onUsernameChange(e.target.value)}
         />
         <input
           type="text"
           className={styles.formInput}
           placeholder="Password"
           value={password}
-          onChange={(e) => onPasswordChange(e.target.value)}
+          onChange={e => onPasswordChange(e.target.value)}
         />
         <button className={styles.submitButton}>Login</button>
       </form>
@@ -152,7 +152,7 @@ const Dev = () => {
           {
             username: username,
             password: password,
-          }
+          },
         );
         console.log(result);
         setStatusMessage("Success!");
@@ -172,7 +172,7 @@ const Dev = () => {
     };
 
     return (
-      <form className={styles.formContainer} onSubmit={(e) => register(e)}>
+      <form className={styles.formContainer} onSubmit={e => register(e)}>
         <div>Register</div>
         <div>{statusMessage}</div>
         <input
@@ -180,14 +180,14 @@ const Dev = () => {
           className={styles.formInput}
           placeholder="Username"
           value={username}
-          onChange={(e) => onUsernameChange(e.target.value)}
+          onChange={e => onUsernameChange(e.target.value)}
         />
         <input
           type="text"
           className={styles.formInput}
           placeholder="Password"
           value={password}
-          onChange={(e) => onPasswordChange(e.target.value)}
+          onChange={e => onPasswordChange(e.target.value)}
         />
         <button className={styles.submitButton}>Login</button>
       </form>

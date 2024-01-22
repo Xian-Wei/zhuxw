@@ -8,7 +8,8 @@ tags:
   - life
 ---
 
-This is a life snapshot because I have no idea what to write about, and it's been 2 months since my last post.
+This is a life snapshot because I have no idea what to write about, and it's
+been 2 months since my last post.
 
 ### 29th August 2023, 23:36
 
@@ -45,7 +46,8 @@ This is a life snapshot because I have no idea what to write about, and it's bee
 - **Honkai Star Rail**
   - Waiting for my queens Jingliu and Topaz
 - **Blue Archive**
-  - Playing for Toki (had to reach pity 5 days ago), Bunny Toki and Swimsuit Shiroko
+  - Playing for Toki (had to reach pity 5 days ago), Bunny Toki and Swimsuit
+    Shiroko
 - **Waiting for potential good games to come out**
   - Just played Ratchet & Clank: Rift Apart and Volcano Princess - both great
 

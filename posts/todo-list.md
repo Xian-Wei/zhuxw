@@ -1,7 +1,8 @@
 ---
 id: 2
 title: "To-Do list"
-description: "This is a To-Do list in case I'm lost in what I was planning on doing before"
+description:
+  "This is a To-Do list in case I'm lost in what I was planning on doing before"
 image: images/blog/thumbnails/tired.png
 date: "2023-01-04"
 tags:
@@ -15,8 +16,10 @@ tags:
 - ~~Low opacity background image to blend with the background~~
 - ~~Responsive navbar + transparent with blur~~
 - ~~Footer~~
-- ~~Rework layouts (Have a main layout with header and footer and children layouts)~~
-- ~~Page transition doesn't work when switching to other pages (feature not a bug ?)~~
+- ~~Rework layouts (Have a main layout with header and footer and children
+  layouts)~~
+- ~~Page transition doesn't work when switching to other pages (feature not a
+  bug ?)~~
 - ~~Navbar transition on hamburger click + window resize~~
 - ~~Add option in Layout component to hide header/footer~~
 - ~~Add Head content to all pages~~
@@ -35,7 +38,8 @@ tags:
 
 **Blog**
 
-- ~~Make own card for blog posts in blog tab and put it as a separate component~~
+- ~~Make own card for blog posts in blog tab and put it as a separate
+  component~~
 - ~~4 highlighted posts on top, horizontal scrollbar when mobile~~
 - ~~Full post list + tag filters and search bar~~
 - ~~Remove highlighted posts for mobile~~
@@ -75,7 +79,8 @@ tags:
 
 **Reverse Lottery**
 
-- Same entry fee for everyone, everyone but one person gets their money back. The rest is split amongst the winners.
+- Same entry fee for everyone, everyone but one person gets their money back.
+  The rest is split amongst the winners.
 
 **Chess 2**
 

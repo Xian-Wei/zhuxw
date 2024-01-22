@@ -14,7 +14,8 @@ I have just "invested" 300 dollars each in 7 different shitcoins.
 
 Now, you may be wondering, why on earth would I buy shitcoins ?
 
-I've been struggling to find post ideas in 2023, so this will provide me with an easy monthly post to ensure that my blog doesn't gather dust.
+I've been struggling to find post ideas in 2023, so this will provide me with an
+easy monthly post to ensure that my blog doesn't gather dust.
 
 ## Why these coins and why $2100 ?
 
@@ -23,17 +24,21 @@ The 7, representing the number of coins, adds a jackpot vibe with 777.
 
 As for why I chose these coins, the reasoning behind it is very straightforward.
 
-I picked them solely because their logo looks cool, and their names exude pure badassery.
+I picked them solely because their logo looks cool, and their names exude pure
+badassery.
 
 That's it, there's nothing more to it.
 
 ## Challenge details
 
-I will be posting my PnL (Profit and Loss) monthly, ranking them from the best to the worst performer (monthly and overall).
+I will be posting my PnL (Profit and Loss) monthly, ranking them from the best
+to the worst performer (monthly and overall).
 
-To maintain consistency, snapshots will always be taken on the first of every month.
+To maintain consistency, snapshots will always be taken on the first of every
+month.
 
-These coins were bought 30 minutes ago, precisely from 1:00 PM to 2:00 PM on January 1st 2024.
+These coins were bought 30 minutes ago, precisely from 1:00 PM to 2:00 PM on
+January 1st 2024.
 
 Without further ado, this is my shitcoin portfolio :
 

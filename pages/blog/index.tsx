@@ -38,8 +38,8 @@ export default function Blog({ posts }: PostProps) {
     let newSearchedPosts: Post[] = [];
 
     if (search != "") {
-      newSearchedPosts = posts?.filter((post) =>
-        post.frontmatter.title.toLowerCase().includes(search.toLowerCase())
+      newSearchedPosts = posts?.filter(post =>
+        post.frontmatter.title.toLowerCase().includes(search.toLowerCase()),
       );
     } else {
       newSearchedPosts = posts;
@@ -53,10 +53,10 @@ export default function Blog({ posts }: PostProps) {
   // The first time a tag is clicked on, all other tags will be disabled
   const toggleTag = (name: string) => {
     let newTagStates: BlogPostTagState[] = [...tagStates];
-    let index = tagStates.findIndex((tag) => tag.name === name);
+    let index = tagStates.findIndex(tag => tag.name === name);
 
     if (firstFilter) {
-      newTagStates.forEach((tagState) => (tagState.enabled = false));
+      newTagStates.forEach(tagState => (tagState.enabled = false));
       setFirstFilter(false);
     }
 
@@ -69,9 +69,9 @@ export default function Blog({ posts }: PostProps) {
   const setAllTags = (posts: Post[]) => {
     let tempTagStates: BlogPostTagState[] = [];
 
-    posts.forEach((post) => {
-      post.frontmatter.tags.forEach((tagName) => {
-        if (!tempTagStates.some((tagState) => tagState.name === tagName)) {
+    posts.forEach(post => {
+      post.frontmatter.tags.forEach(tagName => {
+        if (!tempTagStates.some(tagState => tagState.name === tagName)) {
           tempTagStates.push({ name: tagName, enabled: true });
         }
       });
@@ -133,7 +133,7 @@ export default function Blog({ posts }: PostProps) {
             ?.slice(0, 100)
             .reverse()
             .slice(0, 4)
-            .map((post) => (
+            .map(post => (
               <SwiperSlide
                 className={styles.swiperSlide}
                 key={post.frontmatter.id}
@@ -155,7 +155,7 @@ export default function Blog({ posts }: PostProps) {
             ?.slice(0, 100)
             .reverse()
             .slice(0, 4)
-            .map((post) => (
+            .map(post => (
               <BlogCard
                 key={post.frontmatter.id}
                 slug={post.slug}
@@ -175,7 +175,7 @@ export default function Blog({ posts }: PostProps) {
               {filteredPosts
                 ?.slice()
                 .reverse()
-                .map((post) => (
+                .map(post => (
                   <BlogPost
                     key={post.frontmatter.id}
                     slug={post.slug}
@@ -190,7 +190,7 @@ export default function Blog({ posts }: PostProps) {
               <input
                 type="text"
                 className={styles.searchInput}
-                onChange={(e) => {
+                onChange={e => {
                   onSearch(e.target.value);
                 }}
               />
@@ -199,7 +199,7 @@ export default function Blog({ posts }: PostProps) {
               <div className={styles.filterTitle}>Tags</div>
               <div className={styles.tags}>
                 {tagStates.length > 0 &&
-                  tagStates?.map((tagState) => (
+                  tagStates?.map(tagState => (
                     <BlogPostTag
                       tagState={tagState}
                       toggle={() => toggleTag(tagState.name)}
@@ -217,7 +217,7 @@ export default function Blog({ posts }: PostProps) {
 
 export async function getStaticProps() {
   const files = fs.readdirSync("posts");
-  const posts: Post[] = files.map((fileName) => {
+  const posts: Post[] = files.map(fileName => {
     const slug = fileName.replace(".md", "");
     const readFile = fs.readFileSync(`posts/${fileName}`, "utf-8");
     const { data: frontmatter }: any = matter(readFile);

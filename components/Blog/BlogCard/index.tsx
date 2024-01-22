@@ -27,7 +27,7 @@ const BlogCard = ({ slug, image, title, description, tags }: BlogCardProps) => {
           <div className={styles.title}>{title}</div>
           <div className={styles.description}>{description}</div>
           <div className={styles.tags}>
-            {tags?.map((tag) => {
+            {tags?.map(tag => {
               return (
                 <div className={styles.tag} key={tag}>
                   {tag}
