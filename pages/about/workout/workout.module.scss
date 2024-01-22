@@ -11,7 +11,7 @@
   padding: 20px 30px 20px 30px;
 
   @media screen and (max-width: $lg) {
-    gap: 20px;
+    gap: 35px;
     padding: 20px;
   }
 }
@@ -46,6 +46,21 @@
   align-items: center;
   width: 100%;
   background-color: $bodyBackgroundHover;
+}
+
+.biggerBlock {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 70%;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 22px 70px 4px;
+
+  @media screen and (max-width: $lg) {
+    height: 500px;
+    width: 100%;
+  }
 }
 
 .topInfos {

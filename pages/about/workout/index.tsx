@@ -10,7 +10,12 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  PieChart,
+  Pie,
+  Cell,
 } from "recharts";
+import useIsWidth from "../../../hooks/useIsWidth";
+import { WindowWidth } from "../../../models/WindowWidth";
 
 interface WorkoutItem {
   muscle: string;
@@ -24,6 +29,7 @@ const Workout = () => {
     "/api/workout",
     fetcher,
   );
+  const isWidth = useIsWidth(WindowWidth.md);
 
   const getWorkoutsByMonth = () => {
     let allWorkoutsCounts: WorkoutItem[][] = [[]];
@@ -148,6 +154,43 @@ const Workout = () => {
     } else return 0;
   };
 
+  const countMuscles = (
+    threshold: number,
+  ): {
+    name: string;
+    value: number;
+  }[] => {
+    const muscleCount: { [key: string]: number } = {};
+
+    workouts.forEach((workout: WorkoutItem) => {
+      const muscles = workout.muscle.split(" & ");
+
+      muscles.forEach((muscle: string) => {
+        muscleCount[muscle] = (muscleCount[muscle] || 0) + 1;
+      });
+    });
+
+    const result: {
+      name: string;
+      value: number;
+    }[] = Object.entries(muscleCount)
+      .filter(([name, value]) => value >= threshold)
+      .map(([name, value]) => ({
+        name,
+        value,
+      }));
+
+    const othersCount = Object.entries(muscleCount)
+      .filter(([name, value]) => value < threshold)
+      .reduce((sum, [, value]) => sum + value, 0);
+
+    if (othersCount > 0) {
+      result.push({ name: "Others", value: othersCount });
+    }
+
+    return result;
+  };
+
   function formatDateAgo(inputDate: string): string {
     const currentDate = new Date();
     const inputDateObject = new Date(inputDate);
@@ -185,6 +228,40 @@ const Workout = () => {
     workouts && workouts.length > 0 ? getWorkoutCountForWeek() : 0;
   const workoutCountsForMonth =
     workouts && workouts.length > 0 ? getWorkoutCountForMonth() : 0;
+  const musclePieData = workouts && workouts ? countMuscles(10) : [];
+
+  const COLORS = [
+    "#0088FE",
+    "#00C49F",
+    "#FFBB28",
+    "#FF8042",
+    "#AF19FF",
+    "#FF0000",
+    "#36a2eb",
+    "#4bc0c0",
+    "#9966CC",
+    "#FFD700",
+  ];
+
+  const CustomTooltip = ({ active, payload }: any) => {
+    if (active) {
+      return (
+        <div
+          style={{
+            backgroundColor: "rgb(20, 20, 40)",
+            padding: "10px",
+            border: "1px solid rgb(80, 80, 160)",
+          }}
+        >
+          <p>
+            {payload[0].name}: {payload[0].value}
+          </p>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <>
@@ -243,6 +320,35 @@ const Workout = () => {
               <Bar dataKey="gym" fill="#8884d8" />
               <Bar dataKey="home" fill="#82ca9d" />
             </BarChart>
+          </ResponsiveContainer>
+        </div>
+        <div className={styles.biggerBlock}>
+          <div className={styles.blockTitle}>Muscle activity trends</div>
+          <ResponsiveContainer>
+            <PieChart width={400} height={400}>
+              <Pie
+                dataKey="value"
+                isAnimationActive={true}
+                data={musclePieData}
+                outerRadius={isWidth ? 170 : 100}
+                fill="#8884d8"
+                label
+              >
+                {musclePieData.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                    style={{ outline: "none" }}
+                  />
+                ))}
+              </Pie>
+              <Tooltip content={<CustomTooltip />} />
+              <Legend
+                layout={isWidth ? "vertical" : "horizontal"}
+                verticalAlign={isWidth ? "top" : "bottom"}
+                align={isWidth ? "right" : "center"}
+              />
+            </PieChart>
           </ResponsiveContainer>
         </div>
       </div>
