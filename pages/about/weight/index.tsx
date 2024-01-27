@@ -278,11 +278,6 @@ const Weight = () => {
     dailyWeights && dailyWeights.length > 0
       ? dailyWeights[dailyWeights.length - 1].close
       : 0;
-  const dailyChange =
-    dailyWeights && dailyWeights.length > 0
-      ? dailyWeights[dailyWeights.length - 1].close -
-        dailyWeights[dailyWeights.length - 2].close
-      : 0;
   const weeklyChange =
     dailyWeights && dailyWeights.length > 0
       ? dailyWeights[dailyWeights.length - 1].close -
@@ -292,6 +287,10 @@ const Weight = () => {
     dailyWeights && dailyWeights.length > 0
       ? dailyWeights[dailyWeights.length - 1].close -
         dailyWeights[dailyWeights.length - 30].close
+      : 0;
+  const yearlyChange =
+    dailyWeights && dailyWeights.length > 0
+      ? getGainLossByYear()[getGainLossByYear().length - 1].kilogram
       : 0;
 
   return (
@@ -306,22 +305,20 @@ const Weight = () => {
               </div>
             </div>
             <div className={styles.topInfoItem}>
-              1D change
-              <div className={styles.topInfoText}>
-                {dailyChange.toFixed(2)} KG
-              </div>
-            </div>
-            <div className={styles.topInfoItem}>
-              7D change
+              Weekly change
               <div className={styles.topInfoText}>
                 {weeklyChange.toFixed(2)} KG
               </div>
             </div>
             <div className={styles.topInfoItem}>
-              30D change
+              Monthly change
               <div className={styles.topInfoText}>
                 {monthlyChange.toFixed(2)} KG
               </div>
+            </div>
+            <div className={styles.topInfoItem}>
+              Yearly change
+              <div className={styles.topInfoText}>{yearlyChange} KG</div>
             </div>
           </div>
           <div className={styles.block}>
