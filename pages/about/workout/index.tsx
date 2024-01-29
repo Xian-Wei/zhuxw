@@ -16,12 +16,7 @@ import {
 } from "recharts";
 import useIsWidth from "../../../hooks/useIsWidth";
 import { WindowWidth } from "../../../models/WindowWidth";
-
-interface WorkoutItem {
-  muscle: string;
-  gym: boolean;
-  date: string;
-}
+import { WorkoutItem } from "../../../models/WorkoutItem";
 
 const Workout = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
