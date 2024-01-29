@@ -12,7 +12,7 @@ export const siteTitle = "Xian-Wei Zhu";
 const pages = ["Dashboard", "Weight", "Workout"];
 
 const About = () => {
-  const [selectedPage, setSelectedPage] = useState<string>("Workout");
+  const [selectedPage, setSelectedPage] = useState<string>("Dashboard");
 
   const renderPage = () => {
     switch (selectedPage) {
