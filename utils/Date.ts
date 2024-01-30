@@ -24,3 +24,10 @@ export function formatDateAgo(inputDate: string): string {
     return `${daysAgo} days ago`;
   }
 }
+
+export function getCurrentMonth(): string {
+  const currentDate = new Date();
+  const monthIndex = currentDate.getMonth() + 1;
+  const formattedMonth = monthIndex.toString().padStart(2, "0");
+  return formattedMonth;
+}

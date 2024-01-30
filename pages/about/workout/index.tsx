@@ -17,7 +17,11 @@ import {
 import useIsWidth from "../../../hooks/useIsWidth";
 import { WindowWidth } from "../../../models/WindowWidth";
 import { WorkoutItem } from "../../../models/WorkoutItem";
-import { formatDateAgo, getThisWeekMonday } from "../../../utils/Date";
+import {
+  formatDateAgo,
+  getCurrentMonth,
+  getThisWeekMonday,
+} from "../../../utils/Date";
 
 const Workout = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
@@ -100,13 +104,6 @@ const Workout = () => {
 
     return chartData;
   };
-
-  function getCurrentMonth(): string {
-    const currentDate = new Date();
-    const monthIndex = currentDate.getMonth() + 1;
-    const formattedMonth = monthIndex.toString().padStart(2, "0");
-    return formattedMonth;
-  }
 
   const getWorkoutCountForWeek = () => {
     const thisMondayDay = getThisWeekMonday(new Date()).getDate();
