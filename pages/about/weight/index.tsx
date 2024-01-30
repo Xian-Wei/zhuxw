@@ -19,6 +19,7 @@ import useSWR from "swr";
 import axios from "axios";
 import { Weight } from "../../../models/Weight";
 import Loader from "../../../components/Loader";
+import { formatDateLongMonth } from "../../../utils/Date";
 
 const Weight = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
@@ -213,15 +214,6 @@ const Weight = () => {
     }
   };
 
-  function formatDate(dateString: string): string {
-    const [year, month, day] = dateString.split("-");
-    const monthName = new Date(`${year}-${month}-01`).toLocaleString(
-      "default",
-      { month: "long" },
-    );
-    return `${monthName} ${year}`;
-  }
-
   const getGainLossByMonth = () => {
     const weightsByMonth = getWeightsByMonth();
     let chartData: { [key: string]: (number | string) | undefined }[] = [];
@@ -234,7 +226,7 @@ const Weight = () => {
       ).toFixed(1);
 
       chartEntry = {
-        name: formatDate(weightsByMonth[i][0].time),
+        name: formatDateLongMonth(weightsByMonth[i][0].time),
         kilogram: -gainLoss,
       };
 

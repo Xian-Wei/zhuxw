@@ -19,6 +19,7 @@ import { WindowWidth } from "../../../models/WindowWidth";
 import { WorkoutItem } from "../../../models/WorkoutItem";
 import {
   formatDateAgo,
+  formatDateLongMonth,
   getCurrentMonth,
   getThisWeekMonday,
 } from "../../../utils/Date";
@@ -67,15 +68,6 @@ const Workout = () => {
     return allWorkoutsCounts;
   };
 
-  function formatDate(dateString: string): string {
-    const [year, month, day] = dateString.split("-");
-    const monthName = new Date(`${year}-${month}-01`).toLocaleString(
-      "default",
-      { month: "long" },
-    );
-    return `${monthName} ${year}`;
-  }
-
   const getChartDataWithGymSort = (
     workouts: WorkoutItem[][],
     dateFormatWithMonth: boolean,
@@ -95,7 +87,7 @@ const Workout = () => {
 
       chartData.push({
         name: dateFormatWithMonth
-          ? formatDate(workouts[i][0].date)
+          ? formatDateLongMonth(workouts[i][0].date)
           : workouts[i][0].date.substring(0, 4),
         gym: gym,
         home: notGym,

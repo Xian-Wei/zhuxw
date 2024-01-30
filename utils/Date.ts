@@ -25,6 +25,14 @@ export function formatDateAgo(inputDate: string): string {
   }
 }
 
+export function formatDateLongMonth(dateString: string): string {
+  const [year, month, day] = dateString.split("-");
+  const monthName = new Date(`${year}-${month}-01`).toLocaleString("default", {
+    month: "long",
+  });
+  return `${monthName} ${year}`;
+}
+
 export function getCurrentMonth(): string {
   const currentDate = new Date();
   const monthIndex = currentDate.getMonth() + 1;
