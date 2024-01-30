@@ -1,46 +1,59 @@
 @import "../../../styles/constants.module.scss";
 
-.container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  z-index: inherit;
-}
-
 .content {
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  height: 100%;
   width: 100%;
   padding: 20px;
   z-index: inherit;
 }
 
-.gridContainer {
+.topInfos {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  height: 100px;
+  width: 85%;
 
-  @media screen and (max-width: $md) {
-    grid-template-columns: repeat(1, 4fr);
+  @media screen and (max-width: $lg) {
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
 }
 
-.gridItem {
+.topInfoItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  padding-block: 10px;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+  font-size: 21px;
+  font-weight: 500;
+
+  @media screen and (max-width: $md) {
+    flex-direction: column;
+    justify-content: center;
+    gap: 3px;
+    font-size: 16px;
+  }
+}
+
+.topInfoText {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
-  width: 200px;
-  text-align: center;
-  background-color: $primaryBackground;
-  box-shadow:
-    rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
-    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  padding-left: 8px;
+  font-size: 22px;
+  font-weight: 700;
 
   @media screen and (max-width: $md) {
-    height: 150px;
-    width: 150px;
+    padding-left: 6px;
+    font-size: 16px;
   }
 }
