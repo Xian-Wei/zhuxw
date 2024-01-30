@@ -39,3 +39,9 @@ export function getCurrentMonth(): string {
   const formattedMonth = monthIndex.toString().padStart(2, "0");
   return formattedMonth;
 }
+
+export function getCurrentYear(): string {
+  const currentYear = new Date();
+
+  return currentYear.getFullYear().toString();
+}

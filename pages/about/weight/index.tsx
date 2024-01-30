@@ -19,7 +19,12 @@ import useSWR from "swr";
 import axios from "axios";
 import { Weight } from "../../../models/Weight";
 import Loader from "../../../components/Loader";
-import { formatDateLongMonth } from "../../../utils/Date";
+import {
+  formatDateLongMonth,
+  getCurrentMonth,
+  getCurrentYear,
+  getThisWeekMonday,
+} from "../../../utils/Date";
 
 const Weight = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
@@ -258,6 +263,41 @@ const Weight = () => {
     return chartData;
   };
 
+  const getWeightChangeForWeek = () => {
+    const thisMondayDay = getThisWeekMonday(
+      new Date(dailyWeights[dailyWeights.length - 1].time),
+    ).getDate();
+
+    const mondayWeight = dailyWeights
+      .slice()
+      .reverse()
+      .find(weight => weight.time.substring(8, 10) == thisMondayDay.toString());
+
+    if (mondayWeight) {
+      return dailyWeights[dailyWeights.length - 1].close - mondayWeight.close;
+    } else {
+      return 0;
+    }
+  };
+
+  const getWeightChangeForMonth = () => {
+    const firstDayOfMonth = getCurrentYear() + "-" + getCurrentMonth() + "-01";
+
+    const firstDayOfMonthWeight = dailyWeights
+      .slice()
+      .reverse()
+      .find(weight => weight.time == firstDayOfMonth);
+
+    if (firstDayOfMonthWeight) {
+      return (
+        dailyWeights[dailyWeights.length - 1].close -
+        firstDayOfMonthWeight.close
+      );
+    } else {
+      return 0;
+    }
+  };
+
   const chartDataUnfiltered = getChartDataUnfiltered();
   const chartDataForCurrentYear = getChartDataForCurrentYear();
   const chartDataByYear =
@@ -273,15 +313,9 @@ const Weight = () => {
       ? dailyWeights[dailyWeights.length - 1].close
       : 0;
   const weeklyChange =
-    dailyWeights && dailyWeights.length > 0
-      ? dailyWeights[dailyWeights.length - 1].close -
-        dailyWeights[dailyWeights.length - 7].close
-      : 0;
+    dailyWeights && dailyWeights.length > 0 ? getWeightChangeForWeek() : 0;
   const monthlyChange =
-    dailyWeights && dailyWeights.length > 0
-      ? dailyWeights[dailyWeights.length - 1].close -
-        dailyWeights[dailyWeights.length - 30].close
-      : 0;
+    dailyWeights && dailyWeights.length > 0 ? getWeightChangeForMonth() : 0;
   const yearlyChange =
     dailyWeights && dailyWeights.length > 0
       ? getGainLossByYear()[getGainLossByYear().length - 1].kilogram
