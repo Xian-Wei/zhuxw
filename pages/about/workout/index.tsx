@@ -32,7 +32,7 @@ const Workout = () => {
   );
   const isWidth = useIsWidth(WindowWidth.md);
 
-  const getWorkoutsByMonth = () => {
+  const getWorkoutsPerMonth = () => {
     let allWorkoutsCounts: WorkoutItem[][] = [[]];
     let currentMonth = "09";
     let monthIndex = 0;
@@ -50,7 +50,7 @@ const Workout = () => {
     return allWorkoutsCounts;
   };
 
-  const getWorkoutsByYear = () => {
+  const getWorkoutsPerYear = () => {
     let allWorkoutsCounts: WorkoutItem[][] = [[]];
     let currentYear = "2019";
     let yearIndex = 0;
@@ -68,7 +68,7 @@ const Workout = () => {
     return allWorkoutsCounts;
   };
 
-  const getChartDataWithGymSort = (
+  const getChartDataSortedByHomeOrGym = (
     workouts: WorkoutItem[][],
     dateFormatWithMonth: boolean,
   ) => {
@@ -168,11 +168,11 @@ const Workout = () => {
 
   const workoutsPerMonth =
     workouts && workouts.length > 0
-      ? getChartDataWithGymSort(getWorkoutsByMonth(), true)
+      ? getChartDataSortedByHomeOrGym(getWorkoutsPerMonth(), true)
       : [];
   const workoutsPerYear =
     workouts && workouts.length > 0
-      ? getChartDataWithGymSort(getWorkoutsByYear(), false)
+      ? getChartDataSortedByHomeOrGym(getWorkoutsPerYear(), false)
       : [];
   const lastWorkout =
     workouts && workouts.length > 0

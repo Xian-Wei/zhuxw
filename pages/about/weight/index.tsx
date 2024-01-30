@@ -89,7 +89,7 @@ const Weight = () => {
     }
   };
 
-  const getChartDataByYear = () => {
+  const getChartDataSeparatedByYear = () => {
     let weightsByYear: Weight[][] | null = getWeightsByYear();
     let chartData: { [key: string]: (number | string) | undefined }[] = [];
     let chartEntry: { [key: string]: (number | string) | undefined };
@@ -174,7 +174,7 @@ const Weight = () => {
     }
   };
 
-  const getChartData = () => {
+  const getChartDataUnfiltered = () => {
     if (dailyWeights && dailyWeights.length > 0) {
       const weightCloseArray: {
         [key: string]: (number | string) | undefined;
@@ -258,10 +258,12 @@ const Weight = () => {
     return chartData;
   };
 
-  const chartData = getChartData();
+  const chartDataUnfiltered = getChartDataUnfiltered();
   const chartDataForCurrentYear = getChartDataForCurrentYear();
   const chartDataByYear =
-    dailyWeights && dailyWeights.length > 0 ? getChartDataByYear() : [];
+    dailyWeights && dailyWeights.length > 0
+      ? getChartDataSeparatedByYear()
+      : [];
   const gainLossByMonth =
     dailyWeights && dailyWeights.length > 0 ? getGainLossByMonth() : [];
   const gainLossByYear =
@@ -360,7 +362,7 @@ const Weight = () => {
               width="100%"
             >
               <AreaChart
-                data={chartData}
+                data={chartDataUnfiltered}
                 margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
               >
                 <XAxis
