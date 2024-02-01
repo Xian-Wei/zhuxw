@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./workout.module.scss";
 import useSWR from "swr";
 import axios from "axios";
@@ -256,8 +256,8 @@ const Workout = () => {
                 }}
               />
               <Legend />
-              <Bar dataKey="gym" fill="#8884d8" />
-              <Bar dataKey="home" fill="#82ca9d" />
+              <Bar dataKey="gym" stackId={"Workout"} fill="#8884d8" />
+              <Bar dataKey="home" stackId={"Workout"} fill="#f3a24b" />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -276,7 +276,7 @@ const Workout = () => {
               />
               <Legend />
               <Bar dataKey="gym" fill="#8884d8" />
-              <Bar dataKey="home" fill="#82ca9d" />
+              <Bar dataKey="home" fill="#f3a24b" />
             </BarChart>
           </ResponsiveContainer>
         </div>
