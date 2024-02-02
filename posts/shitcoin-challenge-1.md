@@ -1,11 +1,12 @@
 ---
 id: 10
-title: "Shitcoin Challenge Update: Month 1"
+title: "Shitcoin Challenge: Month 1"
 description: "An unfortunate update to my net worth."
 image: images/blog/thumbnails/sadge.png
 date: "2024-01-02"
 tags:
   - crypto
+  - shitcoin
 ---
 
 Was it FOMO that led me to embark on this stupid challenge ?

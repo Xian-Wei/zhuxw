@@ -1,11 +1,12 @@
 ---
 id: 9
-title: "$2100 shitcoin challenge"
+title: "$2100 Shitcoin Challenge"
 description: "Watch me lose 2100 dollars in record time."
 image: images/blog/thumbnails/shitcoin.png
 date: "2024-01-01"
 tags:
   - crypto
+  - shitcoin
 ---
 
 ## Introduction
