@@ -11,7 +11,7 @@ tags:
 
 Was it FOMO that led me to embark on this stupid challenge ?
 
-Fear, uncertainty and doubt is a perfect description of my emotions during this
+Fear, uncertainty and doubt are a perfect description of my emotions during this
 soul-crushing month of watching my net worth nosedive.
 
 # 2024 is off to a great start
@@ -24,13 +24,13 @@ portfolio of 7 random coins.
 I thought perhaps I had discovered a newfound investing genius ? \
 Could I be the next Warren Buffett ?
 
-Spoiler alert: that optimism aged like milk left out in the counter.
+Spoiler alert: that optimism aged like milk left out on the counter.
 
 It was a downward spiral. Literally.
 
 ![Loss](/images/blog/10-chart.png)
 
-It was like riding an rollercoaster, except that it doesn't go up and down, it
+It was like riding a rollercoaster, except that it doesn't go up and down, it
 goes **STRAIGHT DOWN**.
 
 The day following my gains, I opened my app to a sea of crimson red and my gains
