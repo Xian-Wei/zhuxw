@@ -9,6 +9,13 @@
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+
+  @media screen and (max-width: $sm) {
+    width: 16px;
+    height: 16px;
+    border: 2px solid #fff;
+    border-bottom-color: transparent;
+  }
 }
 
 @keyframes rotation {
