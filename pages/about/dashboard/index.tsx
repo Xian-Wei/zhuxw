@@ -6,6 +6,7 @@ import useSWR from "swr";
 import { WorkoutItem } from "../../../models/WorkoutItem";
 import { formatDateAgo, getCurrentMonth } from "../../../utils/Date";
 import useIsMetamaskInstalled from "../../../hooks/useIsMetamaskInstalled";
+import LoadingAnimation from "../../../components/LoadingAnimation";
 
 const Dashboard = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
@@ -63,19 +64,27 @@ const Dashboard = () => {
       <div className={styles.topInfos}>
         <div className={styles.topInfoItem}>
           Today&apos;s weight
-          <div className={styles.topInfoText}>{todayWeight} KG</div>
+          <div className={styles.topInfoText}>
+            {dailyWeights ? `${todayWeight} KG` : <LoadingAnimation />}
+          </div>
         </div>
         <div className={styles.topInfoItem}>
           Weight trend
-          <div className={styles.topInfoText}>{weightTrend}</div>
+          <div className={styles.topInfoText}>
+            {dailyWeights ? weightTrend : <LoadingAnimation />}
+          </div>
         </div>
         <div className={styles.topInfoItem}>
           Last workout
-          <div className={styles.topInfoText}>{lastWorkout}</div>
+          <div className={styles.topInfoText}>
+            {workouts ? lastWorkout : <LoadingAnimation />}
+          </div>
         </div>
         <div className={styles.topInfoItem}>
           Workouts (month)
-          <div className={styles.topInfoText}>{workoutCountsForMonth}</div>
+          <div className={styles.topInfoText}>
+            {workouts ? workoutCountsForMonth : <LoadingAnimation />}
+          </div>
         </div>
       </div>
     </div>
