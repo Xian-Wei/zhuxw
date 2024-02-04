@@ -16,9 +16,10 @@ export default function PostPage({ slug, frontmatter, content }: any) {
           description={frontmatter.description}
           url={`https://zhuxw.com/post/${slug}`}
           type="article"
+          image={`/${frontmatter.image}`}
         />
       </Head>
-      <div className="prose prose-invert mx-auto py-10 px-5">
+      <article className="prose prose-invert mx-auto py-10 px-5">
         <h1>{frontmatter.title}</h1>
         <Image
           width={600}
@@ -27,7 +28,7 @@ export default function PostPage({ slug, frontmatter, content }: any) {
           src={`/${frontmatter.image}`}
         />
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
-      </div>
+      </article>
     </Layout>
   );
 }
