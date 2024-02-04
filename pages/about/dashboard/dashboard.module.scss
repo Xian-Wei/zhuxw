@@ -2,8 +2,9 @@
 
 .content {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   height: 100%;
   width: 100%;
   padding: 20px;
@@ -16,11 +17,17 @@
   gap: 10px;
   height: 100px;
   width: 85%;
+  margin-bottom: 20px;
 
   @media screen and (max-width: $lg) {
+    height: 200px;
     width: 100%;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: $md) {
+    height: 150px;
   }
 }
 
@@ -57,5 +64,50 @@
     height: 20px;
     padding-left: 6px;
     font-size: 16px;
+  }
+}
+
+.charts {
+  display: flex;
+  flex-direction: row;
+  min-height: 300px;
+  width: 90%;
+  margin-block: 5px;
+  gap: 10px;
+
+  @media screen and (max-width: $lg) {
+    flex-direction: column;
+    min-height: 400px;
+    width: 100%;
+  }
+}
+
+.chart {
+  display: flex;
+  flex: 0.3;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.5;
+    width: 100%;
+  }
+}
+
+.chartLarge {
+  display: flex;
+  flex: 0.7;
+  justify-content: center;
+  align-items: center;
+  width: 700px;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+
+  @media screen and (max-width: $lg) {
+    flex: 0.5;
+    width: 100%;
   }
 }

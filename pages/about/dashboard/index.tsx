@@ -87,6 +87,18 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <div className={styles.charts}>
+        {/* Bar chart  */}
+        <div className={styles.chart}>Monthly weights</div>
+        {/* AreaChartFillByValue */}
+        <div className={styles.chartLarge}>Weight variation 30 days</div>
+      </div>
+      <div className={styles.charts}>
+        {/* List of strings */}
+        <div className={styles.chart}>Latest workouts</div>
+        {/* Bar chart  */}
+        <div className={styles.chartLarge}>Time between each workout</div>
+      </div>
     </div>
   );
 };

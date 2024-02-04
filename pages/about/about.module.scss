@@ -3,14 +3,14 @@
 .container {
   display: flex;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 90vh;
   width: 100%;
   z-index: inherit;
 }
 
 .content {
   display: flex;
-  min-height: 100%;
+  min-height: 85%;
   width: 100%;
   z-index: inherit;
 }
