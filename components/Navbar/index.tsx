@@ -37,7 +37,7 @@ const Navbar = () => {
         </Link>
       </nav>
       <nav className={styles.middleContainer}>
-        <Link href="/about" className={styles.link}>
+        <Link href="/weight" className={styles.link}>
           About
         </Link>
         <Link href="/blog" className={styles.link}>
@@ -73,7 +73,7 @@ const Navbar = () => {
       <nav className={navbarToggle ? styles.fadeIn : styles.fadeOut}>
         <div className={styles.mobileLinks}>
           <Link
-            href="/about"
+            href="/weight"
             className={styles.mobileLink}
             onClick={() => setNavbarToggle(false)}
           >
