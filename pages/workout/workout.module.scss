@@ -110,7 +110,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 8px;
   font-size: 22px;
   font-weight: 700;
   height: 35px;
@@ -118,7 +117,6 @@
 
   @media screen and (max-width: $md) {
     height: 2ch;
-    padding-left: 6px;
     font-size: 16px;
   }
 }
@@ -145,9 +143,14 @@
   height: 37px;
   width: 100%;
   padding-inline: 20px;
+  border-bottom: 1px solid $primaryBorder;
 
   &:hover {
     background-color: $primaryBorder;
+  }
+
+  &:last-child {
+    border-bottom: none;
   }
 
   @media screen and (max-width: $md) {

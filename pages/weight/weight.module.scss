@@ -95,7 +95,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-left: 8px;
   font-size: 22px;
   font-weight: 700;
   height: 35px;
@@ -103,7 +102,6 @@
 
   @media screen and (max-width: $md) {
     height: 2ch;
-    padding-left: 6px;
     font-size: 16px;
   }
 }

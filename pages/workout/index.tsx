@@ -257,15 +257,27 @@ const Workout = () => {
               </div>
             </div>
             <div className={styles.topInfoItem}>
-              Sessions this week
+              This week
               <div className={styles.topInfoText}>
-                {workouts ? `${workoutCountsForWeek}` : <LoadingAnimation />}
+                {workouts ? (
+                  `${workoutCountsForWeek} ${
+                    workoutCountsForWeek > 1 ? "workouts" : "workout"
+                  }`
+                ) : (
+                  <LoadingAnimation />
+                )}
               </div>
             </div>
             <div className={styles.topInfoItem}>
-              Sessions this month
+              This month
               <div className={styles.topInfoText}>
-                {workouts ? `${workoutCountsForMonth}` : <LoadingAnimation />}
+                {workouts ? (
+                  `${workoutCountsForMonth} ${
+                    workoutCountsForMonth > 1 ? "workouts" : "workout"
+                  }`
+                ) : (
+                  <LoadingAnimation />
+                )}
               </div>
             </div>
           </div>
