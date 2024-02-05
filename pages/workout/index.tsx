@@ -243,46 +243,33 @@ const Workout = () => {
       </Head>
       <div className={styles.container}>
         <div className={styles.content}>
-          <div className={styles.topInfos}>
-            <div className={styles.topInfoItem}>
-              Last workout
-              <div className={styles.topInfoText}>
-                {workouts ? `${lastWorkout}` : <LoadingAnimation />}
-              </div>
-            </div>
-            <div className={styles.topInfoItem}>
-              Muscle worked
-              <div className={styles.topInfoText}>
-                {workouts ? `${lastMuscleWorked}` : <LoadingAnimation />}
-              </div>
-            </div>
-            <div className={styles.topInfoItem}>
-              This week
-              <div className={styles.topInfoText}>
-                {workouts ? (
-                  `${workoutCountsForWeek} ${
-                    workoutCountsForWeek > 1 ? "workouts" : "workout"
-                  }`
-                ) : (
-                  <LoadingAnimation />
-                )}
-              </div>
-            </div>
-            <div className={styles.topInfoItem}>
-              This month
-              <div className={styles.topInfoText}>
-                {workouts ? (
-                  `${workoutCountsForMonth} ${
-                    workoutCountsForMonth > 1 ? "workouts" : "workout"
-                  }`
-                ) : (
-                  <LoadingAnimation />
-                )}
-              </div>
-            </div>
-          </div>
           {workouts ? (
             <>
+              <div className={styles.topInfos}>
+                <div className={styles.topInfoItem}>
+                  Last workout
+                  <div className={styles.topInfoText}>{lastWorkout}</div>
+                </div>
+                <div className={styles.topInfoItem}>
+                  Muscle worked
+                  <div className={styles.topInfoText}>{lastMuscleWorked}</div>
+                </div>
+                <div className={styles.topInfoItem}>
+                  This week
+                  <div className={styles.topInfoText}>
+                    {workoutCountsForWeek}{" "}
+                    {workoutCountsForWeek > 1 ? "workouts" : "workout"}
+                  </div>
+                </div>
+                <div className={styles.topInfoItem}>
+                  This month
+                  <div className={styles.topInfoText}>
+                    {workoutCountsForMonth}{" "}
+                    {workoutCountsForMonth > 1 ? "workouts" : "workout"}
+                  </div>
+                </div>
+              </div>
+
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Workouts per month</div>
                 <ResponsiveContainer width="100%" height="100%">
