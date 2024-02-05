@@ -28,7 +28,7 @@ import {
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import MetaTags from "../../components/MetaTags";
-import LoadingAnimation from "../../components/LoadingAnimation";
+import BottomNavbar from "../../components/BottomNavbar";
 
 export const siteTitle = "Xian-Wei Zhu's weight";
 
@@ -339,6 +339,7 @@ const Weight = () => {
           url={"https://zhuxw.com/about"}
         />
       </Head>
+      <BottomNavbar page={"about"} />
       <div className={styles.container}>
         <div className={styles.content}>
           {dailyWeights ? (

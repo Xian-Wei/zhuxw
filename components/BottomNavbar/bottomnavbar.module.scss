@@ -1,0 +1,25 @@
+@import "../../styles/constants.module.scss";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 45px;
+  width: 100%;
+  border-bottom: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+  z-index: inherit;
+}
+
+.navlink {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 150px;
+
+  @media screen and (max-width: $sm) {
+    width: 130px;
+  }
+}

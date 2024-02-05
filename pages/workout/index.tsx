@@ -27,7 +27,7 @@ import Layout from "../../components/Layout";
 import Head from "next/head";
 import MetaTags from "../../components/MetaTags";
 import Loader from "../../components/Loader";
-import LoadingAnimation from "../../components/LoadingAnimation";
+import BottomNavbar from "../../components/BottomNavbar";
 
 export const siteTitle = "Xian-Wei Zhu's workouts";
 
@@ -241,6 +241,7 @@ const Workout = () => {
           url={"https://zhuxw.com/workout"}
         />
       </Head>
+      <BottomNavbar page={"about"} />
       <div className={styles.container}>
         <div className={styles.content}>
           {workouts ? (
