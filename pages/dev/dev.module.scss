@@ -10,16 +10,11 @@
 
 .content {
   display: flex;
-  flex: 0.85;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
   z-index: inherit;
-
-  @media screen and (max-width: $xl) {
-    flex: 1;
-  }
 }
 
 /* Login */

@@ -4,20 +4,17 @@ import styles from "./about.module.scss";
 import MetaTags from "../../components/MetaTags";
 import Layout from "../../components/Layout";
 import Sidebar from "../../components/Sidebar";
-import Dashboard from "./dashboard";
 import Weight from "./weight";
 import Workout from "./workout";
 
 export const siteTitle = "Xian-Wei Zhu";
-const pages = ["Dashboard", "Weight", "Workout"];
+const pages = ["Weight", "Workout"];
 
 const About = () => {
-  const [selectedPage, setSelectedPage] = useState<string>("Dashboard");
+  const [selectedPage, setSelectedPage] = useState<string>("Weight");
 
   const renderPage = () => {
     switch (selectedPage) {
-      case "Dashboard":
-        return <Dashboard />;
       case "Weight":
         return <Weight />;
       case "Workout":
