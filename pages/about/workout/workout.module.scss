@@ -109,3 +109,63 @@
     font-size: 16px;
   }
 }
+
+.workoutLines {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  width: 70%;
+  border: 1px solid $primaryBorder;
+  background-color: $bodyBackgroundHover;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 22px 70px 4px;
+
+  @media screen and (max-width: $lg) {
+    height: 350px;
+    width: 100%;
+  }
+}
+
+.workoutLine {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 37px;
+  width: 100%;
+  padding-inline: 20px;
+
+  &:hover {
+    background-color: $primaryBorder;
+  }
+
+  @media screen and (max-width: $md) {
+    padding-inline: 10px;
+  }
+}
+
+.workoutLineDate {
+  display: flex;
+  flex: 0.35;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.workoutLineMuscle {
+  display: flex;
+  flex: 0.5;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  min-width: 100px;
+  width: 100%;
+}
+
+.workoutLineHomeOrGym {
+  display: flex;
+  flex: 0.15;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}

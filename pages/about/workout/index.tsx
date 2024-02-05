@@ -31,6 +31,7 @@ const Workout = () => {
     fetcher,
   );
   const isWidth = useIsWidth(WindowWidth.md);
+  const lastMusclesDisplayCount = 10;
 
   const getWorkoutsPerMonth = () => {
     let allWorkoutsCounts: WorkoutItem[][] = [[]];
@@ -279,6 +280,28 @@ const Workout = () => {
               <Bar dataKey="home" fill="#f3a24b" />
             </BarChart>
           </ResponsiveContainer>
+        </div>
+        <div className={styles.workoutLines}>
+          <div className={styles.blockTitle}>Last 10 workouts details</div>
+          {workouts
+            .slice(
+              workouts.length - lastMusclesDisplayCount - 1,
+              workouts.length - 1,
+            )
+            .reverse()
+            .map(workout => {
+              return (
+                <div className={styles.workoutLine} key={workout.date}>
+                  <div className={styles.workoutLineDate}>{workout.date}</div>
+                  <div className={styles.workoutLineMuscle}>
+                    {workout.muscle}
+                  </div>
+                  <div className={styles.workoutLineHomeOrGym}>
+                    {workout.gym ? "Gym" : "Home"}
+                  </div>
+                </div>
+              );
+            })}
         </div>
         <div className={styles.biggerBlock}>
           <div className={styles.blockTitle}>Muscle activity trends</div>
