@@ -100,7 +100,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 3px;
-    height: 90px;
+    height: 60px;
     padding-left: 0px;
     font-size: 16px;
   }
@@ -117,7 +117,7 @@
   width: 100%;
 
   @media screen and (max-width: $md) {
-    height: 30px;
+    height: 2ch;
     padding-left: 6px;
     font-size: 16px;
   }
