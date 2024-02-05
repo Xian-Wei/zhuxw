@@ -283,25 +283,26 @@ const Workout = () => {
         </div>
         <div className={styles.workoutLines}>
           <div className={styles.blockTitle}>Last 10 workouts details</div>
-          {workouts
-            .slice(
-              workouts.length - lastMusclesDisplayCount - 1,
-              workouts.length - 1,
-            )
-            .reverse()
-            .map(workout => {
-              return (
-                <div className={styles.workoutLine} key={workout.date}>
-                  <div className={styles.workoutLineDate}>{workout.date}</div>
-                  <div className={styles.workoutLineMuscle}>
-                    {workout.muscle}
+          {workouts &&
+            workouts
+              .slice(
+                workouts.length - lastMusclesDisplayCount - 1,
+                workouts.length - 1,
+              )
+              .reverse()
+              .map(workout => {
+                return (
+                  <div className={styles.workoutLine} key={workout.date}>
+                    <div className={styles.workoutLineDate}>{workout.date}</div>
+                    <div className={styles.workoutLineMuscle}>
+                      {workout.muscle}
+                    </div>
+                    <div className={styles.workoutLineHomeOrGym}>
+                      {workout.gym ? "Gym" : "Home"}
+                    </div>
                   </div>
-                  <div className={styles.workoutLineHomeOrGym}>
-                    {workout.gym ? "Gym" : "Home"}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
         <div className={styles.biggerBlock}>
           <div className={styles.blockTitle}>Muscle activity trends</div>
