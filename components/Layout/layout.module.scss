@@ -28,7 +28,7 @@
   pointer-events: none;
   background-image: $backgroundImage;
   background-size: $backgroundSize;
-  z-index: 0;
+  z-index: -1;
 
   @media screen and (max-width: $lg) {
     background-size: $backgroundSizeMobile;
