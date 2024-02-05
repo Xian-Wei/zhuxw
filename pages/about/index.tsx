@@ -28,7 +28,7 @@ const About = () => {
   };
 
   return (
-    <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
+    <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
       <Head>
         <title>{siteTitle}</title>
         <MetaTags
