@@ -28,6 +28,7 @@ import {
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import MetaTags from "../../components/MetaTags";
+import LoadingAnimation from "../../components/LoadingAnimation";
 
 export const siteTitle = "Xian-Wei Zhu's weight";
 
@@ -340,32 +341,46 @@ const Weight = () => {
       </Head>
       <div className={styles.container}>
         <div className={styles.content}>
+          <div className={styles.topInfos}>
+            <div className={styles.topInfoItem}>
+              Today
+              <div className={styles.topInfoText}>
+                {dailyWeights ? (
+                  `${currentWeight.toFixed(2)} KG`
+                ) : (
+                  <LoadingAnimation />
+                )}
+              </div>
+            </div>
+            <div className={styles.topInfoItem}>
+              Weekly change
+              <div className={styles.topInfoText}>
+                {dailyWeights ? (
+                  `${weeklyChange.toFixed(2)} KG`
+                ) : (
+                  <LoadingAnimation />
+                )}
+              </div>
+            </div>
+            <div className={styles.topInfoItem}>
+              Monthly change
+              <div className={styles.topInfoText}>
+                {dailyWeights ? (
+                  `${monthlyChange.toFixed(2)} KG`
+                ) : (
+                  <LoadingAnimation />
+                )}
+              </div>
+            </div>
+            <div className={styles.topInfoItem}>
+              Yearly change
+              <div className={styles.topInfoText}>
+                {dailyWeights ? `${yearlyChange} KG` : <LoadingAnimation />}
+              </div>
+            </div>
+          </div>
           {dailyWeights ? (
             <>
-              <div className={styles.topInfos}>
-                <div className={styles.topInfoItem}>
-                  Today
-                  <div className={styles.topInfoText}>
-                    {currentWeight.toFixed(2)} KG
-                  </div>
-                </div>
-                <div className={styles.topInfoItem}>
-                  Weekly change
-                  <div className={styles.topInfoText}>
-                    {weeklyChange.toFixed(2)} KG
-                  </div>
-                </div>
-                <div className={styles.topInfoItem}>
-                  Monthly change
-                  <div className={styles.topInfoText}>
-                    {monthlyChange.toFixed(2)} KG
-                  </div>
-                </div>
-                <div className={styles.topInfoItem}>
-                  Yearly change
-                  <div className={styles.topInfoText}>{yearlyChange} KG</div>
-                </div>
-              </div>
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Weight in 2024</div>
                 <ResponsiveContainer

@@ -3,7 +3,7 @@
 .container {
   display: flex;
   justify-content: center;
-  min-height: 90vh;
+  min-height: 60vh;
   width: 100%;
   z-index: inherit;
 }
@@ -20,7 +20,7 @@
   z-index: inherit;
 
   @media screen and (max-width: $lg) {
-    gap: 20px;
+    gap: 15px;
     padding: 20px;
   }
 }
@@ -62,7 +62,6 @@
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   gap: 10px;
-  height: 200px;
   width: 70%;
 
   @media screen and (max-width: $lg) {
@@ -76,6 +75,7 @@
   justify-content: center;
   align-items: center;
   gap: 5px;
+  height: 100px;
   border: 1px solid $primaryBorder;
   background-color: $bodyBackgroundHover;
   font-size: 22px;
@@ -85,6 +85,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 3px;
+    height: 90px;
     padding-left: 0px;
     font-size: 16px;
   }
@@ -97,8 +98,11 @@
   padding-left: 8px;
   font-size: 22px;
   font-weight: 700;
+  height: 35px;
+  width: 100%;
 
   @media screen and (max-width: $md) {
+    height: 30px;
     padding-left: 6px;
     font-size: 16px;
   }

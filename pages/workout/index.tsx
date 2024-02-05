@@ -26,6 +26,8 @@ import {
 import Layout from "../../components/Layout";
 import Head from "next/head";
 import MetaTags from "../../components/MetaTags";
+import Loader from "../../components/Loader";
+import LoadingAnimation from "../../components/LoadingAnimation";
 
 export const siteTitle = "Xian-Wei Zhu's workouts";
 
@@ -238,129 +240,145 @@ const Workout = () => {
           }
           url={"https://zhuxw.com/workout"}
         />
-      </Head>{" "}
+      </Head>
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.topInfos}>
             <div className={styles.topInfoItem}>
               Last workout
-              <div className={styles.topInfoText}>{lastWorkout}</div>
+              <div className={styles.topInfoText}>
+                {workouts ? `${lastWorkout}` : <LoadingAnimation />}
+              </div>
             </div>
             <div className={styles.topInfoItem}>
               Muscle worked
-              <div className={styles.topInfoText}>{lastMuscleWorked}</div>
+              <div className={styles.topInfoText}>
+                {workouts ? `${lastMuscleWorked}` : <LoadingAnimation />}
+              </div>
             </div>
             <div className={styles.topInfoItem}>
               Sessions this week
-              <div className={styles.topInfoText}>{workoutCountsForWeek}</div>
+              <div className={styles.topInfoText}>
+                {workouts ? `${workoutCountsForWeek}` : <LoadingAnimation />}
+              </div>
             </div>
             <div className={styles.topInfoItem}>
               Sessions this month
-              <div className={styles.topInfoText}>{workoutCountsForMonth}</div>
+              <div className={styles.topInfoText}>
+                {workouts ? `${workoutCountsForMonth}` : <LoadingAnimation />}
+              </div>
             </div>
           </div>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Workouts per month</div>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart width={500} height={300} data={workoutsPerMonth}>
-                <XAxis
-                  dataKey="name"
-                  tick={false}
-                  axisLine={false}
-                  height={0}
-                />
-                <YAxis tick={false} axisLine={false} width={0} />
-                <Tooltip
-                  cursor={{ fill: "rgb(35, 35, 70)" }}
-                  contentStyle={{
-                    backgroundColor: "rgb(20, 20, 40)",
-                    borderColor: "rgb(80, 80, 160)",
-                  }}
-                />
-                <Legend />
-                <Bar dataKey="gym" stackId={"Workout"} fill="#8884d8" />
-                <Bar dataKey="home" stackId={"Workout"} fill="#f3a24b" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <div className={styles.block}>
-            <div className={styles.blockTitle}>Workouts per year</div>
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart width={500} height={300} data={workoutsPerYear}>
-                <XAxis
-                  dataKey="name"
-                  tick={false}
-                  axisLine={false}
-                  height={0}
-                />
-                <YAxis tick={false} axisLine={false} width={0} />
-                <Tooltip
-                  cursor={{ fill: "rgb(35, 35, 70)" }}
-                  contentStyle={{
-                    backgroundColor: "rgb(20, 20, 40)",
-                    borderColor: "rgb(80, 80, 160)",
-                  }}
-                />
-                <Legend />
-                <Bar dataKey="gym" fill="#8884d8" />
-                <Bar dataKey="home" fill="#f3a24b" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-          <div className={styles.workoutLines}>
-            <div className={styles.blockTitle}>Last 10 workouts details</div>
-            {workouts &&
-              workouts
-                .slice(
-                  workouts.length - lastMusclesDisplayCount - 1,
-                  workouts.length - 1,
-                )
-                .reverse()
-                .map(workout => {
-                  return (
-                    <div className={styles.workoutLine} key={workout.date}>
-                      <div className={styles.workoutLineDate}>
-                        {workout.date}
-                      </div>
-                      <div className={styles.workoutLineMuscle}>
-                        {workout.muscle}
-                      </div>
-                      <div className={styles.workoutLineHomeOrGym}>
-                        {workout.gym ? "Gym" : "Home"}
-                      </div>
-                    </div>
-                  );
-                })}
-          </div>
-          <div className={styles.biggerBlock}>
-            <div className={styles.blockTitle}>Muscle activity trends</div>
-            <ResponsiveContainer>
-              <PieChart width={400} height={400}>
-                <Pie
-                  dataKey="value"
-                  isAnimationActive={true}
-                  data={musclePieData}
-                  outerRadius={isWidth ? 170 : 100}
-                  fill="#8884d8"
-                  label
-                >
-                  {musclePieData.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                      style={{ outline: "none" }}
+          {workouts ? (
+            <>
+              <div className={styles.block}>
+                <div className={styles.blockTitle}>Workouts per month</div>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart width={500} height={300} data={workoutsPerMonth}>
+                    <XAxis
+                      dataKey="name"
+                      tick={false}
+                      axisLine={false}
+                      height={0}
                     />
-                  ))}
-                </Pie>
-                <Tooltip content={<CustomTooltip />} />
-                <Legend
-                  layout={isWidth ? "vertical" : "horizontal"}
-                  verticalAlign={isWidth ? "top" : "bottom"}
-                  align={isWidth ? "right" : "center"}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+                    <YAxis tick={false} axisLine={false} width={0} />
+                    <Tooltip
+                      cursor={{ fill: "rgb(35, 35, 70)" }}
+                      contentStyle={{
+                        backgroundColor: "rgb(20, 20, 40)",
+                        borderColor: "rgb(80, 80, 160)",
+                      }}
+                    />
+                    <Legend />
+                    <Bar dataKey="gym" stackId={"Workout"} fill="#8884d8" />
+                    <Bar dataKey="home" stackId={"Workout"} fill="#f3a24b" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className={styles.block}>
+                <div className={styles.blockTitle}>Workouts per year</div>
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart width={500} height={300} data={workoutsPerYear}>
+                    <XAxis
+                      dataKey="name"
+                      tick={false}
+                      axisLine={false}
+                      height={0}
+                    />
+                    <YAxis tick={false} axisLine={false} width={0} />
+                    <Tooltip
+                      cursor={{ fill: "rgb(35, 35, 70)" }}
+                      contentStyle={{
+                        backgroundColor: "rgb(20, 20, 40)",
+                        borderColor: "rgb(80, 80, 160)",
+                      }}
+                    />
+                    <Legend />
+                    <Bar dataKey="gym" fill="#8884d8" />
+                    <Bar dataKey="home" fill="#f3a24b" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className={styles.workoutLines}>
+                <div className={styles.blockTitle}>
+                  Last 10 workouts details
+                </div>
+                {workouts &&
+                  workouts
+                    .slice(
+                      workouts.length - lastMusclesDisplayCount - 1,
+                      workouts.length - 1,
+                    )
+                    .reverse()
+                    .map(workout => {
+                      return (
+                        <div className={styles.workoutLine} key={workout.date}>
+                          <div className={styles.workoutLineDate}>
+                            {workout.date}
+                          </div>
+                          <div className={styles.workoutLineMuscle}>
+                            {workout.muscle}
+                          </div>
+                          <div className={styles.workoutLineHomeOrGym}>
+                            {workout.gym ? "Gym" : "Home"}
+                          </div>
+                        </div>
+                      );
+                    })}
+              </div>
+              <div className={styles.biggerBlock}>
+                <div className={styles.blockTitle}>Muscle activity trends</div>
+                <ResponsiveContainer>
+                  <PieChart width={400} height={400}>
+                    <Pie
+                      dataKey="value"
+                      isAnimationActive={true}
+                      data={musclePieData}
+                      outerRadius={isWidth ? 170 : 100}
+                      fill="#8884d8"
+                      label
+                    >
+                      {musclePieData.map((entry, index) => (
+                        <Cell
+                          key={`cell-${index}`}
+                          fill={COLORS[index % COLORS.length]}
+                          style={{ outline: "none" }}
+                        />
+                      ))}
+                    </Pie>
+                    <Tooltip content={<CustomTooltip />} />
+                    <Legend
+                      layout={isWidth ? "vertical" : "horizontal"}
+                      verticalAlign={isWidth ? "top" : "bottom"}
+                      align={isWidth ? "right" : "center"}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+            </>
+          ) : (
+            <Loader />
+          )}
         </div>
       </div>
     </Layout>

@@ -10,7 +10,7 @@
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 
-  @media screen and (max-width: $sm) {
+  @media screen and (max-width: $lg) {
     width: 16px;
     height: 16px;
     border: 2px solid #fff;
