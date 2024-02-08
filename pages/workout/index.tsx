@@ -326,8 +326,8 @@ const Workout = () => {
                 {workouts &&
                   workouts
                     .slice(
-                      workouts.length - lastMusclesDisplayCount - 1,
-                      workouts.length - 1,
+                      workouts.length - lastMusclesDisplayCount,
+                      workouts.length,
                     )
                     .reverse()
                     .map(workout => {
