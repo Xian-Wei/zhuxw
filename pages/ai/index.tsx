@@ -13,6 +13,19 @@ const AI = () => {
     chatList.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const renderMessageContent = (content: string, role: string) => {
+    if (role != "user") {
+      return content.split("\n").map((line, index) => (
+        <React.Fragment key={index}>
+          {line}
+          <br />
+        </React.Fragment>
+      ));
+    } else {
+      return content;
+    }
+  };
+
   return (
     <Layout navbarEnabled={true} footerEnabled={false} backgroundEnabled={true}>
       <div className={styles.container}>
@@ -22,10 +35,10 @@ const AI = () => {
               <div
                 key={m.id}
                 className={
-                  m.role == "user" ? styles.chatLine : styles.chatLineAi
+                  m.role === "user" ? styles.chatLine : styles.chatLineAi
                 }
               >
-                {m.content}
+                {renderMessageContent(m.content, m.role)}
               </div>
             ))}
             <div ref={chatList} />
