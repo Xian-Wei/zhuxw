@@ -32,7 +32,7 @@ export default async function POST(req: Request) {
     model: "HuggingFaceH4/zephyr-7b-beta",
     inputs: buildPrompt(messages),
     parameters: {
-      max_new_tokens: 200,
+      max_new_tokens: 400,
       // @ts-ignore (this is a valid parameter specifically in OpenAssistant models)
       typical_p: 0.2,
       repetition_penalty: 1,
