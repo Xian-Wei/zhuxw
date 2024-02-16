@@ -107,7 +107,7 @@
     background-size: $backgroundSizeMobile;
   }
 
-  @media screen and (max-width: $sm) {
+  @media screen and (max-width: $lg) {
     width: calc(100vw);
     gap: 10px;
   }
