@@ -2,14 +2,15 @@
 
 .container {
   display: flex;
+  position: fixed;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 45px;
+  height: $bottomNavbarHeight;
   width: 100%;
   border-bottom: 1px solid $primaryBorder;
   background-color: $bodyBackgroundHover;
-  z-index: inherit;
+  z-index: 10;
 }
 
 .navlink {
