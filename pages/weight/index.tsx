@@ -336,10 +336,10 @@ const Weight = () => {
           description={
             "Welcome to Xian-Wei's life tracker page - where every misstep, questionable decision, and triumph are meticulously documented for your entertainment."
           }
-          url={"https://zhuxw.com/about"}
+          url={"https://zhuxw.com/weight"}
         />
       </Head>
-      <BottomNavbar page={"about"} />
+      <BottomNavbar page={"tracker"} />
       <div className={styles.container}>
         <div className={styles.content}>
           {dailyWeights ? (

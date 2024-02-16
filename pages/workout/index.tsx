@@ -241,7 +241,7 @@ const Workout = () => {
           url={"https://zhuxw.com/workout"}
         />
       </Head>
-      <BottomNavbar page={"about"} />
+      <BottomNavbar page={"tracker"} />
       <div className={styles.container}>
         <div className={styles.content}>
           {workouts ? (

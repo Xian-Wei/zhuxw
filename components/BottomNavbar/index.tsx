@@ -7,7 +7,7 @@ interface BottomNavbarProps {
 }
 
 const BottomNavbar = ({ page }: BottomNavbarProps) => {
-  const AboutNavbar = () => {
+  const TrackerNavbar = () => {
     return (
       <>
         <Link href="/weight" className={styles.navlink}>
@@ -21,7 +21,7 @@ const BottomNavbar = ({ page }: BottomNavbarProps) => {
   };
 
   return (
-    <nav className={styles.container}>{page == "about" && <AboutNavbar />}</nav>
+    <nav className={styles.container}>{page == "tracker" && <TrackerNavbar />}</nav>
   );
 };
 
