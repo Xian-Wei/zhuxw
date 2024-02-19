@@ -11,7 +11,7 @@ function buildPrompt(
   return messages
     .map(({ content, role }) => {
       if (role === "user") {
-        return content;
+        return `${content}<|endoftext|>`;
       }
     })
     .join("");
