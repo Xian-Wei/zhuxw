@@ -44,9 +44,14 @@
   border-radius: 10px;
   background-color: $primaryColor;
   color: white;
+  white-space: pre-wrap !important;
 
   @media screen and (max-width: $md) {
     max-width: 95%;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 12px;
   }
 }
 
@@ -58,9 +63,14 @@
   border-radius: 10px;
   background-color: rgb(80, 80, 100);
   color: white;
+  white-space: pre-wrap !important;
 
   @media screen and (max-width: $md) {
     max-width: 95%;
+  }
+
+  @media screen and (max-width: $sm) {
+    font-size: 12px;
   }
 }
 
