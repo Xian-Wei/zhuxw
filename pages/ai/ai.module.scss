@@ -51,7 +51,7 @@
   }
 
   @media screen and (max-width: $sm) {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -70,7 +70,7 @@
   }
 
   @media screen and (max-width: $sm) {
-    font-size: 12px;
+    font-size: 14px;
   }
 }
 
@@ -88,6 +88,7 @@
   height: 50px;
   width: 100%;
   padding-left: 15px;
+  padding-right: 15px;
   border: 1px solid $primaryBorder;
   border-radius: 5px;
   background-color: rgb(30, 30, 60, 0.9);
