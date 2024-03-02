@@ -1,8 +1,8 @@
 ---
 id: 12
 title: "Shitcoin Challenge: Month 2"
-description: "SHITCOINS ARE THE SHIT."
-image: images/blog/thumbnails/sadge.png
+description: "Shitcoins are the shit."
+image: images/blog/thumbnails/peepo.png
 date: "2024-03-01"
 tags:
   - crypto
