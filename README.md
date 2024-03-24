@@ -1,20 +1,13 @@
 # zhuxw
 
-A random website with random features.
+Random website with random features.
 
-https://www.zhuxw.com/
-     
-- 3D Home page
-  - https://www.zhuxw.com/
-    
-- Personal blog updated twice a month
-  - https://www.zhuxw.com/blog
-    
-- Weight/Workout tracker since September 2019
-  - https://www.zhuxw.com/weight
-    
-- Trading system based on my weight (powered by Ethereum)
-  - https://www.zhuxw.com/web3
-    
-- AI powered by Mistral 7B v0.1
-  - https://www.zhuxw.com/ai    
+- **3D Home Page**: Experience a mind-blowing (no) 3D [home page](https://www.zhuxw.com/).
+  
+- **Personal Blog**: Updated bi-monthly with a variety of topics, including a $2100 shitcoin challenge. [Check it out here](https://www.zhuxw.com/blog).
+
+- **Weight/Workout Tracker**: Keeping track of my weight and workouts since September 2019. [Access it here](https://www.zhuxw.com/weight).
+
+- **Web3/Crypto Trading**: An unique trading system based on my weight, powered by Ethereum. [Trade here](https://www.zhuxw.com/web3).
+
+- **AI Chat**: Engage with an AI assistant, powered by Mistral-7B-v0.1. [Interact with it here](https://www.zhuxw.com/ai).
