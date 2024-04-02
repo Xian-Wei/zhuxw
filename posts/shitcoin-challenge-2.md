@@ -34,7 +34,7 @@ Only in crypto can you see an asset's value multiply by **4.95 / 395.15%** in su
 
 ![Portfolio](/images/blog/12-portfolio.jpg)
 
-Quick reminder: I bought 300 dollars of each coin on the January 1st, 2024.
+Quick reminder: I bought 300 dollars of each coin on January 1st, 2024.
 
 Kaspa has been doing fantastic as well.
 
