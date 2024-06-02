@@ -1,6 +1,6 @@
 ---
 id: 10
-title: "Shitcoin Challenge: Month 1"
+title: "Shitcoin Challenge: January 2024"
 description: "An unfortunate update to my net worth."
 image: images/blog/thumbnails/sadge.png
 date: "2024-02-01"
