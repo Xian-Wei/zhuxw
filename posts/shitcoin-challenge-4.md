@@ -1,5 +1,5 @@
 ---
-id: 16
+id: 15
 title: "Shitcoin Challenge: Avril 2024"
 description: "It's so over."
 image: images/blog/thumbnails/pepelook.png
@@ -18,7 +18,7 @@ Well, shit.
 My gains are almost as impressive as a pile of poo, with two months of progress
 down the drain.
 
-![Gain](/images/blog/16-chart.png)
+![Gain](/images/blog/15-chart.png)
 
 The drop was as steep as the rise from month 2; you can even visualize a poo
 figure in the chart.
@@ -28,12 +28,12 @@ However I wasn't expecting to regress back to January values.
 
 WHERE IS THE BULL RUN I WAS PROMISED, HALVING MY ASS.
 
-![Portfolio](/images/blog/16-portfolio.png)
+![Portfolio](/images/blog/15-portfolio.png)
 
 Your monthly reminder that I bought 300 dollars of each coin on January
 1st, 2024.
 
-![Profit](/images/blog/16-profit.png)
+![Profit](/images/blog/15-profit.png)
 
 Aleph Zero taking L's since day one, surprise, surprise.
 
