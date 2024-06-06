@@ -16,7 +16,7 @@ const Footer = () => {
           <FaReddit />
         </a>
       </div>
-      <div className={styles.copyright}>&copy; 2023 Xian-Wei Zhu</div>
+      <div className={styles.copyright}>&copy; 2024 Xian-Wei Zhu</div>
     </footer>
   );
 };
