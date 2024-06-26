@@ -1,16 +1,16 @@
 ---
 id: 17
-title: "Airdrops"
-description: "ZK is the endgame."
-image: images/blog/thumbnails/pepefat.png
+title: "Crypto Airdrops"
+description: "Airdrops are the endgame."
+image: images/blog/thumbnails/airdrop.png
 date: "2024-06-26"
 tags:
   - crypto
 ---
 
-This is more of a time capsule for my future self than anything.
+This blog post serves as a time capsule for my future self.
 
-However it might still interest the few readers in here who don't view crypto
+However it might still interest the few readers here who don't view crypto
 solely as a scam.
 
 ## What are airdrops ?
@@ -22,12 +22,12 @@ An airdrop is basically free money for clicking on websites.\
 We're talking about rewards ranging from two to six figures just for using a mouse
 and a keyboard.
 
-Yes, it's absurd.
+Yes, it sounds absurd.
 
 ## How do airdrops work ?
 
-In essence, projects distribute money to users who click and interact with their
-apps using various secret criteria like interacting with a specific feature or
+In essence, projects distribute money to users who interact with their apps
+based on various secret criteria, such as interacting with a specific feature or
 have a certain amount of interactions.
 
 If a user doesn't meet these criteria, they won't be eligible for the rewards,
@@ -41,16 +41,16 @@ their apps with the hope that they'll become durable users.
 
 There are 2 main types of airdrops:
 
-- **Interaction-based airdrops**: This involves clicking on every feature you
+- **Interaction-based airdrops**: These involve clicking on every feature you
   see on a website, trying to meet as many criteria as possible. The specific
   criteria are unknown, which filters out low-quality users who just click on
   the most obvious things without properly researching the project. This method
   reaps the most rewards if done properly since most people don’t meet all the
   criteria.
 
-- **Point-based airdrops**: This involves depositing money on the website to
+- **Point-based airdrops**: These involve depositing money on the website to
   earn massive interest. The problem is that there are millionaires who deposit
-  large amounts of money and reap most of the rewards, leaving less for poor
+  large amounts of money and reap most of the rewards, leaving less for poorer
   participants like me.
 
 ## Benefits and Risks
@@ -63,14 +63,17 @@ Benefits:
 
 Risks:
 
-- A lot of scams
+- Most of them are scams
 - Time-consuming
 - Easy to make mistakes
 - You might end up clicking for nothing
 
 ## How much did I get from airdrops ?
 
-Peanuts.
+![Angry](/images/blog/pepe-nothappy.png)
+
+Peanuts. And I've been at it for 2 years now. \
+But perseverance and discipline are key.
 
 The problem is that "airdrop farming" has become too popular among cryptobros,
 significantly diluting the rewards due to the sheer number of participants.
