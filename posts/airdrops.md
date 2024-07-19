@@ -1,7 +1,7 @@
 ---
 id: 17
 title: "Crypto Airdrops"
-description: "Airdrops are the endgame."
+description: "ZK is the endgame."
 image: images/blog/thumbnails/airdrop.png
 date: "2024-06-26"
 tags:
