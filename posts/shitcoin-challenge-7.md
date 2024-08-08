@@ -15,6 +15,8 @@ tutorial.
 This one especially hurts, as one of my coin went down the gutter and is now
 worth less than 100 dollars.
 
+**Quick update 4 days later:** my portfolio hit 1210 dollars.
+
 ![Gain](/images/blog/20-chart.png)
 
 Brace yourself for what was initially worth 300 bucks.
