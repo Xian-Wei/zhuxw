@@ -3,7 +3,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -13,8 +12,13 @@
   display: flex;
   position: fixed;
   flex-direction: column;
-  height: calc(100% - 70px);
-  width: 75%;
+  height: calc(100% - 80px);
+  width: 700px;
+  padding-inline: 10px;
+  margin-top: 10px;
+  border: 1px solid $primaryBorder;
+  border-radius: 10px;
+  background-color: $primaryTransparentBackground;
 
   @media screen and (max-width: $md) {
     width: 95%;
@@ -39,13 +43,14 @@
 .chatLineUser {
   align-self: flex-end;
   max-width: 80%;
-  margin-bottom: 10px;
+  margin-top: 10px;
   padding: 10px;
   border-radius: 10px;
   background-color: $primaryColor;
   color: white;
+  border: 1px solid $primaryBorder;
   white-space: pre-wrap !important;
-
+  
   @media screen and (max-width: $md) {
     max-width: 95%;
   }
@@ -58,11 +63,12 @@
 .chatLineAI {
   align-self: flex-start;
   max-width: 80%;
-  margin-bottom: 10px;
+  margin-top: 10px;
   padding: 10px;
   border-radius: 10px;
   background-color: rgb(80, 80, 100);
-  color: white;
+  color: white;  
+  border: 1px solid $primaryBorder;
   white-space: pre-wrap !important;
 
   @media screen and (max-width: $md) {
