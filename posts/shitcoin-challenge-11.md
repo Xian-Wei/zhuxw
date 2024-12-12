@@ -2,7 +2,7 @@
 id: 24
 title: "Shitcoin Challenge: December 2024"
 description: "Final month of blog procrastination."
-image: images/blog/thumbnails/pepepond.png
+image: images/blog/thumbnails/weresoover.png
 date: "2024-12-12"
 tags:
   - crypto
@@ -25,8 +25,8 @@ Turns out shitcoins are totally safe investments, eh? (Okay, maybe not so much.)
 
 ![Portfolio](/images/blog/24-portfolio.png)
 
-Unurprisingly, Aleph Zero is back to being the star of my portfolio. \
-Morpheus Network stood no chance against the Ultimate Shitcoin.
+Unsurprisingly, Aleph Zero is back to being the star of my portfolio. \
+Morpheus Network? It stood no chance against the Ultimate Shitcoin.
 
 The lesson? You only need 1 or 2 winners to make it in crypto.
 
