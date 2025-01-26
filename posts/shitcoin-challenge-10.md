@@ -7,6 +7,7 @@ date: "2024-11-03"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 Only two months left before I have to get serious and start writing actual blog

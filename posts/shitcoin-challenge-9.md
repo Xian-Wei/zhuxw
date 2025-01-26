@@ -7,6 +7,7 @@ date: "2024-09-02"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 As we approach 2025, this challenge is coming to a close, and I couldn't be more

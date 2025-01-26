@@ -7,6 +7,7 @@ date: "2024-07-23"
 tags:
   - gaming
   - review
+  - 2024
 ---
 
 Today's post is a bit different as I had no inspiration and nothing specific to

@@ -7,6 +7,7 @@ date: "2024-09-02"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 I am almost two days late for my monthly crypto hate post, and I apologize for

@@ -6,6 +6,7 @@ image: images/blog/thumbnails/radio.png
 date: "2024-03-17"
 tags:
   - life
+  - 2024
 ---
 
 I've hosted my very first radio show.

@@ -7,6 +7,7 @@ date: "2024-08-01"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 All-time low on my portfolio as we get on month 8 of my "How to lose money"

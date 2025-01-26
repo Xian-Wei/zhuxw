@@ -7,6 +7,7 @@ date: "2024-07-01"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 This is Month 7 of pain and sadness as I am officially **DOWN** on my initial

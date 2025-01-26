@@ -7,6 +7,7 @@ date: "2024-01-01"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 ## Introduction

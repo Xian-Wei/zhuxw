@@ -7,6 +7,7 @@ date: "2024-05-01"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 Back to square one.

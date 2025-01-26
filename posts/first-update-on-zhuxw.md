@@ -6,6 +6,7 @@ image: images/blog/thumbnails/progress.png
 date: "2023-01-29"
 tags:
   - zhuxw
+  - 2023
 ---
 
 I was about to write and brag about how my blog had a new interface and was

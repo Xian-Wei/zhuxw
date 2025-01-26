@@ -7,6 +7,7 @@ date: "2023-06-22"
 tags:
   - zhuxw
   - ai
+  - 2023
 ---
 
 Everybody has been talking about AI this year, so I couldn't resist implementing

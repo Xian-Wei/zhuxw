@@ -6,6 +6,7 @@ image: images/blog/thumbnails/hi.png
 date: "2022-12-22"
 tags:
   - zhuxw
+  - 2022
 ---
 
 **Hello and welcome to my very first blog post !**

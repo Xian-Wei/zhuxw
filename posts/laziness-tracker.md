@@ -7,6 +7,7 @@ date: "2024-02-16"
 tags:
   - zhuxw
   - life
+  - 2024
 ---
 
 At last, the [Tracker](https://www.zhuxw.com/weight) page has been updated.

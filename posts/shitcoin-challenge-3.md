@@ -7,6 +7,7 @@ date: "2024-04-01"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 From 4k back to 3k, the crypto market wiped an entire month of progress.

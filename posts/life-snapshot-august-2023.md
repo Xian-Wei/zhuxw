@@ -6,6 +6,7 @@ image: images/blog/thumbnails/life-snapshot-august.png
 date: "2023-08-29"
 tags:
   - life
+  - 2023
 ---
 
 This is a life snapshot because I have no idea what to write about, and it's

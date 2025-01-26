@@ -8,6 +8,7 @@ tags:
   - zhuxw
   - crypto
   - nft
+  - 2023
 ---
 
 At long last I am thrilled to announce that the $ZHU token finally has

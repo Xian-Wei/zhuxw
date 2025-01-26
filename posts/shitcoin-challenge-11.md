@@ -7,6 +7,7 @@ date: "2024-12-12"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 It's officially time for me to start thinking about blog posts again.

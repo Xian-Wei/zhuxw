@@ -7,6 +7,7 @@ date: "2024-06-01"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 Welcome to Month 6 of the Shitcoin Challenge where I showcase my questionable

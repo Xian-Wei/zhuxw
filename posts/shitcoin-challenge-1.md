@@ -7,6 +7,7 @@ date: "2024-02-01"
 tags:
   - crypto
   - shitcoin
+  - 2024
 ---
 
 Was it FOMO that led me to embark on this stupid challenge ?

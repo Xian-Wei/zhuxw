@@ -6,6 +6,7 @@ image: images/blog/thumbnails/airdrop.png
 date: "2024-06-26"
 tags:
   - crypto
+  - 2024
 ---
 
 This blog post serves as a time capsule for my future self.

@@ -7,6 +7,7 @@ date: "2023-12-22"
 tags:
   - zhuxw
   - life
+  - 2023
 ---
 
 ## Happy 1st anniversary to the zhuxw blog
