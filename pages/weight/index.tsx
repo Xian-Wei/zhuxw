@@ -45,6 +45,7 @@ const Weight = () => {
     2022: false,
     2023: false,
     2024: false,
+    2025: false,
   });
   const [hoveredYear, setHoveredYear] = useState<{ [key: string]: boolean }>({
     2019: false,
@@ -53,6 +54,7 @@ const Weight = () => {
     2022: false,
     2023: false,
     2024: false,
+    2025: false,
   });
   const hoveredYearStrokeWidth = 3;
 
@@ -114,7 +116,8 @@ const Weight = () => {
           2021: weightsByYear[2][i - 1] && weightsByYear[2][i - 1].close,
           2022: weightsByYear[3][i - 1] && weightsByYear[3][i - 1].close,
           2023: weightsByYear[4][i - 1] && weightsByYear[4][i - 1].close,
-          2024: weightsByYear[5][i] && weightsByYear[5][i].close,
+          2024: weightsByYear[5][i - 1] && weightsByYear[5][i - 1].close,
+          2025: weightsByYear[6][i] && weightsByYear[6][i].close,
         };
       } else if (i < 59) {
         chartEntry = {
@@ -124,12 +127,13 @@ const Weight = () => {
           2022: weightsByYear[3][i] && weightsByYear[3][i].close,
           2023: weightsByYear[4][i] && weightsByYear[4][i].close,
           2024: weightsByYear[5][i] && weightsByYear[5][i].close,
+          2025: weightsByYear[6][i] && weightsByYear[6][i].close,
         };
       } else {
         chartEntry = {
           name: weightsByYear[1][i].time.substring(5),
           2020: weightsByYear[1][i] && weightsByYear[1][i].close,
-          2024: weightsByYear[5][i] && weightsByYear[5][i].close,
+          2025: weightsByYear[6][i] && weightsByYear[6][i].close,
         };
       }
 
@@ -158,6 +162,9 @@ const Weight = () => {
         break;
       case "2024":
         setFilters({ ...filters, 2024: !filters[2024].valueOf() });
+        break;
+      case "2025":
+        setFilters({ ...filters, 2025: !filters[2025].valueOf() });
         break;
     }
   };
@@ -370,7 +377,7 @@ const Weight = () => {
               </div>
 
               <div className={styles.block}>
-                <div className={styles.blockTitle}>Weight in 2024</div>
+                <div className={styles.blockTitle}>Weight in {getCurrentYear()}</div>
                 <ResponsiveContainer
                   className={styles.blockContent}
                   height="100%"
@@ -604,6 +611,17 @@ const Weight = () => {
                       hide={filters[2024]}
                       strokeWidth={
                         hoveredYear[2024] ? hoveredYearStrokeWidth : 1
+                      }
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="2025"
+                      stroke="#1111FF"
+                      opacity={hoveredYear[2025] ? 1 : 0.8}
+                      dot={false}
+                      hide={filters[2025]}
+                      strokeWidth={
+                        hoveredYear[2025] ? hoveredYearStrokeWidth : 1
                       }
                     />
                   </LineChart>
