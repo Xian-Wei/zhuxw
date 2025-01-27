@@ -17,7 +17,7 @@ import {
 } from "recharts";
 import useSWR from "swr";
 import axios from "axios";
-import { Weight } from "../../models/Weight";
+import type { Weight } from "../../models/Weight";
 import Loader from "../../components/Loader";
 import {
   formatDateLongMonth,
