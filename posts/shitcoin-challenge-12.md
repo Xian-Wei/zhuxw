@@ -1,5 +1,5 @@
 ---
-id: 26
+id: 27
 title: "Shitcoin Challenge: January 2025"
 description: "It is actually over."
 image: images/blog/thumbnails/end.png
@@ -12,7 +12,7 @@ tags:
 
 It is officially the end of the shitcoin challenge, and I'm **30 days late** in wrapping it up.
 
-![Gain](/images/blog/26-chart.png)
+![Gain](/images/blog/27-chart.png)
 
 ## The Damage
 
@@ -24,7 +24,7 @@ For those new to crypto, Bitcoin is the metronome of the market—when BTC moves
 
 The fact that my portfolio massively underperformed means I should have just stuck with good ol’ BTC.
 
-![Portfolio](/images/blog/26-portfolio.png)
+![Portfolio](/images/blog/27-portfolio.png)
 
 A final reminder: that I started this challenge with 300 dollars in each shitcoin.
 
@@ -37,7 +37,7 @@ Looking at these numbers, I’m only now realizing just how terrible of an idea 
 
 Honestly I should have known, **Zero** was literally in the name.
 
-![Profit](/images/blog/26-profit.png)
+![Profit](/images/blog/27-profit.png)
 
 I took this hit so you don’t have to.
 
