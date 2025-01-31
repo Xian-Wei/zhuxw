@@ -67,8 +67,10 @@
 
 .filters {
   display: flex;
+  justify-content: flex-start;
   flex-direction: column;
   flex: 0.3;
+  height: 450px;
   padding-left: 20px;
   border-left: 1px solid $secondaryBorder;
 
