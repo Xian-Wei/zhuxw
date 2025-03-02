@@ -30,7 +30,7 @@ import Head from "next/head";
 import MetaTags from "../../components/MetaTags";
 import BottomNavbar from "../../components/BottomNavbar";
 
-export const siteTitle = "Xian-Wei Zhu's weight";
+export const siteTitle = "Xian-Wei's weight";
 
 const Weight = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);

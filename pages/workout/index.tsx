@@ -29,7 +29,7 @@ import MetaTags from "../../components/MetaTags";
 import Loader from "../../components/Loader";
 import BottomNavbar from "../../components/BottomNavbar";
 
-export const siteTitle = "Xian-Wei Zhu's workouts";
+export const siteTitle = "Xian-Wei's workouts";
 
 const Workout = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);

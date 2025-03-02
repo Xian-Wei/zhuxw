@@ -442,7 +442,7 @@ const Chart = () => {
               : "XWZ/KG"
           }
           description={
-            "Xian-Wei Zhu's weight in a candlestick chart. Highly volatile and unpredictable, trade at your own risk. Not financial advice."
+            "Xian-Wei's weight in a candlestick chart. Highly volatile and unpredictable, trade at your own risk. Not financial advice."
           }
           url={"https://zhuxw.com/chart"}
         />
