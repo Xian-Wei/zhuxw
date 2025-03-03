@@ -82,7 +82,7 @@ And lo and behold—I was right.
 
 My real winner? Buying **$SOL at $17** during the FTX collapse.
 
-Fast forward **350 days**, and the price had skyrocketed to **$125**- marking the first time I had ever taken profits. 
+Fast forward **350 days**, and the price had skyrocketed to **$125**—marking the first time I had ever taken profits. 
 
 At that moment, I realized the opportunities the market had to offer. It was enough to convince me to try going full-time in crypto.
 
@@ -96,7 +96,7 @@ To put it bluntly, I got cucked by the market—everything pumped hard except th
 
 Despite holding underperforming assets, my portfolio still grew to the point where it was hitting all-time highs day after day.
 
-Doing my research from 2022 to 2023-when no one else was-learning about economics and technical analysis turned out to be a great investment.
+Doing my research from 2022 to 2023, when no one else was, and learning economics and technical analysis turned out to be a great investment.
 
 However, as my portfolio and my ego inflated, a new problem emerged:
 
