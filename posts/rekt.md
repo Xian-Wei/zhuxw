@@ -2,7 +2,7 @@
 id: 28
 title: "Tutorial on how to lose money"
 description: "Rekt." 
-image: images/blog/thumbnails/wip.png
+image: images/blog/thumbnails/losemoney.png
 date: "2025-02-28"
 tags:
   - life
