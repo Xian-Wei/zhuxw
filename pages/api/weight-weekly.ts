@@ -17,9 +17,9 @@ function calculateWeeklyWeights(data: any) {
       const weightEntry = {
         time: allWeightsInWeek[0].time,
         open: allWeightsInWeek[0].open,
+        close: allWeightsInWeek[allWeightsInWeek.length - 1].close,
         high: Math.max(...allWeightsInWeek.map(weight => weight.close)),
         low: Math.min(...allWeightsInWeek.map(weight => weight.close)),
-        close: allWeightsInWeek[allWeightsInWeek.length - 1].close,
       };
       weeklyWeights.push(weightEntry);
       allWeightsInWeek = [];
