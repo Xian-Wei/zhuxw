@@ -14,12 +14,14 @@ function calculateWeeklyWeights(data: any) {
     allWeightsInWeek.push(data[i]);
 
     if (allWeightsInWeek.length === 7 || i == data.length - 1) {
+      const closes = allWeightsInWeek.map(weight => Number(weight.close)).filter(val => !isNaN(val));
+
       const weightEntry = {
         time: allWeightsInWeek[0].time,
         open: allWeightsInWeek[0].open,
         close: allWeightsInWeek[allWeightsInWeek.length - 1].close,
-        high: Math.max(...allWeightsInWeek.map(weight => weight.close)),
-        low: Math.min(...allWeightsInWeek.map(weight => weight.close)),
+        high: Math.max(...closes),
+        low: Math.min(...closes),
       };
       weeklyWeights.push(weightEntry);
       allWeightsInWeek = [];
