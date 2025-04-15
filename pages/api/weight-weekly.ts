@@ -8,8 +8,6 @@ type ResponseData = {
 
 function calculateWeeklyWeights(data: any) {
   const weeklyWeights = [];
-  let allWeightsInWeek = [];
-
  
   for (let i = 1; i < data.length; i += 7) {
     const weekSlice = data.slice(i, i + 7);
