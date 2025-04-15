@@ -28,8 +28,6 @@ export default async function handler(
         let newWeight: Weight = {
           time: req.body.date,
           open: -1,
-          high: -1,
-          low: -1,
           close: Number(req.body.weight),
         };
 
@@ -41,15 +39,7 @@ export default async function handler(
 
         if (weightsIndex === -1) {
           newWeight.open = Number(weights[weights.length - 1].close);
-          newWeight.high =
-            req.body.weight >= weights[weights.length - 1].close
-              ? Number(req.body.weight)
-              : Number(weights[weights.length - 1].close);
-          newWeight.low =
-            req.body.weight >= weights[weights.length - 1].close
-              ? Number(weights[weights.length - 1].close)
-              : Number(req.body.weight);
-
+        
           weights.push(newWeight);
 
           await setDoc(doc(db, "weights", "xw"), { weights: weights });
@@ -57,15 +47,7 @@ export default async function handler(
           res.status(200).send({ message: "Added new weight" });
         } else {
           newWeight.open = Number(weights[weights.length - 2].close);
-          newWeight.high =
-            req.body.weight >= weights[weights.length - 2].close
-              ? Number(req.body.weight)
-              : Number(weights[weights.length - 2].close);
-          newWeight.low =
-            req.body.weight >= weights[weights.length - 2].close
-              ? Number(weights[weights.length - 2].close)
-              : Number(req.body.weight);
-
+          
           weights[weightsIndex] = newWeight;
 
           await setDoc(doc(db, "weights", "xw"), { weights: weights });
