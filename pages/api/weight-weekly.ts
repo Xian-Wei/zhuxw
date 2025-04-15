@@ -10,23 +10,22 @@ function calculateWeeklyWeights(data: any) {
   const weeklyWeights = [];
   let allWeightsInWeek = [];
 
-  for (let i = 1; i < data.length; i++) {
-    allWeightsInWeek.push(data[i]);
+ 
+  for (let i = 1; i < data.length; i += 7) {
+    const weekSlice = data.slice(i, i + 7);
+    const closes = weekSlice.map((entry: any) => Number(entry.close)).filter((val: any) => !isNaN(val));
 
-    if (allWeightsInWeek.length === 7 || i == data.length - 1) {
-      const closes = allWeightsInWeek.map(weight => Number(weight.close)).filter(val => !isNaN(val));
+    if (closes.length === 0) continue;
 
-      const weightEntry = {
-        time: allWeightsInWeek[0].time,
-        open: allWeightsInWeek[0].open,
-        close: allWeightsInWeek[allWeightsInWeek.length - 1].close,
-        high: Math.max(...closes),
-        low: Math.min(...closes),
-      };
-      weeklyWeights.push(weightEntry);
-      allWeightsInWeek = [];
-    }
+    weeklyWeights.push({
+      time: weekSlice[0].time,
+      open: weekSlice[0].open,
+      close: weekSlice[weekSlice.length - 1].close,
+      high: Math.max(...closes),
+      low: Math.min(...closes),
+    });
   }
+
   return weeklyWeights;
 }
 
