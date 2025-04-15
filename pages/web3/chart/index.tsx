@@ -316,6 +316,16 @@ const Chart = () => {
   }, [chainId, wallet, getBalance, getPositions, getFaucetLockState]);
 
   useEffect(() => {
+    if (dailyWeights)
+      // Add low and high attributes for TradingView
+      dailyWeights.forEach((weight: any) => {
+        weight.low = weight.close < weight.open ? weight.open : weight.close;
+        weight.high = weight.close > weight.open ? weight.close : weight.open;
+      });
+    console.log(dailyWeights);
+  }, [dailyWeights]);
+
+  useEffect(() => {
     if (provider) {
       // After a successful Long/Short
       let positionAdded: any = {
