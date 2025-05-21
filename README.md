@@ -9,5 +9,3 @@ Random website with random features.
 - **Weight/Workout Tracker**: Keeping track of my weight and workouts since September 2019. [Access it here](https://www.zhuxw.com/weight).
 
 - **Web3/Crypto Trading**: An unique trading system based on my weight, powered by Ethereum. [Trade here](https://www.zhuxw.com/web3).
-
-- **AI Chat**: Engage with an AI assistant, powered by Mistral-7B-v0.1. [Interact with it here](https://www.zhuxw.com/ai).
