@@ -41,7 +41,7 @@ export default function Home() {
           url={"https://zhuxw.com/"}
         />
       </Head>
-      <Layout navbarEnabled={true}>
+      <Layout navbarEnabled={false}>
         <section className={styles.container}>
           <Suspense fallback={<Loader />}>
             <Canvas className={styles.canvas} camera={{ near: 0.1, far: 1000 }}>
