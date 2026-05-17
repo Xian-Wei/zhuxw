@@ -13,7 +13,6 @@ const Navbar = () => {
   const [navbarToggle, setNavbarToggle] = useState<boolean>(false);
   const isWidth = useIsWidth(WindowWidth.lg);
   const { isDev } = useIsEasterEgg();
-
   useEffect(() => {
     if (isWidth) {
       setNavbarToggle(false);
@@ -38,11 +37,9 @@ const Navbar = () => {
         </Link>
       </nav>
       <nav className={styles.middleContainer}>
-        {isDev && (
-          <Link href="/blog" className={styles.link}>
-            Blog
-          </Link>
-        )}
+        <Link href="/blog" className={styles.link}>
+          Blog
+        </Link>
         <Link href="/weight" className={styles.link}>
           Tracker
         </Link>
@@ -75,15 +72,13 @@ const Navbar = () => {
       </nav>
       <nav className={navbarToggle ? styles.fadeIn : styles.fadeOut}>
         <div className={styles.mobileLinks}>
-          {isDev && (
-            <Link
-              href="/blog"
-              className={styles.mobileLink}
-              onClick={() => setNavbarToggle(false)}
-            >
-              Blog
-            </Link>
-          )}
+          <Link
+            href="/blog"
+            className={styles.mobileLink}
+            onClick={() => setNavbarToggle(false)}
+          >
+            Blog
+          </Link>
           <Link
             href="/weight"
             className={styles.mobileLink}
