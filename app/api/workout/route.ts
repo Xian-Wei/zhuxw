@@ -1,5 +1,5 @@
 import { db } from "../../../firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore/lite";
 import { WorkoutItem } from "../../../models/WorkoutItem";
 import { getCurrentYear } from "../../../utils/Date";
 

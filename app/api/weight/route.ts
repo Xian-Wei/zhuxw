@@ -1,5 +1,5 @@
 import { db } from "../../../firebase";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore/lite";
 import { Weight } from "../../../models/Weight";
 
 export async function POST(request: Request) {
