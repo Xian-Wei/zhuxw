@@ -11,15 +11,13 @@ export const Experience = () => {
     <>
       <ambientLight intensity={2} />
       <OrbitControls
-        enableZoom={true}
-        minDistance={0}
-        maxDistance={9}
+        enableZoom={false}
         minPolarAngle={Math.PI / 20}
         maxPolarAngle={Math.PI - Math.PI / 2}
       />
       <Letters
         position={isWidth ? [0, 0, 0] : [0, 0.5, 0]}
-        scale={isWidth ? 0.7 : 0.25}
+        scale={isWidth ? 0.7 : 0.45}
       />
       <Tabs />
     </>
