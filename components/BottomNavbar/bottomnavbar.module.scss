@@ -8,9 +8,12 @@
   align-items: center;
   height: $bottomNavbarHeight;
   width: 100%;
-  border-bottom: 1px solid $primaryBorder;
-  background-color: $bodyBackgroundHover;
+  background: rgba(15, 15, 30, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(80, 80, 160, 0.2);
   z-index: 6;
+  gap: 4px;
+  padding: 6px;
 }
 
 .navlink {
@@ -18,9 +21,27 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 150px;
+  width: 120px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(160, 160, 220, 0.6);
+  transition: color 0.15s, background-color 0.15s;
+
+  &:hover {
+    color: white;
+    background-color: rgba(80, 80, 160, 0.2);
+  }
 
   @media screen and (max-width: $sm) {
-    width: 130px;
+    width: 100px;
   }
+}
+
+.navlinkActive {
+  composes: navlink;
+  color: white;
+  background-color: rgba(80, 80, 160, 0.35);
 }

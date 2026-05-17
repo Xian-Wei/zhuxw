@@ -58,7 +58,7 @@ const WorkoutPage = () => {
 
   const getWorkoutsPerYear = () => {
     let allWorkoutsCounts: WorkoutItem[][] = [[]];
-    let currentYear = "2019";
+    let currentYear = workouts[0].date.substring(0, 4);
     let yearIndex = 0;
 
     for (let i = 0; i < workouts.length; i++) {
@@ -195,16 +195,16 @@ const WorkoutPage = () => {
   const musclePieData = workouts && workouts ? countMuscles(10) : [];
 
   const COLORS = [
-    "#0088FE",
-    "#00C49F",
-    "#FFBB28",
-    "#FF8042",
-    "#AF19FF",
-    "#FF0000",
-    "#36a2eb",
-    "#4bc0c0",
-    "#9966CC",
-    "#FFD700",
+    "#74C0FC",
+    "#69DB7C",
+    "#FFD43B",
+    "#FF6B6B",
+    "#DA77F2",
+    "#FFA94D",
+    "#4DABF7",
+    "#63E6BE",
+    "#A9B7C6",
+    "#E599F7",
   ];
 
   const CustomTooltip = ({ active, payload }: any) => {
@@ -261,6 +261,7 @@ const WorkoutPage = () => {
 
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Workouts per month</div>
+                <div className={styles.chartWrapper}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart width={500} height={300} data={workoutsPerMonth}>
                     <XAxis
@@ -282,9 +283,11 @@ const WorkoutPage = () => {
                     <Bar dataKey="home" stackId={"Workout"} fill="#f3a24b" />
                   </BarChart>
                 </ResponsiveContainer>
+                </div>
               </div>
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Workouts per year</div>
+                <div className={styles.chartWrapper}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart width={500} height={300} data={workoutsPerYear}>
                     <XAxis
@@ -306,6 +309,7 @@ const WorkoutPage = () => {
                     <Bar dataKey="home" fill="#f3a24b" />
                   </BarChart>
                 </ResponsiveContainer>
+                </div>
               </div>
               <div className={styles.workoutLines}>
                 <div className={styles.blockTitle}>
@@ -336,7 +340,8 @@ const WorkoutPage = () => {
               </div>
               <div className={styles.biggerBlock}>
                 <div className={styles.blockTitle}>Muscle activity trends</div>
-                <ResponsiveContainer>
+                <div className={styles.chartWrapper}>
+                <ResponsiveContainer width="100%" height="100%">
                   <PieChart width={400} height={400}>
                     <Pie
                       dataKey="value"
@@ -362,6 +367,7 @@ const WorkoutPage = () => {
                     />
                   </PieChart>
                 </ResponsiveContainer>
+                </div>
               </div>
             </>
           ) : (
