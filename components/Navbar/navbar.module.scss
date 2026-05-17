@@ -68,6 +68,15 @@
 
 .homeLink {
   display: flex;
+
+  img {
+    height: 50px;
+    width: auto;
+
+    @media screen and (max-width: $lg) {
+      height: 36px;
+    }
+  }
 }
 
 .link {

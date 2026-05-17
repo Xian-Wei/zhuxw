@@ -32,7 +32,6 @@ const Navbar = () => {
             height={80}
             width={80}
             alt="zhuxw logo"
-            style={{ width: "auto" }}
           />
         </Link>
       </nav>
