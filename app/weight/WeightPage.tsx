@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import styles from "./weight.module.scss";
 import {
   LineChart,
@@ -36,25 +36,34 @@ const WeightPage = () => {
     "/api/weight-daily",
     fetcher,
   );
-  const [filters, setFilters] = useState<{ [key: string]: boolean }>({
-    2019: false,
-    2020: false,
-    2021: false,
-    2022: false,
-    2023: false,
-    2024: false,
-    2025: false,
-  });
-  const [hoveredYear, setHoveredYear] = useState<{ [key: string]: boolean }>({
-    2019: false,
-    2020: false,
-    2021: false,
-    2022: false,
-    2023: false,
-    2024: false,
-    2025: false,
-  });
+  const [filters, setFilters] = useState<{ [key: string]: boolean }>({});
+  const [hoveredYear, setHoveredYear] = useState<{ [key: string]: boolean }>({});
   const hoveredYearStrokeWidth = 3;
+
+  const YEAR_COLORS: { [year: string]: string } = {
+    "2019": "#FF6B6B",
+    "2020": "#69DB7C",
+    "2021": "#74C0FC",
+    "2022": "#FFD43B",
+    "2023": "#DA77F2",
+    "2024": "#A9B7C6",
+    "2025": "#4DABF7",
+  };
+  const COLOR_PALETTE = Object.values(YEAR_COLORS);
+  const getYearColor = (year: string, idx: number) =>
+    YEAR_COLORS[year] ?? COLOR_PALETTE[idx % COLOR_PALETTE.length];
+
+  const years = useMemo(() => {
+    if (!dailyWeights) return [];
+    return [...new Set(dailyWeights.map(w => w.time.substring(0, 4)))].sort();
+  }, [dailyWeights]);
+
+  useEffect(() => {
+    if (years.length > 0) {
+      setFilters(Object.fromEntries(years.map(y => [y, false])));
+      setHoveredYear(Object.fromEntries(years.map(y => [y, false])));
+    }
+  }, [years]);
 
   const getWeightsByYear = () => {
     if (dailyWeights) {
@@ -101,94 +110,33 @@ const WeightPage = () => {
   };
 
   const getChartDataSeparatedByYear = () => {
-    let weightsByYear: Weight[][] | null = getWeightsByYear();
-    let chartData: { [key: string]: (number | string) | undefined }[] = [];
-    let chartEntry: { [key: string]: (number | string) | undefined };
+    if (!dailyWeights || dailyWeights.length === 0) return [];
 
-    for (let i = 0; i < 366; i++) {
-      if (i > 59) {
-        chartEntry = {
-          name: weightsByYear[1][i].time.substring(5),
-          2019: i > 243 ? weightsByYear[0][i - 244].close : undefined,
-          2020: weightsByYear[1][i] && weightsByYear[1][i].close,
-          2021: weightsByYear[2][i - 1] && weightsByYear[2][i - 1].close,
-          2022: weightsByYear[3][i - 1] && weightsByYear[3][i - 1].close,
-          2023: weightsByYear[4][i - 1] && weightsByYear[4][i - 1].close,
-          2024: weightsByYear[5][i - 1] && weightsByYear[5][i - 1].close,
-          2025: weightsByYear[6][i] && weightsByYear[6][i].close,
-        };
-      } else if (i < 59) {
-        chartEntry = {
-          name: weightsByYear[1][i].time.substring(5),
-          2020: weightsByYear[1][i] && weightsByYear[1][i].close,
-          2021: weightsByYear[2][i] && weightsByYear[2][i].close,
-          2022: weightsByYear[3][i] && weightsByYear[3][i].close,
-          2023: weightsByYear[4][i] && weightsByYear[4][i].close,
-          2024: weightsByYear[5][i] && weightsByYear[5][i].close,
-          2025: weightsByYear[6][i] && weightsByYear[6][i].close,
-        };
-      } else {
-        chartEntry = {
-          name: weightsByYear[1][i].time.substring(5),
-          2020: weightsByYear[1][i] && weightsByYear[1][i].close,
-          2025: weightsByYear[6][i] && weightsByYear[6][i].close,
-        };
-      }
+    const yearDayMap: { [year: string]: { [day: number]: number } } = {};
+    dailyWeights.forEach(weight => {
+      const year = weight.time.substring(0, 4);
+      const date = new Date(weight.time);
+      const dayOfYear = Math.floor(
+        (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000,
+      );
+      if (!yearDayMap[year]) yearDayMap[year] = {};
+      yearDayMap[year][dayOfYear] = weight.close;
+    });
 
-      chartData.push(chartEntry);
-    }
-
-    return chartData;
+    return Array.from({ length: 366 }, (_, i) => {
+      const refDate = new Date(2020, 0, i);
+      const label = refDate.toISOString().substring(5, 10);
+      const entry: { [key: string]: number | string | undefined } = { name: label };
+      years.forEach(year => { entry[year] = yearDayMap[year]?.[i]; });
+      return entry;
+    });
   };
 
-  const toggleYear = (year: string) => {
-    switch (year) {
-      case "2019":
-        setFilters({ ...filters, 2019: !filters[2019].valueOf() });
-        break;
-      case "2020":
-        setFilters({ ...filters, 2020: !filters[2020].valueOf() });
-        break;
-      case "2021":
-        setFilters({ ...filters, 2021: !filters[2021].valueOf() });
-        break;
-      case "2022":
-        setFilters({ ...filters, 2022: !filters[2022].valueOf() });
-        break;
-      case "2023":
-        setFilters({ ...filters, 2023: !filters[2023].valueOf() });
-        break;
-      case "2024":
-        setFilters({ ...filters, 2024: !filters[2024].valueOf() });
-        break;
-      case "2025":
-        setFilters({ ...filters, 2025: !filters[2025].valueOf() });
-        break;
-    }
-  };
+  const toggleYear = (year: string) =>
+    setFilters(f => ({ ...f, [year]: !f[year] }));
 
-  const hoverYear = (year: string, activate: boolean) => {
-    switch (year) {
-      case "2019":
-        setHoveredYear({ ...hoveredYear, 2019: activate });
-        break;
-      case "2020":
-        setHoveredYear({ ...hoveredYear, 2020: activate });
-        break;
-      case "2021":
-        setHoveredYear({ ...hoveredYear, 2021: activate });
-        break;
-      case "2022":
-        setHoveredYear({ ...hoveredYear, 2022: activate });
-        break;
-      case "2023":
-        setHoveredYear({ ...hoveredYear, 2023: activate });
-        break;
-      case "2024":
-        setHoveredYear({ ...hoveredYear, 2024: activate });
-        break;
-    }
-  };
+  const hoverYear = (year: string, activate: boolean) =>
+    setHoveredYear(h => ({ ...h, [year]: activate }));
 
   const getChartDataUnfiltered = () => {
     if (dailyWeights && dailyWeights.length > 0) {
@@ -534,84 +482,18 @@ const WeightPage = () => {
                       onPointerEnter={e => hoverYear(e.dataKey as string, true)}
                       onPointerLeave={e => hoverYear(e.dataKey as string, false)}
                     />
-                    <Line
-                      type="monotone"
-                      dataKey="2019"
-                      stroke="#FF0000"
-                      opacity={hoveredYear[2019] ? 1 : 0.8}
-                      dot={false}
-                      hide={filters[2019]}
-                      strokeWidth={
-                        hoveredYear[2019] ? hoveredYearStrokeWidth : 1
-                      }
-                    />
-
-                    <Line
-                      type="monotone"
-                      dataKey="2020"
-                      stroke="#00FF00"
-                      opacity={hoveredYear[2020] ? 1 : 0.8}
-                      dot={false}
-                      hide={filters[2020]}
-                      strokeWidth={
-                        hoveredYear[2020] ? hoveredYearStrokeWidth : 1
-                      }
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="2021"
-                      stroke="#00FFFF"
-                      opacity={hoveredYear[2021] ? 1 : 0.8}
-                      dot={false}
-                      hide={filters[2021]}
-                      strokeWidth={
-                        hoveredYear[2021] ? hoveredYearStrokeWidth : 1
-                      }
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="2022"
-                      stroke="#FFFF00"
-                      opacity={hoveredYear[2022] ? 1 : 0.8}
-                      dot={false}
-                      hide={filters[2022]}
-                      strokeWidth={
-                        hoveredYear[2022] ? hoveredYearStrokeWidth : 1
-                      }
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="2023"
-                      stroke="#FF00FF"
-                      opacity={hoveredYear[2023] ? 1 : 0.8}
-                      dot={false}
-                      hide={filters[2023]}
-                      strokeWidth={
-                        hoveredYear[2023] ? hoveredYearStrokeWidth : 1
-                      }
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="2024"
-                      stroke="#FFFFFF"
-                      opacity={hoveredYear[2024] ? 1 : 0.8}
-                      dot={false}
-                      hide={filters[2024]}
-                      strokeWidth={
-                        hoveredYear[2024] ? hoveredYearStrokeWidth : 1
-                      }
-                    />
-                    <Line
-                      type="monotone"
-                      dataKey="2025"
-                      stroke="#1111FF"
-                      opacity={hoveredYear[2025] ? 1 : 0.8}
-                      dot={false}
-                      hide={filters[2025]}
-                      strokeWidth={
-                        hoveredYear[2025] ? hoveredYearStrokeWidth : 1
-                      }
-                    />
+                    {years.map((year, idx) => (
+                      <Line
+                        key={year}
+                        type="monotone"
+                        dataKey={year}
+                        stroke={getYearColor(year, idx)}
+                        opacity={hoveredYear[year] ? 1 : 0.8}
+                        dot={false}
+                        hide={filters[year]}
+                        strokeWidth={hoveredYear[year] ? hoveredYearStrokeWidth : 1}
+                      />
+                    ))}
                   </LineChart>
                 </ResponsiveContainer>
               </div>
