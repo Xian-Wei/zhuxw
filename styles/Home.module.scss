@@ -5,9 +5,8 @@
   height: 100vh;
   width: 100%;
   z-index: inherit;
+  background-image: url("/images/background.png");
+  background-size: cover;
+  background-position: center;
 }
 
-.canvas {
-  height: 100%;
-  width: 100%;
-}
