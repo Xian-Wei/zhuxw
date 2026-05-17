@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function Tabs() {
   const router = useRouter();

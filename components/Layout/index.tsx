@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import styles from "./layout.module.scss";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 
 interface LayoutProps {
   children: any;
@@ -17,7 +19,7 @@ const Layout = ({
   footerEnabled = false,
   backgroundEnabled = false,
 }: LayoutProps) => {
-  const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <>
@@ -29,7 +31,7 @@ const Layout = ({
       )}
       <div
         className={
-          router.pathname == "/"
+          pathname == "/"
             ? styles.childrenNoPadding
             : footerEnabled
               ? styles.children
