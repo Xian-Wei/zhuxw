@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const files = fs.readdirSync("posts");
+  const files = fs.existsSync("posts") ? fs.readdirSync("posts") : [];
   const posts: Post[] = files.map(fileName => {
     const slug = fileName.replace(".md", "");
     const readFile = fs.readFileSync(`posts/${fileName}`, "utf-8");
