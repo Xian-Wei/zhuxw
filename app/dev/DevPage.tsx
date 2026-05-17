@@ -2,7 +2,7 @@
 
 import React from "react";
 import Layout from "../../components/Layout";
-import styles from "../../pages/dev/dev.module.scss";
+import styles from "./dev.module.scss";
 
 const DevPage = () => {
   return (

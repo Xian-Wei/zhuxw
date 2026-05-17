@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "../../pages/weight/weight.module.scss";
+import styles from "./weight.module.scss";
 import {
   LineChart,
   Line,

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
-import styles from "../../pages/ai/ai.module.scss";
+import styles from "./ai.module.scss";
 import { useChat } from "@ai-sdk/react";
 import ReactMarkdown from "react-markdown";
 

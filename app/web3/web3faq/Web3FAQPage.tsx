@@ -3,7 +3,7 @@
 // FaqAccordion.tsx
 
 import React from "react";
-import styles from "../../../pages/web3/web3faq/web3faq.module.scss";
+import styles from "./web3faq.module.scss";
 
 interface FAQItemProps {
   title: string;

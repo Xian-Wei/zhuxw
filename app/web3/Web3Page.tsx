@@ -5,7 +5,7 @@ import Layout from "../../components/Layout";
 import Sidebar from "../../components/Sidebar";
 import ChartPage from "./chart/ChartPage";
 import ShopPage from "./shop/ShopPage";
-import styles from "../../pages/web3/web3.module.scss";
+import styles from "./web3.module.scss";
 import Web3FAQPage from "./web3faq/Web3FAQPage";
 
 const pages = ["Chart", "Shop", "FAQ"];

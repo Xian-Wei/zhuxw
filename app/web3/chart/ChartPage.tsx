@@ -7,7 +7,7 @@ import axios from "axios";
 
 import LWChart from "../../../components/Web3/LWChart";
 import { Timeframe } from "../../../models/Timeframe";
-import styles from "../../../pages/web3/chart/chart.module.scss";
+import styles from "./chart.module.scss";
 import useWeb3Provider from "../../../hooks/useWeb3Provider";
 import useWeb3ChainId from "../../../hooks/useWeb3Network";
 import contractAddresses from "../../../data/artifacts/contractAddresses.json";

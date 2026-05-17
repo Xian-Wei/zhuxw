@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useState, useEffect } from "react";
-import styles from "../../../pages/web3/shop/shop.module.scss";
+import styles from "./shop.module.scss";
 import useWeb3ChainId from "../../../hooks/useWeb3Network";
 import contractAddresses from "../../../data/artifacts/contractAddresses.json";
 import zhuAbi from "../../../data/artifacts/Zhu.json";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import styles from "../../pages/blog/Blog.module.scss";
+import styles from "./Blog.module.scss";
 import Post from "../../models/Post";
 import Layout from "../../components/Layout";
 import BlogPost from "../../components/Blog/BlogPost";
