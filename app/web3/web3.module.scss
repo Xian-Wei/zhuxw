@@ -15,6 +15,6 @@
   z-index: inherit;
 
   @media screen and (max-width: $xl) {
-    flex: 1;
+    padding-top: $bottomNavbarHeight;
   }
 }
