@@ -135,7 +135,7 @@ const Shop = () => {
         <MetaTags
           title={siteTitle}
           description={
-            "Welcome to Xian-Wei's NFT shop, where my attempts at creating digital art are on display like a gallery of questionable life choices."
+            "Welcome to my NFT shop, where my attempts at creating digital art are on display like a gallery of questionable life choices."
           }
           url={"https://zhuxw.com/shop"}
         />

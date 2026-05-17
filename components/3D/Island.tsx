@@ -21,12 +21,12 @@ type GLTFResult = GLTF & {
 
 type ContextType = Record<
   string,
-  React.ForwardRefExoticComponent<JSX.IntrinsicElements["mesh"]>
+  React.ForwardRefExoticComponent<React.JSX.IntrinsicElements["mesh"]>
 >;
 
-export function Island(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/3d/island.glb") as GLTFResult;
-  const islandRef = useRef<any>();
+export function Island(props: React.JSX.IntrinsicElements["group"]) {
+  const { nodes, materials } = useGLTF("/3d/island.glb") as unknown as GLTFResult;
+  const islandRef = useRef<any>(null);
 
   return (
     <a.group {...props} dispose={null} ref={islandRef}>

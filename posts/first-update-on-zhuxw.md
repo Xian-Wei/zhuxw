@@ -23,7 +23,7 @@ Just so you know I had previously created 2 posts in this blog, the
 ![Damn bug](/images/blog/3-screenshot.png)
 
 Yeah I'm definitely fixing this bug before I take on the rest of this post. \
-I must say past Xian-Wei from a week ago really disappoints.
+I must say past me from a week ago really disappoints.
 
 ## The so-called "update"
 
@@ -48,7 +48,7 @@ That's it, that's all I have for now. Yes.
 I'm working on NFTs that I'm gonna be giving for free when you connect your
 crypto wallet (MetaMask browser extension) to this website.
 
-> Oh no Xian-Wei is a cryptobro !
+> Oh no I'm a cryptobro !
 
 For all of you haters, HAVE FUN STAYING POOR ! \
 Just kidding.

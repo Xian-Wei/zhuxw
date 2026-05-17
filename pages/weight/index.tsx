@@ -30,7 +30,7 @@ import Head from "next/head";
 import MetaTags from "../../components/MetaTags";
 import BottomNavbar from "../../components/BottomNavbar";
 
-export const siteTitle = "Xian-Wei's weight";
+export const siteTitle = "zhuxw weight";
 
 const Weight = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
@@ -341,7 +341,7 @@ const Weight = () => {
         <MetaTags
           title={siteTitle}
           description={
-            "Welcome to Xian-Wei's life tracker page - where every misstep, questionable decision, and triumph are meticulously documented for your entertainment."
+            "Welcome to my life tracker page - where every misstep, questionable decision, and triumph are meticulously documented for your entertainment."
           }
           url={"https://zhuxw.com/weight"}
         />
@@ -542,9 +542,9 @@ const Weight = () => {
                       }}
                     />
                     <Legend
-                      onClick={e => toggleYear(e.dataKey)}
-                      onPointerEnter={e => hoverYear(e.dataKey, true)}
-                      onPointerLeave={e => hoverYear(e.dataKey, false)}
+                      onClick={e => toggleYear(e.dataKey as string)}
+                      onPointerEnter={e => hoverYear(e.dataKey as string, true)}
+                      onPointerLeave={e => hoverYear(e.dataKey as string, false)}
                     />
                     <Line
                       type="monotone"

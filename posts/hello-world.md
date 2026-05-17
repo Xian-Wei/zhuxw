@@ -11,7 +11,7 @@ tags:
 
 **Hello and welcome to my very first blog post !**
 
-Hello everybody I am Xian-Wei Zhu, a hopeless 24 years old wantrepreneur kid
+Hello everybody I am xw, a hopeless 24 years old wantrepreneur kid
 from the internet whose interests vary day to day.
 
 This is a first from a (hopefully) long series of blog posts where I'll be

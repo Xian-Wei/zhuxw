@@ -326,31 +326,48 @@ const Chart = () => {
   }, [dailyWeights]);
 
   useEffect(() => {
-    if (provider) {
-      // After a successful Long/Short
-      let positionAdded: any = {
-        address: zhuExchangeContractAddress,
-        topics: [ethers.id("PositionAdded()")],
-      };
-      provider.on(positionAdded, async () => {
-        await getPositions();
-      });
+    if (!provider || !zhuExchangeContractAddress) return;
 
-      // After trades are executed on-chain
-      let tradesExecuted: any = {
-        address: zhuExchangeContractAddress,
-        topics: [ethers.id("TradesExecuted()")],
-      };
-      provider.on(tradesExecuted, async () => {
-        await getBalance();
-        await getPositions();
-      });
+    let lastBlock: number | null = null;
+    let active = true;
 
-      return () => {
-        provider.off(positionAdded);
-        provider.off(tradesExecuted);
-      };
-    }
+    const poll = async () => {
+      if (!active) return;
+      try {
+        const current = await provider.getBlockNumber();
+        if (lastBlock === null) { lastBlock = current; return; }
+        if (current <= lastBlock) return;
+
+        const [positionLogs, tradeLogs] = await Promise.all([
+          provider.getLogs({
+            fromBlock: lastBlock + 1,
+            toBlock: current,
+            address: zhuExchangeContractAddress,
+            topics: [ethers.id("PositionAdded()")],
+          }),
+          provider.getLogs({
+            fromBlock: lastBlock + 1,
+            toBlock: current,
+            address: zhuExchangeContractAddress,
+            topics: [ethers.id("TradesExecuted()")],
+          }),
+        ]);
+
+        lastBlock = current;
+        if (positionLogs.length > 0) await getPositions();
+        if (tradeLogs.length > 0) { await getBalance(); await getPositions(); }
+      } catch {
+        // Node not reachable, skip silently
+      }
+    };
+
+    const interval = setInterval(poll, 4000);
+    poll();
+
+    return () => {
+      active = false;
+      clearInterval(interval);
+    };
   }, [provider, getBalance, getPositions, zhuExchangeContractAddress]);
 
   const LongShortButton = () => {
@@ -452,7 +469,7 @@ const Chart = () => {
               : "XWZ/KG"
           }
           description={
-            "Xian-Wei's weight in a candlestick chart. Highly volatile and unpredictable, trade at your own risk. Not financial advice."
+            "Weight in a candlestick chart. Highly volatile and unpredictable, trade at your own risk. Not financial advice."
           }
           url={"https://zhuxw.com/chart"}
         />

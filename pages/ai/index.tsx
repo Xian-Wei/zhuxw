@@ -1,24 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Layout from "../../components/Layout";
 import styles from "./ai.module.scss";
-import { useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
 import ReactMarkdown from "react-markdown";
 
 const AI = () => {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "/api/chat",
-  });
+  const { messages, sendMessage } = useChat();
+  const [input, setInput] = useState("");
   const chatList = useRef<null | HTMLDivElement>(null);
   const inputRef = useRef<null | HTMLInputElement>(null);
 
   // Thanks ChatGPT
   useEffect(() => {
     const handleResize = () => {
-      // Adjust body height to account for keyboard visibility
       const windowHeight = window.innerHeight;
       const bodyHeight = document.documentElement.clientHeight;
 
-      // If window height is smaller, keyboard is likely open
       if (windowHeight < bodyHeight) {
         document.body.style.height = `${windowHeight}px`;
       } else {
@@ -29,34 +26,36 @@ const AI = () => {
         setTimeout(() => {
           inputRef.current?.scrollIntoView({
             behavior: "smooth",
-            block: "center", // Center the input in the view
+            block: "center",
           });
-        }, 100); // Small delay for the keyboard to appear
+        }, 100);
       }
     };
 
-    // Focus event: Scroll the input into view when it gains focus
     const scrollToInput = () => {
       setTimeout(() => {
         inputRef.current?.scrollIntoView({
           behavior: "smooth",
           block: "center",
         });
-      }, 300); // Delay to wait for the keyboard to appear
+      }, 300);
     };
 
-    // Attach the resize event listener
     window.addEventListener("resize", handleResize);
-
-    // Attach the focus event listener to the input
     inputRef.current?.addEventListener("focus", scrollToInput);
 
-    // Cleanup function to remove event listeners
     return () => {
       window.removeEventListener("resize", handleResize);
       inputRef.current?.removeEventListener("focus", scrollToInput);
     };
-  }, []); // Run only on mount and unmount
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    sendMessage({ text: input });
+    setInput("");
+  };
 
   return (
     <Layout navbarEnabled={true} footerEnabled={false} backgroundEnabled={true}>
@@ -73,7 +72,12 @@ const AI = () => {
                     m.role === "user" ? styles.chatLineUser : styles.chatLineAI
                   }
                 >
-                  <ReactMarkdown>{m.content}</ReactMarkdown>
+                  <ReactMarkdown>
+                    {m.parts
+                      .filter(p => p.type === "text")
+                      .map(p => (p as { type: "text"; text: string }).text)
+                      .join("")}
+                  </ReactMarkdown>
                 </div>
               ))}
             <div ref={chatList} />
@@ -84,8 +88,7 @@ const AI = () => {
               value={input}
               placeholder="Say something..."
               className={styles.chatInput}
-              onChange={handleInputChange}
-              // Ensure input field is visible when focused
+              onChange={e => setInput(e.target.value)}
               onFocus={() =>
                 setTimeout(() => {
                   inputRef.current?.scrollIntoView({

@@ -17,8 +17,8 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Letters(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/3d/Letters.gltf") as GLTFResult;
+export function Letters(props: React.JSX.IntrinsicElements["group"]) {
+  const { nodes, materials } = useGLTF("/3d/Letters.gltf") as unknown as GLTFResult;
   const refLetters = useRef<THREE.Mesh>(null!);
   const refMonten = useRef<THREE.Mesh>(null!);
   const refCannon = useRef<THREE.Mesh>(null!);

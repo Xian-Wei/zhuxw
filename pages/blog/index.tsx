@@ -18,12 +18,13 @@ import BlogPostTagState from "../../models/BlogPostTagState";
 import useIsWidth from "../../hooks/useIsWidth";
 import { WindowWidth } from "../../models/WindowWidth";
 import MetaTags from "../../components/MetaTags";
+import useIsEasterEgg from "../../hooks/useIsEasterEgg";
 
 interface PostProps {
   posts: Post[];
 }
 
-export const siteTitle = "Xian-Wei's blog";
+export const siteTitle = "zhuxw blog";
 
 export default function Blog({ posts }: PostProps) {
   const [searchedPosts, setSearchedPosts] = useState<Post[]>([]);
@@ -32,6 +33,7 @@ export default function Blog({ posts }: PostProps) {
   const [firstFilter, setFirstFilter] = useState<boolean>(true);
 
   const isWidth = useIsWidth(WindowWidth.xl);
+  const { isDev } = useIsEasterEgg();
 
   // Text search
   const onSearch = (search: string) => {
@@ -122,12 +124,12 @@ export default function Blog({ posts }: PostProps) {
         <MetaTags
           title={siteTitle}
           description={
-            "Welcome to Xian-Wei's blog, where I attempt to write in a way that doesn't put you to sleep."
+            "Welcome to my blog, where I attempt to write in a way that doesn't put you to sleep."
           }
           url={"https://zhuxw.com/blog"}
         />
       </Head>
-      {!isWidth ? (
+      {isDev && (!isWidth ? (
         <Swiper navigation={true} loop={true} modules={[Navigation]}>
           {posts
             ?.slice(0, 100)
@@ -166,13 +168,13 @@ export default function Blog({ posts }: PostProps) {
               />
             ))}
         </div>
-      )}
+      ))}
       <div className={styles.container}>
         <div className={styles.subcontainer}>
           <div className={styles.postContainer}>
             <div className={styles.postTitle}>Recent posts</div>
             <div className={styles.posts}>
-              {filteredPosts
+              {isDev && filteredPosts
                 ?.slice()
                 .reverse()
                 .map(post => (

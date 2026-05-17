@@ -29,7 +29,7 @@ import MetaTags from "../../components/MetaTags";
 import Loader from "../../components/Loader";
 import BottomNavbar from "../../components/BottomNavbar";
 
-export const siteTitle = "Xian-Wei's workouts";
+export const siteTitle = "zhuxw workouts";
 
 const Workout = () => {
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
@@ -236,7 +236,7 @@ const Workout = () => {
         <MetaTags
           title={siteTitle}
           description={
-            "Welcome to Xian-Wei's life tracker page - where every misstep, questionable decision, and triumph are meticulously documented for your entertainment."
+            "Welcome to my life tracker page - where every misstep, questionable decision, and triumph are meticulously documented for your entertainment."
           }
           url={"https://zhuxw.com/workout"}
         />

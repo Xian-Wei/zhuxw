@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Timeframe } from "../../../models/Timeframe";
-import { IChartApi, ISeriesApi } from "lightweight-charts";
+import { IChartApi, ISeriesApi, CandlestickSeries } from "lightweight-charts";
 import styles from "./lwchart.module.scss";
 
 interface ChartProps {
@@ -24,25 +24,23 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
   useEffect(() => {
     (async () => {
       if (!chart) {
-        if (await import("lightweight-charts")) {
-          const Chart = await import("lightweight-charts");
-          const newChart = Chart.createChart(
-            chartContainerRef.current as string | HTMLElement,
-            {
-              layout: {
-                background: {
-                  type: Chart.ColorType.Solid,
-                  color: backgroundColor,
-                },
-                textColor,
+        const Chart = await import("lightweight-charts");
+        const newChart = Chart.createChart(
+          chartContainerRef.current as string | HTMLElement,
+          {
+            layout: {
+              background: {
+                type: Chart.ColorType.Solid,
+                color: backgroundColor,
               },
-              width: chartContainerRef.current?.clientWidth,
-              height: chartContainerRef.current?.clientHeight,
+              textColor,
             },
-          );
+            width: chartContainerRef.current?.clientWidth,
+            height: chartContainerRef.current?.clientHeight,
+          },
+        );
 
-          setChart(newChart);
-        }
+        setChart(newChart);
       }
     })();
   }, [chart]);
@@ -58,7 +56,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
         };
 
         // Series
-        const newSeries = chart.addCandlestickSeries();
+        const newSeries = chart.addSeries(CandlestickSeries);
         newSeries.setData(weeklyWeights);
 
         setSeries(newSeries);
@@ -77,25 +75,18 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
         // Border horizontal axis
         chart.timeScale().applyOptions({ borderColor: borderColor });
 
-        const CrosshairMode = await (
-          await import("lightweight-charts")
-        ).CrosshairMode;
-        const LineStyle = await (await import("lightweight-charts")).LineStyle;
+        const { CrosshairMode, LineStyle } = await import("lightweight-charts");
 
         // Customizing the Crosshair
         chart.applyOptions({
           crosshair: {
             mode: CrosshairMode.Normal,
-
-            // Vertical crosshair line (showing Date in Label)
             vertLine: {
               width: 1,
               color: crosshairColor,
               style: LineStyle.LargeDashed,
               labelBackgroundColor: labelBackgroundColor,
             },
-
-            // Horizontal crosshair line (showing Price in Label)
             horzLine: {
               width: 1,
               color: crosshairColor,
@@ -120,7 +111,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
   useEffect(() => {
     const updateChart = () => {
       if (chart && series && weeklyWeights && dailyWeights) {
-        const newSeries = chart.addCandlestickSeries();
+        const newSeries = chart.addSeries(CandlestickSeries);
 
         chart?.removeSeries(series);
         if (timeframe == Timeframe.Daily) {

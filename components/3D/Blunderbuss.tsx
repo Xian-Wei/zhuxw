@@ -13,8 +13,8 @@ type GLTFResult = GLTF & {
   };
 };
 
-export function Blunderbuss(props: JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/3d/blunderbuss.gltf") as GLTFResult;
+export function Blunderbuss(props: React.JSX.IntrinsicElements["group"]) {
+  const { nodes, materials } = useGLTF("/3d/blunderbuss.gltf") as unknown as GLTFResult;
   const ref = useRef<THREE.Mesh>(null!);
   const [hovered, hover] = useState(false);
   const [clicked, click] = useState(false);

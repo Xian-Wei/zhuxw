@@ -17,7 +17,7 @@ const MetaTags = ({
 }: MetaTagsProps) => {
   return (
     <>
-      <meta name="author" content="Xian-Wei Zhu" />
+      <meta name="author" content="zhuxw" />
       <meta name="og:title" content={title} />
       <meta name="description" content={description} />
       <meta name="og:description" content={description} />

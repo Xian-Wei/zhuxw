@@ -37,9 +37,11 @@ const Navbar = () => {
         </Link>
       </nav>
       <nav className={styles.middleContainer}>
-        <Link href="/blog" className={styles.link}>
-          Blog
-        </Link>
+        {isDev && (
+          <Link href="/blog" className={styles.link}>
+            Blog
+          </Link>
+        )}
         <Link href="/weight" className={styles.link}>
           Tracker
         </Link>
@@ -72,13 +74,15 @@ const Navbar = () => {
       </nav>
       <nav className={navbarToggle ? styles.fadeIn : styles.fadeOut}>
         <div className={styles.mobileLinks}>
-          <Link
-            href="/blog"
-            className={styles.mobileLink}
-            onClick={() => setNavbarToggle(false)}
-          >
-            Blog
-          </Link>
+          {isDev && (
+            <Link
+              href="/blog"
+              className={styles.mobileLink}
+              onClick={() => setNavbarToggle(false)}
+            >
+              Blog
+            </Link>
+          )}
           <Link
             href="/weight"
             className={styles.mobileLink}

@@ -8,7 +8,7 @@ import Layout from "../components/Layout";
 import Sky from "../components/3D/Sky";
 import { Experience } from "../components/3D/Experience";
 
-export const siteTitle = "Xian-Wei Zhu";
+export const siteTitle = "zhuxw";
 
 export default function Home() {
   const adjustIslandForScreenSize = () => {
