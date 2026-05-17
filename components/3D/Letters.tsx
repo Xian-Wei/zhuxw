@@ -1,8 +1,7 @@
 import * as THREE from "three";
-import React, { useRef, useState } from "react";
+import React from "react";
 import { useGLTF } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
-import { useFrame } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -18,41 +17,15 @@ type GLTFResult = GLTF & {
 };
 
 export function Letters(props: React.JSX.IntrinsicElements["group"]) {
-  const { nodes, materials } = useGLTF("/3d/Letters.gltf") as unknown as GLTFResult;
-  const refLetters = useRef<THREE.Mesh>(null!);
-  const refMonten = useRef<THREE.Mesh>(null!);
-  const refCannon = useRef<THREE.Mesh>(null!);
-  const [isRotating, setIsRotating] = useState(false);
-
-  useFrame((state, delta) => {
-    if (isRotating) {
-      refLetters.current.rotation.y += delta / 10;
-      refMonten.current.rotation.y += delta / 10;
-      refCannon.current.rotation.y += delta / 10;
-    }
-  });
+  const { nodes, materials } = useGLTF(
+    "/3d/Letters.gltf",
+  ) as unknown as GLTFResult;
 
   return (
-    <group
-      {...props}
-      dispose={null}
-      onPointerDown={() => setIsRotating(r => !r)}
-    >
-      <mesh
-        ref={refLetters}
-        geometry={nodes.Letters.geometry}
-        material={materials.Main}
-      />
-      <mesh
-        ref={refMonten}
-        geometry={nodes.Monten.geometry}
-        material={materials.Mountain}
-      />
-      <mesh
-        ref={refCannon}
-        geometry={nodes.Cannon.geometry}
-        material={materials.Cannon}
-      />
+    <group {...props} dispose={null}>
+      <mesh geometry={nodes.Letters.geometry} material={materials.Main} />
+      <mesh geometry={nodes.Monten.geometry} material={materials.Mountain} />
+      <mesh geometry={nodes.Cannon.geometry} material={materials.Cannon} />
     </group>
   );
 }
