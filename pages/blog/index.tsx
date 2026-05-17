@@ -2,21 +2,13 @@ import { useEffect, useState } from "react";
 import fs from "fs";
 import matter from "gray-matter";
 import Head from "next/head";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
-
-import "swiper/css";
-import "swiper/css/navigation";
 
 import styles from "./Blog.module.scss";
 import Post from "../../models/Post";
 import Layout from "../../components/Layout";
-import BlogCard from "../../components/Blog/BlogCard";
 import BlogPost from "../../components/Blog/BlogPost";
 import BlogPostTag from "../../components/Blog/BlogPostTag";
 import BlogPostTagState from "../../models/BlogPostTagState";
-import useIsWidth from "../../hooks/useIsWidth";
-import { WindowWidth } from "../../models/WindowWidth";
 import MetaTags from "../../components/MetaTags";
 import useIsEasterEgg from "../../hooks/useIsEasterEgg";
 
@@ -31,90 +23,64 @@ export default function Blog({ posts }: PostProps) {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [tagStates, setTagStates] = useState<BlogPostTagState[]>([]);
   const [firstFilter, setFirstFilter] = useState<boolean>(true);
-
-  const isWidth = useIsWidth(WindowWidth.xl);
   const { isDev } = useIsEasterEgg();
 
-  // Text search
   const onSearch = (search: string) => {
-    let newSearchedPosts: Post[] = [];
-
-    if (search != "") {
-      newSearchedPosts = posts?.filter(post =>
-        post.frontmatter.title.toLowerCase().includes(search.toLowerCase()),
+    if (search !== "") {
+      setSearchedPosts(
+        posts?.filter(post =>
+          post.frontmatter.title.toLowerCase().includes(search.toLowerCase()),
+        ),
       );
     } else {
-      newSearchedPosts = posts;
+      setSearchedPosts(posts);
     }
-
-    setSearchedPosts(newSearchedPosts);
   };
 
-  // Tag toggle function
-  // By default all tags are enabled
-  // The first time a tag is clicked on, all other tags will be disabled
   const toggleTag = (name: string) => {
-    let newTagStates: BlogPostTagState[] = [...tagStates];
-    let index = tagStates.findIndex(tag => tag.name === name);
+    let newTagStates = [...tagStates];
+    const index = tagStates.findIndex(tag => tag.name === name);
 
     if (firstFilter) {
-      newTagStates.forEach(tagState => (tagState.enabled = false));
+      newTagStates.forEach(t => (t.enabled = false));
       setFirstFilter(false);
     }
 
     newTagStates[index].enabled = !newTagStates[index].enabled;
-
     setTagStates(newTagStates);
   };
 
-  // Gets tags from all posts
   const setAllTags = (posts: Post[]) => {
-    let tempTagStates: BlogPostTagState[] = [];
-
+    const tempTagStates: BlogPostTagState[] = [];
     posts.forEach(post => {
       post.frontmatter.tags.forEach(tagName => {
-        if (!tempTagStates.some(tagState => tagState.name === tagName)) {
+        if (!tempTagStates.some(t => t.name === tagName)) {
           tempTagStates.push({ name: tagName, enabled: true });
         }
       });
     });
-
     setTagStates(tempTagStates);
   };
 
-  // Initializes everything on load
   useEffect(() => {
     setSearchedPosts(posts);
     setFilteredPosts(posts);
     setAllTags(posts);
   }, [posts]);
 
-  // Filters every time there's an input or a tag toggle
   useEffect(() => {
-    const onFilter = () => {
-      let newFilteredPosts: Post[] = [];
-
-      for (let i = 0; i < searchedPosts?.length; i++) {
-        loop2: for (
-          let j = 0;
-          j < searchedPosts[i].frontmatter.tags.length;
-          j++
-        ) {
-          for (let k = 0; k < tagStates.length; k++) {
-            if (
-              searchedPosts[i].frontmatter.tags[j] === tagStates[k].name &&
-              tagStates[k].enabled
-            ) {
-              newFilteredPosts.push(searchedPosts[i]);
-              break loop2;
-            }
+    const newFilteredPosts: Post[] = [];
+    for (const post of searchedPosts ?? []) {
+      loop2: for (const tag of post.frontmatter.tags) {
+        for (const tagState of tagStates) {
+          if (tag === tagState.name && tagState.enabled) {
+            newFilteredPosts.push(post);
+            break loop2;
           }
         }
       }
-
-      setFilteredPosts(newFilteredPosts);
-    };
-    onFilter();
+    }
+    setFilteredPosts(newFilteredPosts);
   }, [searchedPosts, tagStates]);
 
   return (
@@ -129,89 +95,46 @@ export default function Blog({ posts }: PostProps) {
           url={"https://zhuxw.com/blog"}
         />
       </Head>
-      {isDev && (!isWidth ? (
-        <Swiper navigation={true} loop={true} modules={[Navigation]}>
-          {posts
-            ?.slice(0, 100)
-            .reverse()
-            .slice(0, 4)
-            .map(post => (
-              <SwiperSlide
-                className={styles.swiperSlide}
-                key={post.frontmatter.id}
-              >
-                <BlogCard
-                  key={post.frontmatter.id}
-                  slug={post.slug}
-                  image={post.frontmatter.image}
-                  title={post.frontmatter.title}
-                  description={post.frontmatter.description}
-                  tags={post.frontmatter.tags}
-                />
-              </SwiperSlide>
-            ))}
-        </Swiper>
-      ) : (
-        <div className={styles.highlighted}>
-          {posts
-            ?.slice(0, 100)
-            .reverse()
-            .slice(0, 4)
-            .map(post => (
-              <BlogCard
-                key={post.frontmatter.id}
-                slug={post.slug}
-                image={post.frontmatter.image}
-                title={post.frontmatter.title}
-                description={post.frontmatter.description}
-                tags={post.frontmatter.tags}
-              />
-            ))}
-        </div>
-      ))}
       <div className={styles.container}>
-        <div className={styles.subcontainer}>
-          <div className={styles.postContainer}>
-            <div className={styles.postTitle}>Recent posts</div>
-            <div className={styles.posts}>
-              {isDev && filteredPosts
-                ?.slice()
-                .reverse()
-                .map(post => (
-                  <BlogPost
-                    key={post.frontmatter.id}
-                    slug={post.slug}
-                    frontmatter={post.frontmatter}
-                  />
-                ))}
-            </div>
-          </div>
-          <div className={styles.filters}>
-            <div className={styles.filterSubContainer}>
-              <div className={styles.filterTitle}>Search</div>
+        {isDev && (
+          <>
+            <div className={styles.filters}>
               <input
                 type="text"
+                placeholder="Search"
                 className={styles.searchInput}
-                onChange={e => {
-                  onSearch(e.target.value);
-                }}
+                onChange={e => onSearch(e.target.value)}
               />
-            </div>
-            <div className={styles.filterSubContainer}>
-              <div className={styles.filterTitle}>Tags</div>
-              <div className={styles.tags}>
-                {tagStates.length > 0 &&
-                  tagStates?.map(tagState => (
+              {tagStates.length > 0 && (
+                <div className={styles.tags}>
+                  {tagStates.map(tagState => (
                     <BlogPostTag
                       tagState={tagState}
                       toggle={() => toggleTag(tagState.name)}
                       key={tagState.name}
                     />
                   ))}
-              </div>
+                </div>
+              )}
             </div>
-          </div>
-        </div>
+            <div className={styles.posts}>
+              {filteredPosts?.length > 0 ? (
+                filteredPosts
+                  .slice()
+                  .reverse()
+                  .map(post => (
+                    <BlogPost
+                      key={post.frontmatter.id}
+                      slug={post.slug}
+                      frontmatter={post.frontmatter}
+                    />
+                  ))
+              ) : (
+                <div className={styles.empty}>No posts yet.</div>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </Layout>
   );
@@ -223,26 +146,14 @@ export async function getStaticProps() {
     const slug = fileName.replace(".md", "");
     const readFile = fs.readFileSync(`posts/${fileName}`, "utf-8");
     const { data: frontmatter }: any = matter(readFile);
-
-    return {
-      slug,
-      frontmatter,
-    };
+    return { slug, frontmatter: { ...frontmatter, date: frontmatter.date instanceof Date ? frontmatter.date.toISOString().split("T")[0] : String(frontmatter.date) } };
   });
 
-  posts.sort((post1, post2) => {
-    if (post1.frontmatter.id < post2.frontmatter.id) {
-      return -1;
-    }
-    if (post1.frontmatter.id > post2.frontmatter.id) {
-      return 1;
-    }
+  posts.sort((a, b) => {
+    if (a.frontmatter.id < b.frontmatter.id) return -1;
+    if (a.frontmatter.id > b.frontmatter.id) return 1;
     return 0;
   });
 
-  return {
-    props: {
-      posts,
-    },
-  };
+  return { props: { posts } };
 }

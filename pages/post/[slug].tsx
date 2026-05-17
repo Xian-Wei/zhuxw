@@ -4,7 +4,6 @@ import md from "markdown-it";
 import Head from "next/head";
 import Layout from "../../components/Layout";
 import MetaTags from "../../components/MetaTags";
-import Image from "next/image";
 
 export default function PostPage({ slug, frontmatter, content }: any) {
   return (
@@ -16,17 +15,12 @@ export default function PostPage({ slug, frontmatter, content }: any) {
           description={frontmatter.description}
           url={`https://zhuxw.com/post/${slug}`}
           type="article"
-          image={`/${frontmatter.image}`}
+
         />
       </Head>
       <article className="prose prose-invert mx-auto py-10 px-5">
         <h1>{frontmatter.title}</h1>
-        <Image
-          width={600}
-          height={600}
-          alt={frontmatter.title}
-          src={`/${frontmatter.image}`}
-        />
+
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
       </article>
     </Layout>
@@ -54,7 +48,7 @@ export async function getStaticProps({ params: { slug } }: any) {
   return {
     props: {
       slug,
-      frontmatter,
+      frontmatter: { ...frontmatter, date: frontmatter.date instanceof Date ? frontmatter.date.toISOString().split("T")[0] : String(frontmatter.date) },
       content,
     },
   };
