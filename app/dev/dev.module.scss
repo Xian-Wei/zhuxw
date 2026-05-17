@@ -27,9 +27,10 @@
   height: 600px;
   width: 350px;
   padding-inline: 20px;
-  border: 1px solid $secondaryBorder;
+  border: 1px solid rgba(80, 80, 160, 0.2);
   border-radius: 20px;
-  background-color: $bodyBackground;
+  background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
+  backdrop-filter: blur(12px);
 }
 
 .formInput {
@@ -38,9 +39,15 @@
   width: 100%;
   padding-left: 15px;
   margin-block: 20px;
-  border: 1px solid $secondaryBorder;
-  border-radius: 4px;
-  background-color: $bodyBackground;
+  border: 1px solid rgba(80, 80, 160, 0.25);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: white;
+}
+
+.formInput:focus {
+  outline: none;
+  border-color: rgba(80, 80, 160, 0.6);
 }
 
 .submitButton {
@@ -52,8 +59,13 @@
   margin-block: 40px;
   margin-inline: 20px;
   padding: 20px;
-  border: 1px solid $secondaryBorder;
-  border-radius: 4px;
-  background-color: $bodyBackground;
+  border: 1px solid rgba(80, 80, 160, 0.35);
+  border-radius: 8px;
+  background: rgba(80, 80, 160, 0.3);
   cursor: pointer;
+  transition: background 0.15s;
+}
+
+.submitButton:hover {
+  background: rgba(80, 80, 160, 0.5);
 }

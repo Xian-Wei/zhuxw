@@ -19,9 +19,11 @@
 .item {
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
   width: 600px;
-  border: 1px solid $primaryBorder;
-  border-radius: 5px;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
 
   @media screen and (max-width: $md) {
     width: 100%;
@@ -30,19 +32,35 @@
 
 .itemTitle {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   padding: 15px;
-  border-radius: 5px 5px 0px 0px;
   font-size: 17px;
   font-weight: 700;
-  background-color: $sidebarBackground;
+  background: linear-gradient(135deg, rgba(40, 40, 80, 0.95), rgba(25, 25, 55, 0.95));
+  cursor: pointer;
+  text-align: left;
+}
+
+.chevron {
+  font-size: 22px;
+  line-height: 1;
+  color: rgba(160, 160, 220, 0.6);
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+}
+
+.chevronOpen {
+  composes: chevron;
+  transform: rotate(90deg);
 }
 
 .itemContent {
   display: flex;
   padding: 15px;
-  border-radius: 0px 0px 5px 5px;
   font-size: 16px;
-  background-color: $bodyBackground;
+  background: linear-gradient(135deg, rgba(20, 20, 42, 0.9), rgba(13, 13, 26, 0.9));
 
   @media screen and (max-width: $md) {
     font-size: 14px;

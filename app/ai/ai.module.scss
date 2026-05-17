@@ -16,9 +16,10 @@
   width: 700px;
   padding-inline: 10px;
   margin-top: 10px;
-  border: 1px solid $primaryBorder;
-  border-radius: 10px;
-  background-color: $primaryTransparentBackground;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(20, 20, 45, 0.85), rgba(12, 12, 28, 0.9));
+  backdrop-filter: blur(12px);
 
   @media screen and (max-width: $md) {
     width: 95%;
@@ -45,12 +46,12 @@
   max-width: 80%;
   margin-top: 10px;
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 12px;
   background-color: $primaryColor;
   color: white;
-  border: 1px solid $primaryBorder;
+  border: 1px solid rgba(80, 80, 160, 0.35);
   white-space: pre-wrap !important;
-  
+
   @media screen and (max-width: $md) {
     max-width: 95%;
   }
@@ -65,10 +66,10 @@
   max-width: 80%;
   margin-top: 10px;
   padding: 10px;
-  border-radius: 10px;
-  background-color: rgb(80, 80, 100);
-  color: white;  
-  border: 1px solid $primaryBorder;
+  border-radius: 12px;
+  background: rgba(35, 35, 65, 0.8);
+  color: white;
+  border: 1px solid rgba(80, 80, 160, 0.2);
   white-space: pre-wrap !important;
 
   @media screen and (max-width: $md) {
@@ -95,9 +96,10 @@
   width: 100%;
   padding-left: 15px;
   padding-right: 15px;
-  border: 1px solid $primaryBorder;
-  border-radius: 5px;
-  background-color: rgb(30, 30, 60, 0.9);
+  border: 1px solid rgba(80, 80, 160, 0.25);
+  border-radius: 10px;
+  background: rgba(15, 15, 35, 0.8);
+  backdrop-filter: blur(8px);
 }
 
 .chatInput:focus {

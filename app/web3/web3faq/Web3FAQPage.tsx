@@ -1,75 +1,76 @@
 "use client";
 
-// FaqAccordion.tsx
-
-import React from "react";
+import React, { useState } from "react";
 import styles from "./web3faq.module.scss";
 
 interface FAQItemProps {
   title: string;
   content: string;
+  isOpen: boolean;
+  onToggle: () => void;
 }
 
-const FAQItem: React.FC<FAQItemProps> = ({ title, content }) => {
+const FAQItem: React.FC<FAQItemProps> = ({ title, content, isOpen, onToggle }) => {
   return (
     <div className={styles.item}>
-      <div className={styles.itemTitle}>{title}</div>
-      <div className={styles.itemContent}>{content}</div>
+      <button className={styles.itemTitle} onClick={onToggle}>
+        <span>{title}</span>
+        <span className={isOpen ? styles.chevronOpen : styles.chevron}>›</span>
+      </button>
+      {isOpen && <div className={styles.itemContent}>{content}</div>}
     </div>
   );
 };
 
 const Web3FAQPage: React.FC = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   const faqData = [
     {
-      title: "What is this ?",
+      title: "What is this?",
       content: "My own trading system built on the blockchain.",
     },
     {
-      title: "What do I trade ?",
+      title: "What do I trade?",
       content:
-        "You trade my weight, betting if I gain or lose weight, using my own cryptocurrency $ZHU.",
+        "Bet on whether I gain or lose weight each week, using my own cryptocurrency $ZHU.",
     },
     {
-      title: "What do I need to start trading ?",
+      title: "What do I need to start trading?",
       content:
-        "An Ethereum wallet, I recommend using Metamask or the integrated wallet in the Brave Browser.",
+        "An Ethereum wallet, I recommend using Metamask, Rabby, or the integrated wallet in the Brave Browser.",
     },
     {
-      title: "How do I get $ZHU ?",
+      title: "How do I get $ZHU?",
       content:
         "Click on the faucet button located next to the trade button to receive free $ZHU.",
     },
     {
-      title: "A tutorial would be nice.",
-      content: "https://www.zhuxw.com/post/introducing-zhu-and-my-weight-chart",
+      title: "Why?",
+      content: "To be able to claim my very own NFT collection in the Shop section.",
     },
     {
-      title: "It's not working.",
+      title: "What is the Zhuba NFT Gacha?",
       content:
-        "Ensure you have enough ETH/MATIC to cover gas fees and sufficient $ZHU for the trade.",
+        "Spend 10,000 $ZHU to receive a Zhuba NFT of random rarity. There are 5 tiers — most are common, a few are not.",
     },
     {
-      title: "Why ?",
+      title: "How does it work under the hood?",
       content:
-        "To be able to claim my very own NFT collection in the Shop section.",
-    },
-    {
-      title: "What is the Zhuba NFT Gacha ?",
-      content:
-        "Zhuba NFTs come in 5 different rarities. Spending 10,000 $ZHU will send an NFT of random rarity your way.",
-    },
-    {
-      title: "How does it work under the hood ?",
-      content:
-        "The smart contracts were developed using Solidity and Chainlink.",
+        "The trading contracts are written in Solidity. Chainlink handles the weight data feed and the randomness behind the NFT gacha.",
     },
   ];
 
   return (
     <div className={styles.container}>
       {faqData.map((faq, index) => (
-        <FAQItem key={index} title={faq.title} content={faq.content} />
+        <FAQItem
+          key={index}
+          title={faq.title}
+          content={faq.content}
+          isOpen={openIndex === index}
+          onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+        />
       ))}
     </div>
   );

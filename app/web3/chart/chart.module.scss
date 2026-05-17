@@ -46,9 +46,10 @@
   min-width: 300px;
   width: 22%;
   padding-inline: 20px;
-  border: 1px solid $primaryBorder;
-  border-radius: 5px;
-  background-color: $primaryBackground;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
+  backdrop-filter: blur(8px);
 
   @media screen and (max-width: $lg) {
     height: 50%;
@@ -67,9 +68,10 @@
   align-items: center;
   min-height: 75px;
   padding-inline: 20px;
-  border: 1px solid $primaryBorder;
-  border-radius: 5px;
-  background-color: $primaryBackground;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
+  backdrop-filter: blur(8px);
 
   @media screen and (max-width: $md) {
     justify-content: space-around;
@@ -164,7 +166,7 @@
   flex: 0.2;
   font-size: 17px;
   font-weight: 600;
-  color: green;
+  color: #69DB7C;
 
   @media screen and (max-width: $lg) {
     font-size: 15px;
@@ -180,7 +182,7 @@
   flex: 0.2;
   font-size: 17px;
   font-weight: 600;
-  color: red;
+  color: #FF6B6B;
 
   @media screen and (max-width: $lg) {
     font-size: 15px;
@@ -220,9 +222,10 @@
   align-items: center;
   min-height: 500px;
   width: 100%;
-  border: 1px solid $primaryBorder;
-  border-radius: 5px;
-  background-color: $primaryBackground;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
+  backdrop-filter: blur(8px);
 
   @media screen and (max-width: $lg) {
     flex: 0.7;
@@ -255,14 +258,14 @@
   align-items: center;
   height: 30px;
   width: 40px;
-  border-radius: 5px;
-  background-color: $disabledColor;
+  border-radius: 8px;
+  background-color: rgba(80, 80, 140, 0.3);
   transition: 0.1s background-color ease-in-out;
   z-index: 6;
 }
 
 .timeframeButton:hover {
-  background-color: $disabledColorHover;
+  background-color: rgba(80, 80, 140, 0.5);
 }
 
 .timeframeButtonActive {
@@ -271,7 +274,7 @@
   align-items: center;
   height: 30px;
   width: 40px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: $primaryColorActive;
   z-index: 6;
 }
@@ -287,9 +290,10 @@
   width: 100%;
   padding-block: 10px;
   padding-inline: 20px;
-  border: 1px solid $primaryBorder;
-  border-radius: 5px;
-  background-color: $primaryBackground;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
+  backdrop-filter: blur(8px);
 
   @media screen and (max-width: $lg) {
     flex: 0.2;
@@ -322,7 +326,7 @@
   width: 100%;
   padding-block: 5px;
   padding-inline: 20px;
-  border-bottom: 1px solid $primaryBorder;
+  border-bottom: 1px solid rgba(80, 80, 160, 0.15);
 
   @media screen and (max-width: $lg) {
     padding-inline: 0px;
@@ -425,9 +429,9 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $primaryBorder;
+  border: 1px solid rgba(80, 80, 160, 0.2);
   border-right: none;
-  border-radius: 7px 0% 0% 7px;
+  border-radius: 8px 0 0 8px;
   background-color: $chartSwitchBackground;
 }
 
@@ -438,9 +442,9 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $primaryBorder;
+  border: 1px solid rgba(80, 80, 160, 0.35);
   border-right: none;
-  border-radius: 7px 0% 0% 7px;
+  border-radius: 8px 0 0 8px;
   background-color: $chartSwitchBackgroundActive;
 }
 
@@ -451,9 +455,9 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $primaryBorder;
+  border: 1px solid rgba(80, 80, 160, 0.2);
   border-left: none;
-  border-radius: 0% 7px 7px 0%;
+  border-radius: 0 8px 8px 0;
   background-color: $chartSwitchBackground;
 }
 
@@ -464,9 +468,9 @@
   align-items: center;
   height: 40px;
   margin-block: 10px;
-  border: 1px solid $primaryBorder;
+  border: 1px solid rgba(80, 80, 160, 0.35);
   border-left: none;
-  border-radius: 0% 7px 7px 0%;
+  border-radius: 0 8px 8px 0;
   background-color: $chartSwitchBackgroundActive;
 }
 
@@ -494,8 +498,8 @@
   width: 100%;
   padding-block: 10px;
   margin-bottom: 20px;
-  border: 1px solid $primaryBorder;
-  border-radius: 4px;
+  border: 1px solid rgba(80, 80, 160, 0.25);
+  border-radius: 8px;
   background-color: $inputBackground;
   font-size: 16px;
   font-weight: 500;
@@ -508,8 +512,8 @@
   width: 100%;
   padding-block: 10px;
   margin-bottom: 20px;
-  border: 1px solid $primaryBackground;
-  border-radius: 4px;
+  border: 1px solid rgba(80, 80, 160, 0.1);
+  border-radius: 8px;
   background-color: $inputBackground;
   font-size: 16px;
   font-weight: 500;
@@ -588,7 +592,7 @@
   justify-content: center;
   align-items: center;
   min-height: 50px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: $primaryColor;
 
   @media screen and (max-width: $lg) {
@@ -602,7 +606,7 @@
   justify-content: center;
   align-items: center;
   min-height: 50px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: $disabledColor;
   opacity: 0.3;
 
@@ -619,7 +623,7 @@
   align-items: center;
   min-height: 50px;
   margin-block: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: $chartShortButton;
   transition: 0.1s background-color ease-in-out;
 
@@ -639,7 +643,7 @@
   align-items: center;
   min-height: 50px;
   margin-block: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: $chartLongButton;
   transition: 0.1s background-color ease-in-out;
 
@@ -659,8 +663,8 @@
   align-items: center;
   min-height: 50px;
   margin-block: 20px;
-  border: 1px solid $primaryBorder;
-  border-radius: 5px;
+  border: 1px solid rgba(80, 80, 160, 0.15);
+  border-radius: 8px;
   background-color: $disabledColor;
 
   @media screen and (max-width: $lg) {

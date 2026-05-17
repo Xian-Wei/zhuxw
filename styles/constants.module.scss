@@ -12,7 +12,7 @@ $xxl: 1600px;
 
 // Body color & background image
 $backgroundImage: url("../../public/images/background.png");
-$backgroundColor: linear-gradient(to right, rgb(15, 15, 30), rgb(10, 10, 20));
+$backgroundColor: linear-gradient(to bottom, rgb(10, 10, 20), rgb(5, 5, 10));
 $backgroundSize: 1920px 1080px;
 $backgroundSizeMobile: 1280px 720px;
 
@@ -62,8 +62,8 @@ $chartShortButton: rgb(120, 30, 30);
 $chartShortButtonHover: rgb(150, 30, 30);
 $chartLongButton: rgb(30, 120, 30);
 $chartLongButtonHover: rgb(30, 150, 30);
-$chartShortText: rgb(255, 0, 0);
-$chartLongText: rgb(0, 255, 0);
+$chartShortText: #FF6B6B;
+$chartLongText: #69DB7C;
 
 /***** Chart *****/
 $chatLineBackground: rgba(90, 90, 170, 0.2);

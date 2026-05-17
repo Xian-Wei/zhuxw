@@ -5,29 +5,177 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 24px;
   height: 100%;
   width: 100%;
-  z-index: inherit;
+  padding: 40px 20px;
+  overflow-y: auto;
+
+  @media screen and (max-width: $md) {
+    padding: 24px 16px;
+    justify-content: flex-start;
+  }
 }
 
 .balance {
-  display: flex;
-  flex: 0.05;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-block: 20px;
-  background-color: $bodyBackgroundHover;
+  padding: 8px 20px;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
+  backdrop-filter: blur(8px);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(200, 200, 240, 0.85);
 }
 
-.card {
+.main {
   display: flex;
-  flex: 0.9;
-  justify-content: center;
-  align-items: flex-start;
-  margin-top: 40px;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 32px;
 
   @media screen and (max-width: $lg) {
-    margin-top: 0px;
+    flex-direction: column;
+    align-items: center;
   }
+}
+
+.gifWrapper {
+  position: relative;
+  flex-shrink: 0;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 20px;
+  overflow: hidden;
+
+  @media screen and (max-width: $lg) {
+    height: 300px;
+    width: 300px;
+    aspect-ratio: unset;
+  }
+}
+
+.gif {
+  object-fit: cover;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 320px;
+  padding: 28px;
+  border: 1px solid rgba(80, 80, 160, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
+  backdrop-filter: blur(8px);
+
+  @media screen and (max-width: $lg) {
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+.nftTitle {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(220, 220, 255, 0.95);
+}
+
+.nftPrice {
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(160, 160, 220, 0.7);
+}
+
+.mintButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  border-radius: 10px;
+  background-color: $primaryColor;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover {
+    background-color: $primaryColorHover;
+  }
+}
+
+.disabledButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+  border-radius: 10px;
+  background-color: rgba(80, 80, 100, 0.3);
+  border: 1px solid rgba(80, 80, 160, 0.15);
+  color: rgba(160, 160, 200, 0.4);
+  font-weight: 600;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(80, 80, 160, 0.15);
+  margin-block: 4px;
+}
+
+.rarityTitle {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(160, 160, 220, 0.6);
+}
+
+.rarityList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.rarityRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rarityLabel {
+  font-size: 14px;
+  font-weight: 700;
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.rarityName {
+  font-size: 13px;
+  color: rgba(200, 200, 240, 0.65);
+  width: 80px;
+  flex-shrink: 0;
+}
+
+.rarityBarTrack {
+  flex: 1;
+  height: 7px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+}
+
+.rarityBarFill {
+  height: 100%;
+  border-radius: 4px;
+  opacity: 0.75;
+}
+
+.rarityRate {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(200, 200, 240, 0.45);
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
 }

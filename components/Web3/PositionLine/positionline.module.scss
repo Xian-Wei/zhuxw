@@ -7,7 +7,7 @@
   width: 100%;
   padding-block: 10px;
   padding-inline: 20px;
-  border-bottom: 1px solid $primaryBorder;
+  border-bottom: 1px solid rgba(80, 80, 160, 0.15);
   transition: background-color 0.1s;
 
   @media screen and (max-width: $lg) {
