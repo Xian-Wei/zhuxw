@@ -7,8 +7,6 @@ import Layout from "../../components/Layout";
 import BlogPost from "../../components/Blog/BlogPost";
 import BlogPostTag from "../../components/Blog/BlogPostTag";
 import BlogPostTagState from "../../models/BlogPostTagState";
-import useIsEasterEgg from "../../hooks/useIsEasterEgg";
-
 interface PostProps {
   posts: Post[];
 }
@@ -18,7 +16,6 @@ export default function BlogClient({ posts }: PostProps) {
   const [filteredPosts, setFilteredPosts] = useState<Post[]>([]);
   const [tagStates, setTagStates] = useState<BlogPostTagState[]>([]);
   const [firstFilter, setFirstFilter] = useState<boolean>(true);
-  const { isDev } = useIsEasterEgg();
 
   const onSearch = (search: string) => {
     if (search !== "") {
@@ -81,8 +78,7 @@ export default function BlogClient({ posts }: PostProps) {
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
       <div className={styles.container}>
-        {isDev && (
-          <>
+        <>
             <div className={styles.filters}>
               <input
                 type="text"
@@ -118,8 +114,7 @@ export default function BlogClient({ posts }: PostProps) {
                 <div className={styles.empty}>No posts yet.</div>
               )}
             </div>
-          </>
-        )}
+        </>
       </div>
     </Layout>
   );
