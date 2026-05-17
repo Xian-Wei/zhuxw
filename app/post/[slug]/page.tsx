@@ -9,8 +9,8 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  const files = fs.readdirSync("posts");
-  return files.map(fileName => ({
+  if (!fs.existsSync("posts")) return [];
+  return fs.readdirSync("posts").map(fileName => ({
     slug: fileName.replace(".md", ""),
   }));
 }
