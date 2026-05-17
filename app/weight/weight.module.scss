@@ -58,6 +58,12 @@
   background-color: $bodyBackgroundHover;
 }
 
+.chartWrapper {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
 .topInfos {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

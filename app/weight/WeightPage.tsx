@@ -314,11 +314,8 @@ const WeightPage = () => {
 
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Weight in {getCurrentYear()}</div>
-                <ResponsiveContainer
-                  className={styles.blockContent}
-                  height="100%"
-                  width="100%"
-                >
+                <div className={styles.chartWrapper}>
+                <ResponsiveContainer height="100%" width="100%">
                   <AreaChart
                     data={chartDataForCurrentYear}
                     margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
@@ -350,16 +347,14 @@ const WeightPage = () => {
                     />
                   </AreaChart>
                 </ResponsiveContainer>
+                </div>
               </div>
               <div className={styles.block}>
                 <div className={styles.blockTitle}>
                   Weight since September 2019
                 </div>
-                <ResponsiveContainer
-                  className={styles.blockContent}
-                  height="100%"
-                  width="100%"
-                >
+                <div className={styles.chartWrapper}>
+                <ResponsiveContainer height="100%" width="100%">
                   <AreaChart
                     data={chartDataUnfiltered}
                     margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
@@ -391,9 +386,11 @@ const WeightPage = () => {
                     />
                   </AreaChart>
                 </ResponsiveContainer>
+                </div>
               </div>
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Monthly weight changes</div>
+                <div className={styles.chartWrapper}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart width={500} height={300} data={gainLossByMonth}>
                     <XAxis
@@ -418,9 +415,11 @@ const WeightPage = () => {
                     />
                   </BarChart>
                 </ResponsiveContainer>
+                </div>
               </div>
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Yearly weight changes</div>
+                <div className={styles.chartWrapper}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart width={500} height={300} data={gainLossByYear}>
                     <XAxis
@@ -445,14 +444,12 @@ const WeightPage = () => {
                     />
                   </BarChart>
                 </ResponsiveContainer>
+                </div>
               </div>
               <div className={styles.block}>
                 <div className={styles.blockTitle}>Weight by year</div>
-                <ResponsiveContainer
-                  className={styles.blockContent}
-                  height="100%"
-                  width="100%"
-                >
+                <div className={styles.chartWrapper}>
+                <ResponsiveContainer height="100%" width="100%">
                   <LineChart
                     data={chartDataByYear}
                     margin={{ top: 0, left: 0, right: 0, bottom: 0 }}
@@ -496,6 +493,7 @@ const WeightPage = () => {
                     ))}
                   </LineChart>
                 </ResponsiveContainer>
+                </div>
               </div>
             </>
           ) : (
