@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
+import { Text3D, Center } from "@react-three/drei";
 import { useRouter } from "next/navigation";
 import * as THREE from "three";
 
@@ -14,9 +14,21 @@ function Tabs() {
   const router = useRouter();
 
   const tabs: Tab[] = [
-    { name: "Blog", position: [0, 2.5, 0], onClick: () => router.push("/blog") },
-    { name: "Tracker", position: [1, 2.5, 0], onClick: () => router.push("/weight") },
-    { name: "Web3", position: [-1, 2.5, 0], onClick: () => router.push("/web3") },
+    {
+      name: "Blog",
+      position: [0, 2.5, 0],
+      onClick: () => router.push("/blog"),
+    },
+    {
+      name: "Tracker",
+      position: [1, 2.5, 0],
+      onClick: () => router.push("/weight"),
+    },
+    {
+      name: "Web3",
+      position: [-1, 2.5, 0],
+      onClick: () => router.push("/web3"),
+    },
   ];
 
   const refs = useRef<(THREE.Object3D | null)[]>([]);
@@ -36,19 +48,27 @@ function Tabs() {
   return (
     <>
       {tabs.map((tab, idx) => (
-        <Text
+        <group
           key={idx}
-          ref={el => { refs.current[idx] = el; }}
-          fontSize={0.3}
-          color="white"
-          anchorX="center"
-          anchorY="middle"
+          ref={el => {
+            refs.current[idx] = el;
+          }}
           onClick={tab.onClick}
-          onPointerOver={e => e.object.scale.set(1.2, 1.2, 1.2)}
-          onPointerOut={e => e.object.scale.set(1, 1, 1)}
+          onPointerOver={() => refs.current[idx]?.scale.set(1.2, 1.2, 1.2)}
+          onPointerOut={() => refs.current[idx]?.scale.set(1, 1, 1)}
         >
-          {tab.name}
-        </Text>
+          <Center>
+            <Text3D
+              font="/fonts/helvetiker_bold.typeface.json"
+              size={0.22}
+              height={0.03}
+              curveSegments={6}
+            >
+              {tab.name}
+              <meshStandardMaterial color="white" />
+            </Text3D>
+          </Center>
+        </group>
       ))}
     </>
   );
