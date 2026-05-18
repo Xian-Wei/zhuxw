@@ -12,96 +12,158 @@
   display: flex;
   position: fixed;
   flex-direction: column;
-  height: calc(100% - 80px);
+  height: calc(100vh - $navbarHeight - 24px);
   width: 700px;
-  padding-inline: 10px;
-  margin-top: 10px;
+  margin-top: 12px;
   border: 1px solid rgba(80, 80, 160, 0.2);
   border-radius: 16px;
   background: linear-gradient(135deg, rgba(20, 20, 45, 0.85), rgba(12, 12, 28, 0.9));
   backdrop-filter: blur(12px);
+  overflow: hidden;
 
   @media screen and (max-width: $md) {
-    width: 95%;
+    width: calc(100% - 16px);
   }
 }
 
 .chatLines {
   display: flex;
-  flex-direction: column-reverse;
-  height: 100%;
-  width: 100%;
-  margin-bottom: 10px;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 16px 8px;
+  gap: 12px;
   overflow-y: auto;
-  -ms-overflow-style: none;
   scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 .chatLines::-webkit-scrollbar {
   display: none;
 }
 
+.empty {
+  margin: auto;
+  font-size: 15px;
+  color: rgba(160, 160, 220, 0.35);
+  letter-spacing: 0.04em;
+}
+
 .chatLineUser {
   align-self: flex-end;
-  max-width: 80%;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 12px;
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 16px 16px 4px 16px;
   background-color: $primaryColor;
-  color: white;
+  color: rgba(255, 255, 255, 0.95);
   border: 1px solid rgba(80, 80, 160, 0.35);
-  white-space: pre-wrap !important;
+  font-size: 15px;
+  line-height: 1.5;
 
   @media screen and (max-width: $md) {
-    max-width: 95%;
+    max-width: 90%;
   }
 
   @media screen and (max-width: $sm) {
     font-size: 14px;
   }
+
+  p { margin: 0; }
 }
 
 .chatLineAI {
   align-self: flex-start;
-  max-width: 80%;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 12px;
+  max-width: 75%;
+  padding: 10px 14px;
+  border-radius: 16px 16px 16px 4px;
   background: rgba(35, 35, 65, 0.8);
-  color: white;
+  color: rgba(220, 220, 255, 0.9);
   border: 1px solid rgba(80, 80, 160, 0.2);
-  white-space: pre-wrap !important;
+  font-size: 15px;
+  line-height: 1.5;
 
   @media screen and (max-width: $md) {
-    max-width: 95%;
+    max-width: 90%;
   }
 
   @media screen and (max-width: $sm) {
     font-size: 14px;
   }
+
+  p { margin: 0 0 8px; &:last-child { margin: 0; } }
+  code { font-size: 13px; background: rgba(255,255,255,0.08); padding: 2px 5px; border-radius: 4px; }
+  pre { background: rgba(0,0,0,0.3); padding: 10px; border-radius: 8px; overflow-x: auto; }
+  ul, ol { padding-left: 20px; margin: 4px 0; }
+}
+
+.thinking {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 4px 2px;
+
+  span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(160, 160, 220, 0.5);
+    animation: pulse 1.2s ease-in-out infinite;
+
+    &:nth-child(2) { animation-delay: 0.2s; }
+    &:nth-child(3) { animation-delay: 0.4s; }
+  }
+}
+
+@keyframes pulse {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.85); }
+  40% { opacity: 1; transform: scale(1); }
 }
 
 .chatForm {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 70px;
-  width: 100%;
-  bottom: 0;
+  align-items: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(80, 80, 160, 0.12);
 }
 
 .chatInput {
-  display: flex;
-  height: 50px;
-  width: 100%;
-  padding-left: 15px;
-  padding-right: 15px;
+  flex: 1;
+  min-height: 44px;
+  max-height: 120px;
+  padding: 11px 14px;
   border: 1px solid rgba(80, 80, 160, 0.25);
-  border-radius: 10px;
+  border-radius: 12px;
   background: rgba(15, 15, 35, 0.8);
   backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  line-height: 1.5;
+  resize: none;
+  transition: border-color 0.15s;
+
+  &::placeholder { color: rgba(160, 160, 220, 0.3); }
+  &:focus { outline: none; border-color: rgba(80, 80, 160, 0.55); }
 }
 
-.chatInput:focus {
-  outline: none;
+.sendButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: $primaryColor;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.15s;
+
+  &:hover { background: $primaryColorHover; }
+}
+
+.sendButtonDisabled {
+  composes: sendButton;
+  background: rgba(80, 80, 120, 0.3);
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.3);
 }

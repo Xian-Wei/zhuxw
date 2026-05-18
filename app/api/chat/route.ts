@@ -1,19 +1,18 @@
-import { createOpenAI } from "@ai-sdk/openai";
-import { streamText } from "ai";
+import { createGroq } from "@ai-sdk/groq";
+import { streamText, convertToModelMessages, UIMessage } from "ai";
 
-const hf = createOpenAI({
-  baseURL: "https://api-inference.huggingface.co/v1",
-  apiKey: process.env.NEXT_PUBLIC_HUGGINGFACE_API_KEY ?? "",
+const groq = createGroq({
+  apiKey: process.env.GROQ_API_KEY ?? "",
 });
 
 export const runtime = "edge";
 
 export async function POST(req: Request) {
-  const { messages } = await req.json();
+  const { messages }: { messages: UIMessage[] } = await req.json();
 
   const result = await streamText({
-    model: hf("mistralai/Mistral-7B-Instruct-v0.1"),
-    messages,
+    model: groq("llama-3.3-70b-versatile"),
+    messages: await convertToModelMessages(messages),
   });
 
   return result.toUIMessageStreamResponse();
