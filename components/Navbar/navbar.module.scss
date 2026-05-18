@@ -92,6 +92,8 @@
 
   @media screen and (max-width: $lg) {
     display: block;
+    position: relative;
+    z-index: 2;
   }
 }
 

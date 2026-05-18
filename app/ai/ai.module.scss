@@ -12,9 +12,9 @@
   display: flex;
   position: fixed;
   flex-direction: column;
-  height: calc(100vh - $navbarHeight - 24px);
+  top: calc($navbarHeight + 12px);
+  bottom: 12px;
   width: 700px;
-  margin-top: 12px;
   border: 1px solid rgba(80, 80, 160, 0.2);
   border-radius: 16px;
   background: linear-gradient(135deg, rgba(20, 20, 45, 0.85), rgba(12, 12, 28, 0.9));
