@@ -1,0 +1,130 @@
+@import "../../../styles/constants.module.scss";
+
+.wrapper {
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(5, 5, 10, 0.95) 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+.article {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+  color: rgba(220, 220, 255, 0.88);
+  font-size: 16px;
+  line-height: 1.8;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 12px;
+    color: rgba(240, 240, 255, 0.97);
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 40px 0 12px;
+    color: rgba(200, 200, 255, 0.95);
+    border-bottom: 1px solid rgba(80, 80, 160, 0.25);
+    padding-bottom: 6px;
+  }
+
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 28px 0 8px;
+    color: rgba(200, 200, 255, 0.9);
+  }
+
+  p {
+    margin: 0 0 20px;
+  }
+
+  ul, ol {
+    margin: 0 0 20px;
+    padding-left: 24px;
+
+    li {
+      margin-bottom: 6px;
+    }
+  }
+
+  strong {
+    color: rgba(240, 240, 255, 0.97);
+    font-weight: 600;
+  }
+
+  em {
+    color: rgba(200, 200, 240, 0.85);
+  }
+
+  code {
+    font-family: "Fira Code", "Cascadia Code", monospace;
+    font-size: 13px;
+    background: rgba(80, 80, 160, 0.18);
+    border: 1px solid rgba(80, 80, 160, 0.25);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: #A78BFA;
+  }
+
+  pre {
+    background: rgba(10, 10, 25, 0.9);
+    border: 1px solid rgba(80, 80, 160, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    overflow-x: auto;
+    margin: 0 0 24px;
+
+    code {
+      background: none;
+      border: none;
+      padding: 0;
+      color: rgba(200, 200, 240, 0.9);
+      font-size: 13px;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid rgba(167, 139, 250, 0.6);
+    margin: 0 0 20px;
+    padding: 4px 0 4px 20px;
+    color: rgba(180, 180, 220, 0.75);
+    font-style: italic;
+  }
+
+  a {
+    color: #818CF8;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+
+    &:hover {
+      color: #A78BFA;
+    }
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid rgba(80, 80, 160, 0.2);
+    margin: 36px 0;
+  }
+
+  .meta {
+    font-size: 13px;
+    color: rgba(160, 160, 200, 0.55);
+    margin-bottom: 40px;
+  }
+}

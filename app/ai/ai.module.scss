@@ -44,7 +44,7 @@
 .empty {
   margin: auto;
   font-size: 15px;
-  color: rgba(160, 160, 220, 0.35);
+  color: rgba(180, 180, 240, 0.7);
   letter-spacing: 0.04em;
 }
 
@@ -141,7 +141,7 @@
   resize: none;
   transition: border-color 0.15s;
 
-  &::placeholder { color: rgba(160, 160, 220, 0.3); }
+  &::placeholder { color: rgba(160, 160, 220, 0.55); }
   &:focus { outline: none; border-color: rgba(80, 80, 160, 0.55); }
 }
 

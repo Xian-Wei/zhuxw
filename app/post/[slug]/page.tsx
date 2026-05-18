@@ -3,6 +3,7 @@ import matter from "gray-matter";
 import md from "markdown-it";
 import type { Metadata } from "next";
 import Layout from "../../../components/Layout";
+import styles from "./post.module.scss";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -35,11 +36,14 @@ export default async function PostPage({ params }: PageProps) {
   const { data: frontmatter, content } = matter(fileName);
 
   return (
-    <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={false}>
-      <article className="prose prose-invert mx-auto py-10 px-5">
+    <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
+      <div className={styles.wrapper}>
+      <article className={styles.article}>
         <h1>{frontmatter.title}</h1>
+        <p className={styles.meta}>{frontmatter.date}</p>
         <div dangerouslySetInnerHTML={{ __html: md().render(content) }} />
       </article>
+      </div>
     </Layout>
   );
 }

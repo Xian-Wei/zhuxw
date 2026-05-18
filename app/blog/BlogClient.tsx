@@ -77,6 +77,7 @@ export default function BlogClient({ posts }: PostProps) {
 
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
+      <div className={styles.wrapper}>
       <div className={styles.container}>
         <>
             <div className={styles.filters}>
@@ -115,6 +116,7 @@ export default function BlogClient({ posts }: PostProps) {
               )}
             </div>
         </>
+      </div>
       </div>
     </Layout>
   );

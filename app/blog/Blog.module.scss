@@ -1,6 +1,23 @@
 @import "../../styles/constants.module.scss";
 
+.wrapper {
+  position: relative;
+  min-height: 100%;
+  width: 100%;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(5, 5, 10, 0.95) 0%, transparent 80%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
 .container {
+  position: relative;
+  z-index: 1;
   max-width: 740px;
   margin: 0 auto;
   padding: 60px 24px 80px;
@@ -30,7 +47,7 @@
   transition: border-color 0.15s;
 
   &::placeholder {
-    color: rgba(160, 160, 220, 0.4);
+    color: rgba(160, 160, 220, 0.65);
   }
 
   &:focus {
