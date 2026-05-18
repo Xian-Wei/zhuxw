@@ -72,7 +72,6 @@ export async function POST(request: Request) {
         );
       }
     } else {
-      console.log(`${body.date} ${body.muscle} ${body.gym}`);
       return Response.json({ message: "Wrong format" }, { status: 400 });
     }
   } else {

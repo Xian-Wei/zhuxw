@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./shop.module.scss";
 import useWeb3ChainId from "../../../hooks/useWeb3Network";

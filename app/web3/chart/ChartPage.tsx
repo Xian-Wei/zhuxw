@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import useSWR from "swr";
 import axios from "axios";
@@ -322,7 +322,6 @@ const ChartPage = () => {
         weight.low = weight.close < weight.open ? weight.open : weight.close;
         weight.high = weight.close > weight.open ? weight.close : weight.open;
       });
-    console.log(dailyWeights);
   }, [dailyWeights]);
 
   useEffect(() => {
