@@ -65,220 +65,117 @@ const WeightPage = () => {
     }
   }, [years]);
 
-  const getWeightsByYear = () => {
-    if (dailyWeights) {
-      let weightsByYear: Weight[][] = [[]];
-      let currentYear = "2019";
-      let yearIndex = 0;
-
-      for (let i = 0; i < dailyWeights.length; i++) {
-        if (dailyWeights[i].time.substring(0, 4) !== currentYear) {
-          currentYear = dailyWeights[i].time.substring(0, 4);
-          weightsByYear.push([]);
-          yearIndex++;
-        }
-
-        weightsByYear[yearIndex].push(dailyWeights[i]);
-      }
-
-      return weightsByYear;
-    } else {
-      return [];
-    }
-  };
-
-  const getWeightsByMonth = () => {
-    if (dailyWeights) {
-      let weightsByMonth: Weight[][] = [[]];
-      let currentMonth = "09";
-      let monthIndex = 0;
-
-      for (let i = 0; i < dailyWeights.length; i++) {
-        if (dailyWeights[i].time.substring(5, 7) !== currentMonth) {
-          currentMonth = dailyWeights[i].time.substring(5, 7);
-          weightsByMonth.push([]);
-          monthIndex++;
-        }
-
-        weightsByMonth[monthIndex].push(dailyWeights[i]);
-      }
-
-      return weightsByMonth;
-    } else {
-      return [];
-    }
-  };
-
-  const getChartDataSeparatedByYear = () => {
-    if (!dailyWeights || dailyWeights.length === 0) return [];
-
-    const yearDayMap: { [year: string]: { [day: number]: number } } = {};
-    dailyWeights.forEach(weight => {
-      const year = weight.time.substring(0, 4);
-      const date = new Date(weight.time);
-      const dayOfYear = Math.floor(
-        (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000,
-      );
-      if (!yearDayMap[year]) yearDayMap[year] = {};
-      yearDayMap[year][dayOfYear] = weight.close;
-    });
-
-    return Array.from({ length: 366 }, (_, i) => {
-      const refDate = new Date(2020, 0, i);
-      const label = refDate.toISOString().substring(5, 10);
-      const entry: { [key: string]: number | string | undefined } = { name: label };
-      years.forEach(year => { entry[year] = yearDayMap[year]?.[i]; });
-      return entry;
-    });
-  };
-
   const toggleYear = (year: string) =>
     setFilters(f => ({ ...f, [year]: !f[year] }));
 
   const hoverYear = (year: string, activate: boolean) =>
     setHoveredYear(h => ({ ...h, [year]: activate }));
 
-  const getChartDataUnfiltered = () => {
-    if (dailyWeights && dailyWeights.length > 0) {
-      const weightCloseArray: {
-        [key: string]: (number | string) | undefined;
-      }[] = [];
+  const chartDataUnfiltered = useMemo(() => {
+    if (!dailyWeights || dailyWeights.length === 0) return [];
+    return dailyWeights.map(w => ({ name: w.time, weight: w.close }));
+  }, [dailyWeights]);
 
-      dailyWeights.forEach(weight => {
-        let chartObject = { name: weight.time, weight: weight.close };
-        weightCloseArray.push(chartObject);
-      });
+  const chartDataForCurrentYear = useMemo(() => {
+    if (!dailyWeights || dailyWeights.length === 0) return [];
+    const currentYear = dailyWeights[dailyWeights.length - 1].time.substring(0, 4);
+    return dailyWeights
+      .filter(w => w.time.substring(0, 4) === currentYear)
+      .map(w => ({ name: w.time, weight: w.close }));
+  }, [dailyWeights]);
 
-      return weightCloseArray;
-    } else {
-      return [];
+  const weightsByYear = useMemo(() => {
+    if (!dailyWeights || dailyWeights.length === 0) return [];
+    const result: Weight[][] = [[]];
+    let currentYear = dailyWeights[0].time.substring(0, 4);
+    let idx = 0;
+    for (const w of dailyWeights) {
+      if (w.time.substring(0, 4) !== currentYear) {
+        currentYear = w.time.substring(0, 4);
+        result.push([]);
+        idx++;
+      }
+      result[idx].push(w);
     }
-  };
+    return result;
+  }, [dailyWeights]);
 
-  const getChartDataForCurrentYear = () => {
-    if (dailyWeights && dailyWeights.length > 0) {
-      const weightCloseArray: {
-        [key: string]: (number | string) | undefined;
-      }[] = [];
-      const currentYear = dailyWeights[dailyWeights.length - 1].time.substring(
-        0,
-        4,
+  const weightsByMonth = useMemo(() => {
+    if (!dailyWeights || dailyWeights.length === 0) return [];
+    const result: Weight[][] = [[]];
+    let currentMonth = dailyWeights[0].time.substring(5, 7);
+    let idx = 0;
+    for (const w of dailyWeights) {
+      if (w.time.substring(5, 7) !== currentMonth) {
+        currentMonth = w.time.substring(5, 7);
+        result.push([]);
+        idx++;
+      }
+      result[idx].push(w);
+    }
+    return result;
+  }, [dailyWeights]);
+
+  const gainLossByMonth = useMemo(() => {
+    if (weightsByMonth.length === 0) return [];
+    return weightsByMonth.map(monthWeights => ({
+      name: formatDateLongMonth(monthWeights[0].time),
+      kilogram: -(monthWeights[0].close - monthWeights[monthWeights.length - 1].close).toFixed(1) as unknown as number,
+    }));
+  }, [weightsByMonth]);
+
+  const gainLossByYear = useMemo(() => {
+    if (weightsByYear.length === 0) return [];
+    return weightsByYear.map(yearWeights => ({
+      name: yearWeights[0].time.substring(0, 4),
+      kilogram: -(yearWeights[0].close - yearWeights[yearWeights.length - 1].close).toFixed(1) as unknown as number,
+    }));
+  }, [weightsByYear]);
+
+  const chartDataByYear = useMemo(() => {
+    if (!dailyWeights || dailyWeights.length === 0 || years.length === 0) return [];
+    const yearDayMap: { [year: string]: { [day: number]: number } } = {};
+    dailyWeights.forEach(w => {
+      const year = w.time.substring(0, 4);
+      const date = new Date(w.time);
+      const dayOfYear = Math.floor(
+        (date.getTime() - new Date(date.getFullYear(), 0, 0).getTime()) / 86400000,
       );
+      if (!yearDayMap[year]) yearDayMap[year] = {};
+      yearDayMap[year][dayOfYear] = w.close;
+    });
+    return Array.from({ length: 366 }, (_, i) => {
+      const label = new Date(2020, 0, i).toISOString().substring(5, 10);
+      const entry: { [key: string]: number | string | undefined } = { name: label };
+      years.forEach(year => { entry[year] = yearDayMap[year]?.[i]; });
+      return entry;
+    });
+  }, [dailyWeights, years]);
 
-      dailyWeights.forEach(weight => {
-        if (weight.time.substring(0, 4) == currentYear) {
-          let chartObject = { name: weight.time, weight: weight.close };
-          weightCloseArray.push(chartObject);
-        }
-      });
+  const currentWeight = useMemo(() =>
+    dailyWeights && dailyWeights.length > 0 ? dailyWeights[dailyWeights.length - 1].close : 0,
+  [dailyWeights]);
 
-      return weightCloseArray;
-    } else {
-      return [];
-    }
-  };
-
-  const getGainLossByMonth = () => {
-    const weightsByMonth = getWeightsByMonth();
-    let chartData: { [key: string]: (number | string) | undefined }[] = [];
-    let chartEntry: { [key: string]: (number | string) | undefined };
-
-    for (let i = 0; i < weightsByMonth.length; i++) {
-      const gainLoss = (
-        weightsByMonth[i][0].close -
-        weightsByMonth[i][weightsByMonth[i].length - 1].close
-      ).toFixed(1);
-
-      chartEntry = {
-        name: formatDateLongMonth(weightsByMonth[i][0].time),
-        kilogram: -gainLoss,
-      };
-
-      chartData.push(chartEntry);
-    }
-
-    return chartData;
-  };
-
-  const getGainLossByYear = () => {
-    const weightsByYear = getWeightsByYear();
-    let chartData: { [key: string]: (number | string) | undefined }[] = [];
-    let chartEntry: { [key: string]: (number | string) | undefined };
-
-    for (let i = 0; i < weightsByYear.length; i++) {
-      const gainLoss = (
-        weightsByYear[i][0].close -
-        weightsByYear[i][weightsByYear[i].length - 1].close
-      ).toFixed(1);
-
-      chartEntry = {
-        name: weightsByYear[i][0].time.substring(0, 4),
-        kilogram: -gainLoss,
-      };
-
-      chartData.push(chartEntry);
-    }
-
-    return chartData;
-  };
-
-  const getWeightChangeForWeek = () => {
+  const weeklyChange = useMemo(() => {
+    if (!dailyWeights || dailyWeights.length === 0) return 0;
     const thisMondayDay = getThisWeekMonday(
       new Date(dailyWeights[dailyWeights.length - 1].time),
     ).getDate();
-
     const mondayWeight = dailyWeights
       .slice()
       .reverse()
-      .find(weight => weight.time.substring(8, 10) == thisMondayDay.toString());
+      .find(w => w.time.substring(8, 10) === thisMondayDay.toString());
+    return mondayWeight ? dailyWeights[dailyWeights.length - 1].close - mondayWeight.close : 0;
+  }, [dailyWeights]);
 
-    if (mondayWeight) {
-      return dailyWeights[dailyWeights.length - 1].close - mondayWeight.close;
-    } else {
-      return 0;
-    }
-  };
-
-  const getWeightChangeForMonth = () => {
+  const monthlyChange = useMemo(() => {
+    if (!dailyWeights || dailyWeights.length === 0) return 0;
     const firstDayOfMonth = getCurrentYear() + "-" + getCurrentMonth() + "-01";
+    const firstDayWeight = dailyWeights.slice().reverse().find(w => w.time === firstDayOfMonth);
+    return firstDayWeight ? dailyWeights[dailyWeights.length - 1].close - firstDayWeight.close : 0;
+  }, [dailyWeights]);
 
-    const firstDayOfMonthWeight = dailyWeights
-      .slice()
-      .reverse()
-      .find(weight => weight.time == firstDayOfMonth);
-
-    if (firstDayOfMonthWeight) {
-      return (
-        dailyWeights[dailyWeights.length - 1].close -
-        firstDayOfMonthWeight.close
-      );
-    } else {
-      return 0;
-    }
-  };
-
-  const chartDataUnfiltered = getChartDataUnfiltered();
-  const chartDataForCurrentYear = getChartDataForCurrentYear();
-  const chartDataByYear =
-    dailyWeights && dailyWeights.length > 0
-      ? getChartDataSeparatedByYear()
-      : [];
-  const gainLossByMonth =
-    dailyWeights && dailyWeights.length > 0 ? getGainLossByMonth() : [];
-  const gainLossByYear =
-    dailyWeights && dailyWeights.length > 0 ? getGainLossByYear() : [];
-  const currentWeight =
-    dailyWeights && dailyWeights.length > 0
-      ? dailyWeights[dailyWeights.length - 1].close
-      : 0;
-  const weeklyChange =
-    dailyWeights && dailyWeights.length > 0 ? getWeightChangeForWeek() : 0;
-  const monthlyChange =
-    dailyWeights && dailyWeights.length > 0 ? getWeightChangeForMonth() : 0;
-  const yearlyChange =
-    dailyWeights && dailyWeights.length > 0
-      ? getGainLossByYear()[getGainLossByYear().length - 1].kilogram
-      : 0;
+  const yearlyChange = gainLossByYear.length > 0 ? gainLossByYear[gainLossByYear.length - 1].kilogram : 0;
 
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>

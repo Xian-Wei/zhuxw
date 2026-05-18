@@ -1,3 +1,4 @@
+// Keep in sync with $sm/$md/$lg/$xl/$xxl in styles/constants.module.scss
 export const breakpoints = {
   sm: 500,
   md: 740,

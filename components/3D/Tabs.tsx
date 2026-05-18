@@ -38,9 +38,9 @@ function Tabs() {
     refs.current.forEach((ref, index) => {
       if (!ref) return;
       const base = tabs[index].position;
-      ref.position.y = base[1] + Math.sin(t + index) * 0.1;
-      ref.position.x = base[0] + Math.sin(t * 0.5 + index) * 0.1;
-      ref.position.z = base[2] + Math.cos(t * 0.5 + index) * 0.1;
+      ref.position.x = base[0];
+      ref.position.z = base[2];
+      ref.position.y = base[1] + Math.sin(t * 0.8 + index * 1.2) * 0.08;
       (ref.rotation as THREE.Euler).y = Math.sin(t + index) * 0.2;
     });
   });
@@ -50,13 +50,15 @@ function Tabs() {
       {tabs.map((tab, idx) => (
         <group
           key={idx}
-          ref={el => {
-            refs.current[idx] = el;
-          }}
+          ref={el => { refs.current[idx] = el; }}
           onClick={tab.onClick}
-          onPointerOver={() => refs.current[idx]?.scale.set(1.2, 1.2, 1.2)}
+          onPointerOver={() => refs.current[idx]?.scale.set(1.15, 1.15, 1.15)}
           onPointerOut={() => refs.current[idx]?.scale.set(1, 1, 1)}
         >
+          <mesh>
+            <planeGeometry args={[0.8, 0.4]} />
+            <meshBasicMaterial transparent opacity={0} />
+          </mesh>
           <Center>
             <Text3D
               font="/fonts/helvetiker_bold.typeface.json"
