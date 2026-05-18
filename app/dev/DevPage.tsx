@@ -160,7 +160,7 @@ const DevPage = () => {
     if (ate) {
       s.score += 1;
       setScore(s.score);
-      if (newSnake.length === 50) {
+      if (newSnake.length === 30) {
         s.won = true;
         setWon(true);
       } else {
@@ -229,7 +229,7 @@ const DevPage = () => {
           <div className={styles.gameWrapper}>
             <div className={styles.gameHeader}>
               <span className={styles.gameTitle}>Snake</span>
-              <span className={styles.gameScore}>{score} / 50</span>
+              <span className={styles.gameScore}>{score} / 30</span>
             </div>
             <div
               ref={wrapperRef}
@@ -259,7 +259,7 @@ const DevPage = () => {
               {won && (
                 <div className={styles.overlay} onClick={reset}>
                   <p className={styles.overlayWin}>You Win!</p>
-                  <p className={styles.overlaySub}>Score: 50</p>
+                  <p className={styles.overlaySub}>Score: 30</p>
                   <p className={styles.overlayRestart}>Tap to play again</p>
                 </div>
               )}
