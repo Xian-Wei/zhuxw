@@ -24,7 +24,8 @@
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  padding: 24px;
+  padding: 20px;
+  width: min(600px, calc(100vw - 32px));
   border: 1px solid rgba(80, 80, 160, 0.2);
   border-radius: 20px;
   background: linear-gradient(135deg, rgba(25, 25, 55, 0.9), rgba(15, 15, 35, 0.9));
@@ -56,6 +57,7 @@
 
 .canvasWrapper {
   position: relative;
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid rgba(80, 80, 160, 0.25);
@@ -63,6 +65,8 @@
 
 .canvas {
   display: block;
+  width: 100%;
+  height: auto;
   background: rgba(8, 8, 20, 0.95);
 }
 
@@ -96,6 +100,15 @@
   font-size: 13px;
   color: #A78BFA;
   margin: 12px 0 0;
+}
+
+.overlayWin {
+  font-size: 28px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #A78BFA, #60A5FA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
 }
 
 .dpad {

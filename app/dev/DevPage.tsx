@@ -6,7 +6,6 @@ import styles from "./dev.module.scss";
 
 const COLS = 20;
 const ROWS = 20;
-const CELL = 24;
 const TICK_MS = 120;
 
 type Point = { x: number; y: number };
@@ -26,6 +25,10 @@ function randomFood(snake: Point[]): Point {
 
 const DevPage = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const cellRef = useRef(24);
+  const [cell, setCell] = useState(24);
+
   const stateRef = useRef({
     snake: [{ x: 10, y: 10 }] as Point[],
     dir: "RIGHT" as Dir,
@@ -33,13 +36,32 @@ const DevPage = () => {
     food: { x: 15, y: 10 } as Point,
     score: 0,
     dead: false,
+    won: false,
     started: false,
   });
   const [score, setScore] = useState(0);
   const [dead, setDead] = useState(false);
+  const [won, setWon] = useState(false);
   const [started, setStarted] = useState(false);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
+
+  // Responsive cell size
+  useEffect(() => {
+    const update = () => {
+      if (!wrapperRef.current) return;
+      const w = wrapperRef.current.clientWidth;
+      const newCell = Math.max(10, Math.min(28, Math.floor(w / COLS)));
+      if (newCell !== cellRef.current) {
+        cellRef.current = newCell;
+        setCell(newCell);
+      }
+    };
+    update();
+    const obs = new ResizeObserver(update);
+    if (wrapperRef.current) obs.observe(wrapperRef.current);
+    return () => obs.disconnect();
+  }, []);
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current;
@@ -47,6 +69,7 @@ const DevPage = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     const s = stateRef.current;
+    const C = cellRef.current;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -54,22 +77,21 @@ const DevPage = () => {
     ctx.strokeStyle = "rgba(80,80,160,0.08)";
     ctx.lineWidth = 0.5;
     for (let x = 0; x <= COLS; x++) {
-      ctx.beginPath(); ctx.moveTo(x * CELL, 0); ctx.lineTo(x * CELL, ROWS * CELL); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x * C, 0); ctx.lineTo(x * C, ROWS * C); ctx.stroke();
     }
     for (let y = 0; y <= ROWS; y++) {
-      ctx.beginPath(); ctx.moveTo(0, y * CELL); ctx.lineTo(COLS * CELL, y * CELL); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, y * C); ctx.lineTo(COLS * C, y * C); ctx.stroke();
     }
 
     // Food
-    const fx = s.food.x * CELL + CELL / 2;
-    const fy = s.food.y * CELL + CELL / 2;
-    const grad = ctx.createRadialGradient(fx, fy, 1, fx, fy, CELL / 2 - 2);
+    const fx = s.food.x * C + C / 2;
+    const fy = s.food.y * C + C / 2;
+    const grad = ctx.createRadialGradient(fx, fy, 1, fx, fy, C / 2 - 2);
     grad.addColorStop(0, "#C4B5FD");
     grad.addColorStop(1, "#7C3AED");
     ctx.beginPath();
-    ctx.arc(fx, fy, CELL / 2 - 3, 0, Math.PI * 2);
+    ctx.arc(fx, fy, C / 2 - 3, 0, Math.PI * 2);
     ctx.fillStyle = grad;
-    ctx.fill();
     ctx.shadowColor = "#A78BFA";
     ctx.shadowBlur = 10;
     ctx.fill();
@@ -77,22 +99,22 @@ const DevPage = () => {
 
     // Snake
     s.snake.forEach((seg, i) => {
-      const t = i / s.snake.length;
+      const t = i / Math.max(s.snake.length, 1);
       const r = Math.round(60 + t * 40);
       const g = Math.round(60 + t * 40);
       const b = Math.round(160 + t * 60);
       ctx.fillStyle = `rgb(${r},${g},${b})`;
-      if (i === 0) {
-        ctx.shadowColor = "#818CF8";
-        ctx.shadowBlur = 12;
-      }
+      if (i === 0) { ctx.shadowColor = "#818CF8"; ctx.shadowBlur = 12; }
       const pad = i === 0 ? 1 : 2;
       ctx.beginPath();
-      ctx.roundRect(seg.x * CELL + pad, seg.y * CELL + pad, CELL - pad * 2, CELL - pad * 2, 4);
+      ctx.roundRect(seg.x * C + pad, seg.y * C + pad, C - pad * 2, C - pad * 2, 4);
       ctx.fill();
       ctx.shadowBlur = 0;
     });
   }, []);
+
+  // Redraw when cell size changes
+  useEffect(() => { draw(); }, [draw, cell]);
 
   const reset = useCallback(() => {
     const initial = [{ x: 10, y: 10 }];
@@ -103,17 +125,19 @@ const DevPage = () => {
       food: randomFood(initial),
       score: 0,
       dead: false,
+      won: false,
       started: false,
     };
     setScore(0);
     setDead(false);
+    setWon(false);
     setStarted(false);
     draw();
   }, [draw]);
 
   const tick = useCallback(() => {
     const s = stateRef.current;
-    if (s.dead || !s.started) return;
+    if (s.dead || s.won || !s.started) return;
 
     s.dir = s.nextDir;
     const head = s.snake[0];
@@ -132,10 +156,16 @@ const DevPage = () => {
     const newSnake = [next, ...s.snake];
     if (!ate) newSnake.pop();
     s.snake = newSnake;
+
     if (ate) {
       s.score += 1;
-      s.food = randomFood(newSnake);
       setScore(s.score);
+      if (newSnake.length === 50) {
+        s.won = true;
+        setWon(true);
+      } else {
+        s.food = randomFood(newSnake);
+      }
     }
     draw();
   }, [draw]);
@@ -144,10 +174,6 @@ const DevPage = () => {
     stateRef.current.started = true;
     setStarted(true);
   }, []);
-
-  useEffect(() => {
-    draw();
-  }, [draw]);
 
   useEffect(() => {
     tickRef.current = setInterval(tick, TICK_MS);
@@ -184,12 +210,9 @@ const DevPage = () => {
     if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return;
     const s = stateRef.current;
     if (!s.started) start();
-    let dir: Dir;
-    if (Math.abs(dx) > Math.abs(dy)) {
-      dir = dx > 0 ? "RIGHT" : "LEFT";
-    } else {
-      dir = dy > 0 ? "DOWN" : "UP";
-    }
+    const dir: Dir = Math.abs(dx) > Math.abs(dy)
+      ? (dx > 0 ? "RIGHT" : "LEFT")
+      : (dy > 0 ? "DOWN" : "UP");
     if (dir !== opposite[s.dir]) s.nextDir = dir;
   };
 
@@ -206,19 +229,21 @@ const DevPage = () => {
           <div className={styles.gameWrapper}>
             <div className={styles.gameHeader}>
               <span className={styles.gameTitle}>Snake</span>
-              <span className={styles.gameScore}>{score}</span>
+              <span className={styles.gameScore}>{score} / 50</span>
             </div>
-            <div className={styles.canvasWrapper}
+            <div
+              ref={wrapperRef}
+              className={styles.canvasWrapper}
               onTouchStart={onTouchStart}
               onTouchEnd={onTouchEnd}
             >
               <canvas
                 ref={canvasRef}
-                width={COLS * CELL}
-                height={ROWS * CELL}
+                width={COLS * cell}
+                height={ROWS * cell}
                 className={styles.canvas}
               />
-              {!started && !dead && (
+              {!started && !dead && !won && (
                 <div className={styles.overlay} onClick={start}>
                   <p className={styles.overlayText}>Press any arrow key</p>
                   <p className={styles.overlaySub}>or tap to start</p>
@@ -229,6 +254,13 @@ const DevPage = () => {
                   <p className={styles.overlayText}>Game Over</p>
                   <p className={styles.overlaySub}>Score: {score}</p>
                   <p className={styles.overlayRestart}>Tap to restart</p>
+                </div>
+              )}
+              {won && (
+                <div className={styles.overlay} onClick={reset}>
+                  <p className={styles.overlayWin}>You Win!</p>
+                  <p className={styles.overlaySub}>Score: 50</p>
+                  <p className={styles.overlayRestart}>Tap to play again</p>
                 </div>
               )}
             </div>
