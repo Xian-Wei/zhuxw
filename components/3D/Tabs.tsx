@@ -2,6 +2,7 @@ import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import { useRouter } from "next/navigation";
+import type { Object3D } from "three";
 
 type Tab = {
   name: string;
@@ -30,7 +31,7 @@ function Tabs() {
     },
   ];
 
-  const refs = useRef<(THREE.Object3D | null)[]>([]);
+  const refs = useRef<(Object3D | null)[]>([]);
 
   useFrame(state => {
     const t = state.clock.elapsedTime;
