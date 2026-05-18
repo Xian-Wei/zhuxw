@@ -50,7 +50,9 @@ function Tabs() {
       {tabs.map((tab, idx) => (
         <group
           key={idx}
-          ref={el => { refs.current[idx] = el; }}
+          ref={el => {
+            refs.current[idx] = el;
+          }}
           onClick={tab.onClick}
           onPointerOver={() => refs.current[idx]?.scale.set(1.15, 1.15, 1.15)}
           onPointerOut={() => refs.current[idx]?.scale.set(1, 1, 1)}
@@ -63,7 +65,7 @@ function Tabs() {
             <Text3D
               font="/fonts/helvetiker_bold.typeface.json"
               size={0.22}
-              height={0.03}
+              height={0.01}
               curveSegments={6}
             >
               {tab.name}
