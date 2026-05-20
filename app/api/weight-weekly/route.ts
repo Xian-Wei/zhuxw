@@ -24,15 +24,24 @@ function calculateWeeklyWeights(data: any) {
   return weeklyWeights;
 }
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const limit = searchParams.get("limit");
+    const before = searchParams.get("before");
+
     const docRef = doc(db, "weights", "xw");
     const docSnap = await getDoc(docRef);
     const dataArray = docSnap.data();
 
     if (dataArray) {
-      const weeklyWeights = calculateWeeklyWeights(dataArray.weights);
-      return Response.json(weeklyWeights);
+      let weeklyWeights = calculateWeeklyWeights(dataArray.weights);
+      if (before) {
+        const idx = weeklyWeights.findIndex((w: any) => w.time >= before);
+        weeklyWeights = idx > 0 ? weeklyWeights.slice(0, idx) : weeklyWeights;
+      }
+      const result = limit ? weeklyWeights.slice(-Number(limit)) : weeklyWeights;
+      return Response.json(result);
     }
     return Response.json(
       { message: "Couldn't fetch weights" },

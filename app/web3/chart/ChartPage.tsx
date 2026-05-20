@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ethers } from "ethers";
 import useSWR from "swr";
 import axios from "axios";
@@ -35,14 +35,56 @@ const ChartPage = () => {
 
   // API
   const fetcher = (url: string) => axios.get(url).then(res => res.data);
-  const { data: weeklyWeights }: { data: any } = useSWR(
-    "/api/weight-weekly",
+  const { data: initialWeeklyWeights }: { data: any } = useSWR(
+    "/api/weight-weekly?limit=104",
     fetcher,
   );
-  const { data: dailyWeights }: { data: any } = useSWR(
-    "/api/weight-daily",
+  const { data: initialDailyWeights }: { data: any } = useSWR(
+    "/api/weight-daily?limit=365",
     fetcher,
   );
+
+  const [weeklyWeights, setWeeklyWeights] = useState<any>(null);
+  const [dailyWeights, setDailyWeights] = useState<any>(null);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
+  const hasMoreDailyRef = useRef(true);
+  const hasMoreWeeklyRef = useRef(true);
+
+  useEffect(() => {
+    if (initialDailyWeights && !dailyWeights) setDailyWeights(initialDailyWeights);
+  }, [initialDailyWeights, dailyWeights]);
+
+  useEffect(() => {
+    if (initialWeeklyWeights && !weeklyWeights) setWeeklyWeights(initialWeeklyWeights);
+  }, [initialWeeklyWeights, weeklyWeights]);
+
+  const loadMore = useCallback(async () => {
+    if (isLoadingMore) return;
+
+    if (timeframe === Timeframe.Daily) {
+      if (!dailyWeights || !hasMoreDailyRef.current) return;
+      setIsLoadingMore(true);
+      const before = dailyWeights[0].time;
+      const { data } = await axios.get(`/api/weight-daily?before=${before}&limit=365`);
+      if (data.length === 0) {
+        hasMoreDailyRef.current = false;
+      } else {
+        setDailyWeights((prev: any) => [...data, ...prev]);
+      }
+      setIsLoadingMore(false);
+    } else {
+      if (!weeklyWeights || !hasMoreWeeklyRef.current) return;
+      setIsLoadingMore(true);
+      const before = weeklyWeights[0].time;
+      const { data } = await axios.get(`/api/weight-weekly?before=${before}&limit=104`);
+      if (data.length === 0) {
+        hasMoreWeeklyRef.current = false;
+      } else {
+        setWeeklyWeights((prev: any) => [...data, ...prev]);
+      }
+      setIsLoadingMore(false);
+    }
+  }, [isLoadingMore, timeframe, dailyWeights, weeklyWeights]);
 
   // Web3
   const provider: ethers.BrowserProvider | null = useWeb3Provider();
@@ -466,6 +508,7 @@ const ChartPage = () => {
                   weeklyWeights={weeklyWeights}
                   dailyWeights={dailyWeights}
                   timeframe={timeframe}
+                  onLoadMore={loadMore}
                 />
               </>
             ) : (

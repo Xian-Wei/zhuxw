@@ -7,6 +7,7 @@ interface ChartProps {
   weeklyWeights: any;
   dailyWeights: any;
   timeframe: Timeframe;
+  onLoadMore?: () => void;
 }
 
 const backgroundColor = "#FFFFFF00";
@@ -16,10 +17,16 @@ const borderColor = "#FFFFFF00";
 const crosshairColor = "#ffffff4f";
 const labelBackgroundColor = "#6464c8";
 
-const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
+const LWChart = ({ weeklyWeights, dailyWeights, timeframe, onLoadMore }: ChartProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
   const chartRef = useRef<IChartApi | null>(null);
   const seriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
+  const onLoadMoreRef = useRef<(() => void) | undefined>(undefined);
+  const lastLoadMoreCallRef = useRef<number>(0);
+
+  useEffect(() => {
+    onLoadMoreRef.current = onLoadMore;
+  }, [onLoadMore]);
 
   // Initialize chart once
   useEffect(() => {
@@ -71,6 +78,14 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
       });
 
       chartRef.current = chart;
+
+      chart.timeScale().subscribeVisibleLogicalRangeChange(range => {
+        if (!range || range.from > 10) return;
+        const now = Date.now();
+        if (now - lastLoadMoreCallRef.current < 1000) return;
+        lastLoadMoreCallRef.current = now;
+        onLoadMoreRef.current?.();
+      });
 
       const handleResize = () => {
         if (!chartContainerRef.current) return;
