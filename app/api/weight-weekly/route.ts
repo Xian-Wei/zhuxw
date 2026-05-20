@@ -38,6 +38,7 @@ export async function GET(request: Request) {
       let weeklyWeights = calculateWeeklyWeights(dataArray.weights);
       if (before) {
         const idx = weeklyWeights.findIndex((w: any) => w.time >= before);
+        if (idx === 0) return Response.json([]);
         weeklyWeights = idx > 0 ? weeklyWeights.slice(0, idx) : weeklyWeights;
       }
       const result = limit ? weeklyWeights.slice(-Number(limit)) : weeklyWeights;

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Timeframe } from "../../../models/Timeframe";
 import { IChartApi, ISeriesApi, CandlestickSeries } from "lightweight-charts";
 import styles from "./lwchart.module.scss";
@@ -23,6 +23,8 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe, onLoadMore }: ChartPr
   const seriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const onLoadMoreRef = useRef<(() => void) | undefined>(undefined);
   const lastLoadMoreCallRef = useRef<number>(0);
+  const prevTimeframeRef = useRef<Timeframe | null>(null);
+  const [chartReady, setChartReady] = useState(false);
 
   useEffect(() => {
     onLoadMoreRef.current = onLoadMore;
@@ -78,6 +80,7 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe, onLoadMore }: ChartPr
       });
 
       chartRef.current = chart;
+      setChartReady(true);
 
       chart.timeScale().subscribeVisibleLogicalRangeChange(range => {
         if (!range || range.from > 10) return;
@@ -121,16 +124,26 @@ const LWChart = ({ weeklyWeights, dailyWeights, timeframe, onLoadMore }: ChartPr
     if (!chart || !weeklyWeights || !dailyWeights) return;
 
     const data = timeframe === Timeframe.Daily ? dailyWeights : weeklyWeights;
+    const isTimeframeChange = prevTimeframeRef.current !== timeframe;
+    prevTimeframeRef.current = timeframe;
 
     if (seriesRef.current) {
-      seriesRef.current.setData(data);
+      if (isTimeframeChange) {
+        seriesRef.current.setData(data);
+        chart.timeScale().fitContent();
+      } else {
+        // loadMore prepend — preserve viewport using time-based range (invariant to prepends)
+        const visibleRange = chart.timeScale().getVisibleRange();
+        seriesRef.current.setData(data);
+        if (visibleRange) chart.timeScale().setVisibleRange(visibleRange);
+      }
     } else {
       const newSeries = chart.addSeries(CandlestickSeries);
       newSeries.setData(data);
       seriesRef.current = newSeries;
       chart.timeScale().fitContent();
     }
-  }, [timeframe, dailyWeights, weeklyWeights]);
+  }, [timeframe, dailyWeights, weeklyWeights, chartReady]);
 
   return <div ref={chartContainerRef} className={styles.chart} />;
 };

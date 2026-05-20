@@ -27,6 +27,13 @@ enum PositionType {
   Short,
 }
 
+const addHighLow = (weights: any[]) =>
+  weights.map((w: any) => ({
+    ...w,
+    low: w.close < w.open ? w.open : w.close,
+    high: w.close > w.open ? w.close : w.open,
+  }));
+
 const ChartPage = () => {
   const [timeframe, setTimeframe] = useState<Timeframe>(Timeframe.Weekly);
   const [positionType, setPositionType] = useState<PositionType>(
@@ -51,11 +58,11 @@ const ChartPage = () => {
   const hasMoreWeeklyRef = useRef(true);
 
   useEffect(() => {
-    if (initialDailyWeights && !dailyWeights) setDailyWeights(initialDailyWeights);
+    if (initialDailyWeights && !dailyWeights) setDailyWeights(addHighLow(initialDailyWeights));
   }, [initialDailyWeights, dailyWeights]);
 
   useEffect(() => {
-    if (initialWeeklyWeights && !weeklyWeights) setWeeklyWeights(initialWeeklyWeights);
+    if (initialWeeklyWeights && !weeklyWeights) setWeeklyWeights(addHighLow(initialWeeklyWeights));
   }, [initialWeeklyWeights, weeklyWeights]);
 
   const loadMore = useCallback(async () => {
@@ -69,7 +76,7 @@ const ChartPage = () => {
       if (data.length === 0) {
         hasMoreDailyRef.current = false;
       } else {
-        setDailyWeights((prev: any) => [...data, ...prev]);
+        setDailyWeights((prev: any) => [...addHighLow(data), ...prev]);
       }
       setIsLoadingMore(false);
     } else {
@@ -80,7 +87,7 @@ const ChartPage = () => {
       if (data.length === 0) {
         hasMoreWeeklyRef.current = false;
       } else {
-        setWeeklyWeights((prev: any) => [...data, ...prev]);
+        setWeeklyWeights((prev: any) => [...addHighLow(data), ...prev]);
       }
       setIsLoadingMore(false);
     }
@@ -356,15 +363,6 @@ const ChartPage = () => {
       if (interval) clearInterval(interval);
     };
   }, [chainId, wallet, getBalance, getPositions, getFaucetLockState]);
-
-  useEffect(() => {
-    if (dailyWeights)
-      // Add low and high attributes for TradingView
-      dailyWeights.forEach((weight: any) => {
-        weight.low = weight.close < weight.open ? weight.open : weight.close;
-        weight.high = weight.close > weight.open ? weight.close : weight.open;
-      });
-  }, [dailyWeights]);
 
   useEffect(() => {
     if (!provider || !zhuExchangeContractAddress) return;

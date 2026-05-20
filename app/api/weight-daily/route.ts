@@ -14,6 +14,7 @@ export async function GET(request: Request) {
       let weights = dataArray.weights;
       if (before) {
         const idx = weights.findIndex((w: any) => w.time >= before);
+        if (idx === 0) return Response.json([]);
         weights = idx > 0 ? weights.slice(0, idx) : weights;
       }
       const result = limit ? weights.slice(-Number(limit)) : weights;
