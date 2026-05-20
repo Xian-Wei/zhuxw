@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Timeframe } from "../../../models/Timeframe";
 import { IChartApi, ISeriesApi, CandlestickSeries } from "lightweight-charts";
 import styles from "./lwchart.module.scss";
@@ -9,122 +9,112 @@ interface ChartProps {
   timeframe: Timeframe;
 }
 
+const backgroundColor = "#FFFFFF00";
+const textColor = "white";
+const gridColor = "#6e6e6e1a";
+const borderColor = "#FFFFFF00";
+const crosshairColor = "#ffffff4f";
+const labelBackgroundColor = "#6464c8";
+
 const LWChart = ({ weeklyWeights, dailyWeights, timeframe }: ChartProps) => {
   const chartContainerRef = useRef<HTMLDivElement>(null);
-  const [chart, setChart] = useState<IChartApi>();
-  const [series, setSeries] = useState<ISeriesApi<"Candlestick">>();
+  const chartRef = useRef<IChartApi | null>(null);
+  const seriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
 
-  const backgroundColor = "#FFFFFF00";
-  const textColor = "white";
-  const gridColor = "#6e6e6e1a";
-  const borderColor = "#FFFFFF00";
-  const crosshairColor = "#ffffff4f";
-  const labelBackgroundColor = "#6464c8";
-
+  // Initialize chart once
   useEffect(() => {
+    if (!chartContainerRef.current) return;
+
+    let chart: IChartApi;
+    let active = true;
+
     (async () => {
-      if (!chart) {
-        const Chart = await import("lightweight-charts");
-        const newChart = Chart.createChart(
-          chartContainerRef.current as string | HTMLElement,
-          {
-            layout: {
-              background: {
-                type: Chart.ColorType.Solid,
-                color: backgroundColor,
-              },
-              textColor,
-            },
-            width: chartContainerRef.current?.clientWidth,
-            height: chartContainerRef.current?.clientHeight,
+      const Chart = await import("lightweight-charts");
+      if (!active || !chartContainerRef.current) return;
+
+      chart = Chart.createChart(chartContainerRef.current, {
+        layout: {
+          background: { type: Chart.ColorType.Solid, color: backgroundColor },
+          textColor,
+        },
+        width: chartContainerRef.current.clientWidth,
+        height: chartContainerRef.current.clientHeight,
+      });
+
+      chart.applyOptions({
+        grid: {
+          vertLines: { color: gridColor },
+          horzLines: { color: gridColor },
+        },
+      });
+
+      chart.priceScale("right").applyOptions({ borderColor });
+      chart.timeScale().applyOptions({ borderColor });
+
+      const { CrosshairMode, LineStyle } = await import("lightweight-charts");
+      chart.applyOptions({
+        crosshair: {
+          mode: CrosshairMode.Normal,
+          vertLine: {
+            width: 1,
+            color: crosshairColor,
+            style: LineStyle.LargeDashed,
+            labelBackgroundColor,
           },
-        );
+          horzLine: {
+            width: 1,
+            color: crosshairColor,
+            style: LineStyle.LargeDashed,
+            labelBackgroundColor,
+          },
+        },
+      });
 
-        setChart(newChart);
-      }
-    })();
-  }, [chart]);
+      chartRef.current = chart;
 
-  useEffect(() => {
-    (async () => {
-      if (chart && weeklyWeights && dailyWeights) {
-        const handleResize = () => {
-          chart.applyOptions({
-            height: chartContainerRef.current?.clientHeight,
-            width: chartContainerRef.current?.clientWidth,
-          });
-        };
-
-        // Series
-        const newSeries = chart.addSeries(CandlestickSeries);
-        newSeries.setData(weeklyWeights);
-
-        setSeries(newSeries);
-
-        // Grid
+      const handleResize = () => {
+        if (!chartContainerRef.current) return;
         chart.applyOptions({
-          grid: {
-            vertLines: { color: gridColor },
-            horzLines: { color: gridColor },
-          },
+          width: chartContainerRef.current.clientWidth,
+          height: chartContainerRef.current.clientHeight,
         });
+      };
+      window.addEventListener("resize", handleResize);
 
-        // Border vertical axis
-        chart.priceScale("right").applyOptions({ borderColor: borderColor });
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    })().then(cleanup => {
+      // store cleanup so we can call it on unmount
+      (chartRef as any)._resizeCleanup = cleanup;
+    });
 
-        // Border horizontal axis
-        chart.timeScale().applyOptions({ borderColor: borderColor });
-
-        const { CrosshairMode, LineStyle } = await import("lightweight-charts");
-
-        // Customizing the Crosshair
-        chart.applyOptions({
-          crosshair: {
-            mode: CrosshairMode.Normal,
-            vertLine: {
-              width: 1,
-              color: crosshairColor,
-              style: LineStyle.LargeDashed,
-              labelBackgroundColor: labelBackgroundColor,
-            },
-            horzLine: {
-              width: 1,
-              color: crosshairColor,
-              style: LineStyle.LargeDashed,
-              labelBackgroundColor: labelBackgroundColor,
-            },
-          },
-        });
-
-        chart.timeScale().fitContent();
-
-        window.addEventListener("resize", handleResize);
-
-        return () => {
-          window.removeEventListener("resize", handleResize);
-          chart.remove();
-        };
+    return () => {
+      active = false;
+      if ((chartRef as any)._resizeCleanup) {
+        (chartRef as any)._resizeCleanup();
       }
-    })();
-  }, [chart, dailyWeights, weeklyWeights]);
-
-  useEffect(() => {
-    const updateChart = () => {
-      if (chart && series && weeklyWeights && dailyWeights) {
-        const newSeries = chart.addSeries(CandlestickSeries);
-
-        chart?.removeSeries(series);
-        if (timeframe == Timeframe.Daily) {
-          newSeries.setData(dailyWeights);
-        } else if (timeframe == Timeframe.Weekly) {
-          newSeries.setData(weeklyWeights);
-        }
-
-        setSeries(newSeries);
-      }
+      chartRef.current?.remove();
+      chartRef.current = null;
+      seriesRef.current = null;
     };
-    updateChart();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Update data when weights or timeframe changes
+  useEffect(() => {
+    const chart = chartRef.current;
+    if (!chart || !weeklyWeights || !dailyWeights) return;
+
+    const data = timeframe === Timeframe.Daily ? dailyWeights : weeklyWeights;
+
+    if (seriesRef.current) {
+      seriesRef.current.setData(data);
+    } else {
+      const newSeries = chart.addSeries(CandlestickSeries);
+      newSeries.setData(data);
+      seriesRef.current = newSeries;
+      chart.timeScale().fitContent();
+    }
   }, [timeframe, dailyWeights, weeklyWeights]);
 
   return <div ref={chartContainerRef} className={styles.chart} />;

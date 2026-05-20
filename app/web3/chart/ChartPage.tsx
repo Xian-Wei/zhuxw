@@ -301,7 +301,7 @@ const ChartPage = () => {
       if (wallet) {
         await getFaucetLockState();
       }
-    }, 1000);
+    }, 30000);
 
     (async () => {
       if (wallet) {
@@ -369,82 +369,27 @@ const ChartPage = () => {
     };
   }, [provider, getBalance, getPositions, zhuExchangeContractAddress]);
 
-  const LongShortButton = () => {
-    if (provider) {
-      if (wallet) {
-        if (zhuExchangeContractAddress) {
-          if (!isLoading) {
-            if (amount == 0) {
-              return (
-                <div className={styles.disabledButton}>Enter an amount</div>
-              );
-            } else if (amount >= MINIMUM_AMOUNT) {
-              if (approved) {
-                // Short
-                if (positionType == PositionType.Short) {
-                  return (
-                    <div className={styles.shortButton} onClick={() => short()}>
-                      Short
-                    </div>
-                  );
-                }
-                // Long
-                else {
-                  return (
-                    <div className={styles.longButton} onClick={() => long()}>
-                      Long
-                    </div>
-                  );
-                }
-              }
-              // Not approved
-              else {
-                return (
-                  <div
-                    className={
-                      positionType == PositionType.Short
-                        ? styles.shortButton
-                        : styles.longButton
-                    }
-                    onClick={() => approve()}
-                  >
-                    Approve
-                  </div>
-                );
-              }
-            }
-            // Amount is less than MINIMUM_AMOUNT
-            else {
-              return (
-                <div className={styles.disabledButton}>
-                  Min {MINIMUM_AMOUNT} $ZHU
-                </div>
-              );
-            }
-          }
-          // Loading
-          else {
-            return (
-              <div className={styles.disabledButton}>
-                <LoadingAnimation />
-              </div>
-            );
-          }
-        }
-        // No contract in this network
-        else {
-          return <div className={styles.disabledButton}>Change network</div>;
-        }
-      }
-      // Wallet not connected
-      else {
-        return <div className={styles.disabledButton}>Connect your wallet</div>;
-      }
-    } else {
+  const renderLongShortButton = () => {
+    if (!provider) return <div className={styles.disabledButton}>Ethereum wallet required</div>;
+    if (!wallet) return <div className={styles.disabledButton}>Connect your wallet</div>;
+    if (!zhuExchangeContractAddress) return <div className={styles.disabledButton}>Change network</div>;
+    if (isLoading) return <div className={styles.disabledButton}><LoadingAnimation /></div>;
+    if (amount === 0) return <div className={styles.disabledButton}>Enter an amount</div>;
+    if (amount < MINIMUM_AMOUNT) return <div className={styles.disabledButton}>Min {MINIMUM_AMOUNT} $ZHU</div>;
+    if (!approved) {
       return (
-        <div className={styles.disabledButton}>Ethereum wallet required</div>
+        <div
+          className={positionType === PositionType.Short ? styles.shortButton : styles.longButton}
+          onClick={approve}
+        >
+          Approve
+        </div>
       );
     }
+    if (positionType === PositionType.Short) {
+      return <div className={styles.shortButton} onClick={short}>Short</div>;
+    }
+    return <div className={styles.longButton} onClick={long}>Long</div>;
   };
 
   return (
@@ -462,28 +407,17 @@ const ChartPage = () => {
             {/* 24h Change */}
             <div className={styles.labelGroup}>
               <div className={styles.label}>24h Change</div>
-              {dailyWeights &&
-                (percentageDifference(
+              {dailyWeights && (() => {
+                const pct = percentageDifference(
                   dailyWeights[dailyWeights.length - 2].close,
                   dailyWeights[dailyWeights.length - 1].close,
-                ) < 0 ? (
-                  <div className={styles.dailyChangeRed}>
-                    {percentageDifference(
-                      dailyWeights[dailyWeights.length - 2].close,
-                      dailyWeights[dailyWeights.length - 1].close,
-                    ).toFixed(2)}
-                    %
-                  </div>
+                );
+                return pct < 0 ? (
+                  <div className={styles.dailyChangeRed}>{pct.toFixed(2)}%</div>
                 ) : (
-                  <div className={styles.dailyChangeGreen}>
-                    +
-                    {percentageDifference(
-                      dailyWeights[dailyWeights.length - 2].close,
-                      dailyWeights[dailyWeights.length - 1].close,
-                    ).toFixed(2)}
-                    %
-                  </div>
-                ))}
+                  <div className={styles.dailyChangeGreen}>+{pct.toFixed(2)}%</div>
+                );
+              })()}
             </div>
             {/* Weekly high */}
             <div className={styles.labelGroupNoMobile}>
@@ -671,7 +605,7 @@ const ChartPage = () => {
           ) : (
             <div className={styles.disabledFaucet}>Not available</div>
           )}
-          <LongShortButton />
+          {renderLongShortButton()}
         </div>
       </div>
     </div>
