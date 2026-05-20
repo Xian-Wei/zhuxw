@@ -98,7 +98,7 @@ const ShopPage = () => {
     (async () => { await getBalance(); })();
   }, [chainId, getBalance]);
 
-  const MintButton = () => {
+  const renderMintButton = () => {
     if (!zhuContractAddress || !zhubaContractAddress)
       return <div className={styles.disabledButton}>Not available</div>;
     if (isLoading) return <div className={styles.disabledButton}><LoadingAnimation /></div>;
@@ -123,7 +123,7 @@ const ShopPage = () => {
         <div className={styles.panel}>
           <div className={styles.nftTitle}>Zhuba NFT Gacha</div>
           <div className={styles.nftPrice}>10,000 $ZHU</div>
-          <MintButton />
+          {renderMintButton()}
           <div className={styles.divider} />
           <div className={styles.rarityTitle}>Rarity Rates</div>
           <div className={styles.rarityList}>

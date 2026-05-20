@@ -3,6 +3,39 @@
 import styles from "./workout.module.scss";
 import useSWR from "swr";
 import axios from "axios";
+const fetcher = (url: string) => axios.get(url).then(res => res.data);
+
+const COLORS = [
+  "#74C0FC",
+  "#69DB7C",
+  "#FFD43B",
+  "#FF6B6B",
+  "#DA77F2",
+  "#FFA94D",
+  "#4DABF7",
+  "#63E6BE",
+  "#A9B7C6",
+  "#E599F7",
+];
+
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active) {
+    return (
+      <div
+        style={{
+          backgroundColor: "rgb(20, 20, 40)",
+          padding: "10px",
+          border: "1px solid rgb(80, 80, 160)",
+        }}
+      >
+        <p>
+          {payload[0].name}: {payload[0].value}
+        </p>
+      </div>
+    );
+  }
+  return null;
+};
 import {
   BarChart,
   Bar,
@@ -29,7 +62,6 @@ import Loader from "../../components/Loader";
 import BottomNavbar from "../../components/BottomNavbar";
 
 const WorkoutPage = () => {
-  const fetcher = (url: string) => axios.get(url).then(res => res.data);
   const { data: workouts }: { data: WorkoutItem[] } = useSWR(
     "/api/workout",
     fetcher,
@@ -192,39 +224,6 @@ const WorkoutPage = () => {
   const workoutCountsForMonth =
     workouts && workouts.length > 0 ? getWorkoutCountForMonth() : 0;
   const musclePieData = workouts && workouts ? countMuscles(10) : [];
-
-  const COLORS = [
-    "#74C0FC",
-    "#69DB7C",
-    "#FFD43B",
-    "#FF6B6B",
-    "#DA77F2",
-    "#FFA94D",
-    "#4DABF7",
-    "#63E6BE",
-    "#A9B7C6",
-    "#E599F7",
-  ];
-
-  const CustomTooltip = ({ active, payload }: any) => {
-    if (active) {
-      return (
-        <div
-          style={{
-            backgroundColor: "rgb(20, 20, 40)",
-            padding: "10px",
-            border: "1px solid rgb(80, 80, 160)",
-          }}
-        >
-          <p>
-            {payload[0].name}: {payload[0].value}
-          </p>
-        </div>
-      );
-    }
-
-    return null;
-  };
 
   return (
     <Layout navbarEnabled={true} footerEnabled={true} backgroundEnabled={true}>
